@@ -35,7 +35,7 @@ void tela_menu_relatorio(void);
 // Programa principal
 int main(void) {
     tela_menu_principal();
-    tela_sobre;
+    tela_sobre();
     tela_equipe;
     tela_menu_cliente;
     tela_menu_funcionario;
