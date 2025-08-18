@@ -82,7 +82,6 @@ void tela_menu_principal(void) {
 
 
 void tela_sobre(void) {
-    char op_menu;
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -105,3 +104,34 @@ void tela_sobre(void) {
     printf("Pressione ENTER para voltar ao menu...");
     getchar();
 }
+
+void tela_equipe(void) {
+    system("clear||cls");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
+    printf("|               Centro de Ensino Superior do Seridó - CERES                   |\n");
+    printf("|                     Disciplina DCT1106 -- Programação                       |\n");
+    printf("|                   Projeto Sistema de Gestão para Motéis                     |\n");
+    printf("|  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   |\n");
+    printf("|                                                                             |\n");
+    printf("|                                   SIG-Motel                                 |\n");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("|                                                                             |\n");
+    printf("| Esse projeto foi desenvolvido por:                                          |\n");
+    printf("|                                                                             |\n");
+    printf("| Wallison Dias                                                               |\n");
+    printf("| E-mail: wallison.dias.711@ufrn.edu.br                                       |\n");
+    printf("| GitHub: @wallisonvsdias                                                     |\n");
+    printf("|                                                                             |\n");
+    printf("| Isabelle Cavalcante                                                         |\n");
+    printf("| E-mail: isabelle.silva.712@ufrn.edu.br                                      |\n");
+    printf("| GitHub: @Isabellecavalcant                                                  |\n");
+    printf("|                                                                             |\n");
+    printf("| Repositório: https://github.com/wallisonvsdias/sig-motel.git                |\n");
+    printf("|                                                                             |\n");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("\n");
+    printf("Pressione ENTER para voltar ao menu...");
+    getchar();
+}
+
