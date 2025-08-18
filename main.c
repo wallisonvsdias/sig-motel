@@ -79,3 +79,29 @@ void tela_menu_principal(void) {
     printf("Pressione ENTER para voltar ao menu...");
     getchar();
 }
+
+
+void tela_sobre(void) {
+    char op_menu;
+    system("clear||cls");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
+    printf("|               Centro de Ensino Superior do Seridó - CERES                   |\n");
+    printf("|                     Disciplina DCT1106 -- Programação                       |\n");
+    printf("|                   Projeto Sistema de Gestão para Motéis                     |\n");
+    printf("|  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   |\n");
+    printf("|                                                                             |\n");
+    printf("|                                   SIG-Motel                                 |\n");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("|                                                                             |\n");
+    printf("| Esse projeto faz parte da disciplina Programação (DCT1106), ministrada pelo |\n");
+    printf("| professor Flavius Gorgônio. Nosso sistema auxilia os funcionários no        |\n");
+    printf("| gerenciamento de motéis, contando com módulos de cliente, funcionário,      |\n");
+    printf("| quarto, produto, hospedagem, venda, e os relatórios, incluíndo a listagem   |\n");
+    printf("| de todos os módulos anteriores.                                             |\n");
+    printf("|                                                                             |\n");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("\n");
+    printf("Pressione ENTER para voltar ao menu...");
+    getchar();
+}
