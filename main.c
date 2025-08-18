@@ -15,7 +15,7 @@
 
 
 #include <stdio.h>
-// #include <stdlib.h>
+#include <stdlib.h>
 
 
 // Assinatura das funções
@@ -34,10 +34,9 @@ void tela_menu_relatorio(void);
 
 // Programa principal
 int main(void) {
-    tela_menu_principal;
+    tela_menu_principal();
     tela_sobre;
     tela_equipe;
-
     tela_menu_cliente;
     tela_menu_funcionario;
     tela_menu_quarto;
@@ -47,4 +46,36 @@ int main(void) {
     tela_menu_relatorio;
     
     return 0;
+}
+
+void tela_menu_principal(void) {
+    char op_menu;
+    system("clear||cls");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
+    printf("|               Centro de Ensino Superior do Seridó - CERES                   |\n");
+    printf("|                     Disciplina DCT1106 -- Programação                       |\n");
+    printf("|                   Projeto Sistema de Gestão para Motéis                     |\n");
+    printf("|  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   |\n");
+    printf("|                                                                             |\n");
+    printf("|                                   SIG-Motel                                 |\n");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("|                                                                             |\n");
+    printf("|           1 - Módulo Clientes                                               |\n");
+    printf("|           2 - Módulo Funcionários                                           |\n");
+    printf("|           3 - Módulo Quartos                                                |\n");
+    printf("|           4 - Módulo Hospedagem                                             |\n");
+    printf("|           5 - Módulo Produtos                                               |\n");
+    printf("|           6 - Módulo vendas                                                 |\n");
+    printf("|           7 - Módulo Relatórios                                             |\n");
+    printf("|           8 - Módulo Informações                                            |\n");
+    printf("|           0 - Sair                                                          |\n");
+    printf("|                                                                             |\n");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("\n");
+    printf("|Escolha sua opção:");
+    scanf(" %c", &op_menu);
+    getchar();
+    printf("Pressione ENTER para voltar ao menu...");
+    getchar();
 }
