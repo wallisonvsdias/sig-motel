@@ -30,6 +30,7 @@ void tela_menu_produto(void);
 void tela_menu_hospedagem(void);
 void tela_menu_venda(void);
 void tela_menu_relatorio(void);
+void tela_finalizacao(void);
 
 
 // Programa principal
@@ -44,6 +45,7 @@ int main(void) {
     tela_menu_hospedagem;
     tela_menu_venda;
     tela_menu_relatorio;
+    tela_finalizacao();
     
     return 0;
 }
@@ -192,5 +194,23 @@ void tela_menu_funcionario(void) {
     scanf(" %c", &op_funcionario);
     getchar();
     printf("Pressione ENTER para voltar ao menu...");
+    getchar();
+}
+
+void tela_finalizacao(void) {
+    system("clear||cls");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("|                            SISTEMA ENCERRADO                                |\n");
+    printf("|                                                                             |\n");
+    printf("|                 Obrigado por utilizar o SIG-Motel!                          |\n");
+    printf("|                                                                             |\n");
+    printf("| Este sistema auxilia no gerenciamento de clientes, funcionários, quartos,   |\n");
+    printf("| produtos, hospedagens, vendas e relatórios, garantindo organização e        |\n");
+    printf("| eficiência na administração do motéis.                                      |\n");
+    printf("|                                                                             |\n");
+    printf("|                             Até a próxima!                                  |\n");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("\n");
+    printf("Pressione ENTER para sair...");
     getchar();
 }
