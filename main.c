@@ -42,7 +42,7 @@ int main(void) {
     tela_menu_funcionario();
     tela_menu_quarto();
     tela_menu_hospedagem();
-    tela_menu_produto;
+    tela_menu_produto();
     tela_menu_venda;
     tela_menu_relatorio;
     tela_finalizacao();
@@ -252,6 +252,36 @@ void tela_menu_hospedagem(void) {
     printf("\n");
     printf("|Escolha sua opção:");
     scanf(" %c", &op_hospedagem);
+    getchar();
+    printf("Pressione ENTER para voltar ao menu...");
+    getchar();
+}
+
+void tela_menu_produto(void) {
+    char op_produto;
+    system("clear||cls");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
+    printf("|               Centro de Ensino Superior do Seridó - CERES                   |\n");
+    printf("|                     Disciplina DCT1106 -- Programação                       |\n");
+    printf("|                   Projeto Sistema de Gestão para Motéis                     |\n");
+    printf("|  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   |\n");
+    printf("|                                                                             |\n");
+    printf("|                                   SIG-Motel                                 |\n");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("|                                                                             |\n");
+    printf("|                               Módulo Produto                                |\n");
+    printf("|                                                                             |\n");
+    printf("|      1 - Cadastrar Produto                                                  |\n");
+    printf("|      2 - Exibir Dados do Produto                                            |\n");
+    printf("|      3 - Alterar Dados do Produto                                           |\n");
+    printf("|      4 - Excluir Produto                                                    |\n");
+    printf("|      0 - Retornar ao Menu Principal                                         |\n");
+    printf("|                                                                             |\n");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("\n");
+    printf("|Escolha sua opção:");
+    scanf(" %c", &op_produto);
     getchar();
     printf("Pressione ENTER para voltar ao menu...");
     getchar();
