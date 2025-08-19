@@ -72,7 +72,6 @@ void tela_menu_principal(void) {
     printf("|           5 - Módulo Produto                                                |\n");
     printf("|           6 - Módulo Venda                                                  |\n");
     printf("|           7 - Módulo Relatórios                                             |\n");
-    printf("|           8 - Módulo Informações                                            |\n");
     printf("|           0 - Sair                                                          |\n");
     printf("|                                                                             |\n");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
