@@ -50,6 +50,7 @@ int main(void) {
     return 0;
 }
 
+
 void tela_menu_principal(void) {
     char op_menu;
     system("clear||cls");
@@ -107,6 +108,7 @@ void tela_sobre(void) {
     getchar();
 }
 
+
 void tela_equipe(void) {
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
@@ -136,6 +138,7 @@ void tela_equipe(void) {
     printf("Pressione ENTER para voltar ao menu...");
     getchar();
 }
+
 
 void tela_menu_cliente(void) {
     char op_cliente;
@@ -167,6 +170,7 @@ void tela_menu_cliente(void) {
     getchar();
 }
 
+
 void tela_menu_funcionario(void) {
     char op_funcionario;
     system("clear||cls");
@@ -196,6 +200,7 @@ void tela_menu_funcionario(void) {
     printf("Pressione ENTER para voltar ao menu...");
     getchar();
 }
+
 
 void tela_menu_quarto(void) {
     char op_quarto;
@@ -227,6 +232,7 @@ void tela_menu_quarto(void) {
     getchar();
 }
 
+
 void tela_menu_hospedagem(void) {
     char op_hospedagem;
     system("clear||cls");
@@ -257,6 +263,7 @@ void tela_menu_hospedagem(void) {
     getchar();
 }
 
+
 void tela_menu_produto(void) {
     char op_produto;
     system("clear||cls");
@@ -286,6 +293,7 @@ void tela_menu_produto(void) {
     printf("Pressione ENTER para voltar ao menu...");
     getchar();
 }
+
 
 void tela_finalizacao(void) {
     system("clear||cls");
