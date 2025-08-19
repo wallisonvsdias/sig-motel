@@ -38,6 +38,7 @@ int main(void) {
     tela_menu_principal();
     tela_sobre();
     tela_equipe;
+
     tela_menu_cliente();
     tela_menu_funcionario();
     tela_menu_quarto();
@@ -64,12 +65,12 @@ void tela_menu_principal(void) {
     printf("|                                   SIG-Motel                                 |\n");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|                                                                             |\n");
-    printf("|           1 - Módulo Clientes                                               |\n");
-    printf("|           2 - Módulo Funcionários                                           |\n");
-    printf("|           3 - Módulo Quartos                                                |\n");
+    printf("|           1 - Módulo Cliente                                                |\n");
+    printf("|           2 - Módulo Funcionário                                            |\n");
+    printf("|           3 - Módulo Quarto                                                 |\n");
     printf("|           4 - Módulo Hospedagem                                             |\n");
-    printf("|           5 - Módulo Produtos                                               |\n");
-    printf("|           6 - Módulo vendas                                                 |\n");
+    printf("|           5 - Módulo Produto                                                |\n");
+    printf("|           6 - Módulo Venda                                                  |\n");
     printf("|           7 - Módulo Relatórios                                             |\n");
     printf("|           8 - Módulo Informações                                            |\n");
     printf("|           0 - Sair                                                          |\n");
@@ -153,7 +154,7 @@ void tela_menu_cliente(void) {
     printf("|                                   SIG-Motel                                 |\n");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|                                                                             |\n");
-    printf("|                                Módulo Clientes                              |\n");
+    printf("|                                Módulo Cliente                               |\n");
     printf("|                                                                             |\n");
     printf("|      1 - Cadastrar Cliente                                                  |\n");
     printf("|      2 - Exibir Dados do Cliente                                            |\n");
@@ -184,7 +185,7 @@ void tela_menu_funcionario(void) {
     printf("|                                   SIG-Motel                                 |\n");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|                                                                             |\n");
-    printf("|                             Módulo Funcionários                             |\n");
+    printf("|                             Módulo Funcionário                              |\n");
     printf("|                                                                             |\n");
     printf("|      1 - Cadastrar Funcioário(a)                                            |\n");
     printf("|      2 - Exibir Dados do Funcionário(a)                                     |\n");
