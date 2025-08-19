@@ -138,7 +138,7 @@ void tela_equipe(void) {
 }
 
 void tela_menu_cliente(void) {
-    char op_menu;
+    char op_cliente;
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -161,7 +161,7 @@ void tela_menu_cliente(void) {
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("\n");
     printf("|Escolha sua opção:");
-    scanf(" %c", &op_menu);
+    scanf(" %c", &op_cliente);
     getchar();
     printf("Pressione ENTER para voltar ao menu...");
     getchar();
