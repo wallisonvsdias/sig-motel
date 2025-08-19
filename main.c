@@ -42,7 +42,7 @@ int main(void) {
     tela_menu_funcionario();
     tela_menu_quarto();
     tela_menu_produto;
-    tela_menu_hospedagem;
+    tela_menu_hospedagem();
     tela_menu_venda;
     tela_menu_relatorio;
     tela_finalizacao();
@@ -222,6 +222,36 @@ void tela_menu_quarto(void) {
     printf("\n");
     printf("|Escolha sua opção:");
     scanf(" %c", &op_quarto);
+    getchar();
+    printf("Pressione ENTER para voltar ao menu...");
+    getchar();
+}
+
+void tela_menu_hospedagem(void) {
+    char op_hospedagem;
+    system("clear||cls");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
+    printf("|               Centro de Ensino Superior do Seridó - CERES                   |\n");
+    printf("|                     Disciplina DCT1106 -- Programação                       |\n");
+    printf("|                   Projeto Sistema de Gestão para Motéis                     |\n");
+    printf("|  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   |\n");
+    printf("|                                                                             |\n");
+    printf("|                                   SIG-Motel                                 |\n");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("|                                                                             |\n");
+    printf("|                               Módulo Hospedagem                             |\n");
+    printf("|                                                                             |\n");
+    printf("|      1 - Cadastrar Hospedagem                                               |\n");
+    printf("|      2 - Exibir Dados da Hospedagem                                         |\n");
+    printf("|      3 - Alterar Dados do Hospagem                                          |\n");
+    printf("|      4 - Cancelar Hospedagem                                                |\n");
+    printf("|      0 - Retornar ao Menu Principal                                         |\n");
+    printf("|                                                                             |\n");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("\n");
+    printf("|Escolha sua opção:");
+    scanf(" %c", &op_hospedagem);
     getchar();
     printf("Pressione ENTER para voltar ao menu...");
     getchar();
