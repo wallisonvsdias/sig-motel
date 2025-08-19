@@ -37,7 +37,7 @@ void tela_finalizacao(void);
 int main(void) {
     tela_menu_principal();
     tela_sobre();
-    tela_equipe;
+    tela_equipe();
 
     tela_menu_cliente();
     tela_menu_funcionario();
@@ -45,7 +45,7 @@ int main(void) {
     tela_menu_hospedagem();
     tela_menu_produto();
     tela_menu_venda();
-    tela_menu_relatorio;
+    tela_menu_relatorio();
     tela_finalizacao();
     
     return 0;
