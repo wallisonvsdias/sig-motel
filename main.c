@@ -47,6 +47,7 @@ int main(void) {
     tela_menu_cliente();
     tela_cadastrar_cliente();
     tela_exibir_cliente();
+    tela_alterar_dados_cliente();
 
     tela_menu_funcionario();
     tela_menu_quarto();
