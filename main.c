@@ -24,7 +24,7 @@ void tela_sobre(void);
 void tela_equipe(void);
 
 void tela_menu_cliente(void);
-void tela_cadastrar_cliente();
+void tela_cadastrar_cliente(void);
 
 void tela_menu_funcionario(void);
 void tela_menu_quarto(void);
@@ -167,6 +167,33 @@ void tela_menu_cliente(void) {
     printf("\n");
     printf("|Escolha sua opção:");
     scanf(" %c", &op_cliente);
+    getchar();
+    printf("Pressione ENTER para voltar ao menu...");
+    getchar();
+}
+
+
+void tela_cadastrar_cliente(void) {
+    system("clear||cls");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
+    printf("|               Centro de Ensino Superior do Seridó - CERES                   |\n");
+    printf("|                     Disciplina DCT1106 -- Programação                       |\n");
+    printf("|                   Projeto Sistema de Gestão para Motéis                     |\n");
+    printf("|  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   |\n");
+    printf("|                                                                             |\n");
+    printf("|                                   SIG-Motel                                 |\n");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("|                                                                             |\n");
+    printf("|                              Cadastrar Cliente                              |\n");
+    printf("|                                                                             |\n");
+    printf("|      Nome:                                                                  |\n");
+    printf("|      Cpf:                                                                   |\n");
+    printf("|      Telefone:                                                              |\n");
+    printf("|      E-mail:                                                                |\n");
+    printf("|                                                                             |\n");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("\n");
     getchar();
     printf("Pressione ENTER para voltar ao menu...");
     getchar();
