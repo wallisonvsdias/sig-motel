@@ -26,7 +26,7 @@ void tela_equipe(void);
 void tela_menu_cliente(void);
 void tela_cadastrar_cliente(void);
 void tela_exibir_cliente(void);
-void alterar_dados_cliente(void);
+void tela_alterar_dados_cliente(void);
 
 
 void tela_menu_funcionario(void);
