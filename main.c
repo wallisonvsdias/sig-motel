@@ -43,7 +43,7 @@ int main(void) {
 
     tela_menu_cliente();
     tela_cadastrar_cliente();
-    
+
     tela_menu_funcionario();
     tela_menu_quarto();
     tela_menu_hospedagem();
@@ -131,7 +131,7 @@ void tela_equipe(void) {
     printf("| E-mail: wallison.dias.711@ufrn.edu.br                                       |\n");
     printf("| GitHub: @wallisonvsdias                                                     |\n");
     printf("|                                                                             |\n");
-    printf("| Isabelle Cavalcante                                                         |\n");
+    printf("| Isabelle Cavalcanti                                                         |\n");
     printf("| E-mail: isabelle.silva.712@ufrn.edu.br                                      |\n");
     printf("| GitHub: @Isabellecavalcant                                                  |\n");
     printf("|                                                                             |\n");
