@@ -42,6 +42,8 @@ int main(void) {
     tela_equipe();
 
     tela_menu_cliente();
+    tela_cadastrar_cliente();
+    
     tela_menu_funcionario();
     tela_menu_quarto();
     tela_menu_hospedagem();
