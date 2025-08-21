@@ -53,6 +53,8 @@ int main(void) {
     tela_excluir_cliente();
 
     tela_menu_funcionario();
+    tela_cadastrar_funcionario();
+    
     tela_menu_quarto();
     tela_menu_hospedagem();
     tela_menu_produto();
