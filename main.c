@@ -229,7 +229,7 @@ void tela_exibir_cliente(void){
     printf("|                                   SIG-Motel                                 |\n");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|                                                                             |\n");
-    printf("|                                 Exibir Cliente                              |\n");
+    printf("|                            Exibir Dados do Cliente                          |\n");
     printf("|                                                                             |\n");
     printf("|      Informe o cpf do cliente:                                              |\n");
     printf("|                                                                             |\n");
@@ -307,7 +307,7 @@ void tela_menu_funcionario(void) {
     printf("|      1 - Cadastrar Funcioário(a)                                            |\n");
     printf("|      2 - Exibir Dados do Funcionário(a)                                     |\n");
     printf("|      3 - Alterar Dados do FUncionário(a)                                    |\n");
-    printf("|      4 - Excluir Cliente                                                    |\n");
+    printf("|      4 - Excluir Funcionário                                                |\n");
     printf("|      0 - Retornar ao Menu Principal                                         |\n");
     printf("|                                                                             |\n");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
@@ -332,7 +332,7 @@ void tela_cadastrar_funcionario(void) {
     printf("|                                   SIG-Motel                                 |\n");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|                                                                             |\n");
-    printf("|                             Cadastrar Funcionário                           |\n");
+    printf("|                           Cadastrar Funcionário(a)                          |\n");
     printf("|                                                                             |\n");
     printf("|      Nome:                                                                  |\n");
     printf("|      Cpf:                                                                   |\n");
@@ -361,7 +361,7 @@ void tela_exibir_funcionario(void) {
     printf("|                                   SIG-Motel                                 |\n");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|                                                                             |\n");
-    printf("|                         Exibir Dados do Funcionário                         |\n");
+    printf("|                        Exibir Dados do Funcionário(a)                       |\n");
     printf("|                                                                             |\n");
     printf("|     Informe o cpf do funcionário:                                           |\n");
     printf("|                                                                             |\n");
@@ -385,7 +385,7 @@ void tela_alterar_dados_funcionario(void) {
     printf("|                                   SIG-Motel                                 |\n");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|                                                                             |\n");
-    printf("|                         Alterar Dados do Funcionário                        |\n");
+    printf("|                       Alterar Dados do Funcionário(a)                       |\n");
     printf("|                                                                             |\n");
     printf("|     Informe o cpf do funcionário:                                           |\n");
     printf("|                                                                             |\n");
@@ -397,7 +397,7 @@ void tela_alterar_dados_funcionario(void) {
 }
 
 
-void tela_excluir_cliente(void){
+void tela_excluir_funcionario(void){
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -409,7 +409,7 @@ void tela_excluir_cliente(void){
     printf("|                                   SIG-Motel                                 |\n");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|                                                                             |\n");
-    printf("|                             Excluir Funcionário                             |\n");
+    printf("|                             Excluir Funcionário(a)                             |\n");
     printf("|                                                                             |\n");
     printf("|      Informe o cpf do funcionário:                                          |\n");
     printf("|                                                                             |\n");
