@@ -30,6 +30,7 @@ void tela_alterar_dados_cliente(void);
 void tela_excluir_cliente(void);
 
 void tela_menu_funcionario(void);
+void tela_cadastrar_funcionario(void);
 void tela_menu_quarto(void);
 void tela_menu_hospedagem(void);
 void tela_menu_produto(void);
