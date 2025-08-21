@@ -371,7 +371,7 @@ void tela_exibir_funcionario(void) {
 }
 
 
-void tela_exibir_funcionario(void) {
+void tela_alterar_dados_funcionario(void) {
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
