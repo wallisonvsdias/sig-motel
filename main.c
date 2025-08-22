@@ -152,6 +152,10 @@ void tela_equipe(void) {
     printf("|                                                                             |\n");
     printf("| Repositório: https://github.com/wallisonvsdias/sig-motel.git                |\n");
     printf("|                                                                             |\n");
+    printf("| Sites usados para as artes em ASCII:                                        |\n");
+    printf("| https://emojicombos.com/heart                                               |\n");
+    printf("| https://www.asciiart.eu/text-to-ascii-art                                   |\n");
+    printf("|                                                                             |\n");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("\n");
     printf("Pressione ENTER para voltar ao menu...");
