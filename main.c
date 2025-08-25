@@ -64,10 +64,6 @@ int main(void) {
     tela_cadastrar_funcionario();
     tela_exibir_funcionario();
     tela_alterar_dados_funcionario();
-
-    tela_menu_quarto();
-    tela_cadastrar_quarto();
-
     
     tela_menu_hospedagem();
     tela_menu_produto();
@@ -539,7 +535,7 @@ void tela_alterar_dados_quarto(void) {
 }
 
 
-void tela_exluir_quarto(void) {
+void tela_excluir_quarto(void) {
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
