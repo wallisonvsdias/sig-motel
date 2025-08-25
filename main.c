@@ -66,6 +66,8 @@ int main(void) {
     tela_alterar_dados_funcionario();
 
     tela_menu_quarto();
+    tela_cadastrar_quarto();
+
     tela_menu_hospedagem();
     tela_menu_produto();
     tela_menu_venda();
