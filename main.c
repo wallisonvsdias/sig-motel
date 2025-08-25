@@ -51,8 +51,6 @@ void tela_finalizacao(void);
 // Programa principal
 int main(void) {
     tela_menu_principal();
-    tela_sobre();
-    tela_equipe();
 
     tela_menu_cliente();
     tela_cadastrar_cliente();
@@ -75,6 +73,9 @@ int main(void) {
     tela_menu_produto();
     tela_menu_venda();
     tela_menu_relatorio();
+
+    tela_sobre();
+    tela_equipe();
     tela_finalizacao();
     
     return 0;
