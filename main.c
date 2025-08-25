@@ -38,7 +38,7 @@ void tela_excluir_funcionario(void);
 void tela_menu_quarto(void);
 void tela_cadastrar_quarto(void);
 void tela_exibir_quarto(void);
-void tela_alterar_dados_quartoo(void);
+void tela_alterar_dados_quarto(void);
 void tela_excluir_quarto(void);
 
 void tela_menu_hospedagem(void);
@@ -68,6 +68,7 @@ int main(void) {
     tela_menu_quarto();
     tela_cadastrar_quarto();
 
+    
     tela_menu_hospedagem();
     tela_menu_produto();
     tela_menu_venda();
