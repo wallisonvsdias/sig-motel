@@ -36,6 +36,11 @@ void tela_alterar_dados_funcionario(void);
 void tela_excluir_funcionario(void);
 
 void tela_menu_quarto(void);
+void tela_cadastrar_quarto(void);
+void tela_exibir_quarto(void);
+void tela_alterar_dados_quartoo(void);
+void tela_excluir_quarto(void);
+
 void tela_menu_hospedagem(void);
 void tela_menu_produto(void);
 void tela_menu_venda(void);
