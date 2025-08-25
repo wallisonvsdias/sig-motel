@@ -461,6 +461,33 @@ void tela_menu_quarto(void) {
 }
 
 
+void tela_cadastrar_quarto(void) {
+    system("clear||cls");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
+    printf("|               Centro de Ensino Superior do Seridó - CERES                   |\n");
+    printf("|                     Disciplina DCT1106 -- Programação                       |\n");
+    printf("|                   Projeto Sistema de Gestão para Motéis                     |\n");
+    printf("|  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   |\n");
+    printf("|                                                                             |\n");
+    printf("|                                   SIG-Motel                                 |\n");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("|                                                                             |\n");
+    printf("|                               Cadastrar Quarto                              |\n");
+    printf("|                                                                             |\n");
+    printf("|      Nome:                                                                  |\n");
+    printf("|      ID:                                                                    |\n");
+    printf("|      Valor:                                                                 |\n");
+    printf("|      Descrição:                                                             |\n");
+    printf("|                                                                             |\n");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("\n");
+    getchar();
+    printf("Pressione ENTER para voltar ao menu...");
+    getchar();
+}
+
+
 void tela_menu_hospedagem(void) {
     char op_hospedagem;
     system("clear||cls");
