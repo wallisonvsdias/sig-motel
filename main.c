@@ -62,7 +62,7 @@ int main(void) {
     tela_cadastrar_funcionario();
     tela_exibir_funcionario();
     tela_alterar_dados_funcionario();
-    tela_excluir_quarto();
+    tela_excluir_funcionario();
 
     tela_menu_quarto();
     tela_cadastrar_quarto();
