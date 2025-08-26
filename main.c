@@ -45,6 +45,7 @@ void tela_menu_hospedagem(void);
 void tela_cadastrar_hospedagem(void);
 void tela_exibir_hospedagem(void);
 void tela_alterar_hospedagem(void);
+void tela_excluir_hospedagem(void);
 
 
 void tela_menu_produto(void);
@@ -78,6 +79,7 @@ int main(void) {
     tela_cadastrar_hospedagem();
     tela_exibir_hospedagem();
     tela_alterar_hospedagem();
+    tela_excluir_hospedagem();
 
 
     tela_menu_produto();
@@ -670,6 +672,30 @@ void tela_alterar_hospedagem(void) {
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|                                                                             |\n");
     printf("|                        Alterar Dados da Hospedagem                          |\n");
+    printf("|                                                                             |\n");
+    printf("|      Informe o ID da hospedagem:                                            |\n");
+    printf("|                                                                             |\n");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("\n");
+    getchar();
+    printf("Pressione ENTER para voltar ao menu...");
+    getchar();
+}
+
+
+void tela_excluir_hospedagem(void) {
+    system("clear||cls");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
+    printf("|               Centro de Ensino Superior do Seridó - CERES                   |\n");
+    printf("|                     Disciplina DCT1106 -- Programação                       |\n");
+    printf("|                   Projeto Sistema de Gestão para Motéis                     |\n");
+    printf("|  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   |\n");
+    printf("|                                                                             |\n");
+    printf("|                                   SIG-Motel                                 |\n");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("|                                                                             |\n");
+    printf("|                              Excluir Hospedagem                             |\n");
     printf("|                                                                             |\n");
     printf("|      Informe o ID da hospedagem:                                            |\n");
     printf("|                                                                             |\n");
