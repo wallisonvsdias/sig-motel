@@ -644,7 +644,7 @@ void tela_exibir_hospedagem(void) {
     printf("|                                                                             |\n");
     printf("|                        Exibir Dados da Hospedagem                           |\n");
     printf("|                                                                             |\n");
-    printf("|      ID da hospedagem:                                                      |\n");
+    printf("|      Informe o ID da hospedagem:                                            |\n");
     printf("|                                                                             |\n");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("\n");
