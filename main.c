@@ -940,28 +940,28 @@ void tela_exibir_venda(void) {
 }
 
 
-// void tela_alterar_venda(void) {
-//     system("clear||cls");
-//     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
-//     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
-//     printf("|               Centro de Ensino Superior do Seridó - CERES                   |\n");
-//     printf("|                     Disciplina DCT1106 -- Programação                       |\n");
-//     printf("|                   Projeto Sistema de Gestão para Motéis                     |\n");
-//     printf("|  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   |\n");
-//     printf("|                                                                             |\n");
-//     printf("|                                   SIG-Motel                                 |\n");
-//     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
-//     printf("|                                                                             |\n");
-//     printf("|                        Alterar Dados da Venda                               |\n");
-//     printf("|                                                                             |\n");
-//     printf("|      Informe o ID da venda:                                                 |\n");
-//     printf("|                                                                             |\n");
-//     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
-//     printf("\n");
-//     getchar();
-//     printf("Pressione ENTER para voltar ao menu...");
-//     getchar();
-// }
+void tela_alterar_venda(void) {
+    system("clear||cls");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
+    printf("|               Centro de Ensino Superior do Seridó - CERES                   |\n");
+    printf("|                     Disciplina DCT1106 -- Programação                       |\n");
+    printf("|                   Projeto Sistema de Gestão para Motéis                     |\n");
+    printf("|  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   |\n");
+    printf("|                                                                             |\n");
+    printf("|                                   SIG-Motel                                 |\n");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("|                                                                             |\n");
+    printf("|                        Alterar Dados da Venda                               |\n");
+    printf("|                                                                             |\n");
+    printf("|      Informe o ID da venda:                                                 |\n");
+    printf("|                                                                             |\n");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("\n");
+    getchar();
+    printf("Pressione ENTER para voltar ao menu...");
+    getchar();
+}
 
 
 // void tela_excluir_venda(void) {
