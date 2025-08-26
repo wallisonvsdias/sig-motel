@@ -43,6 +43,7 @@ void tela_excluir_quarto(void);
 
 void tela_menu_hospedagem(void);
 void tela_cadastrar_hospedagem(void);
+void tela_exibir_hospedagem(void);
 
 
 void tela_menu_produto(void);
@@ -74,6 +75,7 @@ int main(void) {
     
     tela_menu_hospedagem();
     tela_cadastrar_hospedagem();
+    tela_exibir_hospedagem();
 
     tela_menu_produto();
     tela_menu_venda();
@@ -619,6 +621,30 @@ void tela_cadastrar_hospedagem(void) {
     printf("|      ID do cliente:                                                         |\n");
     printf("|      ID do quarto:                                                          |\n");
     printf("|      Quantidade de dias:                                                    |\n");
+    printf("|                                                                             |\n");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("\n");
+    getchar();
+    printf("Pressione ENTER para voltar ao menu...");
+    getchar();
+}
+
+
+void tela_exibir_hospedagem(void) {
+    system("clear||cls");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
+    printf("|               Centro de Ensino Superior do Seridó - CERES                   |\n");
+    printf("|                     Disciplina DCT1106 -- Programação                       |\n");
+    printf("|                   Projeto Sistema de Gestão para Motéis                     |\n");
+    printf("|  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   |\n");
+    printf("|                                                                             |\n");
+    printf("|                                   SIG-Motel                                 |\n");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("|                                                                             |\n");
+    printf("|                        Exibir Dados da Hospedagem                           |\n");
+    printf("|                                                                             |\n");
+    printf("|      ID da hospedagem:                                                      |\n");
     printf("|                                                                             |\n");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("\n");
