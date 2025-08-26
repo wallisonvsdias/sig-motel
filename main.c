@@ -52,7 +52,7 @@ void tela_menu_produto(void);
 void tela_cadastrar_produto(void);
 void tela_exibir_produto(void);
 void tela_alterar_produto(void);
-// void tela_excluir_produto(void);
+void tela_excluir_produto(void);
 
 
 void tela_menu_venda(void);
@@ -92,7 +92,7 @@ int main(void) {
     tela_cadastrar_produto();
     tela_exibir_produto();
     tela_alterar_produto();
-    // tela_excluir_produto();
+    tela_excluir_produto();
 
 
     tela_menu_venda();
@@ -813,6 +813,30 @@ void tela_alterar_produto(void){
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|                                                                             |\n");
     printf("|                           Alterar Dados do Produto                          |\n");
+    printf("|                                                                             |\n");
+    printf("|      Informe o ID do produto:                                               |\n");
+    printf("|                                                                             |\n");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("\n");
+    getchar();
+    printf("Pressione ENTER para voltar ao menu...");
+    getchar();
+}
+
+
+void tela_excluir_produto(void){
+    system("clear||cls");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
+    printf("|               Centro de Ensino Superior do Seridó - CERES                   |\n");
+    printf("|                     Disciplina DCT1106 -- Programação                       |\n");
+    printf("|                   Projeto Sistema de Gestão para Motéis                     |\n");
+    printf("|  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   |\n");
+    printf("|                                                                             |\n");
+    printf("|                                   SIG-Motel                                 |\n");
+    printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
+    printf("|                                                                             |\n");
+    printf("|                                Excluir Produto                              |\n");
     printf("|                                                                             |\n");
     printf("|      Informe o ID do produto:                                               |\n");
     printf("|                                                                             |\n");
