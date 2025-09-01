@@ -19,33 +19,33 @@
 
 
 // Assinatura das funções
-void tela_menu_principal(void);
-void tela_sobre(void);
-void tela_equipe(void);
+void menu_principal(void);
+void sobre(void);
+void equipe(void);
 
-void tela_menu_cliente(void);
-void tela_cadastrar_cliente(void);
-void tela_exibir_cliente(void);
-void tela_alterar_dados_cliente(void);
-void tela_excluir_cliente(void);
+void menu_cliente(void);
+void cadastrar_cliente(void);
+void exibir_cliente(void);
+void alterar_dados_cliente(void);
+void excluir_cliente(void);
 
-void tela_menu_funcionario(void);
-void tela_cadastrar_funcionario(void);
-void tela_exibir_funcionario(void);
-void tela_alterar_dados_funcionario(void);
-void tela_excluir_funcionario(void);
+void menu_funcionario(void);
+void cadastrar_funcionario(void);
+void exibir_funcionario(void);
+void alterar_dados_funcionario(void);
+void excluir_funcionario(void);
 
-void tela_menu_quarto(void);
-void tela_cadastrar_quarto(void);
-void tela_exibir_quarto(void);
-void tela_alterar_dados_quarto(void);
-void tela_excluir_quarto(void);
+void menu_quarto(void);
+void cadastrar_quarto(void);
+void exibir_quarto(void);
+void alterar_dados_quarto(void);
+void excluir_quarto(void);
 
-void tela_menu_hospedagem(void);
-void tela_cadastrar_hospedagem(void);
-void tela_exibir_hospedagem(void);
-void tela_alterar_hospedagem(void);
-void tela_excluir_hospedagem(void);
+void menu_hospedagem(void);
+void cadastrar_hospedagem(void);
+void exibir_hospedagem(void);
+void alterar_dados_hospedagem(void);
+void excluir_hospedagem(void);
 
 
 void tela_menu_produto(void);
@@ -68,30 +68,30 @@ void tela_finalizacao(void);
 
 // Programa principal
 int main(void) {
-    tela_menu_principal();
+    menu_principal();
 
-    tela_menu_cliente();
-    tela_cadastrar_cliente();
-    tela_exibir_cliente();
-    tela_alterar_dados_cliente();
-    tela_excluir_cliente();
+    menu_cliente();
+    cadastrar_cliente();
+    exibir_cliente();
+    alterar_dados_cliente();
+    excluir_cliente();
 
-    tela_menu_funcionario();
-    tela_cadastrar_funcionario();
-    tela_exibir_funcionario();
-    tela_alterar_dados_funcionario();
-    tela_excluir_funcionario();
+    menu_funcionario();
+    cadastrar_funcionario();
+    exibir_funcionario();
+    alterar_dados_funcionario();
+    excluir_funcionario();
 
-    tela_menu_quarto();
-    tela_cadastrar_quarto();
-    tela_alterar_dados_quarto();
-    tela_excluir_quarto();
+    menu_quarto();
+    cadastrar_quarto();
+    alterar_dados_quarto();
+    excluir_quarto();
     
-    tela_menu_hospedagem();
-    tela_cadastrar_hospedagem();
-    tela_exibir_hospedagem();
-    tela_alterar_hospedagem();
-    tela_excluir_hospedagem();
+    menu_hospedagem();
+    cadastrar_hospedagem();
+    exibir_hospedagem();
+    alterar_dados_hospedagem();
+    excluir_hospedagem();
 
 
     tela_menu_produto();
@@ -110,15 +110,15 @@ int main(void) {
 
     tela_menu_relatorio();
 
-    tela_sobre();
-    tela_equipe();
+    sobre();
+    equipe();
     tela_finalizacao();
     
     return 0;
 }
 
 
-void tela_menu_principal(void) {
+void menu_principal(void) {
     char op_menu;
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
@@ -150,7 +150,7 @@ void tela_menu_principal(void) {
 }
 
 
-void tela_sobre(void) {
+void sobre(void) {
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -175,7 +175,7 @@ void tela_sobre(void) {
 }
 
 
-void tela_equipe(void) {
+void equipe(void) {
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -210,7 +210,7 @@ void tela_equipe(void) {
 }
 
 
-void tela_menu_cliente(void) {
+void menu_cliente(void) {
     char op_cliente;
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
@@ -241,7 +241,7 @@ void tela_menu_cliente(void) {
 }
 
 
-void tela_cadastrar_cliente(void) {
+void cadastrar_cliente(void) {
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -268,7 +268,7 @@ void tela_cadastrar_cliente(void) {
 }
 
 
-void tela_exibir_cliente(void){
+void exibir_cliente(void){
         system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -292,7 +292,7 @@ void tela_exibir_cliente(void){
 }
 
 
-void tela_alterar_dados_cliente(void){
+void alterar_dados_cliente(void){
         system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -316,7 +316,7 @@ void tela_alterar_dados_cliente(void){
 }
 
 
-void tela_excluir_cliente(void){
+void excluir_cliente(void){
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -340,7 +340,7 @@ void tela_excluir_cliente(void){
 }
 
 
-void tela_menu_funcionario(void) {
+void menu_funcionario(void) {
     char op_funcionario;
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
@@ -371,7 +371,7 @@ void tela_menu_funcionario(void) {
 }
 
 
-void tela_cadastrar_funcionario(void) {
+void cadastrar_funcionario(void) {
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -400,7 +400,7 @@ void tela_cadastrar_funcionario(void) {
 }
 
 
-void tela_exibir_funcionario(void) {
+void exibir_funcionario(void) {
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -424,7 +424,7 @@ void tela_exibir_funcionario(void) {
 }
 
 
-void tela_alterar_dados_funcionario(void) {
+void alterar_dados_funcionario(void) {
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -448,7 +448,7 @@ void tela_alterar_dados_funcionario(void) {
 }
 
 
-void tela_excluir_funcionario(void){
+void excluir_funcionario(void){
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -472,7 +472,7 @@ void tela_excluir_funcionario(void){
 }
 
 
-void tela_menu_quarto(void) {
+void menu_quarto(void) {
     char op_quarto;
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
@@ -503,7 +503,7 @@ void tela_menu_quarto(void) {
 }
 
 
-void tela_cadastrar_quarto(void) {
+void cadastrar_quarto(void) {
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -530,7 +530,7 @@ void tela_cadastrar_quarto(void) {
 }
 
 
-void tela_exibir_quarto(void){
+void exibir_quarto(void){
         system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -554,7 +554,7 @@ void tela_exibir_quarto(void){
 }
 
 
-void tela_alterar_dados_quarto(void) {
+void alterar_dados_quarto(void) {
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -578,7 +578,7 @@ void tela_alterar_dados_quarto(void) {
 }
 
 
-void tela_excluir_quarto(void) {
+void excluir_quarto(void) {
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -602,7 +602,7 @@ void tela_excluir_quarto(void) {
 }
 
 
-void tela_menu_hospedagem(void) {
+void menu_hospedagem(void) {
     char op_hospedagem;
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
@@ -633,7 +633,7 @@ void tela_menu_hospedagem(void) {
 }
 
 
-void tela_cadastrar_hospedagem(void) {
+void cadastrar_hospedagem(void) {
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -659,7 +659,7 @@ void tela_cadastrar_hospedagem(void) {
 }
 
 
-void tela_exibir_hospedagem(void) {
+void exibir_hospedagem(void) {
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -683,7 +683,7 @@ void tela_exibir_hospedagem(void) {
 }
 
 
-void tela_alterar_hospedagem(void) {
+void alterar_dados_hospedagem(void) {
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -707,7 +707,7 @@ void tela_alterar_hospedagem(void) {
 }
 
 
-void tela_excluir_hospedagem(void) {
+void excluir_hospedagem(void) {
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
