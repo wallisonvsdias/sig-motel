@@ -68,58 +68,83 @@ void tela_finalizacao(void);
 
 // Programa principal
 int main(void) {
-    tela_menu_principal();
+    char op_menu;
+    do {
+        tela_menu_principal();
+        printf("Escolha sua opção: ");
+        scanf(" %c", &op_menu);
+        getchar();
+        
+        switch(op_menu) {
+            case '1':
+                tela_menu_cliente();
+                break;
+            case '2':
+                tela_menu_funcionario();
+                break;
+            case '3':
+                tela_menu_quarto();
+                break;
+            case '4':
+                tela_menu_hospedagem();
+                break;
+            case '5':
+                tela_menu_produto();
+                break;
+            case '6':
+                tela_menu_venda();
+                break;
+            case '7':
+                tela_menu_relatorio();
+                break;
+            case '0':
+                tela_sobre();
+                tela_equipe();   
+                tela_finalizacao();
+                break;
+            default:
+                printf("Por favor, digite uma opção válida");
+                break;
+        }
+    } while (op_menu != '0');
 
-    tela_menu_cliente();
+
     tela_cadastrar_cliente();
     tela_exibir_cliente();
     tela_alterar_dados_cliente();
     tela_excluir_cliente();
 
-    tela_menu_funcionario();
     tela_cadastrar_funcionario();
     tela_exibir_funcionario();
     tela_alterar_dados_funcionario();
     tela_excluir_funcionario();
 
-    tela_menu_quarto();
     tela_cadastrar_quarto();
     tela_alterar_dados_quarto();
     tela_excluir_quarto();
     
-    tela_menu_hospedagem();
     tela_cadastrar_hospedagem();
     tela_exibir_hospedagem();
     tela_alterar_hospedagem();
     tela_excluir_hospedagem();
 
 
-    tela_menu_produto();
     tela_cadastrar_produto();
     tela_exibir_produto();
     tela_alterar_produto();
     tela_excluir_produto();
 
-
-    tela_menu_venda();
     tela_cadastrar_venda();
     tela_exibir_venda();
     tela_alterar_venda();
     tela_excluir_venda();
 
-
-    tela_menu_relatorio();
-
-    tela_sobre();
-    tela_equipe();
-    tela_finalizacao();
-    
+ 
     return 0;
 }
 
 
 void tela_menu_principal(void) {
-    char op_menu;
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -142,12 +167,8 @@ void tela_menu_principal(void) {
     printf("|                                                                             |\n");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("\n");
-    printf("|Escolha sua opção:");
-    scanf(" %c", &op_menu);
-    getchar();
-    printf("Pressione ENTER para voltar ao menu...");
-    getchar();
 }
+
 
 
 void tela_sobre(void) {
