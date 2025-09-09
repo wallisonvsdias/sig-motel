@@ -109,11 +109,6 @@ int main(void) {
     } while (op_menu != '0');
 
     
-    cadastrar_produto();
-    exibir_produto();
-    alterar_produto();
-    excluir_produto();
-
     cadastrar_venda();
     exibir_venda();
     alterar_venda();
@@ -817,11 +812,29 @@ void menu_produto(void) {
     printf("|                                                                             |\n");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("\n");
-    printf("|Escolha sua opção:");
+    printf("Escolha sua opção: ");
     scanf(" %c", &op_produto);
     getchar();
-    printf("Pressione ENTER para voltar ao menu...");
-    getchar();
+    
+    switch(op_produto) {
+        case '1':
+            cadastrar_produto();
+            break;
+        case '2':
+            exibir_produto();
+            break;
+        case '3':
+            alterar_produto();
+            break;
+        case '4':
+            excluir_produto();
+            break;
+        default:
+            printf("Por favor, digite uma opção válida");
+            break;
+    }
+
+
 }
 
 
