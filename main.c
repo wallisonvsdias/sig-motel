@@ -26,19 +26,19 @@ void equipe(void);
 void menu_cliente(void);
 void cadastrar_cliente(void);
 void exibir_cliente(void);
-void alterar_dados_cliente(void);
+void alterar_cliente(void);
 void excluir_cliente(void);
 
 void menu_funcionario(void);
 void cadastrar_funcionario(void);
 void exibir_funcionario(void);
-void alterar_dados_funcionario(void);
+void alterar_funcionario(void);
 void excluir_funcionario(void);
 
 void menu_quarto(void);
 void cadastrar_quarto(void);
 void exibir_quarto(void);
-void alterar_dados_quarto(void);
+void alterar_quarto(void);
 void excluir_quarto(void);
 
 void menu_hospedagem(void);
@@ -233,7 +233,7 @@ void menu_cliente(void) {
             exibir_cliente();
             break;
         case '3':
-            alterar_dados_cliente();
+            alterar_cliente();
             break;
         case '4':
             excluir_cliente();
@@ -297,7 +297,7 @@ void exibir_cliente(void){
 }
 
 
-void alterar_dados_cliente(void){
+void alterar_cliente(void){
         system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -380,7 +380,7 @@ void menu_funcionario(void) {
             exibir_funcionario();
             break;
         case '3':
-            alterar_dados_funcionario();
+            alterar_funcionario();
             break;
         case '4':
             excluir_funcionario();
@@ -445,7 +445,7 @@ void exibir_funcionario(void) {
 }
 
 
-void alterar_dados_funcionario(void) {
+void alterar_funcionario(void) {
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -528,7 +528,7 @@ void menu_quarto(void) {
             exibir_quarto();
             break;
         case '3':
-            alterar_dados_quarto();
+            alterar_quarto();
             break;
         case '4':
             excluir_quarto();
@@ -591,7 +591,7 @@ void exibir_quarto(void){
 }
 
 
-void alterar_dados_quarto(void) {
+void alterar_quarto(void) {
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
