@@ -1101,9 +1101,8 @@ void menu_relatorio(void) {
     printf("|     11  - Lista de vendas por cliente                                       |\n");
     printf("|     12  - Lista de vendas por funcionário                                   |\n");
     printf("|     13  - Lista de vendas por produto                                       |\n");
-    printf("|     14  - Lista de vendas por hospedagem                                    |\n");
-    printf("|     15  - Lista de vendas por período                                       |\n");
-    printf("|     16  - Lista de gastos totais por cliente                                |\n");
+    printf("|     14  - Lista de vendas por período                                       |\n");
+    printf("|     15  - Lista de gastos totais por cliente                                |\n");
     printf("|      0  - Retornar ao Menu Principal                                        |\n");
     printf("|                                                                             |\n");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
