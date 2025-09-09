@@ -125,7 +125,6 @@ int main(void) {
 }
 
 void menu_principal(void) {
-    char op_menu;
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
