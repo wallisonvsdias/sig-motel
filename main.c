@@ -108,11 +108,6 @@ int main(void) {
         }
     } while (op_menu != '0');
 
-    
-    cadastrar_venda();
-    exibir_venda();
-    alterar_venda();
-    excluir_venda();
 
     menu_relatorio();
 
@@ -610,7 +605,7 @@ void alterar_dados_quarto(void) {
     printf("|                                                                             |\n");
     printf("|                            Alterar Dados do Quarto                          |\n");
     printf("|                                                                             |\n");
-    printf("|     Informe o ID do quarto:                                           |\n");
+    printf("|     Informe o ID do quarto:                                                 |\n");
     printf("|                                                                             |\n");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("\n");
@@ -833,8 +828,6 @@ void menu_produto(void) {
             printf("Por favor, digite uma opção válida");
             break;
     }
-
-
 }
 
 
@@ -959,11 +952,27 @@ void menu_venda(void) {
     printf("|                                                                             |\n");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("\n");
-    printf("|Escolha sua opção:");
+    printf("Escolha sua opção: ");
     scanf(" %c", &op_venda);
     getchar();
-    printf("Pressione ENTER para voltar ao menu...");
-    getchar();
+    
+    switch(op_venda) {
+        case '1':
+            cadastrar_venda();
+            break;
+        case '2':
+            exibir_venda();
+            break;
+        case '3':
+            alterar_venda();
+            break;
+        case '4':
+            excluir_venda();
+            break;
+        default:
+            printf("Por favor, digite uma opção válida");
+            break;
+    }
 }
 
 
