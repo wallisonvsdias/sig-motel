@@ -44,64 +44,63 @@ void excluir_quarto(void);
 void menu_hospedagem(void);
 void cadastrar_hospedagem(void);
 void exibir_hospedagem(void);
-void alterar_dados_hospedagem(void);
+void alterar_hospedagem(void);
 void excluir_hospedagem(void);
 
 
-void tela_menu_produto(void);
-void tela_cadastrar_produto(void);
-void tela_exibir_produto(void);
-void tela_alterar_produto(void);
-void tela_excluir_produto(void);
+void menu_produto(void);
+void cadastrar_produto(void);
+void exibir_produto(void);
+void alterar_produto(void);
+void excluir_produto(void);
 
 
-void tela_menu_venda(void);
-void tela_cadastrar_venda(void);
-void tela_exibir_venda(void);
-void tela_alterar_venda(void);
-void tela_excluir_venda(void);
+void menu_venda(void);
+void cadastrar_venda(void);
+void exibir_venda(void);
+void alterar_venda(void);
+void excluir_venda(void);
 
 
-void tela_menu_relatorio(void);
-void tela_finalizacao(void);
+void menu_relatorio(void);
+void finalizacao(void);
 
 
 // Programa principal
 int main(void) {
-<<<<<<< HEAD
     char op_menu;
     do {
-        tela_menu_principal();
+        menu_principal();
         printf("Escolha sua opção: ");
         scanf(" %c", &op_menu);
         getchar();
-        
+
         switch(op_menu) {
             case '1':
-                tela_menu_cliente();
+                menu_cliente();
                 break;
             case '2':
-                tela_menu_funcionario();
+                menu_funcionario();
                 break;
             case '3':
-                tela_menu_quarto();
+                menu_quarto();
                 break;
             case '4':
-                tela_menu_hospedagem();
+                menu_hospedagem();
                 break;
             case '5':
-                tela_menu_produto();
+                menu_produto();
                 break;
             case '6':
-                tela_menu_venda();
+                menu_venda();
                 break;
             case '7':
-                tela_menu_relatorio();
+                menu_relatorio();
                 break;
             case '0':
-                tela_sobre();
-                tela_equipe();   
-                tela_finalizacao();
+                sobre();
+                equipe();   
+                finalizacao();
                 break;
             default:
                 printf("Por favor, digite uma opção válida");
@@ -109,84 +108,24 @@ int main(void) {
         }
     } while (op_menu != '0');
 
-
-    tela_cadastrar_cliente();
-    tela_exibir_cliente();
-    tela_alterar_dados_cliente();
-    tela_excluir_cliente();
-
-    tela_cadastrar_funcionario();
-    tela_exibir_funcionario();
-    tela_alterar_dados_funcionario();
-    tela_excluir_funcionario();
-
-    tela_cadastrar_quarto();
-    tela_alterar_dados_quarto();
-    tela_excluir_quarto();
     
-    tela_cadastrar_hospedagem();
-    tela_exibir_hospedagem();
-    tela_alterar_hospedagem();
-    tela_excluir_hospedagem();
-=======
-    menu_principal();
+    cadastrar_produto();
+    exibir_produto();
+    alterar_produto();
+    excluir_produto();
 
-    menu_cliente();
-    cadastrar_cliente();
-    exibir_cliente();
-    alterar_dados_cliente();
-    excluir_cliente();
+    cadastrar_venda();
+    exibir_venda();
+    alterar_venda();
+    excluir_venda();
 
-    menu_funcionario();
-    cadastrar_funcionario();
-    exibir_funcionario();
-    alterar_dados_funcionario();
-    excluir_funcionario();
+    menu_relatorio();
 
-    menu_quarto();
-    cadastrar_quarto();
-    alterar_dados_quarto();
-    excluir_quarto();
-    
-    menu_hospedagem();
-    cadastrar_hospedagem();
-    exibir_hospedagem();
-    alterar_dados_hospedagem();
-    excluir_hospedagem();
->>>>>>> cf54c0a88e62c80bc29807b943b382715fe5b66a
-
-
-    tela_cadastrar_produto();
-    tela_exibir_produto();
-    tela_alterar_produto();
-    tela_excluir_produto();
-
-    tela_cadastrar_venda();
-    tela_exibir_venda();
-    tela_alterar_venda();
-    tela_excluir_venda();
-
-<<<<<<< HEAD
- 
-=======
-
-    tela_menu_relatorio();
-
-    sobre();
-    equipe();
-    tela_finalizacao();
-    
->>>>>>> cf54c0a88e62c80bc29807b943b382715fe5b66a
     return 0;
 }
 
-
-<<<<<<< HEAD
-void tela_menu_principal(void) {
-=======
 void menu_principal(void) {
     char op_menu;
->>>>>>> cf54c0a88e62c80bc29807b943b382715fe5b66a
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -211,13 +150,7 @@ void menu_principal(void) {
     printf("\n");
 }
 
-
-<<<<<<< HEAD
-
-void tela_sobre(void) {
-=======
 void sobre(void) {
->>>>>>> cf54c0a88e62c80bc29807b943b382715fe5b66a
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -300,11 +233,26 @@ void menu_cliente(void) {
     printf("|                                                                             |\n");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("\n");
-    printf("|Escolha sua opção:");
+    printf("Escolha sua opção: ");
     scanf(" %c", &op_cliente);
     getchar();
-    printf("Pressione ENTER para voltar ao menu...");
-    getchar();
+    switch(op_cliente) {
+        case '1':
+            cadastrar_cliente();
+            break;
+        case '2':
+            exibir_cliente();
+            break;
+        case '3':
+            alterar_dados_cliente();
+            break;
+        case '4':
+            excluir_cliente();
+            break;
+        default:
+            printf("Por favor, digite uma opção válida");
+            break;
+    }
 }
 
 
@@ -331,6 +279,7 @@ void cadastrar_cliente(void) {
     printf("\n");
     getchar();
     printf("Pressione ENTER para voltar ao menu...");
+    
     getchar();
 }
 
@@ -430,11 +379,27 @@ void menu_funcionario(void) {
     printf("|                                                                             |\n");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("\n");
-    printf("|Escolha sua opção:");
+    printf("Escolha sua opção: ");
     scanf(" %c", &op_funcionario);
     getchar();
-    printf("Pressione ENTER para voltar ao menu...");
-    getchar();
+    
+    switch(op_funcionario) {
+        case '1':
+            cadastrar_funcionario();
+            break;
+        case '2':
+            exibir_funcionario();
+            break;
+        case '3':
+            alterar_dados_funcionario();
+            break;
+        case '4':
+            excluir_funcionario();
+            break;
+        default:
+            printf("Por favor, digite uma opção válida");
+            break;
+    }
 }
 
 
@@ -562,11 +527,27 @@ void menu_quarto(void) {
     printf("|                                                                             |\n");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("\n");
-    printf("|Escolha sua opção:");
+    printf("Escolha sua opção: ");
     scanf(" %c", &op_quarto);
     getchar();
-    printf("Pressione ENTER para voltar ao menu...");
-    getchar();
+    
+    switch(op_quarto) {
+        case '1':
+            cadastrar_quarto();
+            break;
+        case '2':
+            exibir_quarto();
+            break;
+        case '3':
+            alterar_dados_quarto();
+            break;
+        case '4':
+            excluir_quarto();
+            break;
+        default:
+            printf("Por favor, digite uma opção válida");
+            break;
+    }
 }
 
 
@@ -692,11 +673,27 @@ void menu_hospedagem(void) {
     printf("|                                                                             |\n");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("\n");
-    printf("|Escolha sua opção:");
+    printf("Escolha sua opção: ");
     scanf(" %c", &op_hospedagem);
     getchar();
-    printf("Pressione ENTER para voltar ao menu...");
-    getchar();
+    
+    switch(op_hospedagem) {
+        case '1':
+            cadastrar_hospedagem();
+            break;
+        case '2':
+            exibir_hospedagem();
+            break;
+        case '3':
+            alterar_hospedagem();
+            break;
+        case '4':
+            excluir_hospedagem();
+            break;
+        default:
+            printf("Por favor, digite uma opção válida");
+            break;
+    }
 }
 
 
@@ -750,7 +747,7 @@ void exibir_hospedagem(void) {
 }
 
 
-void alterar_dados_hospedagem(void) {
+void alterar_hospedagem(void) {
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -798,7 +795,7 @@ void excluir_hospedagem(void) {
 }
 
 
-void tela_menu_produto(void) {
+void menu_produto(void) {
     char op_produto;
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
@@ -829,7 +826,7 @@ void tela_menu_produto(void) {
 }
 
 
-void tela_cadastrar_produto(void) {
+void cadastrar_produto(void) {
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -855,7 +852,7 @@ void tela_cadastrar_produto(void) {
 }
 
 
-void tela_exibir_produto(void){
+void exibir_produto(void){
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -879,7 +876,7 @@ void tela_exibir_produto(void){
 }
 
 
-void tela_alterar_produto(void){
+void alterar_produto(void){
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -903,7 +900,7 @@ void tela_alterar_produto(void){
 }
 
 
-void tela_excluir_produto(void){
+void excluir_produto(void){
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -927,7 +924,7 @@ void tela_excluir_produto(void){
 }
 
 
-void tela_menu_venda(void) {
+void menu_venda(void) {
     char op_venda;
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
@@ -958,7 +955,7 @@ void tela_menu_venda(void) {
 }
 
 
-void tela_cadastrar_venda(void) {
+void cadastrar_venda(void) {
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -983,7 +980,7 @@ void tela_cadastrar_venda(void) {
 }
 
 
-void tela_exibir_venda(void) {
+void exibir_venda(void) {
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -1007,7 +1004,7 @@ void tela_exibir_venda(void) {
 }
 
 
-void tela_alterar_venda(void) {
+void alterar_venda(void) {
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -1031,7 +1028,7 @@ void tela_alterar_venda(void) {
 }
 
 
-void tela_excluir_venda(void) {
+void excluir_venda(void) {
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|           Universidade Federal do Rio Grande do Norte - UFRN                |\n");
@@ -1055,7 +1052,7 @@ void tela_excluir_venda(void) {
 }
 
 
-void tela_menu_relatorio(void) {
+void menu_relatorio(void) {
     char op_relatorio;
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
@@ -1098,7 +1095,7 @@ void tela_menu_relatorio(void) {
 }
 
 
-void tela_finalizacao(void) {
+void finalizacao(void) {
     system("clear||cls");
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("|                            SISTEMA ENCERRADO                                |\n");
