@@ -37,7 +37,7 @@ void menu_relatorio(void) {
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("\n");
     printf("|Escolha sua opção:");
-    scanf(" %c", &op_relatorio);
+    scanf("%c", &op_relatorio);
     getchar();
     printf("Pressione ENTER para voltar ao menu...");
     getchar();

@@ -60,7 +60,7 @@ int main(void) {
     do {
         menu_principal();
         printf("Escolha sua opção: ");
-        scanf(" %c", &op_menu);
+        scanf("%c", &op_menu);
         getchar();
 
         switch(op_menu) {
@@ -211,7 +211,7 @@ void menu_cliente(void) {
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("\n");
     printf("Escolha sua opção: ");
-    scanf(" %c", &op_cliente);
+    scanf("%c", &op_cliente);
     getchar();
     switch(op_cliente) {
         case '1':
@@ -357,7 +357,7 @@ void menu_funcionario(void) {
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("\n");
     printf("Escolha sua opção: ");
-    scanf(" %c", &op_funcionario);
+    scanf("%c", &op_funcionario);
     getchar();
     
     switch(op_funcionario) {
@@ -505,7 +505,7 @@ void menu_quarto(void) {
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("\n");
     printf("Escolha sua opção: ");
-    scanf(" %c", &op_quarto);
+    scanf("%c", &op_quarto);
     getchar();
     
     switch(op_quarto) {
@@ -651,7 +651,7 @@ void menu_hospedagem(void) {
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("\n");
     printf("Escolha sua opção: ");
-    scanf(" %c", &op_hospedagem);
+    scanf("%c", &op_hospedagem);
     getchar();
     
     switch(op_hospedagem) {

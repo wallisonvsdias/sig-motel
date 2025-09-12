@@ -26,7 +26,7 @@ void menu_produto(void) {
     printf("♡--------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------------˖⁺‧₊˚♡˚₊‧⁺˖--------♡\n");
     printf("\n");
     printf("Escolha sua opção: ");
-    scanf(" %c", &op_produto);
+    scanf("%c", &op_produto);
     getchar();
     
     switch(op_produto) {
