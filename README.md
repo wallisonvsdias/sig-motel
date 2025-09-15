@@ -1,4 +1,4 @@
-# sig-motel
+# SIG-Motel
 
 **Sistema de Gestão para Motéis**  
 Universidade Federal do Rio Grande do Norte - UFRN  
@@ -50,5 +50,5 @@ O sistema é composto por diversos módulos:
    make
 
 3. Execute o programa:
-```bash
+   ```bash
    ./sig-motel
