@@ -13,8 +13,8 @@ Desenvolvido por [@wallisonvsdias](https://github.com/wallisonvsdias) e [@Isabel
 ---
 
 ## 📌 Sobre o Projeto
-O **sig-motel** é um sistema acadêmico desenvolvido para a disciplina de Programação (DCT1106).  
-Seu objetivo é **auxiliar o gerenciamento de motéis**, oferecendo funcionalidades que facilitam o controle de clientes, funcionários e hospedagens, além de permitir a emissão de relatórios completos.  
+O sig-motel é um sistema acadêmico desenvolvido para a disciplina de Programação (DCT1106).  
+Seu objetivo é auxiliar o gerenciamento de motéis, oferecendo funcionalidades que facilitam o controle de clientes, funcionários e hospedagens, além de permitir a emissão de relatórios completos.  
 
 ---
 
@@ -28,13 +28,6 @@ O sistema é composto por diversos módulos:
 - 🏨 **Hospedagens** – Controle de entradas, saídas e consumo.  
 - 💰 **Vendas** – Registro das transações realizadas.  
 - 📊 **Relatórios** – Listagem e análise de todos os módulos.  
-
----
-
-## 🚀 Tecnologias Utilizadas
-- Linguagem: **C**  
-- Paradigma: **Programação Estruturada**  
-- Ferramentas: **gcc**, **make**  
 
 ---
 
