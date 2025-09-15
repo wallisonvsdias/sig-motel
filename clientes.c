@@ -71,13 +71,12 @@ void cadastrar_cliente(void) {
     printf("\n");
     getchar();
     printf("Pressione ENTER para voltar ao menu...");
-    
     getchar();
 }
 
 
 void exibir_cliente(void){
-        system("clear||cls");
+    system("clear||cls");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡           Universidade Federal do Rio Grande do Norte - UFRN                ♡\n");
     printf("♡               Centro de Ensino Superior do Seridó - CERES                   ♡\n");
@@ -101,7 +100,7 @@ void exibir_cliente(void){
 
 
 void alterar_cliente(void){
-        system("clear||cls");
+    system("clear||cls");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡           Universidade Federal do Rio Grande do Norte - UFRN                ♡\n");
     printf("♡               Centro de Ensino Superior do Seridó - CERES                   ♡\n");

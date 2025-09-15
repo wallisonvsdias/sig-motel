@@ -74,7 +74,6 @@ int main(void) {
         }
     } while (op_menu != '0');
 
-
     menu_relatorio();
 
     return 0;
