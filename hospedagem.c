@@ -1,19 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "interface.h"
 #include "hospedagem.h"
 
 
 void menu_hospedagem(void) {
     char op_hospedagem;
     system("clear||cls");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    printf("♡           Universidade Federal do Rio Grande do Norte - UFRN                ♡\n");
-    printf("♡               Centro de Ensino Superior do Seridó - CERES                   ♡\n");
-    printf("♡                     Disciplina DCT1106 -- Programação                       ♡\n");
-    printf("♡                   Projeto Sistema de Gestão para Motéis                     ♡\n");
-    printf("♡  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   ♡\n");
-    printf("♡                                                                             ♡\n");
-    printf("♡                                   SIG-Motel                                 ♡\n");
+    cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                               Módulo Hospedagem                             ♡\n");
@@ -52,14 +46,7 @@ void menu_hospedagem(void) {
 
 void cadastrar_hospedagem(void) {
     system("clear||cls");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    printf("♡           Universidade Federal do Rio Grande do Norte - UFRN                ♡\n");
-    printf("♡               Centro de Ensino Superior do Seridó - CERES                   ♡\n");
-    printf("♡                     Disciplina DCT1106 -- Programação                       ♡\n");
-    printf("♡                   Projeto Sistema de Gestão para Motéis                     ♡\n");
-    printf("♡  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   ♡\n");
-    printf("♡                                                                             ♡\n");
-    printf("♡                                   SIG-Motel                                 ♡\n");
+    cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                           Cadastrar Hospedagem                              ♡\n");
@@ -78,14 +65,7 @@ void cadastrar_hospedagem(void) {
 
 void exibir_hospedagem(void) {
     system("clear||cls");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    printf("♡           Universidade Federal do Rio Grande do Norte - UFRN                ♡\n");
-    printf("♡               Centro de Ensino Superior do Seridó - CERES                   ♡\n");
-    printf("♡                     Disciplina DCT1106 -- Programação                       ♡\n");
-    printf("♡                   Projeto Sistema de Gestão para Motéis                     ♡\n");
-    printf("♡  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   ♡\n");
-    printf("♡                                                                             ♡\n");
-    printf("♡                                   SIG-Motel                                 ♡\n");
+    cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                        Exibir Dados da Hospedagem                           ♡\n");
@@ -102,14 +82,7 @@ void exibir_hospedagem(void) {
 
 void alterar_hospedagem(void) {
     system("clear||cls");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    printf("♡           Universidade Federal do Rio Grande do Norte - UFRN                ♡\n");
-    printf("♡               Centro de Ensino Superior do Seridó - CERES                   ♡\n");
-    printf("♡                     Disciplina DCT1106 -- Programação                       ♡\n");
-    printf("♡                   Projeto Sistema de Gestão para Motéis                     ♡\n");
-    printf("♡  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   ♡\n");
-    printf("♡                                                                             ♡\n");
-    printf("♡                                   SIG-Motel                                 ♡\n");
+    cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                        Alterar Dados da Hospedagem                          ♡\n");
@@ -126,14 +99,7 @@ void alterar_hospedagem(void) {
 
 void excluir_hospedagem(void) {
     system("clear||cls");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    printf("♡           Universidade Federal do Rio Grande do Norte - UFRN                ♡\n");
-    printf("♡               Centro de Ensino Superior do Seridó - CERES                   ♡\n");
-    printf("♡                     Disciplina DCT1106 -- Programação                       ♡\n");
-    printf("♡                   Projeto Sistema de Gestão para Motéis                     ♡\n");
-    printf("♡  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   ♡\n");
-    printf("♡                                                                             ♡\n");
-    printf("♡                                   SIG-Motel                                 ♡\n");
+    cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                              Excluir Hospedagem                             ♡\n");

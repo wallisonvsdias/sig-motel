@@ -1,18 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "interface.h"
 #include "produtos.h"
+
 
 void menu_produto(void) {
     char op_produto;
     system("clear||cls");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    printf("♡           Universidade Federal do Rio Grande do Norte - UFRN                ♡\n");
-    printf("♡               Centro de Ensino Superior do Seridó - CERES                   ♡\n");
-    printf("♡                     Disciplina DCT1106 -- Programação                       ♡\n");
-    printf("♡                   Projeto Sistema de Gestão para Motéis                     ♡\n");
-    printf("♡  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   ♡\n");
-    printf("♡                                                                             ♡\n");
-    printf("♡                                   SIG-Motel                                 ♡\n");
+    cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                               Módulo Produto                                ♡\n");
@@ -51,14 +46,7 @@ void menu_produto(void) {
 
 void cadastrar_produto(void) {
     system("clear||cls");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    printf("♡           Universidade Federal do Rio Grande do Norte - UFRN                ♡\n");
-    printf("♡               Centro de Ensino Superior do Seridó - CERES                   ♡\n");
-    printf("♡                     Disciplina DCT1106 -- Programação                       ♡\n");
-    printf("♡                   Projeto Sistema de Gestão para Motéis                     ♡\n");
-    printf("♡  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   ♡\n");
-    printf("♡                                                                             ♡\n");
-    printf("♡                                   SIG-Motel                                 ♡\n");
+    cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                            Cadastrar Produto                                ♡\n");
@@ -77,14 +65,7 @@ void cadastrar_produto(void) {
 
 void exibir_produto(void){
     system("clear||cls");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    printf("♡           Universidade Federal do Rio Grande do Norte - UFRN                ♡\n");
-    printf("♡               Centro de Ensino Superior do Seridó - CERES                   ♡\n");
-    printf("♡                     Disciplina DCT1106 -- Programação                       ♡\n");
-    printf("♡                   Projeto Sistema de Gestão para Motéis                     ♡\n");
-    printf("♡  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   ♡\n");
-    printf("♡                                                                             ♡\n");
-    printf("♡                                   SIG-Motel                                 ♡\n");
+    cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                           Exibir Dados do Produto                           ♡\n");
@@ -101,14 +82,7 @@ void exibir_produto(void){
 
 void alterar_produto(void){
     system("clear||cls");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    printf("♡           Universidade Federal do Rio Grande do Norte - UFRN                ♡\n");
-    printf("♡               Centro de Ensino Superior do Seridó - CERES                   ♡\n");
-    printf("♡                     Disciplina DCT1106 -- Programação                       ♡\n");
-    printf("♡                   Projeto Sistema de Gestão para Motéis                     ♡\n");
-    printf("♡  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   ♡\n");
-    printf("♡                                                                             ♡\n");
-    printf("♡                                   SIG-Motel                                 ♡\n");
+    cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                           Alterar Dados do Produto                          ♡\n");
@@ -125,14 +99,7 @@ void alterar_produto(void){
 
 void excluir_produto(void){
     system("clear||cls");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    printf("♡           Universidade Federal do Rio Grande do Norte - UFRN                ♡\n");
-    printf("♡               Centro de Ensino Superior do Seridó - CERES                   ♡\n");
-    printf("♡                     Disciplina DCT1106 -- Programação                       ♡\n");
-    printf("♡                   Projeto Sistema de Gestão para Motéis                     ♡\n");
-    printf("♡  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   ♡\n");
-    printf("♡                                                                             ♡\n");
-    printf("♡                                   SIG-Motel                                 ♡\n");
+    cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                                Excluir Produto                              ♡\n");

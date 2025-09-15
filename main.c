@@ -16,6 +16,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "interface.h"
 #include "clientes.h"
 #include "funcionarios.h"
 #include "quartos.h"
@@ -81,14 +83,7 @@ int main(void) {
 
 void menu_principal(void) {
     system("clear||cls");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    printf("♡           Universidade Federal do Rio Grande do Norte - UFRN                ♡\n");
-    printf("♡               Centro de Ensino Superior do Seridó - CERES                   ♡\n");
-    printf("♡                     Disciplina DCT1106 -- Programação                       ♡\n");
-    printf("♡                   Projeto Sistema de Gestão para Motéis                     ♡\n");
-    printf("♡  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   ♡\n");
-    printf("♡                                                                             ♡\n");
-    printf("♡                                   SIG-Motel                                 ♡\n");
+    cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡           1 - Módulo Cliente                                                ♡\n");
@@ -106,14 +101,7 @@ void menu_principal(void) {
 
 void sobre(void) {
     system("clear||cls");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    printf("♡           Universidade Federal do Rio Grande do Norte - UFRN                ♡\n");
-    printf("♡               Centro de Ensino Superior do Seridó - CERES                   ♡\n");
-    printf("♡                     Disciplina DCT1106 -- Programação                       ♡\n");
-    printf("♡                   Projeto Sistema de Gestão para Motéis                     ♡\n");
-    printf("♡  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   ♡\n");
-    printf("♡                                                                             ♡\n");
-    printf("♡                                   SIG-Motel                                 ♡\n");
+    cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ Esse projeto faz parte da disciplina Programação (DCT1106), ministrada pelo ♡\n");
@@ -131,14 +119,7 @@ void sobre(void) {
 
 void equipe(void) {
     system("clear||cls");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    printf("♡           Universidade Federal do Rio Grande do Norte - UFRN                ♡\n");
-    printf("♡               Centro de Ensino Superior do Seridó - CERES                   ♡\n");
-    printf("♡                     Disciplina DCT1106 -- Programação                       ♡\n");
-    printf("♡                   Projeto Sistema de Gestão para Motéis                     ♡\n");
-    printf("♡  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   ♡\n");
-    printf("♡                                                                             ♡\n");
-    printf("♡                                   SIG-Motel                                 ♡\n");
+    cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ Esse projeto foi desenvolvido por:                                          ♡\n");

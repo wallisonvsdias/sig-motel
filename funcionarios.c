@@ -1,18 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "interface.h"
 #include "funcionarios.h"
+
 
 void menu_funcionario(void) {
     char op_funcionario;
     system("clear||cls");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    printf("♡           Universidade Federal do Rio Grande do Norte - UFRN                ♡\n");
-    printf("♡               Centro de Ensino Superior do Seridó - CERES                   ♡\n");
-    printf("♡                     Disciplina DCT1106 -- Programação                       ♡\n");
-    printf("♡                   Projeto Sistema de Gestão para Motéis                     ♡\n");
-    printf("♡  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   ♡\n");
-    printf("♡                                                                             ♡\n");
-    printf("♡                                   SIG-Motel                                 ♡\n");
+    cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                             Módulo Funcionário                              ♡\n");
@@ -51,14 +46,7 @@ void menu_funcionario(void) {
 
 void cadastrar_funcionario(void) {
     system("clear||cls");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    printf("♡           Universidade Federal do Rio Grande do Norte - UFRN                ♡\n");
-    printf("♡               Centro de Ensino Superior do Seridó - CERES                   ♡\n");
-    printf("♡                     Disciplina DCT1106 -- Programação                       ♡\n");
-    printf("♡                   Projeto Sistema de Gestão para Motéis                     ♡\n");
-    printf("♡  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   ♡\n");
-    printf("♡                                                                             ♡\n");
-    printf("♡                                   SIG-Motel                                 ♡\n");
+    cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                           Cadastrar Funcionário(a)                          ♡\n");
@@ -80,14 +68,7 @@ void cadastrar_funcionario(void) {
 
 void exibir_funcionario(void) {
     system("clear||cls");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    printf("♡           Universidade Federal do Rio Grande do Norte - UFRN                ♡\n");
-    printf("♡               Centro de Ensino Superior do Seridó - CERES                   ♡\n");
-    printf("♡                     Disciplina DCT1106 -- Programação                       ♡\n");
-    printf("♡                   Projeto Sistema de Gestão para Motéis                     ♡\n");
-    printf("♡  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   ♡\n");
-    printf("♡                                                                             ♡\n");
-    printf("♡                                   SIG-Motel                                 ♡\n");
+    cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                        Exibir Dados do Funcionário(a)                       ♡\n");
@@ -104,14 +85,7 @@ void exibir_funcionario(void) {
 
 void alterar_funcionario(void) {
     system("clear||cls");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    printf("♡           Universidade Federal do Rio Grande do Norte - UFRN                ♡\n");
-    printf("♡               Centro de Ensino Superior do Seridó - CERES                   ♡\n");
-    printf("♡                     Disciplina DCT1106 -- Programação                       ♡\n");
-    printf("♡                   Projeto Sistema de Gestão para Motéis                     ♡\n");
-    printf("♡  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   ♡\n");
-    printf("♡                                                                             ♡\n");
-    printf("♡                                   SIG-Motel                                 ♡\n");
+    cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                       Alterar Dados do Funcionário(a)                       ♡\n");
@@ -128,17 +102,10 @@ void alterar_funcionario(void) {
 
 void excluir_funcionario(void){
     system("clear||cls");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    printf("♡           Universidade Federal do Rio Grande do Norte - UFRN                ♡\n");
-    printf("♡               Centro de Ensino Superior do Seridó - CERES                   ♡\n");
-    printf("♡                     Disciplina DCT1106 -- Programação                       ♡\n");
-    printf("♡                   Projeto Sistema de Gestão para Motéis                     ♡\n");
-    printf("♡  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   ♡\n");
-    printf("♡                                                                             ♡\n");
-    printf("♡                                   SIG-Motel                                 ♡\n");
+    cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡                             Excluir Funcionário(a)                             ♡\n");
+    printf("♡                            Excluir Funcionário(a)                           ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡      Informe o cpf do funcionário:                                          ♡\n");
     printf("♡                                                                             ♡\n");

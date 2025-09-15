@@ -1,20 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "interface.h"
 #include "quartos.h"
 
 
 void menu_quarto(void) {
     char op_quarto;
     system("clear||cls");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡n");
-    printf("♡           Universidade Federal do Rio Grande do Norte - UFRN                ♡\n");
-    printf("♡               Centro de Ensino Superior do Seridó - CERES                   ♡\n");
-    printf("♡                     Disciplina DCT1106 -- Programação                       ♡\n");
-    printf("♡                   Projeto Sistema de Gestão para Motéis                     ♡\n");
-    printf("♡  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   ♡\n");
-    printf("♡                                                                             ♡\n");
-    printf("♡                                   SIG-Motel                                 ♡\n");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡n");
+    cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                                Módulo Quarto                                ♡\n");
     printf("♡                                                                             ♡\n");
@@ -24,7 +18,7 @@ void menu_quarto(void) {
     printf("♡      4 - Excluir QUarto                                                     ♡\n");
     printf("♡      0 - Retornar ao Menu Principal                                         ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("\n");
     printf("Escolha sua opção: ");
     scanf("%c", &op_quarto);
@@ -52,15 +46,8 @@ void menu_quarto(void) {
 
 void cadastrar_quarto(void) {
     system("clear||cls");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡n");
-    printf("♡           Universidade Federal do Rio Grande do Norte - UFRN                ♡\n");
-    printf("♡               Centro de Ensino Superior do Seridó - CERES                   ♡\n");
-    printf("♡                     Disciplina DCT1106 -- Programação                       ♡\n");
-    printf("♡                   Projeto Sistema de Gestão para Motéis                     ♡\n");
-    printf("♡  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   ♡\n");
-    printf("♡                                                                             ♡\n");
-    printf("♡                                   SIG-Motel                                 ♡\n");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡n");
+    cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                               Cadastrar Quarto                              ♡\n");
     printf("♡                                                                             ♡\n");
@@ -69,7 +56,7 @@ void cadastrar_quarto(void) {
     printf("♡      Valor:                                                                 ♡\n");
     printf("♡      Descrição:                                                             ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("\n");
     getchar();
     printf("Pressione ENTER para voltar ao menu...");
@@ -78,22 +65,15 @@ void cadastrar_quarto(void) {
 
 
 void exibir_quarto(void){
-        system("clear||cls");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡n");
-    printf("♡           Universidade Federal do Rio Grande do Norte - UFRN                ♡\n");
-    printf("♡               Centro de Ensino Superior do Seridó - CERES                   ♡\n");
-    printf("♡                     Disciplina DCT1106 -- Programação                       ♡\n");
-    printf("♡                   Projeto Sistema de Gestão para Motéis                     ♡\n");
-    printf("♡  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   ♡\n");
-    printf("♡                                                                             ♡\n");
-    printf("♡                                   SIG-Motel                                 ♡\n");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡n");
+    system("clear||cls");
+    cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                            Exibir Dados do Quarto                           ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡      Informe o ID do quarto:                                                ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("\n");
     getchar();
     printf("Pressione ENTER para voltar ao menu...");
@@ -103,21 +83,14 @@ void exibir_quarto(void){
 
 void alterar_quarto(void) {
     system("clear||cls");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡n");
-    printf("♡           Universidade Federal do Rio Grande do Norte - UFRN                ♡\n");
-    printf("♡               Centro de Ensino Superior do Seridó - CERES                   ♡\n");
-    printf("♡                     Disciplina DCT1106 -- Programação                       ♡\n");
-    printf("♡                   Projeto Sistema de Gestão para Motéis                     ♡\n");
-    printf("♡  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   ♡\n");
-    printf("♡                                                                             ♡\n");
-    printf("♡                                   SIG-Motel                                 ♡\n");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡n");
+    cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                            Alterar Dados do Quarto                          ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡     Informe o ID do quarto:                                                 ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("\n");
     getchar();
     printf("Pressione ENTER para voltar ao menu...");
@@ -127,21 +100,14 @@ void alterar_quarto(void) {
 
 void excluir_quarto(void) {
     system("clear||cls");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡n");
-    printf("♡           Universidade Federal do Rio Grande do Norte - UFRN                ♡\n");
-    printf("♡               Centro de Ensino Superior do Seridó - CERES                   ♡\n");
-    printf("♡                     Disciplina DCT1106 -- Programação                       ♡\n");
-    printf("♡                   Projeto Sistema de Gestão para Motéis                     ♡\n");
-    printf("♡  Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025   ♡\n");
-    printf("♡                                                                             ♡\n");
-    printf("♡                                   SIG-Motel                                 ♡\n");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡n");
+    cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                                 Excluir Quarto                              ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡     Informe o ID do quarto:                                                 ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("\n");
     getchar();
     printf("Pressione ENTER para voltar ao menu...");
