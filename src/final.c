@@ -17,6 +17,5 @@ void final(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                             Até a próxima!                                  ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    getchar();
     continuar_acao();
 }
