@@ -40,8 +40,7 @@ int main(void) {
     do {
         menu_principal();
         printf("Escolha sua opção: ");
-        scanf("%c", &op_menu);
-        getchar();
+        scanf(" %c", &op_menu);
 
         switch(op_menu) {
             case '1':
@@ -71,12 +70,12 @@ int main(void) {
                 finalizacao();
                 break;
             default:
-                printf("Por favor, digite uma opção válida");
+                getchar();
+                printf("\nPor favor, digite uma opção válida\n");
+                getchar();
                 break;
         }
     } while (op_menu != '0');
-
-    menu_relatorio();
 
     return 0;
 }
@@ -111,8 +110,7 @@ void sobre(void) {
     printf("♡ de todos os módulos anteriores.                                             ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    printf("\n");
-    printf("Pressione ENTER para voltar ao menu...");
+    printf("\nPressione ENTER para continuar..\n");
     getchar();
 }
 
@@ -139,8 +137,7 @@ void equipe(void) {
     printf("♡ https://www.asciiart.eu/text-to-ascii-art                                   ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    printf("\n");
-    printf("Pressione ENTER para voltar ao menu...");
+    printf("\nPressione ENTER para continuar...\n");
     getchar();
 }
 
@@ -158,7 +155,6 @@ void finalizacao(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                             Até a próxima!                                  ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    printf("\n");
-    printf("Pressione ENTER para sair...");
+    printf("\nPressione ENTER para sair...\n");
     getchar();
 }

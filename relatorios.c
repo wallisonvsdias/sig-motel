@@ -5,7 +5,7 @@
 
 
 void menu_relatorio(void) {
-    char op_relatorio;
+    char op_relatorio[3];
     system("clear||cls");
     cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -31,9 +31,9 @@ void menu_relatorio(void) {
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("\n");
-    printf("♡Escolha sua opção:");
-    scanf("%c", &op_relatorio);
+    printf("Escolha sua opção:");
+    scanf(" %2s", op_relatorio);
     getchar();
-    printf("Pressione ENTER para voltar ao menu...");
+    printf("\nPressione ENTER para voltar ao menu...\n");
     getchar();
 }
