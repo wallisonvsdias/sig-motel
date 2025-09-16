@@ -26,11 +26,11 @@
 #include "vendas.h"
 #include "relatorios.h"
 #include "infos.h"
+#include "final.h"
 
 
 // Assinatura
 void menu_principal(void);
-void finalizacao(void);
 
 
 // Função do menu principal
@@ -51,6 +51,7 @@ void menu_principal(void) {
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
 }
+
 
 // Programa principal
 int main(void) {
@@ -87,7 +88,7 @@ int main(void) {
                 equipe();
                 break;
             case '0': 
-                finalizacao();
+                final();
                 break;
             default:
                 getchar();
@@ -99,22 +100,4 @@ int main(void) {
     } while (op_menu != '0');
 
     return 0;
-}
-
-
-void finalizacao(void) {
-    system("clear||cls");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    printf("♡                            SISTEMA ENCERRADO                                ♡\n");
-    printf("♡                                                                             ♡\n");
-    printf("♡                 Obrigado por utilizar o SIG-Motel!                          ♡\n");
-    printf("♡                                                                             ♡\n");
-    printf("♡ Este sistema auxilia no gerenciamento de clientes, funcionários, quartos,   ♡\n");
-    printf("♡ produtos, hospedagens, vendas e relatórios, garantindo organização e        ♡\n");
-    printf("♡ eficiência na administração do motéis.                                      ♡\n");
-    printf("♡                                                                             ♡\n");
-    printf("♡                             Até a próxima!                                  ♡\n");
-    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    getchar();
-    continuar_acao();
 }

@@ -3,6 +3,7 @@
 #include "interface.h"
 #include "infos.h"
 
+
 void sobre(void) {
     system("clear||cls");
     mostrar_cabecalho();
