@@ -14,9 +14,11 @@
 // Desenvolvido por @wallisonvsdias e @Isabellecavalcant -- desde Ago, 2025
 
 
+// Bibliotecas
 #include <stdio.h>
 #include <stdlib.h>
 
+// Arquivos de cabeçalho
 #include "interface.h"
 #include "clientes.h"
 #include "funcionarios.h"

@@ -4,6 +4,7 @@
 #include "infos.h"
 
 
+// Informações sobre o projeto
 void sobre(void) {
     system("clear||cls");
     mostrar_cabecalho();
@@ -21,6 +22,7 @@ void sobre(void) {
 }
 
 
+// Informações sobre a equipe
 void equipe(void) {
     system("clear||cls");
     mostrar_cabecalho();

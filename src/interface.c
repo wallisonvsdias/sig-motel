@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "interface.h"
 
-
+// Exibido no início de cada tela
 void mostrar_cabecalho(void) {
     system("clear||cls");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -16,6 +16,7 @@ void mostrar_cabecalho(void) {
 }
 
 
+// Exibido no fim de cada tela
 void continuar_acao(void) {
     printf("\n");
     printf("Pressione [Enter] para continuar a ação");
