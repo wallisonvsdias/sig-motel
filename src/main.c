@@ -27,7 +27,7 @@
 #include "produtos.h"
 #include "vendas.h"
 #include "relatorios.h"
-#include "infos.h"
+#include "info.h"
 #include "final.h"
 
 
@@ -86,8 +86,7 @@ int main(void) {
                 menu_relatorio();
                 break;
             case '8':
-                sobre();
-                equipe();
+                menu_info();
                 break;
             case '0': 
                 final();

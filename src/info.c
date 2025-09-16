@@ -1,7 +1,44 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "interface.h"
-#include "infos.h"
+#include "info.h"
+
+
+void menu_info(void) {
+    char op_info;
+        do {
+        system("clear||cls");
+        mostrar_cabecalho();
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡                              Módulo Informações                             ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡      1 - Sobre o projeto                                                    ♡\n");
+        printf("♡      2 - Equipe                                                             ♡\n");
+        printf("♡      0 - Retornar ao menu principal                                         ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+        printf("\nEscolha sua opção: ");
+        scanf(" %c", &op_info);
+
+        switch(op_info) {
+            case '1':
+                sobre();
+                break;
+            case '2':
+                equipe();
+                break;
+            case '0':
+                break;
+            default:
+                getchar();
+                printf("\n");
+                printf("Por favor, digite uma opção válida");
+                getchar();
+                break;
+        }
+    } while (op_info != '0');
+}
 
 
 // Informações sobre o projeto
@@ -45,5 +82,6 @@ void equipe(void) {
     printf("♡ https://www.asciiart.eu/text-to-ascii-art                                   ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    getchar();
     continuar_acao();
 }
