@@ -13,11 +13,11 @@ void menu_cliente(void) {
         printf("♡                                                                             ♡\n");
         printf("♡                                Módulo Cliente                               ♡\n");
         printf("♡                                                                             ♡\n");
-        printf("♡      1 - Cadastrar Cliente                                                  ♡\n");
-        printf("♡      2 - Exibir Dados do Cliente                                            ♡\n");
-        printf("♡      3 - Alterar Dados do Cliente                                           ♡\n");
-        printf("♡      4 - Excluir Cliente                                                    ♡\n");
-        printf("♡      0 - Retornar ao Menu Principal                                         ♡\n");
+        printf("♡      1 - Cadastrar cliente                                                  ♡\n");
+        printf("♡      2 - Exibir dados do cliente                                            ♡\n");
+        printf("♡      3 - Alterar dados do cliente                                           ♡\n");
+        printf("♡      4 - Excluir cliente                                                    ♡\n");
+        printf("♡      0 - Retornar ao menu principal                                         ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         printf("\nEscolha sua opção: ");
@@ -57,7 +57,7 @@ void cadastrar_cliente(void) {
     printf("♡                              Cadastrar Cliente                              ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡      Nome:                                                                  ♡\n");
-    printf("♡      Cpf:                                                                   ♡\n");
+    printf("♡      CPF:                                                                   ♡\n");
     printf("♡      Telefone:                                                              ♡\n");
     printf("♡      E-mail:                                                                ♡\n");
     printf("♡                                                                             ♡\n");
@@ -74,7 +74,7 @@ void exibir_cliente(void){
     printf("♡                                                                             ♡\n");
     printf("♡                            Exibir Dados do Cliente                          ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o cpf do cliente:                                              ♡\n");
+    printf("♡      Informe o CPF do cliente:                                              ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     getchar();
@@ -89,7 +89,7 @@ void alterar_cliente(void){
     printf("♡                                                                             ♡\n");
     printf("♡                           Alterar Dados do Cliente                          ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o cpf do cliente:                                              ♡\n");
+    printf("♡      Informe o CPF do cliente:                                              ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     getchar();
@@ -104,7 +104,7 @@ void excluir_cliente(void){
     printf("♡                                                                             ♡\n");
     printf("♡                                Excluir Cliente                              ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o cpf do cliente:                                              ♡\n");
+    printf("♡      Informe o CPF do cliente:                                              ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     getchar();

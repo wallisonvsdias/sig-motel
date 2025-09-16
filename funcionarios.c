@@ -11,13 +11,13 @@ void menu_funcionario(void) {
         mostrar_cabecalho();
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         printf("♡                                                                             ♡\n");
-        printf("♡                             Módulo Funcionário                              ♡\n");
+        printf("♡                           Módulo Funcionário(a)                             ♡\n");
         printf("♡                                                                             ♡\n");
-        printf("♡      1 - Cadastrar Funcioário(a)                                            ♡\n");
-        printf("♡      2 - Exibir Dados do Funcionário(a)                                     ♡\n");
-        printf("♡      3 - Alterar Dados do FUncionário(a)                                    ♡\n");
-        printf("♡      4 - Excluir Funcionário                                                ♡\n");
-        printf("♡      0 - Retornar ao Menu Principal                                         ♡\n");
+        printf("♡      1 - Cadastrar funcioário(a)                                            ♡\n");
+        printf("♡      2 - Exibir dados do funcionário(a)                                     ♡\n");
+        printf("♡      3 - Alterar dados do funcionário(a)                                    ♡\n");
+        printf("♡      4 - Excluir funcionário(a)                                             ♡\n");
+        printf("♡      0 - Retornar ao menu principal                                         ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         printf("\nEscolha sua opção: ");
@@ -57,7 +57,7 @@ void cadastrar_funcionario(void) {
     printf("♡                           Cadastrar Funcionário(a)                          ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡      Nome:                                                                  ♡\n");
-    printf("♡      Cpf:                                                                   ♡\n");
+    printf("♡      CPF:                                                                   ♡\n");
     printf("♡      Telefone:                                                              ♡\n");
     printf("♡      E-mail:                                                                ♡\n");
     printf("♡      Cargo:                                                                 ♡\n");
@@ -76,7 +76,7 @@ void exibir_funcionario(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                        Exibir Dados do Funcionário(a)                       ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡     Informe o cpf do funcionário:                                           ♡\n");
+    printf("♡     Informe o CPF do(a) funcionário(a):                                     ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     getchar();
@@ -91,12 +91,11 @@ void alterar_funcionario(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                       Alterar Dados do Funcionário(a)                       ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡     Informe o cpf do funcionário:                                           ♡\n");
+    printf("♡     Informe o CPF do(a) funcionário(a):                                     ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     getchar();
-    printf("\nPressione ENTER para voltar ao menu...\n");
-    getchar();
+    continuar_acao();
 }
 
 
@@ -107,10 +106,9 @@ void excluir_funcionario(void){
     printf("♡                                                                             ♡\n");
     printf("♡                            Excluir Funcionário(a)                           ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o cpf do funcionário:                                          ♡\n");
+    printf("♡      Informe o CPF do(a) funcionário(a):                                    ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     getchar();
-    printf("\nPressione ENTER para voltar ao menu...\n");
-    getchar();
+    continuar_acao();
 }

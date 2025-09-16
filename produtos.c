@@ -13,11 +13,11 @@ void menu_produto(void) {
         printf("♡                                                                             ♡\n");
         printf("♡                               Módulo Produto                                ♡\n");
         printf("♡                                                                             ♡\n");
-        printf("♡      1 - Cadastrar Produto                                                  ♡\n");
-        printf("♡      2 - Exibir Dados do Produto                                            ♡\n");
-        printf("♡      3 - Alterar Dados do Produto                                           ♡\n");
-        printf("♡      4 - Excluir Produto                                                    ♡\n");
-        printf("♡      0 - Retornar ao Menu Principal                                         ♡\n");
+        printf("♡      1 - Cadastrar produto                                                  ♡\n");
+        printf("♡      2 - Exibir dados do produto                                            ♡\n");
+        printf("♡      3 - Alterar dados do produto                                           ♡\n");
+        printf("♡      4 - Excluir produto                                                    ♡\n");
+        printf("♡      0 - Retornar ao menu principal                                         ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         printf("\nEscolha sua opção: ");

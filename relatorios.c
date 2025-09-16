@@ -34,6 +34,5 @@ void menu_relatorio(void) {
     printf("Escolha sua opção: ");
     scanf(" %2s", op_relatorio);
     getchar();
-    printf("\nPressione ENTER para voltar ao menu...\n");
-    getchar();
+    continuar_acao();
 }

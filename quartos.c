@@ -13,11 +13,11 @@ void menu_quarto(void) {
         printf("♡                                                                             ♡\n");
         printf("♡                                Módulo Quarto                                ♡\n");
         printf("♡                                                                             ♡\n");
-        printf("♡      1 - Cadastrar Quarto                                                   ♡\n");
-        printf("♡      2 - Exibir Dados do Quarto                                             ♡\n");
-        printf("♡      3 - Alterar Dados do Quarto                                            ♡\n");
-        printf("♡      4 - Excluir QUarto                                                     ♡\n");
-        printf("♡      0 - Retornar ao Menu Principal                                         ♡\n");
+        printf("♡      1 - Cadastrar quarto                                                   ♡\n");
+        printf("♡      2 - Exibir dados do quarto                                             ♡\n");
+        printf("♡      3 - Alterar dados do quarto                                            ♡\n");
+        printf("♡      4 - Excluir quarto                                                     ♡\n");
+        printf("♡      0 - Retornar ao menu principal                                         ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         printf("\nEscolha sua opção: ");

@@ -13,11 +13,11 @@ void menu_venda(void) {
         printf("♡                                                                             ♡\n");
         printf("♡                                Módulo Venda                                 ♡\n");
         printf("♡                                                                             ♡\n");
-        printf("♡      1 - Cadastrar Venda                                                    ♡\n");
-        printf("♡      2 - Exibir Dados da Venda                                              ♡\n");
-        printf("♡      3 - Alterar Dados da Venda                                             ♡\n");
-        printf("♡      4 - Excluir Venda                                                      ♡\n");
-        printf("♡      0 - Retornar ao Menu Principal                                         ♡\n");
+        printf("♡      1 - Cadastrar venda                                                    ♡\n");
+        printf("♡      2 - Exibir dados da venda                                              ♡\n");
+        printf("♡      3 - Alterar dados da venda                                             ♡\n");
+        printf("♡      4 - Excluir venda                                                      ♡\n");
+        printf("♡      0 - Retornar ao menu principal                                         ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         printf("\nEscolha sua opção: ");
