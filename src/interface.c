@@ -14,6 +14,7 @@ void mostrar_cabecalho(void) {
     printf("♡                                   SIG-Motel                                 ♡\n");
 }
 
+
 void continuar_acao(void) {
     printf("\n");
     printf("Pressione [Enter] para continuar a ação");
