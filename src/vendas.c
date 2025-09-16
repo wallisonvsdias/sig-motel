@@ -57,6 +57,7 @@ void cadastrar_venda(void) {
     printf("♡                                                                             ♡\n");
     printf("♡      ID do cliente:                                                         ♡\n");
     printf("♡      ID do produto:                                                         ♡\n");
+    printf("♡      Quantidade:                                                            ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     getchar();
