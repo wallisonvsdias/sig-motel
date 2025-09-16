@@ -27,6 +27,7 @@ void menu_relatorio(void) {
     printf("♡     13  - Lista de vendas por produto                                       ♡\n");
     printf("♡     14  - Lista de vendas por período                                       ♡\n");
     printf("♡     15  - Lista de gastos totais por cliente                                ♡\n");
+    printf("♡     16  - Lista de lucros totais                                            ♡\n");
     printf("♡      0  - Retornar ao Menu Principal                                        ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");

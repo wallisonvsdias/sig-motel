@@ -56,7 +56,7 @@ void cadastrar_venda(void) {
     printf("♡                              Cadastrar Venda                                ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡      ID do cliente:                                                         ♡\n");
-    printf("♡      ID da venda:                                                           ♡\n");
+    printf("♡      ID do produto:                                                         ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     getchar();

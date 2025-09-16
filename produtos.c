@@ -57,7 +57,9 @@ void cadastrar_produto(void) {
     printf("♡                            Cadastrar Produto                                ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡      Nome:                                                                  ♡\n");
-    printf("♡      Valor:                                                                 ♡\n");
+    printf("♡      Descrição:                                                             ♡\n");
+    printf("♡      Custo:                                                                 ♡\n");
+    printf("♡      Preço:                                                                 ♡\n");
     printf("♡      Quantidade:                                                            ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");

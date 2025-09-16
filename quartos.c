@@ -56,17 +56,18 @@ void cadastrar_quarto(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                               Cadastrar Quarto                              ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Nome:                                                                  ♡\n");
-    printf("♡      ID:                                                                    ♡\n");
-    printf("♡      Valor:                                                                 ♡\n");
+    printf("♡      Tipo:                                                                  ♡\n");
     printf("♡      Descrição:                                                             ♡\n");
+    printf("♡      Custo/hora:                                                            ♡\n");
+    printf("♡      Preço/hora:                                                            ♡\n");
+    printf("♡      Preço/diária:                                                          ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     getchar();
     continuar_acao();
 }
 
-
+// Exibir também o status
 void exibir_quarto(void){
     system("clear||cls");
     mostrar_cabecalho();

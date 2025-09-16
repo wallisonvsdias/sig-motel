@@ -13,11 +13,11 @@ void menu_hospedagem(void) {
         printf("♡                                                                             ♡\n");
         printf("♡                               Módulo Hospedagem                             ♡\n");
         printf("♡                                                                             ♡\n");
-        printf("♡      1 - Cadastrar Hospedagem                                               ♡\n");
-        printf("♡      2 - Exibir Dados da Hospedagem                                         ♡\n");
-        printf("♡      3 - Alterar Dados do Hospagem                                          ♡\n");
-        printf("♡      4 - Cancelar Hospedagem                                                ♡\n");
-        printf("♡      0 - Retornar ao Menu Principal                                         ♡\n");
+        printf("♡      1 - Cadastrar hospedagem                                               ♡\n");
+        printf("♡      2 - Exibir dados da hospedagem                                         ♡\n");
+        printf("♡      3 - Alterar dados do hospedagem                                        ♡\n");
+        printf("♡      4 - Cancelar hospedagem                                                ♡\n");
+        printf("♡      0 - Retornar ao menu principal                                         ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         printf("\nEscolha sua opção: ");
@@ -59,13 +59,14 @@ void cadastrar_hospedagem(void) {
     printf("♡      ID do cliente:                                                         ♡\n");
     printf("♡      ID do quarto:                                                          ♡\n");
     printf("♡      Quantidade de dias:                                                    ♡\n");
+    printf("♡      Quantidade de horas:                                                   ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     getchar();
     continuar_acao();
 }
 
-
+// Exibir também a data
 void exibir_hospedagem(void) {
     system("clear||cls");
     mostrar_cabecalho();

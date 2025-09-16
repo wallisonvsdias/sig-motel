@@ -58,6 +58,7 @@ void cadastrar_cliente(void) {
     printf("♡                                                                             ♡\n");
     printf("♡      Nome:                                                                  ♡\n");
     printf("♡      CPF:                                                                   ♡\n");
+    printf("♡      Data de nascimento:                                                    ♡\n");
     printf("♡      Telefone:                                                              ♡\n");
     printf("♡      E-mail:                                                                ♡\n");
     printf("♡                                                                             ♡\n");
