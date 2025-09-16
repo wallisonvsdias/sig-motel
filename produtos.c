@@ -8,7 +8,7 @@ void menu_produto(void) {
     char op_produto;
     do {
         system("clear||cls");
-        cabecalho();
+        mostrar_cabecalho();
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡                               Módulo Produto                                ♡\n");
@@ -20,8 +20,7 @@ void menu_produto(void) {
         printf("♡      0 - Retornar ao Menu Principal                                         ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-
-        printf("Escolha sua opção: ");
+        printf("\nEscolha sua opção: ");
         scanf(" %c", &op_produto);
         
         switch(op_produto) {
@@ -41,7 +40,8 @@ void menu_produto(void) {
                 break;
             default:
                 getchar();
-                printf("\nPor favor, digite uma opção válida\n");
+                printf("\n");
+                printf("Por favor, digite uma opção válida");
                 getchar();
                 break;
         }
@@ -51,7 +51,7 @@ void menu_produto(void) {
 
 void cadastrar_produto(void) {
     system("clear||cls");
-    cabecalho();
+    mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                            Cadastrar Produto                                ♡\n");
@@ -62,14 +62,13 @@ void cadastrar_produto(void) {
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     getchar();
-    printf("\nPressione ENTER para voltar ao menu...\n");
-    getchar();
+    continuar_acao();
 }
 
 
 void exibir_produto(void){
     system("clear||cls");
-    cabecalho();
+    mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                           Exibir Dados do Produto                           ♡\n");
@@ -78,14 +77,13 @@ void exibir_produto(void){
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     getchar();
-    printf("\nPressione ENTER para voltar ao menu...\n");
-    getchar();
+    continuar_acao();
 }
 
 
 void alterar_produto(void){
     system("clear||cls");
-    cabecalho();
+    mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                           Alterar Dados do Produto                          ♡\n");
@@ -94,14 +92,13 @@ void alterar_produto(void){
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     getchar();
-    printf("\nPressione ENTER para voltar ao menu...\n");
-    getchar();
+    continuar_acao();
 }
 
 
 void excluir_produto(void){
     system("clear||cls");
-    cabecalho();
+    mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                                Excluir Produto                              ♡\n");
@@ -110,6 +107,5 @@ void excluir_produto(void){
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     getchar();
-    printf("\nPressione ENTER para voltar ao menu...\n");
-    getchar();
+    continuar_acao();
 }

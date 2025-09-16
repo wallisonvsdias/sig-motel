@@ -39,7 +39,7 @@ int main(void) {
     char op_menu;
     do {
         menu_principal();
-        printf("Escolha sua opção: ");
+        printf("\nEscolha sua opção: ");
         scanf(" %c", &op_menu);
 
         switch(op_menu) {
@@ -71,7 +71,8 @@ int main(void) {
                 break;
             default:
                 getchar();
-                printf("\nPor favor, digite uma opção válida\n");
+                printf("\n");
+                printf("Por favor, digite uma opção válida");
                 getchar();
                 break;
         }
@@ -80,9 +81,10 @@ int main(void) {
     return 0;
 }
 
+
 void menu_principal(void) {
     system("clear||cls");
-    cabecalho();
+    mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡           1 - Módulo Cliente                                                ♡\n");
@@ -95,12 +97,12 @@ void menu_principal(void) {
     printf("♡           0 - Sair                                                          ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    printf("\n");
 }
+
 
 void sobre(void) {
     system("clear||cls");
-    cabecalho();
+    mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ Esse projeto faz parte da disciplina Programação (DCT1106), ministrada pelo ♡\n");
@@ -110,14 +112,14 @@ void sobre(void) {
     printf("♡ de todos os módulos anteriores.                                             ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    printf("\nPressione ENTER para continuar..\n");
     getchar();
+    continuar_acao();
 }
 
 
 void equipe(void) {
     system("clear||cls");
-    cabecalho();
+    mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ Esse projeto foi desenvolvido por:                                          ♡\n");
@@ -137,8 +139,7 @@ void equipe(void) {
     printf("♡ https://www.asciiart.eu/text-to-ascii-art                                   ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    printf("\nPressione ENTER para continuar...\n");
-    getchar();
+    continuar_acao();
 }
 
 
@@ -155,6 +156,5 @@ void finalizacao(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                             Até a próxima!                                  ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    printf("\nPressione ENTER para sair...\n");
-    getchar();
+    continuar_acao();
 }

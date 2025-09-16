@@ -8,7 +8,7 @@ void menu_funcionario(void) {
     char op_funcionario;
     do {
         system("clear||cls");
-        cabecalho();
+        mostrar_cabecalho();
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡                             Módulo Funcionário                              ♡\n");
@@ -20,8 +20,7 @@ void menu_funcionario(void) {
         printf("♡      0 - Retornar ao Menu Principal                                         ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-
-        printf("Escolha sua opção: ");
+        printf("\nEscolha sua opção: ");
         scanf(" %c", &op_funcionario);
         
         switch(op_funcionario) {
@@ -41,7 +40,8 @@ void menu_funcionario(void) {
                 break;
             default:
                 getchar();
-                printf("\nPor favor, digite uma opção válida\n");
+                printf("\n");
+                printf("Por favor, digite uma opção válida");
                 getchar();
                 break;
         }
@@ -51,7 +51,7 @@ void menu_funcionario(void) {
 
 void cadastrar_funcionario(void) {
     system("clear||cls");
-    cabecalho();
+    mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                           Cadastrar Funcionário(a)                          ♡\n");
@@ -65,14 +65,13 @@ void cadastrar_funcionario(void) {
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     getchar();
-    printf("\nPressione ENTER para voltar ao menu...\n");
-    getchar();
+    continuar_acao();
 }
 
 
 void exibir_funcionario(void) {
     system("clear||cls");
-    cabecalho();
+    mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                        Exibir Dados do Funcionário(a)                       ♡\n");
@@ -81,14 +80,13 @@ void exibir_funcionario(void) {
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     getchar();
-    printf("\nPressione ENTER para voltar ao menu...\n");
-    getchar();
+    continuar_acao();
 }
 
 
 void alterar_funcionario(void) {
     system("clear||cls");
-    cabecalho();
+    mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                       Alterar Dados do Funcionário(a)                       ♡\n");
@@ -104,7 +102,7 @@ void alterar_funcionario(void) {
 
 void excluir_funcionario(void){
     system("clear||cls");
-    cabecalho();
+    mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                            Excluir Funcionário(a)                           ♡\n");

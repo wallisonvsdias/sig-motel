@@ -8,7 +8,7 @@ void menu_hospedagem(void) {
     char op_hospedagem;
     do {
         system("clear||cls");
-        cabecalho();
+        mostrar_cabecalho();
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡                               Módulo Hospedagem                             ♡\n");
@@ -20,8 +20,7 @@ void menu_hospedagem(void) {
         printf("♡      0 - Retornar ao Menu Principal                                         ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-
-        printf("Escolha sua opção: ");
+        printf("\nEscolha sua opção: ");
         scanf(" %c", &op_hospedagem);
         
         switch(op_hospedagem) {
@@ -41,7 +40,8 @@ void menu_hospedagem(void) {
                 break;
             default:
                 getchar();
-                printf("\nPor favor, digite uma opção válida\n");
+                printf("\n");
+                printf("Por favor, digite uma opção válida");
                 getchar();
                 break;
         }
@@ -51,7 +51,7 @@ void menu_hospedagem(void) {
 
 void cadastrar_hospedagem(void) {
     system("clear||cls");
-    cabecalho();
+    mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                           Cadastrar Hospedagem                              ♡\n");
@@ -62,14 +62,13 @@ void cadastrar_hospedagem(void) {
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     getchar();
-    printf("\nPressione ENTER para voltar ao menu...\n");
-    getchar();
+    continuar_acao();
 }
 
 
 void exibir_hospedagem(void) {
     system("clear||cls");
-    cabecalho();
+    mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                        Exibir Dados da Hospedagem                           ♡\n");
@@ -78,14 +77,13 @@ void exibir_hospedagem(void) {
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     getchar();
-    printf("\nPressione ENTER para voltar ao menu...\n");
-    getchar();
+    continuar_acao();
 }
 
 
 void alterar_hospedagem(void) {
     system("clear||cls");
-    cabecalho();
+    mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                        Alterar Dados da Hospedagem                          ♡\n");
@@ -94,14 +92,13 @@ void alterar_hospedagem(void) {
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     getchar();
-    printf("\nPressione ENTER para voltar ao menu...\n");
-    getchar();
+    continuar_acao();
 }
 
 
 void excluir_hospedagem(void) {
     system("clear||cls");
-    cabecalho();
+    mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                              Excluir Hospedagem                             ♡\n");
@@ -110,6 +107,5 @@ void excluir_hospedagem(void) {
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     getchar();
-    printf("\nPressione ENTER para voltar ao menu...\n");
-    getchar();
+    continuar_acao();
 }

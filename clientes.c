@@ -8,7 +8,7 @@ void menu_cliente(void) {
     char op_cliente;
     do {
         system("clear||cls");
-        cabecalho();
+        mostrar_cabecalho();
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡                                Módulo Cliente                               ♡\n");
@@ -20,9 +20,9 @@ void menu_cliente(void) {
         printf("♡      0 - Retornar ao Menu Principal                                         ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-        printf("\n");
-        printf("Escolha sua opção: ");
+        printf("\nEscolha sua opção: ");
         scanf(" %c", &op_cliente);
+
         switch(op_cliente) {
             case '1':
                 cadastrar_cliente();
@@ -40,7 +40,8 @@ void menu_cliente(void) {
                 break;
             default:
                 getchar();
-                printf("\nPor favor, digite uma opção válida\n");
+                printf("\n");
+                printf("Por favor, digite uma opção válida");
                 getchar();
                 break;
         }
@@ -50,7 +51,7 @@ void menu_cliente(void) {
 
 void cadastrar_cliente(void) {
     system("clear||cls");
-    cabecalho();
+    mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                              Cadastrar Cliente                              ♡\n");
@@ -62,14 +63,13 @@ void cadastrar_cliente(void) {
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     getchar();
-    printf("\nPressione ENTER para voltar ao menu...\n");
-    getchar();
+    continuar_acao();
 }
 
 
 void exibir_cliente(void){
     system("clear||cls");
-    cabecalho();
+    mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                            Exibir Dados do Cliente                          ♡\n");
@@ -78,14 +78,13 @@ void exibir_cliente(void){
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     getchar();
-    printf("\nPressione ENTER para voltar ao menu...\n");
-    getchar();
+    continuar_acao();
 }
 
 
 void alterar_cliente(void){
     system("clear||cls");
-    cabecalho();
+    mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                           Alterar Dados do Cliente                          ♡\n");
@@ -94,14 +93,13 @@ void alterar_cliente(void){
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     getchar();
-    printf("\nPressione ENTER para voltar ao menu...\n");
-    getchar();
+    continuar_acao();
 }
 
 
 void excluir_cliente(void){
     system("clear||cls");
-    cabecalho();
+    mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                                Excluir Cliente                              ♡\n");
@@ -110,6 +108,5 @@ void excluir_cliente(void){
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     getchar();
-    printf("Pressione ENTER para voltar ao menu...");
-    getchar();
+    continuar_acao();
 }
