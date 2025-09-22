@@ -8,30 +8,30 @@ Disciplina DCT1106 — Programação
 Professor: Flavius Gorgônio 
 
 Desenvolvido por [@wallisonvsdias](https://github.com/wallisonvsdias) e [@Isabellecavalcant](https://github.com/Isabellecavalcant)  
-📅 Desde agosto/2025  
+Desde agosto/2025  
 
 ---
 
-## 📌 Sobre o Projeto
+## Sobre o Projeto
 O sig-motel é um sistema acadêmico desenvolvido para a disciplina de Programação (DCT1106).  
 Seu objetivo é auxiliar o gerenciamento de motéis, oferecendo funcionalidades que facilitam o controle de clientes, funcionários e hospedagens, além de permitir a emissão de relatórios completos.  
 
 ---
 
-## ⚙️ Funcionalidades
+## Funcionalidades
 O sistema é composto por diversos módulos:  
 
-- 👥 **Clientes** – Cadastro e gerenciamento de hóspedes.  
-- 🧑‍💼 **Funcionários** – Controle de informações da equipe.  
-- 🛏️ **Quartos** – Registro e organização da disponibilidade.  
-- 🛒 **Produtos** – Administração de itens comercializados.  
-- 🏨 **Hospedagens** – Controle de entradas, saídas e consumo.  
-- 💰 **Vendas** – Registro das transações realizadas.  
-- 📊 **Relatórios** – Listagem e análise de todos os módulos.  
+- **Clientes** – Cadastro e gerenciamento de hóspedes.  
+- **Funcionários** – Controle de informações da equipe.  
+- **Quartos** – Registro e organização da disponibilidade.  
+- **Produtos** – Administração de itens comercializados.  
+- **Hospedagens** – Controle de entradas, saídas e consumo.  
+- **Vendas** – Registro das transações realizadas.  
+- **Relatórios** – Listagem e análise de todos os módulos.  
 
 ---
 
-## 📖 Como Executar
+## Como Executar
 
 1. Clone o repositório:
    ```bash
