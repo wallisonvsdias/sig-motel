@@ -63,8 +63,8 @@ void cadastrar_cliente(void) {
     char nome[51];
     char cpf[12];
     char nasc[11];
-    char email[51];
     char telef[12];
+    char email[51];
     int tam;
     system("clear||cls");
     mostrar_cabecalho();
@@ -103,15 +103,55 @@ void cadastrar_cliente(void) {
 
 
 void exibir_cliente(void){
+    char nome[51];
+    char cpf[12];
+    char cpf_lido[12];
+    char nasc[11];
+    char telef[12];
+    char email[51];
+    FILE *arq_clientes;
+    arq_clientes = fopen("clientes.csv", "rt");
+    if (arq_clientes == NULL) {
+        printf("nao consigo ler nada");
+        printf("pressione <enter>");
+        getchar();
+        return;
+    }
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                            Exibir Dados do Cliente                          ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o CPF do cliente:                                              ♡\n");
+    printf("♡      Informe o CPF do cliente: ");
+    scanf("%s",cpf_lido);
+    getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    while (!feof(arq_clientes)) {
+        fscanf(arq_clientes, "%[^;]",cpf);
+        fgetc(arq_clientes);
+        fscanf(arq_clientes, "%[^;]",nome);
+        fgetc(arq_clientes);
+        fscanf(arq_clientes, "%[^;]",nasc);
+        fgetc(arq_clientes);
+        fscanf(arq_clientes, "%[^;]",telef);
+        fgetc(arq_clientes);
+        fscanf(arq_clientes, "%[^\n]",email);
+        fgetc(arq_clientes);
+        if (strcmp(cpf,cpf_lido)==0){
+            printf("\t\t Cliente encontrado! >>>> \n");
+            printf("\t\tCPF: %s\n",cpf);
+            printf("\t\tNome: %s\n",nome);
+            printf("\t\tData de nascimento: %s\n",nasc);
+            printf("\t\tTelefone: %s\n",telef);
+            printf("\t\tEmail: %s\n",email);
+            printf("Pressione <ENTER> para continuar");
+            getchar();
+            fclose(arq_clientes);
+            return;
+        }
+    }
     continuar_acao();
 }
 
