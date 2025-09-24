@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "interface.h"
 #include "clientes.h"
 
@@ -22,6 +23,7 @@ void menu_cliente(void) {
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         printf("\nEscolha sua opção: ");
         scanf(" %c", &op_cliente);
+        getchar();
 
         switch(op_cliente) {
             case '1':
@@ -50,19 +52,52 @@ void menu_cliente(void) {
 
 
 void cadastrar_cliente(void) {
+    FILE *arq_clientes;
+    arq_clientes = fopen("clientes.txt", "at");
+    if (arq_clientes == NULL) {
+        printf("nao consigo ler nada");
+        printf("pressione <enter>");
+        getchar();
+        return;
+    }
+    char nome[51];
+    char cpf[12];
+    char nasc[11];
+    char email[51];
+    char telef[12];
+    int tam;
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                              Cadastrar Cliente                              ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Nome:                                                                  ♡\n");
-    printf("♡      CPF:                                                                   ♡\n");
-    printf("♡      Data de nascimento:                                                    ♡\n");
-    printf("♡      Telefone:                                                              ♡\n");
-    printf("♡      E-mail:                                                                ♡\n");
+    printf("♡      Nome: ");
+    fgets(nome,51,stdin);
+    tam = strlen(nome);
+    nome[tam-1] = '\0';
+    printf("♡      CPF: ");
+    scanf("%s",cpf);
+    getchar();
+    printf("♡      Data de nascimento: ");
+    scanf("%s",nasc);
+    getchar();
+    printf("♡      Telefone: ");
+    scanf("%s",telef);
+    getchar();
+    printf("♡      E-mail: ");
+    scanf("%s",email);
+    getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+
+    fprintf(arq_clientes,"%s\n",nome);
+    fprintf(arq_clientes,"%s\n",cpf);
+    fprintf(arq_clientes,"%s\n",nasc);
+    fprintf(arq_clientes,"%s\n",telef);
+    fprintf(arq_clientes,"%s\n",email);
+    fclose(arq_clientes);
+
     continuar_acao();
 }
 
