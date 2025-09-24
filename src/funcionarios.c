@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "interface.h"
 #include "funcionarios.h"
 
 
-void menu_funcionario(void) {
+void menu_funcionario(void) {    
     char op_funcionario;
     do {
         system("clear||cls");
@@ -50,20 +51,51 @@ void menu_funcionario(void) {
 
 
 void cadastrar_funcionario(void) {
+    FILE *arq_funcionario;
+    arq_funcionario= fopen("funcionarios.csv","at");
+    char cpf[12];
+    char nome[51];
+    char telefone[12];
+    char email[53];
+    char cargo[20];
+    char salario[9];
+    int tam;
+
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                           Cadastrar Funcionário(a)                          ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Nome:                                                                  ♡\n");
     printf("♡      CPF:                                                                   ♡\n");
+    scanf("%s", cpf);
+    getchar();
+    printf("♡      Nome:                                                                  ♡\n");
+    fgets(nome, 51, stdin);
+    tam = strlen(nome);
+    nome[tam-1] = '\0';
     printf("♡      Telefone:                                                              ♡\n");
+    scanf("%s", telefone);
+    getchar();
     printf("♡      E-mail:                                                                ♡\n");
+    scanf("%s", email);
     printf("♡      Cargo:                                                                 ♡\n");
+    scanf("%s", cargo);
+    getchar();
     printf("♡      Salário:                                                               ♡\n");
+    scanf("%s", salario);
+    getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+
+    fprintf(arq_funcionario, "%s;", cpf);
+    fprintf(arq_funcionario, "%s;", nome);
+    fprintf(arq_funcionario, "%s;", telefone);
+    fprintf(arq_funcionario, "%s;", email);
+    fprintf(arq_funcionario, "%s;", cargo);
+    fprintf(arq_funcionario, "%s\n", salario);
+    fclose(arq_funcionario);
+
     continuar_acao();
 }
 
