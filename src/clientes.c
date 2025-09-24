@@ -53,7 +53,7 @@ void menu_cliente(void) {
 
 void cadastrar_cliente(void) {
     FILE *arq_clientes;
-    arq_clientes = fopen("clientes.txt", "at");
+    arq_clientes = fopen("clientes.csv", "at");
     if (arq_clientes == NULL) {
         printf("nao consigo ler nada");
         printf("pressione <enter>");
@@ -72,17 +72,17 @@ void cadastrar_cliente(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                              Cadastrar Cliente                              ♡\n");
     printf("♡                                                                             ♡\n");
+    printf("♡      CPF: ");
+    scanf("%s",cpf);
+    getchar();
     printf("♡      Nome: ");
     fgets(nome,51,stdin);
     tam = strlen(nome);
     nome[tam-1] = '\0';
-    printf("♡      CPF: ");
-    scanf("%s",cpf);
-    getchar();
     printf("♡      Data de nascimento: ");
     scanf("%s",nasc);
     getchar();
-    printf("♡      Telefone: ");
+    printf("♡      Telefone (apenas números): ");
     scanf("%s",telef);
     getchar();
     printf("♡      E-mail: ");
@@ -91,10 +91,10 @@ void cadastrar_cliente(void) {
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
 
-    fprintf(arq_clientes,"%s\n",nome);
-    fprintf(arq_clientes,"%s\n",cpf);
-    fprintf(arq_clientes,"%s\n",nasc);
-    fprintf(arq_clientes,"%s\n",telef);
+    fprintf(arq_clientes,"%s;",cpf);
+    fprintf(arq_clientes,"%s;",nome);
+    fprintf(arq_clientes,"%s;",nasc);
+    fprintf(arq_clientes,"%s;",telef);
     fprintf(arq_clientes,"%s\n",email);
     fclose(arq_clientes);
 
