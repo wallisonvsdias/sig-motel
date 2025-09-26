@@ -35,7 +35,7 @@ O sistema é composto por diversos módulos:
 
 1. Clone o repositório:
    ```bash
-   https://github.com/wallisonvsdias/sig-motel.git
+   git clone https://github.com/wallisonvsdias/sig-motel.git
    cd sig-motel
 
 2. Compile o projeto com o Makefile:
