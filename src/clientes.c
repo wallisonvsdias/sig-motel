@@ -152,6 +152,11 @@ void exibir_cliente(void){
             return;
         }
     }
+    printf("\t\t Cliente NAO encontrado! >>>> \n");
+    printf("Pressione <ENTER> para continuar");
+    getchar();
+    fclose(arq_clientes);
+    return;
     continuar_acao();
 }
 
