@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "interface.h"
 #include "produtos.h"
-
+#include "id.h"
 
 void menu_produto(void) {
     char op_produto;
@@ -22,6 +23,7 @@ void menu_produto(void) {
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         printf("\nEscolha sua opção: ");
         scanf(" %c", &op_produto);
+        getchar();
         
         switch(op_produto) {
             case '1':
@@ -50,19 +52,52 @@ void menu_produto(void) {
 
 
 void cadastrar_produto(void) {
+    FILE *arq_produtos;
+    arq_produtos = fopen("produtos.csv", "at");
+    if (arq_produtos == NULL) {
+        printf("Não foi possivel ler o arquivo");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+    int id = gerador_id("produtos.csv");
+    int tam;
+    char nome[25];
+    char descricao[55];
+    float preco;
+    int quant;
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                            Cadastrar Produto                                ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Nome:                                                                  ♡\n");
-    printf("♡      Descrição:                                                             ♡\n");
-    printf("♡      Custo:                                                                 ♡\n");
-    printf("♡      Preço:                                                                 ♡\n");
-    printf("♡      Quantidade:                                                            ♡\n");
+    printf("♡      Nome: ");
+    fgets(nome,25,stdin);
+    tam = strlen(nome);
+    nome[tam-1] = '\0';
+    printf("♡      Descrição: ");
+    fgets(descricao,55,stdin);
+    tam = strlen(descricao);
+    descricao[tam-1] = '\0';
+    printf("♡      Preço: ");
+    scanf("%f",&preco);
+    getchar();
+    printf("♡      Quantidade: ");
+    scanf("%d",&quant);
+    getchar();
+    printf("♡                                                                             ♡\n");
+    printf("♡        Produto cadastrado com sucesso!                                        ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+
+    fprintf(arq_produtos,"%d;",id);
+    fprintf(arq_produtos,"%s;",nome);
+    fprintf(arq_produtos,"%s;",descricao);
+    fprintf(arq_produtos,"%f;",preco);
+    fprintf(arq_produtos,"%d\n",quant);
+    fclose(arq_produtos);
+
     continuar_acao();
 }
 
