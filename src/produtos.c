@@ -103,6 +103,20 @@ void cadastrar_produto(void) {
 
 
 void exibir_produto(void){
+    FILE *arq_produtos;
+    arq_produtos = fopen("produtos.csv", "rt");
+    if (arq_produtos == NULL) {
+        printf("Não foi possivel ler o arquivo");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+    int id;
+    int id_lido;
+    char nome[25];
+    char descricao[55];
+    float preco;
+    int quant;
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -110,8 +124,38 @@ void exibir_produto(void){
     printf("♡                           Exibir Dados do Produto                           ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡      Informe o ID do produto:                                               ♡\n");
+    scanf("%d",&id_lido);
+    getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    while (!feof(arq_produtos)) {
+        fscanf(arq_produtos, "%d[^;]", &id);
+        fgetc(arq_produtos);
+        fscanf(arq_produtos, "%[^;]", nome);
+        fgetc(arq_produtos);
+        fscanf(arq_produtos, "%[^;]", descricao);
+        fgetc(arq_produtos);
+        fscanf(arq_produtos, "%f[^;]", &preco);
+        fgetc(arq_produtos);
+        fscanf(arq_produtos, "%d[^\n]", &quant);
+        fgetc(arq_produtos);
+        if (id == id_lido){
+            printf("\t\t Produto encontrado! >>>> \n");
+            printf("\t\tNome: %s\n",nome);
+            printf("\t\tDescricao: %s\n",descricao);
+            printf("\t\tPreco: %f\n",preco);
+            printf("\t\tQuantidade: %d\n",quant);
+            printf("Pressione <ENTER> para continuar");
+            getchar();
+            fclose(arq_produtos);
+            return;
+        }
+    }
+    printf("\t\t Produto NAO encontrado! >>>> \n");
+    printf("Pressione <ENTER> para continuar");
+    getchar();
+    fclose(arq_produtos);
+    return;
     continuar_acao();
 }
 
