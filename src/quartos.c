@@ -122,15 +122,59 @@ void cadastrar_quarto(void) {
 
 // Exibir também o status
 void exibir_quarto(void){
+    FILE *arq_quartos;
+    arq_quartos = fopen("quartos.csv", "rt");
+    if (arq_quartos == NULL) {
+        printf("Não foi possivel ler o arquivo");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+    int id;
+    int id_lido;
+    char tipo[32];
+    char descricao[51];
+    float preco_hora;
+    float preco_diaria;
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                            Exibir Dados do Quarto                           ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o ID do quarto:                                                ♡\n");
+    printf("♡      Informe o ID do quarto: ");
+    scanf("%d",&id_lido);
+    getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    while (!feof(arq_quartos)) {
+        fscanf(arq_quartos, "%d[^;]", &id);
+        fgetc(arq_quartos);
+        fscanf(arq_quartos, "%[^;]", tipo);
+        fgetc(arq_quartos);
+        fscanf(arq_quartos, "%[^;]", descricao);
+        fgetc(arq_quartos);
+        fscanf(arq_quartos, "%f[^;]", &preco_hora);
+        fgetc(arq_quartos);
+        fscanf(arq_quartos, "%f[^\n]", &preco_diaria);
+        fgetc(arq_quartos);
+        if (id == id_lido){
+            printf("\t\t Quarto encontrado! >>>> \n");
+            printf("\t\tTipo: %s\n",tipo);
+            printf("\t\tDescricao: %s\n",descricao);
+            printf("\t\tPreco/hora: %f\n",preco_hora);
+            printf("\t\tPreco/diaria: %f\n",preco_diaria);
+            printf("Pressione <ENTER> para continuar");
+            getchar();
+            fclose(arq_quartos);
+            return;
+        }
+    }
+    printf("\t\t Quarto NAO encontrado! >>>> \n");
+    printf("Pressione <ENTER> para continuar");
+    getchar();
+    fclose(arq_quartos);
+    return;
     continuar_acao();
 }
 
