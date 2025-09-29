@@ -76,7 +76,7 @@ void cadastrar_venda(void) {
 
     fprintf(arq_venda,"%s;",cpf);
     fprintf(arq_venda,"%s;",id_produto);
-    fprintf(arq_venda,"%s;", quant);
+    fprintf(arq_venda,"%s\n", quant);
     fclose(arq_venda);
     
     continuar_acao();
@@ -84,15 +84,44 @@ void cadastrar_venda(void) {
 
 
 void exibir_venda(void) {
+    char cpf[12];
+    char cpf_lido[12];
+    char id_produto[4];
+    char quant[4];
+
+    FILE *arq_vendas;
+    arq_vendas = fopen("vendas.csv", "rt");
+    if (arq_vendas == NULL) {
+        printf("nao consigo ler nada");
+        printf("pressione <enter>");
+        getchar();
+        return;
+    }
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                        Exibir Dados da Venda                                ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o ID da venda:                                                 ♡\n");
+    printf("♡      Informe o CPF do cliente:                                              ♡\n");
+    scanf("%s", cpf_lido);
+    getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+
+    while (fscanf(arq_vendas, "%11[^;];%3[^;];%3[^\n]\n", cpf, id_produto, quant) == 3) {
+        if (strcmp(cpf, cpf_lido) == 0) {
+            printf("\nVenda encontrado!\n");
+            printf("CPF: %s\n", cpf);
+            printf("ID do produto: %s\n", id_produto);
+            printf("Horas: %s\n", quant);
+            fclose(arq_vendas);
+            getchar();
+            return;
+        }
+    }
+    fclose(arq_vendas);
+    printf("\nVenda não encontrado.\n");
     getchar();
     continuar_acao();
 }
