@@ -50,18 +50,35 @@ void menu_hospedagem(void) {
 
 
 void cadastrar_hospedagem(void) {
+    FILE *arq_hospedagem;
+    arq_hospedagem = fopen("hospedagem.csv", "at");
+    char cpf[12];
+    char id_quarto[30];
+    char horas[3];
+
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                           Cadastrar Hospedagem                              ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      ID do cliente:                                                         ♡\n");
+    printf("♡      CPF do cliente:                                                        ♡\n");
+    scanf("%s", cpf);
+    getchar();
     printf("♡      ID do quarto:                                                          ♡\n");
-    printf("♡      Quantidade de dias:                                                    ♡\n");
+    scanf("%s", id_quarto);
+    getchar();
     printf("♡      Quantidade de horas:                                                   ♡\n");
+    scanf("%s", horas);
+    getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+
+    fprintf(arq_hospedagem,"%s;",cpf);
+    fprintf(arq_hospedagem,"%s;",id_quarto);
+    fprintf(arq_hospedagem,"%s\n", horas);
+    fclose(arq_hospedagem);
+    
     continuar_acao();
 }
 
