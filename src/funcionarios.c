@@ -101,6 +101,22 @@ void cadastrar_funcionario(void) {
 
 
 void exibir_funcionario(void) {
+    char cpf[12];
+    char cpf_lido[12];
+    char nome[51];
+    char cargo[11];
+    char salario[9];
+    char telefone[12];
+    char email[51];
+
+    FILE *arq_funcionario;
+    arq_funcionario = fopen("funcionarios.csv", "rt");
+    if (arq_funcionario == NULL) {
+        printf("nao consigo ler nada");
+        printf("pressione <enter>");
+        getchar();
+        return;
+    }
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -108,9 +124,31 @@ void exibir_funcionario(void) {
     printf("♡                        Exibir Dados do Funcionário(a)                       ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡     Informe o CPF do(a) funcionário(a):                                     ♡\n");
+    scanf("%s", cpf_lido);
+    getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+
+   while (fscanf(arq_funcionario, "%11[^;];%50[^;];%11[^;];%52[^;];%19[^;];%8[^\n]\n",
+                  cpf, nome, telefone, email, cargo, salario) == 6) {
+        if (strcmp(cpf, cpf_lido) == 0) {
+            printf("\nFuncionário encontrado!\n");
+            printf("CPF: %s\n", cpf);
+            printf("Nome: %s\n", nome);
+            printf("Telefone: %s\n", telefone);
+            printf("Email: %s\n", email);
+            printf("Cargo: %s\n", cargo);
+            printf("Salário: %s\n", salario);
+            fclose(arq_funcionario);
+            getchar();
+            return;
+        }
+    }
+    fclose(arq_funcionario);
+    printf("\nFuncionário não encontrado.\n");
+    getchar();
     continuar_acao();
+
 }
 
 
