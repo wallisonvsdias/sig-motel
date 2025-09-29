@@ -64,13 +64,13 @@ void cadastrar_hospedagem(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                           Cadastrar Hospedagem                              ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      CPF do cliente:                                                        ♡\n");
+    printf("♡      CPF do cliente: ");
     scanf("%s", cpf);
     getchar();
-    printf("♡      ID do quarto:                                                          ♡\n");
+    printf("♡      ID do quarto: ");
     scanf("%s", id_quarto);
     getchar();
-    printf("♡      Quantidade de horas:                                                   ♡\n");
+    printf("♡      Quantidade de horas: ");
     scanf("%s", horas);
     getchar();
     printf("♡                                                                             ♡\n");
@@ -105,7 +105,7 @@ void exibir_hospedagem(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                        Exibir Dados da Hospedagem                           ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o CPF do cliente hospedado:                                    ♡\n");
+    printf("♡      Informe o CPF do cliente hospedado: ");
     scanf("%s", cpf_lido);
     getchar();
     printf("♡                                                                             ♡\n");
