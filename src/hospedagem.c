@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "interface.h"
 #include "hospedagem.h"
 
@@ -50,6 +51,7 @@ void menu_hospedagem(void) {
 
 
 void cadastrar_hospedagem(void) {
+   
     FILE *arq_hospedagem;
     arq_hospedagem = fopen("hospedagem.csv", "at");
     char cpf[12];
@@ -78,21 +80,51 @@ void cadastrar_hospedagem(void) {
     fprintf(arq_hospedagem,"%s;",id_quarto);
     fprintf(arq_hospedagem,"%s\n", horas);
     fclose(arq_hospedagem);
-    
+
     continuar_acao();
 }
 
 // Exibir também a data
 void exibir_hospedagem(void) {
+    char cpf[12];
+    char cpf_lido[12];
+    char id_quarto[4];
+    char horas[4];
+
+    FILE *arq_hospedagem;
+    arq_hospedagem = fopen("hospedagem.csv", "rt");
+    if (arq_hospedagem == NULL) {
+        printf("nao consigo ler nada");
+        printf("pressione <enter>");
+        getchar();
+        return;
+    }
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                        Exibir Dados da Hospedagem                           ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o ID da hospedagem:                                            ♡\n");
+    printf("♡      Informe o CPF do cliente hospedado:                                    ♡\n");
+    scanf("%s", cpf_lido);
+    getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+
+    while (fscanf(arq_hospedagem, "%11[^;];%3[^;];%3[^\n]\n", cpf, id_quarto, horas) == 3) {
+        if (strcmp(cpf, cpf_lido) == 0) {
+            printf("\nHospedagem encontrado!\n");
+            printf("CPF: %s\n", cpf);
+            printf("ID do quarto: %s\n", id_quarto);
+            printf("Horas: %s\n", horas);
+            fclose(arq_hospedagem);
+            getchar();
+            return;
+        }
+    }
+    fclose(arq_hospedagem);
+    printf("\nHospedagem não encontrado.\n");
+    getchar();
     continuar_acao();
 }
 
