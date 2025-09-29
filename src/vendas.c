@@ -49,18 +49,36 @@ void menu_venda(void) {
 
 
 void cadastrar_venda(void) {
+    FILE *arq_venda;
+    arq_venda = fopen("vendas.csv","at");
+    char cpf[12];
+    char id_produto[4];
+    char quant[4];
+
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                              Cadastrar Venda                                ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      ID do cliente:                                                         ♡\n");
+    printf("♡      CPF cliente:                                                           ♡\n");
+    scanf("%s", cpf);
+    getchar();
     printf("♡      ID do produto:                                                         ♡\n");
+    scanf("%s", id_produto);
+    getchar();
     printf("♡      Quantidade:                                                            ♡\n");
+    scanf("%s", quant);
+    getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     getchar();
+
+    fprintf(arq_venda,"%s;",cpf);
+    fprintf(arq_venda,"%s;",id_produto);
+    fprintf(arq_venda,"%s;", quant);
+    fclose(arq_venda);
+    
     continuar_acao();
 }
 
