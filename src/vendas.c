@@ -62,13 +62,13 @@ void cadastrar_venda(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                              Cadastrar Venda                                ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      CPF cliente:                                                           ♡\n");
+    printf("♡      CPF cliente: ");
     scanf("%s", cpf);
     getchar();
-    printf("♡      ID do produto:                                                         ♡\n");
+    printf("♡      ID do produto: ");
     scanf("%s", id_produto);
     getchar();
-    printf("♡      Quantidade:                                                            ♡\n");
+    printf("♡      Quantidade: ");
     scanf("%s", quant);
     getchar();
     printf("♡                                                                             ♡\n");
@@ -104,7 +104,7 @@ void exibir_venda(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                        Exibir Dados da Venda                                ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o CPF do cliente:                                              ♡\n");
+    printf("♡      Informe o CPF do cliente: ");
     scanf("%s", cpf_lido);
     getchar();
     printf("♡                                                                             ♡\n");
