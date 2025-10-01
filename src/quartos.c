@@ -128,17 +128,8 @@ void exibir_quarto(void){
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    while (!feof(arq_quartos)) {
-        fscanf(arq_quartos, "%d[^;]", &id);
-        fgetc(arq_quartos);
-        fscanf(arq_quartos, "%[^;]", tipo);
-        fgetc(arq_quartos);
-        fscanf(arq_quartos, "%[^;]", descricao);
-        fgetc(arq_quartos);
-        fscanf(arq_quartos, "%f[^;]", &preco_hora);
-        fgetc(arq_quartos);
-        fscanf(arq_quartos, "%f[^\n]", &preco_diaria);
-        fgetc(arq_quartos);
+    while (fscanf(arq_quartos, "%d[^;];%32[^;];%50[^;];%f[^;];%f[^\n]\n",
+        &id,tipo,descricao,&preco_hora,&preco_diaria)==5) {
         if (id == id_lido){
             printf("\t\t Quarto encontrado! >>>> \n");
             printf("\t\tTipo: %s\n",tipo);
