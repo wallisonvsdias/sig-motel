@@ -128,17 +128,8 @@ void exibir_cliente(void){
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    while (!feof(arq_clientes)) {
-        fscanf(arq_clientes, "%[^;]",cpf);
-        fgetc(arq_clientes);
-        fscanf(arq_clientes, "%[^;]",nome);
-        fgetc(arq_clientes);
-        fscanf(arq_clientes, "%[^;]",nasc);
-        fgetc(arq_clientes);
-        fscanf(arq_clientes, "%[^;]",telef);
-        fgetc(arq_clientes);
-        fscanf(arq_clientes, "%[^\n]",email);
-        fgetc(arq_clientes);
+    while (fscanf(arq_clientes, "%11[^;];%50[^;];%10[^;];%11[^;];%50[^\n]\n",
+        cpf,nome,nasc,telef,email)==5) {
         if (strcmp(cpf,cpf_lido)==0){
             printf("\t\t Cliente encontrado! >>>> \n");
             printf("\t\tCPF: %s\n",cpf);
