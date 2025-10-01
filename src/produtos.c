@@ -128,17 +128,8 @@ void exibir_produto(void){
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    while (!feof(arq_produtos)) {
-        fscanf(arq_produtos, "%d[^;]", &id);
-        fgetc(arq_produtos);
-        fscanf(arq_produtos, "%[^;]", nome);
-        fgetc(arq_produtos);
-        fscanf(arq_produtos, "%[^;]", descricao);
-        fgetc(arq_produtos);
-        fscanf(arq_produtos, "%f[^;]", &preco);
-        fgetc(arq_produtos);
-        fscanf(arq_produtos, "%d[^\n]", &quant);
-        fgetc(arq_produtos);
+    while (fscanf(arq_produtos, "%d[^;];%24[^;];%54[^;];%f[^;];%d[^\n]\n",
+        &id,nome,descricao,&preco,&quant)==5) {
         if (id == id_lido){
             printf("\t\t Produto encontrado! >>>> \n");
             printf("\t\tNome: %s\n",nome);
