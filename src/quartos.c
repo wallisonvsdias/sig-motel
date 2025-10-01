@@ -72,7 +72,7 @@ void cadastrar_quarto(void) {
     printf("♡                               Cadastrar Quarto                              ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡      Tipo: ");
-    fgets(tipo,51,stdin);
+    fgets(tipo,32,stdin);
     tam = strlen(tipo);
     tipo[tam-1] = '\0';
     printf("♡      Descrição: ");
