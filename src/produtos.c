@@ -152,15 +152,101 @@ void exibir_produto(void){
 
 
 void alterar_produto(void){
+    FILE *arq_produtos;
+    arq_produtos = fopen("produtos.csv", "rt");
+    if (arq_produtos == NULL) {
+        printf("Não foi possivel ler o arquivo");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+    FILE *arq_temp;
+    arq_temp = fopen("temp.csv", "at");
+    if (arq_temp == NULL) {
+        printf("Não foi possivel ler o arquivo");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+    int id;
+    int id_lido;
+    char nome[25];
+    char descricao[55];
+    float preco;
+    int quant;
+    int tam;
+    int encontrado;
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                           Alterar Dados do Produto                          ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o ID do produto:                                               ♡\n");
+    printf("♡      Informe o ID do produto: ");
+    scanf("%d",&id_lido);
+    getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    while (fscanf(arq_produtos, "%d;%24[^;];%54[^;];%f;%d\n",
+        &id,nome,descricao,&preco,&quant)==5) {
+        if (id != id_lido){
+            fprintf(arq_temp,"%d;",id);
+            fprintf(arq_temp,"%s;",nome);
+            fprintf(arq_temp,"%s;",descricao);
+            fprintf(arq_temp,"%f;",preco);
+            fprintf(arq_temp,"%d\n",quant);
+        } else {
+            encontrado = 1;
+        }
+    }
+
+    fclose(arq_produtos);
+
+    if (encontrado) {
+        system("clear||cls");
+        mostrar_cabecalho();
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡                         Editar dados de Produto                             ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡      Nome: ");
+        fgets(nome,25,stdin);
+        tam = strlen(nome);
+        nome[tam-1] = '\0';
+        printf("♡      Descrição: ");
+        fgets(descricao,55,stdin);
+        tam = strlen(descricao);
+        descricao[tam-1] = '\0';
+        printf("♡      Preço: ");
+        scanf("%f",&preco);
+        getchar();
+        printf("♡      Quantidade: ");
+        scanf("%d",&quant);
+        getchar();
+        printf("♡                                                                             ♡\n");
+        printf("♡        Produto cadastrado com sucesso!                                        ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+
+        fprintf(arq_temp,"%d;",id);
+        fprintf(arq_temp,"%s;",nome);
+        fprintf(arq_temp,"%s;",descricao);
+        fprintf(arq_temp,"%f;",preco);
+        fprintf(arq_temp,"%d\n",quant);
+        fclose(arq_temp);
+
+        remove("produtos.csv");
+        rename("temp.csv","produtos.csv");
+        printf("\t\t Produto ALTERADO com sucesso! >>>> \n");
+        printf("Pressione <ENTER> para continuar");
+        getchar();
+        return;
+    } else {
+        printf("\t\t Produto NAO encontrado! >>>> \n");
+        printf("Pressione <ENTER> para continuar");
+        getchar();
+        return;
+    }
     continuar_acao();
 }
 
