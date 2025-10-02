@@ -128,7 +128,7 @@ void exibir_quarto(void){
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    while (fscanf(arq_quartos, "%d[^;];%32[^;];%50[^;];%f[^;];%f[^\n]\n",
+    while (fscanf(arq_quartos, "%d;%32[^;];%50[^;];%f;%f\n",
         &id,tipo,descricao,&preco_hora,&preco_diaria)==5) {
         if (id == id_lido){
             printf("\t\t Quarto encontrado! >>>> \n");
