@@ -166,14 +166,70 @@ void alterar_quarto(void) {
 
 
 void excluir_quarto(void) {
+    FILE *arq_quartos;
+    arq_quartos = fopen("quartos.csv", "rt");
+    if (arq_quartos == NULL) {
+        printf("Não foi possivel ler o arquivo quartos.csv\n");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+    FILE *arq_temp;
+    arq_temp = fopen("temp.csv", "at");
+    if (arq_temp == NULL) {
+        printf("Não foi possivel ler o arquivo temp.csv\n");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+    int id;
+    int id_lido;
+    char tipo[32];
+    char descricao[51];
+    float preco_hora;
+    float preco_diaria;
+    int encontrado;
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                                 Excluir Quarto                              ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡     Informe o ID do quarto:                                                 ♡\n");
+    printf("♡     Informe o ID do quarto: ");
+    scanf("%d",&id_lido);
+    getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    while (fscanf(arq_quartos, "%d;%32[^;];%50[^;];%f;%f\n",
+        &id,tipo,descricao,&preco_hora,&preco_diaria)==5) {
+        if (id != id_lido){
+            fprintf(arq_temp,"%d;",id);
+            fprintf(arq_temp,"%s;",tipo);
+            fprintf(arq_temp,"%s;",descricao);
+            fprintf(arq_temp,"%f;",preco_hora);
+            fprintf(arq_temp,"%f\n",preco_diaria);
+        } else {
+            encontrado = 1;
+        }
+    }
+    
+    fclose(arq_quartos);
+    fclose(arq_temp);
+
+    if (encontrado) {
+        remove("quartos.csv");
+        rename("temp.csv","quartos.csv");
+        printf("\t\t Quarto EXCLUIDO com sucesso! >>>> \n");
+        printf("Pressione <ENTER> para continuar");
+        getchar();
+        return;
+    } else {
+        printf("\t\t Quarto NAO encontrado! >>>> \n");
+        printf("Pressione <ENTER> para continuar");
+        getchar();
+        return;
+    }
+
     continuar_acao();
+
 }
