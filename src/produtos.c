@@ -128,7 +128,7 @@ void exibir_produto(void){
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    while (fscanf(arq_produtos, "%d[^;];%24[^;];%54[^;];%f[^;];%d[^\n]\n",
+    while (fscanf(arq_produtos, "%d;%24[^;];%54[^;];%f;%d\n",
         &id,nome,descricao,&preco,&quant)==5) {
         if (id == id_lido){
             printf("\t\t Produto encontrado! >>>> \n");
