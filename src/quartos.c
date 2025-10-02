@@ -152,15 +152,101 @@ void exibir_quarto(void){
 
 
 void alterar_quarto(void) {
+    FILE *arq_quartos;
+    arq_quartos = fopen("quartos.csv", "rt");
+    if (arq_quartos == NULL) {
+        printf("Não foi possivel ler o arquivo quartos.csv\n");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+    FILE *arq_temp;
+    arq_temp = fopen("temp.csv", "at");
+    if (arq_temp == NULL) {
+        printf("Não foi possivel ler o arquivo temp.csv\n");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+    int id;
+    int id_lido;
+    char tipo[32];
+    char descricao[51];
+    float preco_hora;
+    float preco_diaria;
+    int encontrado;
+    int tam;
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                            Alterar Dados do Quarto                          ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡     Informe o ID do quarto:                                                 ♡\n");
+    printf("♡     Informe o ID do quarto: ");
+    scanf("%d",&id_lido);
+    getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    while (fscanf(arq_quartos, "%d;%32[^;];%50[^;];%f;%f\n",
+        &id,tipo,descricao,&preco_hora,&preco_diaria)==5) {
+        if (id != id_lido){
+            fprintf(arq_temp,"%d;",id);
+            fprintf(arq_temp,"%s;",tipo);
+            fprintf(arq_temp,"%s;",descricao);
+            fprintf(arq_temp,"%f;",preco_hora);
+            fprintf(arq_temp,"%f\n",preco_diaria);
+        } else {
+            encontrado = 1;
+        }
+    }
+
+    fclose(arq_quartos);
+
+    if (encontrado) {
+        system("clear||cls");
+        mostrar_cabecalho();
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡                              Editar dados de Quarto                         ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡      Tipo: ");
+        fgets(tipo,32,stdin);
+        tam = strlen(tipo);
+        tipo[tam-1] = '\0';
+        printf("♡      Descrição: ");
+        fgets(descricao,51,stdin);
+        tam = strlen(descricao);
+        descricao[tam-1] = '\0';
+        printf("♡      Preço/hora: ");
+        scanf("%f",&preco_hora);
+        getchar();
+        printf("♡      Preço/diária: ");
+        scanf("%f",&preco_diaria);
+        getchar();
+        printf("♡                                                                             ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+
+        fprintf(arq_temp,"%d;",id);
+        fprintf(arq_temp,"%s;",tipo);
+        fprintf(arq_temp,"%s;",descricao);
+        fprintf(arq_temp,"%f;",preco_hora);
+        fprintf(arq_temp,"%f\n",preco_diaria);
+        fclose(arq_temp);
+
+        remove("quartos.csv");
+        rename("temp.csv","quartos.csv");
+        printf("\t\t Quarto ALTERADO com sucesso! >>>> \n");
+        printf("Pressione <ENTER> para continuar");
+        getchar();
+        return;
+    } else {
+        printf("\t\t Quarto NAO encontrado! >>>> \n");
+        printf("Pressione <ENTER> para continuar");
+        getchar();
+        return;
+    }
+
     continuar_acao();
 }
 
@@ -212,7 +298,7 @@ void excluir_quarto(void) {
             encontrado = 1;
         }
     }
-    
+
     fclose(arq_quartos);
     fclose(arq_temp);
 
