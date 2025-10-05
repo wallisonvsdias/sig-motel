@@ -52,6 +52,7 @@ void menu_cliente(void) {
 
 
 void cadastrar_cliente(void) {
+    Cliente cliente;
     FILE *arq_clientes;
     arq_clientes = fopen("clientes.csv", "at");
     if (arq_clientes == NULL) {
@@ -60,11 +61,6 @@ void cadastrar_cliente(void) {
         getchar();
         return;
     }
-    char nome[51];
-    char cpf[12];
-    char nasc[11];
-    char telef[12];
-    char email[51];
     int tam;
     system("clear||cls");
     mostrar_cabecalho();
@@ -73,29 +69,29 @@ void cadastrar_cliente(void) {
     printf("♡                              Cadastrar Cliente                              ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡      CPF: ");
-    scanf("%s",cpf);
+    scanf("%s",cliente.cpf);
     getchar();
     printf("♡      Nome: ");
-    fgets(nome,51,stdin);
-    tam = strlen(nome);
-    nome[tam-1] = '\0';
+    fgets(cliente.nome,51,stdin);
+    tam = strlen(cliente.nome);
+    cliente.nome[tam-1] = '\0';
     printf("♡      Data de nascimento: ");
-    scanf("%s",nasc);
+    scanf("%s",cliente.nasc);
     getchar();
     printf("♡      Telefone (apenas números): ");
-    scanf("%s",telef);
+    scanf("%s",cliente.telef);
     getchar();
     printf("♡      E-mail: ");
-    scanf("%s",email);
+    scanf("%s",cliente.email);
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
 
-    fprintf(arq_clientes,"%s;",cpf);
-    fprintf(arq_clientes,"%s;",nome);
-    fprintf(arq_clientes,"%s;",nasc);
-    fprintf(arq_clientes,"%s;",telef);
-    fprintf(arq_clientes,"%s\n",email);
+    fprintf(arq_clientes,"%s;",cliente.cpf);
+    fprintf(arq_clientes,"%s;",cliente.nome);
+    fprintf(arq_clientes,"%s;",cliente.nasc);
+    fprintf(arq_clientes,"%s;",cliente.telef);
+    fprintf(arq_clientes,"%s\n",cliente.email);
     fclose(arq_clientes);
 
     continuar_acao();
@@ -103,12 +99,8 @@ void cadastrar_cliente(void) {
 
 
 void exibir_cliente(void){
-    char nome[51];
-    char cpf[12];
+    Cliente cliente;
     char cpf_lido[12];
-    char nasc[11];
-    char telef[12];
-    char email[51];
     FILE *arq_clientes;
     arq_clientes = fopen("clientes.csv", "rt");
     if (arq_clientes == NULL) {
@@ -129,14 +121,14 @@ void exibir_cliente(void){
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fscanf(arq_clientes, "%11[^;];%50[^;];%10[^;];%11[^;];%50[^\n]\n",
-        cpf,nome,nasc,telef,email)==5) {
-        if (strcmp(cpf,cpf_lido)==0){
+        cliente.cpf,cliente.nome,cliente.nasc,cliente.telef,cliente.email)==5) {
+        if (strcmp(cliente.cpf,cpf_lido)==0){
             printf("\t\t Cliente encontrado! >>>> \n");
-            printf("\t\tCPF: %s\n",cpf);
-            printf("\t\tNome: %s\n",nome);
-            printf("\t\tData de nascimento: %s\n",nasc);
-            printf("\t\tTelefone: %s\n",telef);
-            printf("\t\tEmail: %s\n",email);
+            printf("\t\tCPF: %s\n",cliente.cpf);
+            printf("\t\tNome: %s\n",cliente.nome);
+            printf("\t\tData de nascimento: %s\n",cliente.nasc);
+            printf("\t\tTelefone: %s\n",cliente.telef);
+            printf("\t\tEmail: %s\n",cliente.email);
             printf("Pressione <ENTER> para continuar");
             getchar();
             fclose(arq_clientes);
@@ -153,6 +145,7 @@ void exibir_cliente(void){
 
 
 void alterar_cliente(void){
+    Cliente cliente;
     FILE *arq_clientes;
     arq_clientes = fopen("clientes.csv", "rt");
     if (arq_clientes == NULL) {
@@ -170,12 +163,7 @@ void alterar_cliente(void){
         return;
     }
     int tam;
-    char nome[51];
-    char cpf[12];
     char cpf_lido[12];
-    char nasc[11];
-    char telef[12];
-    char email[51];
     int encontrado;
     system("clear||cls");
     mostrar_cabecalho();
@@ -189,13 +177,13 @@ void alterar_cliente(void){
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fscanf(arq_clientes, "%11[^;];%50[^;];%10[^;];%11[^;];%50[^\n]\n",
-        cpf,nome,nasc,telef,email)==5) {
-        if (strcmp(cpf,cpf_lido)!=0){
-            fprintf(arq_temp,"%s;",cpf);
-            fprintf(arq_temp,"%s;",nome);
-            fprintf(arq_temp,"%s;",nasc);
-            fprintf(arq_temp,"%s;",telef);
-            fprintf(arq_temp,"%s\n",email);
+        cliente.cpf,cliente.nome,cliente.nasc,cliente.telef,cliente.email)==5) {
+        if (strcmp(cliente.cpf,cpf_lido)!=0){
+            fprintf(arq_temp,"%s;",cliente.cpf);
+            fprintf(arq_temp,"%s;",cliente.nome);
+            fprintf(arq_temp,"%s;",cliente.nasc);
+            fprintf(arq_temp,"%s;",cliente.telef);
+            fprintf(arq_temp,"%s\n",cliente.email);
         } else {
             encontrado = 1;
         }
@@ -204,6 +192,7 @@ void alterar_cliente(void){
     fclose(arq_clientes);
 
     if (encontrado) {
+        Cliente novo_cliente;
         system("clear||cls");
         mostrar_cabecalho();
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -211,29 +200,29 @@ void alterar_cliente(void){
         printf("♡                            Novos dados de Cliente                           ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡      CPF: ");
-        scanf("%s",cpf);
+        scanf("%s",novo_cliente.cpf);
         getchar();
         printf("♡      Nome: ");
-        fgets(nome,51,stdin);
-        tam = strlen(nome);
-        nome[tam-1] = '\0';
+        fgets(novo_cliente.nome,51,stdin);
+        tam = strlen(novo_cliente.nome);
+        novo_cliente.nome[tam-1] = '\0';
         printf("♡      Data de nascimento: ");
-        scanf("%s",nasc);
+        scanf("%s",novo_cliente.nasc);
         getchar();
         printf("♡      Telefone (apenas números): ");
-        scanf("%s",telef);
+        scanf("%s",novo_cliente.telef);
         getchar();
         printf("♡      E-mail: ");
-        scanf("%s",email);
+        scanf("%s",novo_cliente.email);
         getchar();
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
 
-        fprintf(arq_temp,"%s;",cpf);
-        fprintf(arq_temp,"%s;",nome);
-        fprintf(arq_temp,"%s;",nasc);
-        fprintf(arq_temp,"%s;",telef);
-        fprintf(arq_temp,"%s\n",email);
+        fprintf(arq_temp,"%s;",novo_cliente.cpf);
+        fprintf(arq_temp,"%s;",novo_cliente.nome);
+        fprintf(arq_temp,"%s;",novo_cliente.nasc);
+        fprintf(arq_temp,"%s;",novo_cliente.telef);
+        fprintf(arq_temp,"%s\n",novo_cliente.email);
         fclose(arq_temp);
 
         remove("clientes.csv");
@@ -254,6 +243,7 @@ void alterar_cliente(void){
 
 
 void excluir_cliente(void){
+    Cliente cliente;
     FILE *arq_clientes;
     arq_clientes = fopen("clientes.csv", "rt");
     if (arq_clientes == NULL) {
@@ -270,12 +260,7 @@ void excluir_cliente(void){
         getchar();
         return;
     }
-    char nome[51];
-    char cpf[12];
     char cpf_lido[12];
-    char nasc[11];
-    char telef[12];
-    char email[51];
     int encontrado;
     system("clear||cls");
     mostrar_cabecalho();
@@ -289,13 +274,13 @@ void excluir_cliente(void){
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fscanf(arq_clientes, "%11[^;];%50[^;];%10[^;];%11[^;];%50[^\n]\n",
-        cpf,nome,nasc,telef,email)==5) {
-        if (strcmp(cpf,cpf_lido)!=0){
-            fprintf(arq_temp,"%s;",cpf);
-            fprintf(arq_temp,"%s;",nome);
-            fprintf(arq_temp,"%s;",nasc);
-            fprintf(arq_temp,"%s;",telef);
-            fprintf(arq_temp,"%s\n",email);
+        cliente.cpf,cliente.nome,cliente.nasc,cliente.telef,cliente.email)==5) {
+        if (strcmp(cliente.cpf,cpf_lido)!=0){
+            fprintf(arq_temp,"%s;",cliente.cpf);
+            fprintf(arq_temp,"%s;",cliente.nome);
+            fprintf(arq_temp,"%s;",cliente.nasc);
+            fprintf(arq_temp,"%s;",cliente.telef);
+            fprintf(arq_temp,"%s\n",cliente.email);
         } else {
             encontrado = 1;
         }

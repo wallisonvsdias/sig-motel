@@ -1,6 +1,14 @@
 #ifndef PRODUTOS_H
 #define PRODUTOS_H
 
+typedef struct {
+    int id;
+    char nome[25];
+    char descricao[55];
+    float preco;
+    int quant;
+} Produto;
+
 void menu_produto(void);
 void cadastrar_produto(void);
 void exibir_produto(void);

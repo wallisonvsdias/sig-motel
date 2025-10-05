@@ -52,6 +52,7 @@ void menu_produto(void) {
 
 
 void cadastrar_produto(void) {
+    Produto produto;
     FILE *arq_produtos;
     arq_produtos = fopen("produtos.csv", "at");
     if (arq_produtos == NULL) {
@@ -60,12 +61,8 @@ void cadastrar_produto(void) {
         getchar();
         return;
     }
-    int id = gerador_id("produtos.csv");
+    produto.id = gerador_id("produtos.csv");
     int tam;
-    char nome[25];
-    char descricao[55];
-    float preco;
-    int quant;
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -73,29 +70,29 @@ void cadastrar_produto(void) {
     printf("♡                            Cadastrar Produto                                ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡      Nome: ");
-    fgets(nome,25,stdin);
-    tam = strlen(nome);
-    nome[tam-1] = '\0';
+    fgets(produto.nome,25,stdin);
+    tam = strlen(produto.nome);
+    produto.nome[tam-1] = '\0';
     printf("♡      Descrição: ");
-    fgets(descricao,55,stdin);
-    tam = strlen(descricao);
-    descricao[tam-1] = '\0';
+    fgets(produto.descricao,55,stdin);
+    tam = strlen(produto.descricao);
+    produto.descricao[tam-1] = '\0';
     printf("♡      Preço: ");
-    scanf("%f",&preco);
+    scanf("%f",&produto.preco);
     getchar();
     printf("♡      Quantidade: ");
-    scanf("%d",&quant);
+    scanf("%d",&produto.quant);
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡        Produto cadastrado com sucesso!                                        ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
 
-    fprintf(arq_produtos,"%d;",id);
-    fprintf(arq_produtos,"%s;",nome);
-    fprintf(arq_produtos,"%s;",descricao);
-    fprintf(arq_produtos,"%f;",preco);
-    fprintf(arq_produtos,"%d\n",quant);
+    fprintf(arq_produtos,"%d;",produto.id);
+    fprintf(arq_produtos,"%s;",produto.nome);
+    fprintf(arq_produtos,"%s;",produto.descricao);
+    fprintf(arq_produtos,"%f;",produto.preco);
+    fprintf(arq_produtos,"%d\n",produto.quant);
     fclose(arq_produtos);
 
     continuar_acao();
@@ -103,6 +100,7 @@ void cadastrar_produto(void) {
 
 
 void exibir_produto(void){
+    Produto produto;
     FILE *arq_produtos;
     arq_produtos = fopen("produtos.csv", "rt");
     if (arq_produtos == NULL) {
@@ -111,12 +109,7 @@ void exibir_produto(void){
         getchar();
         return;
     }
-    int id;
     int id_lido;
-    char nome[25];
-    char descricao[55];
-    float preco;
-    int quant;
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -129,13 +122,13 @@ void exibir_produto(void){
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fscanf(arq_produtos, "%d;%24[^;];%54[^;];%f;%d\n",
-        &id,nome,descricao,&preco,&quant)==5) {
-        if (id == id_lido){
+        &produto.id,produto.nome,produto.descricao,&produto.preco,&produto.quant)==5) {
+        if (produto.id == id_lido){
             printf("\t\t Produto encontrado! >>>> \n");
-            printf("\t\tNome: %s\n",nome);
-            printf("\t\tDescricao: %s\n",descricao);
-            printf("\t\tPreco: %f\n",preco);
-            printf("\t\tQuantidade: %d\n",quant);
+            printf("\t\tNome: %s\n",produto.nome);
+            printf("\t\tDescricao: %s\n",produto.descricao);
+            printf("\t\tPreco: %f\n",produto.preco);
+            printf("\t\tQuantidade: %d\n",produto.quant);
             printf("Pressione <ENTER> para continuar");
             getchar();
             fclose(arq_produtos);
@@ -152,6 +145,7 @@ void exibir_produto(void){
 
 
 void alterar_produto(void){
+    Produto produto;
     FILE *arq_produtos;
     arq_produtos = fopen("produtos.csv", "rt");
     if (arq_produtos == NULL) {
@@ -168,12 +162,7 @@ void alterar_produto(void){
         getchar();
         return;
     }
-    int id;
     int id_lido;
-    char nome[25];
-    char descricao[55];
-    float preco;
-    int quant;
     int tam;
     int encontrado;
     system("clear||cls");
@@ -188,13 +177,13 @@ void alterar_produto(void){
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fscanf(arq_produtos, "%d;%24[^;];%54[^;];%f;%d\n",
-        &id,nome,descricao,&preco,&quant)==5) {
-        if (id != id_lido){
-            fprintf(arq_temp,"%d;",id);
-            fprintf(arq_temp,"%s;",nome);
-            fprintf(arq_temp,"%s;",descricao);
-            fprintf(arq_temp,"%f;",preco);
-            fprintf(arq_temp,"%d\n",quant);
+        &produto.id,produto.nome,produto.descricao,&produto.preco,&produto.quant)==5) {
+        if (produto.id != id_lido){
+            fprintf(arq_temp,"%d;",produto.id);
+            fprintf(arq_temp,"%s;",produto.nome);
+            fprintf(arq_temp,"%s;",produto.descricao);
+            fprintf(arq_temp,"%f;",produto.preco);
+            fprintf(arq_temp,"%d\n",produto.quant);
         } else {
             encontrado = 1;
         }
@@ -203,6 +192,7 @@ void alterar_produto(void){
     fclose(arq_produtos);
 
     if (encontrado) {
+        Produto novo_produto;
         system("clear||cls");
         mostrar_cabecalho();
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -210,29 +200,29 @@ void alterar_produto(void){
         printf("♡                         Editar dados de Produto                             ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡      Nome: ");
-        fgets(nome,25,stdin);
-        tam = strlen(nome);
-        nome[tam-1] = '\0';
+        fgets(novo_produto.nome,25,stdin);
+        tam = strlen(novo_produto.nome);
+        novo_produto.nome[tam-1] = '\0';
         printf("♡      Descrição: ");
-        fgets(descricao,55,stdin);
-        tam = strlen(descricao);
-        descricao[tam-1] = '\0';
+        fgets(novo_produto.descricao,55,stdin);
+        tam = strlen(novo_produto.descricao);
+        novo_produto.descricao[tam-1] = '\0';
         printf("♡      Preço: ");
-        scanf("%f",&preco);
+        scanf("%f",&novo_produto.preco);
         getchar();
         printf("♡      Quantidade: ");
-        scanf("%d",&quant);
+        scanf("%d",&novo_produto.quant);
         getchar();
         printf("♡                                                                             ♡\n");
-        printf("♡        Produto cadastrado com sucesso!                                        ♡\n");
+        printf("♡        Produto editado com sucesso!                                        ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
 
-        fprintf(arq_temp,"%d;",id);
-        fprintf(arq_temp,"%s;",nome);
-        fprintf(arq_temp,"%s;",descricao);
-        fprintf(arq_temp,"%f;",preco);
-        fprintf(arq_temp,"%d\n",quant);
+        fprintf(arq_temp,"%d;",produto.id);
+        fprintf(arq_temp,"%s;",novo_produto.nome);
+        fprintf(arq_temp,"%s;",novo_produto.descricao);
+        fprintf(arq_temp,"%f;",novo_produto.preco);
+        fprintf(arq_temp,"%d\n",novo_produto.quant);
         fclose(arq_temp);
 
         remove("produtos.csv");
@@ -252,6 +242,7 @@ void alterar_produto(void){
 
 
 void excluir_produto(void){
+    Produto produto;
     FILE *arq_produtos;
     arq_produtos = fopen("produtos.csv", "rt");
     if (arq_produtos == NULL) {
@@ -268,12 +259,7 @@ void excluir_produto(void){
         getchar();
         return;
     }
-    int id;
     int id_lido;
-    char nome[25];
-    char descricao[55];
-    float preco;
-    int quant;
     int encontrado;
     system("clear||cls");
     mostrar_cabecalho();
@@ -287,13 +273,13 @@ void excluir_produto(void){
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fscanf(arq_produtos, "%d;%24[^;];%54[^;];%f;%d\n",
-        &id,nome,descricao,&preco,&quant)==5) {
-        if (id != id_lido){
-            fprintf(arq_temp,"%d;",id);
-            fprintf(arq_temp,"%s;",nome);
-            fprintf(arq_temp,"%s;",descricao);
-            fprintf(arq_temp,"%f;",preco);
-            fprintf(arq_temp,"%d\n",quant);
+        &produto.id,produto.nome,produto.descricao,&produto.preco,&produto.quant)==5) {
+        if (produto.id != id_lido){
+            fprintf(arq_temp,"%d;",produto.id);
+            fprintf(arq_temp,"%s;",produto.nome);
+            fprintf(arq_temp,"%s;",produto.descricao);
+            fprintf(arq_temp,"%f;",produto.preco);
+            fprintf(arq_temp,"%d\n",produto.quant);
         } else {
             encontrado = 1;
         }
