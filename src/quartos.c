@@ -186,44 +186,43 @@ void alterar_quarto(void) {
             fprintf(arq_temp,"%f\n",quarto.preco_diaria);
         } else {
             encontrado = 1;
+            Quarto novo_quarto;
+            system("clear||cls");
+            mostrar_cabecalho();
+            printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+            printf("♡                                                                             ♡\n");
+            printf("♡                              Editar dados de Quarto                         ♡\n");
+            printf("♡                                                                             ♡\n");
+            printf("♡      Tipo: ");
+            fgets(novo_quarto.tipo,32,stdin);
+            tam = strlen(novo_quarto.tipo);
+            novo_quarto.tipo[tam-1] = '\0';
+            printf("♡      Descrição: ");
+            fgets(novo_quarto.descricao,51,stdin);
+            tam = strlen(novo_quarto.descricao);
+            novo_quarto.descricao[tam-1] = '\0';
+            printf("♡      Preço/hora: ");
+            scanf("%f",&novo_quarto.preco_hora);
+            getchar();
+            printf("♡      Preço/diária: ");
+            scanf("%f",&novo_quarto.preco_diaria);
+            getchar();
+            printf("♡                                                                             ♡\n");
+            printf("♡                                                                             ♡\n");
+            printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+
+            fprintf(arq_temp,"%d;",quarto.id);
+            fprintf(arq_temp,"%s;",novo_quarto.tipo);
+            fprintf(arq_temp,"%s;",novo_quarto.descricao);
+            fprintf(arq_temp,"%f;",novo_quarto.preco_hora);
+            fprintf(arq_temp,"%f\n",novo_quarto.preco_diaria);
         }
     }
 
+    fclose(arq_temp);
     fclose(arq_quartos);
 
     if (encontrado) {
-        Quarto novo_quarto;
-        system("clear||cls");
-        mostrar_cabecalho();
-        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-        printf("♡                                                                             ♡\n");
-        printf("♡                              Editar dados de Quarto                         ♡\n");
-        printf("♡                                                                             ♡\n");
-        printf("♡      Tipo: ");
-        fgets(novo_quarto.tipo,32,stdin);
-        tam = strlen(novo_quarto.tipo);
-        novo_quarto.tipo[tam-1] = '\0';
-        printf("♡      Descrição: ");
-        fgets(novo_quarto.descricao,51,stdin);
-        tam = strlen(novo_quarto.descricao);
-        novo_quarto.descricao[tam-1] = '\0';
-        printf("♡      Preço/hora: ");
-        scanf("%f",&novo_quarto.preco_hora);
-        getchar();
-        printf("♡      Preço/diária: ");
-        scanf("%f",&novo_quarto.preco_diaria);
-        getchar();
-        printf("♡                                                                             ♡\n");
-        printf("♡                                                                             ♡\n");
-        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-
-        fprintf(arq_temp,"%d;",quarto.id);
-        fprintf(arq_temp,"%s;",novo_quarto.tipo);
-        fprintf(arq_temp,"%s;",novo_quarto.descricao);
-        fprintf(arq_temp,"%f;",novo_quarto.preco_hora);
-        fprintf(arq_temp,"%f\n",novo_quarto.preco_diaria);
-        fclose(arq_temp);
-
         remove("quartos.csv");
         rename("temp.csv","quartos.csv");
         printf("\t\t Quarto ALTERADO com sucesso! >>>> \n");
