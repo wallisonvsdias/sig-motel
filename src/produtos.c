@@ -186,45 +186,43 @@ void alterar_produto(void){
             fprintf(arq_temp,"%d\n",produto.quant);
         } else {
             encontrado = 1;
+            Produto novo_produto;
+            system("clear||cls");
+            mostrar_cabecalho();
+            printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+            printf("♡                                                                             ♡\n");
+            printf("♡                         Editar dados de Produto                             ♡\n");
+            printf("♡                                                                             ♡\n");
+            printf("♡      Nome: ");
+            fgets(novo_produto.nome,25,stdin);
+            tam = strlen(novo_produto.nome);
+            novo_produto.nome[tam-1] = '\0';
+            printf("♡      Descrição: ");
+            fgets(novo_produto.descricao,55,stdin);
+            tam = strlen(novo_produto.descricao);
+            novo_produto.descricao[tam-1] = '\0';
+            printf("♡      Preço: ");
+            scanf("%f",&novo_produto.preco);
+            getchar();
+            printf("♡      Quantidade: ");
+            scanf("%d",&novo_produto.quant);
+            getchar();
+            printf("♡                                                                             ♡\n");
+            printf("♡                                                                             ♡\n");
+            printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+
+            fprintf(arq_temp,"%d;",produto.id);
+            fprintf(arq_temp,"%s;",novo_produto.nome);
+            fprintf(arq_temp,"%s;",novo_produto.descricao);
+            fprintf(arq_temp,"%f;",novo_produto.preco);
+            fprintf(arq_temp,"%d\n",novo_produto.quant);
         }
     }
 
+    fclose(arq_temp);
     fclose(arq_produtos);
 
     if (encontrado) {
-        Produto novo_produto;
-        system("clear||cls");
-        mostrar_cabecalho();
-        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-        printf("♡                                                                             ♡\n");
-        printf("♡                         Editar dados de Produto                             ♡\n");
-        printf("♡                                                                             ♡\n");
-        printf("♡      Nome: ");
-        fgets(novo_produto.nome,25,stdin);
-        tam = strlen(novo_produto.nome);
-        novo_produto.nome[tam-1] = '\0';
-        printf("♡      Descrição: ");
-        fgets(novo_produto.descricao,55,stdin);
-        tam = strlen(novo_produto.descricao);
-        novo_produto.descricao[tam-1] = '\0';
-        printf("♡      Preço: ");
-        scanf("%f",&novo_produto.preco);
-        getchar();
-        printf("♡      Quantidade: ");
-        scanf("%d",&novo_produto.quant);
-        getchar();
-        printf("♡                                                                             ♡\n");
-        printf("♡        Produto editado com sucesso!                                        ♡\n");
-        printf("♡                                                                             ♡\n");
-        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-
-        fprintf(arq_temp,"%d;",produto.id);
-        fprintf(arq_temp,"%s;",novo_produto.nome);
-        fprintf(arq_temp,"%s;",novo_produto.descricao);
-        fprintf(arq_temp,"%f;",novo_produto.preco);
-        fprintf(arq_temp,"%d\n",novo_produto.quant);
-        fclose(arq_temp);
-
         remove("produtos.csv");
         rename("temp.csv","produtos.csv");
         printf("\t\t Produto ALTERADO com sucesso! >>>> \n");
@@ -235,8 +233,9 @@ void alterar_produto(void){
         printf("\t\t Produto NAO encontrado! >>>> \n");
         printf("Pressione <ENTER> para continuar");
         getchar();
-        return;
+    return;
     }
+    
     continuar_acao();
 }
 
