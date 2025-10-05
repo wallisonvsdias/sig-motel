@@ -51,6 +51,7 @@ void menu_quarto(void) {
 
 
 void cadastrar_quarto(void) {
+    Quarto quarto;
     FILE *arq_quartos;
     arq_quartos = fopen("quartos.csv", "at");
     if (arq_quartos == NULL) {
@@ -59,11 +60,7 @@ void cadastrar_quarto(void) {
         getchar();
         return;
     }
-    int id = gerador_id("quartos.csv");
-    char tipo[32];
-    char descricao[51];
-    float preco_hora;
-    float preco_diaria;
+    quarto.id = gerador_id("quartos.csv");
     int tam;
     system("clear||cls");
     mostrar_cabecalho();
@@ -72,29 +69,29 @@ void cadastrar_quarto(void) {
     printf("♡                               Cadastrar Quarto                              ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡      Tipo: ");
-    fgets(tipo,32,stdin);
-    tam = strlen(tipo);
-    tipo[tam-1] = '\0';
+    fgets(quarto.tipo,32,stdin);
+    tam = strlen(quarto.tipo);
+    quarto.tipo[tam-1] = '\0';
     printf("♡      Descrição: ");
-    fgets(descricao,51,stdin);
-    tam = strlen(descricao);
-    descricao[tam-1] = '\0';
+    fgets(quarto.descricao,51,stdin);
+    tam = strlen(quarto.descricao);
+    quarto.descricao[tam-1] = '\0';
     printf("♡      Preço/hora: ");
-    scanf("%f",&preco_hora);
+    scanf("%f",&quarto.preco_hora);
     getchar();
     printf("♡      Preço/diária: ");
-    scanf("%f",&preco_diaria);
+    scanf("%f",&quarto.preco_diaria);
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡        Quarto cadastrado com sucesso!                                       ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
 
-    fprintf(arq_quartos,"%d;",id);
-    fprintf(arq_quartos,"%s;",tipo);
-    fprintf(arq_quartos,"%s;",descricao);
-    fprintf(arq_quartos,"%f;",preco_hora);
-    fprintf(arq_quartos,"%f\n",preco_diaria);
+    fprintf(arq_quartos,"%d;",quarto.id);
+    fprintf(arq_quartos,"%s;",quarto.tipo);
+    fprintf(arq_quartos,"%s;",quarto.descricao);
+    fprintf(arq_quartos,"%f;",quarto.preco_hora);
+    fprintf(arq_quartos,"%f\n",quarto.preco_diaria);
     fclose(arq_quartos);
 
     continuar_acao();
@@ -103,6 +100,7 @@ void cadastrar_quarto(void) {
 
 // Exibir também o status
 void exibir_quarto(void){
+    Quarto quarto;
     FILE *arq_quartos;
     arq_quartos = fopen("quartos.csv", "rt");
     if (arq_quartos == NULL) {
@@ -111,12 +109,7 @@ void exibir_quarto(void){
         getchar();
         return;
     }
-    int id;
     int id_lido;
-    char tipo[32];
-    char descricao[51];
-    float preco_hora;
-    float preco_diaria;
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -129,13 +122,13 @@ void exibir_quarto(void){
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fscanf(arq_quartos, "%d;%32[^;];%50[^;];%f;%f\n",
-        &id,tipo,descricao,&preco_hora,&preco_diaria)==5) {
-        if (id == id_lido){
+        &quarto.id,quarto.tipo,quarto.descricao,&quarto.preco_hora,&quarto.preco_diaria)==5) {
+        if (quarto.id == id_lido){
             printf("\t\t Quarto encontrado! >>>> \n");
-            printf("\t\tTipo: %s\n",tipo);
-            printf("\t\tDescricao: %s\n",descricao);
-            printf("\t\tPreco/hora: %f\n",preco_hora);
-            printf("\t\tPreco/diaria: %f\n",preco_diaria);
+            printf("\t\tTipo: %s\n",quarto.tipo);
+            printf("\t\tDescricao: %s\n",quarto.descricao);
+            printf("\t\tPreco/hora: %f\n",quarto.preco_hora);
+            printf("\t\tPreco/diaria: %f\n",quarto.preco_diaria);
             printf("Pressione <ENTER> para continuar");
             getchar();
             fclose(arq_quartos);
@@ -152,6 +145,7 @@ void exibir_quarto(void){
 
 
 void alterar_quarto(void) {
+    Quarto quarto;
     FILE *arq_quartos;
     arq_quartos = fopen("quartos.csv", "rt");
     if (arq_quartos == NULL) {
@@ -168,12 +162,7 @@ void alterar_quarto(void) {
         getchar();
         return;
     }
-    int id;
     int id_lido;
-    char tipo[32];
-    char descricao[51];
-    float preco_hora;
-    float preco_diaria;
     int encontrado;
     int tam;
     system("clear||cls");
@@ -188,13 +177,13 @@ void alterar_quarto(void) {
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fscanf(arq_quartos, "%d;%32[^;];%50[^;];%f;%f\n",
-        &id,tipo,descricao,&preco_hora,&preco_diaria)==5) {
-        if (id != id_lido){
-            fprintf(arq_temp,"%d;",id);
-            fprintf(arq_temp,"%s;",tipo);
-            fprintf(arq_temp,"%s;",descricao);
-            fprintf(arq_temp,"%f;",preco_hora);
-            fprintf(arq_temp,"%f\n",preco_diaria);
+        &quarto.id,quarto.tipo,quarto.descricao,&quarto.preco_hora,&quarto.preco_diaria)==5) {
+        if (quarto.id != id_lido){
+            fprintf(arq_temp,"%d;",quarto.id);
+            fprintf(arq_temp,"%s;",quarto.tipo);
+            fprintf(arq_temp,"%s;",quarto.descricao);
+            fprintf(arq_temp,"%f;",quarto.preco_hora);
+            fprintf(arq_temp,"%f\n",quarto.preco_diaria);
         } else {
             encontrado = 1;
         }
@@ -203,6 +192,7 @@ void alterar_quarto(void) {
     fclose(arq_quartos);
 
     if (encontrado) {
+        Quarto novo_quarto;
         system("clear||cls");
         mostrar_cabecalho();
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -210,28 +200,28 @@ void alterar_quarto(void) {
         printf("♡                              Editar dados de Quarto                         ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡      Tipo: ");
-        fgets(tipo,32,stdin);
-        tam = strlen(tipo);
-        tipo[tam-1] = '\0';
+        fgets(novo_quarto.tipo,32,stdin);
+        tam = strlen(novo_quarto.tipo);
+        novo_quarto.tipo[tam-1] = '\0';
         printf("♡      Descrição: ");
-        fgets(descricao,51,stdin);
-        tam = strlen(descricao);
-        descricao[tam-1] = '\0';
+        fgets(novo_quarto.descricao,51,stdin);
+        tam = strlen(novo_quarto.descricao);
+        novo_quarto.descricao[tam-1] = '\0';
         printf("♡      Preço/hora: ");
-        scanf("%f",&preco_hora);
+        scanf("%f",&novo_quarto.preco_hora);
         getchar();
         printf("♡      Preço/diária: ");
-        scanf("%f",&preco_diaria);
+        scanf("%f",&novo_quarto.preco_diaria);
         getchar();
         printf("♡                                                                             ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
 
-        fprintf(arq_temp,"%d;",id);
-        fprintf(arq_temp,"%s;",tipo);
-        fprintf(arq_temp,"%s;",descricao);
-        fprintf(arq_temp,"%f;",preco_hora);
-        fprintf(arq_temp,"%f\n",preco_diaria);
+        fprintf(arq_temp,"%d;",quarto.id);
+        fprintf(arq_temp,"%s;",novo_quarto.tipo);
+        fprintf(arq_temp,"%s;",novo_quarto.descricao);
+        fprintf(arq_temp,"%f;",novo_quarto.preco_hora);
+        fprintf(arq_temp,"%f\n",novo_quarto.preco_diaria);
         fclose(arq_temp);
 
         remove("quartos.csv");
@@ -252,6 +242,7 @@ void alterar_quarto(void) {
 
 
 void excluir_quarto(void) {
+    Quarto quarto;
     FILE *arq_quartos;
     arq_quartos = fopen("quartos.csv", "rt");
     if (arq_quartos == NULL) {
@@ -268,12 +259,7 @@ void excluir_quarto(void) {
         getchar();
         return;
     }
-    int id;
     int id_lido;
-    char tipo[32];
-    char descricao[51];
-    float preco_hora;
-    float preco_diaria;
     int encontrado;
     system("clear||cls");
     mostrar_cabecalho();
@@ -287,13 +273,13 @@ void excluir_quarto(void) {
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fscanf(arq_quartos, "%d;%32[^;];%50[^;];%f;%f\n",
-        &id,tipo,descricao,&preco_hora,&preco_diaria)==5) {
-        if (id != id_lido){
-            fprintf(arq_temp,"%d;",id);
-            fprintf(arq_temp,"%s;",tipo);
-            fprintf(arq_temp,"%s;",descricao);
-            fprintf(arq_temp,"%f;",preco_hora);
-            fprintf(arq_temp,"%f\n",preco_diaria);
+        &quarto.id,quarto.tipo,quarto.descricao,&quarto.preco_hora,&quarto.preco_diaria)==5) {
+        if (quarto.id != id_lido){
+            fprintf(arq_temp,"%d;",quarto.id);
+            fprintf(arq_temp,"%s;",quarto.tipo);
+            fprintf(arq_temp,"%s;",quarto.descricao);
+            fprintf(arq_temp,"%f;",quarto.preco_hora);
+            fprintf(arq_temp,"%f\n",quarto.preco_diaria);
         } else {
             encontrado = 1;
         }
