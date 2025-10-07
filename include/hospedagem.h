@@ -1,6 +1,12 @@
 #ifndef HOSPEDAGEM_H
 #define HOSPEDAGEM_H
 
+typedef struct {
+    char cpf[12];
+    char id_quarto[30];
+    char horas[3];
+} Quarto;
+
 void menu_hospedagem(void);
 void cadastrar_hospedagem(void);
 void exibir_hospedagem(void);
