@@ -156,7 +156,7 @@ void alterar_cliente(void){
     }
     FILE *arq_temp;
     arq_temp = fopen("temp.csv", "at");
-    if (arq_clientes == NULL) {
+    if (arq_temp == NULL) {
         printf("Não foi possivel ler o arquivo");
         printf("Pressione <ENTER> ...");
         getchar();
@@ -254,7 +254,7 @@ void excluir_cliente(void){
     }
     FILE *arq_temp;
     arq_temp = fopen("temp.csv", "at");
-    if (arq_clientes == NULL) {
+    if (arq_temp == NULL) {
         printf("Não foi possivel ler o arquivo");
         printf("Pressione <ENTER> ...");
         getchar();
