@@ -257,16 +257,69 @@ void alterar_funcionario(void) {
     continuar_acao();
 }
 
-
-void excluir_funcionario(void){
+void excluir_funcionario(void) {
+    Funcionario funcionario;
+    FILE *arq_funcionarios;
+    char cpf_lido[12];
+    int encontrado = 0;
+    
+    arq_funcionarios = fopen("funcionarios.csv", "rt");
+    if (arq_funcionarios == NULL) {
+        printf("Não foi possivel ler o arquivo funcionarios.csv\n");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+    
+    FILE *arq_temp;
+    arq_temp = fopen("temp.csv", "wt"); 
+    if (arq_temp == NULL) {
+        printf("Não foi possivel criar o arquivo temp.csv\n");
+        fclose(arq_funcionarios);
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+    
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                            Excluir Funcionário(a)                           ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o CPF do(a) funcionário(a):                                    ♡\n");
+    printf("♡      Informe o CPF do(a) funcionário(a): ");
+    scanf("%s", cpf_lido);
+    getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    continuar_acao();
+    
+    while (fscanf(arq_funcionarios, "%11[^;];%50[^;];%11[^;];%50[^;];%19[^;];%8[^\n]\n",
+        funcionario.cpf, funcionario.nome, funcionario.telefone, funcionario.email, 
+        funcionario.cargo, funcionario.salario) == 6) {
+        
+        if (strcmp(funcionario.cpf, cpf_lido) != 0) {
+            fprintf(arq_temp, "%s;%s;%s;%s;%s;%s\n",
+                funcionario.cpf, funcionario.nome, funcionario.telefone, 
+                funcionario.email, funcionario.cargo, funcionario.salario);
+        } else {
+            encontrado = 1;
+            printf("\n♡ Funcionário(a) encontrado(a): %s\n", funcionario.nome);
+            printf("♡ Cargo: %s\n", funcionario.cargo);
+        }
+    }
+    
+    fclose(arq_funcionarios);
+    fclose(arq_temp);
+    
+    if (encontrado) {
+        remove("funcionarios.csv");
+        rename("temp.csv", "funcionarios.csv");
+        printf("\n♡ Funcionário(a) EXCLUÍDO(A) com sucesso! ♡\n");
+    } else {
+        remove("temp.csv");
+        printf("\n♡ Funcionário(a) NÃO encontrado(a)! ♡\n");
+    }
+    
+    printf("♡ Pressione <ENTER> para continuar...");
+    getchar();
 }
