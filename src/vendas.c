@@ -218,6 +218,29 @@ void alterar_venda(void) {
 
 
 void excluir_venda(void) {
+    Venda venda;
+    FILE *arq_vendas;
+    FILE *arq_temp;
+    char cpf_lido[12];
+    int encontrado = 0;
+    
+    arq_vendas = fopen("vendas.csv", "rt");
+    if (arq_vendas == NULL) {
+        printf("Não foi possivel ler o arquivo vendas.csv\n");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+    
+    arq_temp = fopen("temp.csv", "wt");
+    if (arq_temp == NULL) {
+        printf("Não foi possivel criar o arquivo temp.csv\n");
+        fclose(arq_vendas);
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -227,6 +250,35 @@ void excluir_venda(void) {
     printf("♡      Informe o ID da venda:                                                 ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+        while (fscanf(arq_vendas, "%11[^;];%3[^;];%3[^\n]\n",
+        venda.cpf, venda.id_produto, venda.quant) == 3) {
+        
+        if (strcmp(venda.cpf, cpf_lido) != 0) {
+            fprintf(arq_temp, "%s;%s;%s\n",
+                venda.cpf, venda.id_produto, venda.quant);
+        } else {
+            encontrado = 1;
+            printf("\n♡ Venda encontrada:\n");
+            printf("♡ CPF: %s\n", venda.cpf);
+            printf("♡ Produto: %s\n", venda.id_produto);
+            printf("♡ Quantidade: %s\n", venda.quant);
+        }
+    }
+    
+    fclose(arq_vendas);
+    fclose(arq_temp);
+    
+    if (encontrado) {
+        remove("vendas.csv");
+        rename("temp.csv", "vendas.csv");
+        printf("\n♡ Venda EXCLUÍDA com sucesso! ♡\n");
+    } else {
+        remove("temp.csv");
+        printf("\n♡ Venda NÃO encontrada! ♡\n");
+    }
+    
+    printf("♡ Pressione <ENTER> para continuar...");
     getchar();
     continuar_acao();
 }
+    
