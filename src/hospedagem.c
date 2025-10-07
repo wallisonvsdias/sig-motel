@@ -217,14 +217,66 @@ void alterar_hospedagem(void) {
 
 
 void excluir_hospedagem(void) {
+        Hospedagem hospedagem;
+    FILE *arq_hospedagem;
+    FILE *arq_temp;
+    char cpf_lido[12];
+    int encontrado = 0;
+    
+    arq_hospedagem = fopen("hospedagem.csv", "rt");
+    if (arq_hospedagem == NULL) {
+        printf("Não foi possivel ler o arquivo hospedagem.csv\n");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+    
+    arq_temp = fopen("temp.csv", "wt");
+    if (arq_temp == NULL) {
+        printf("Não foi possivel criar o arquivo temp.csv\n");
+        fclose(arq_hospedagem);
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                              Excluir Hospedagem                             ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o ID da hospedagem:                                            ♡\n");
+    printf("♡      Informe o ID da hospedagem: ");
+    scanf("%s", cpf_lido);
+    getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    while (fscanf(arq_hospedagem, "%11[^;];%29[^;];%10[^;];%3[^\n]\n",
+        hospedagem.cpf, hospedagem.id_quarto, hospedagem.horas) == 3) {
+        
+        if (strcmp(hospedagem.cpf, cpf_lido) != 0) {
+            fprintf(arq_temp, "%s;%s;%s;%s\n",
+                hospedagem.cpf, hospedagem.id_quarto, hospedagem.horas);
+        } else {
+            encontrado = 1;
+            printf("\n♡ Hospedagem encontrada:\n");
+            printf("♡ CPF: %s\n", hospedagem.cpf);
+            printf("♡ Quarto: %s\n", hospedagem.id_quarto);
+            printf("♡ Horas: %s\n", hospedagem.horas);
+        }
+    }
+    
+    fclose(arq_hospedagem);
+    fclose(arq_temp);
+    
+    if (encontrado) {
+        remove("hospedagem.csv");
+        rename("temp.csv", "hospedagem.csv");
+        printf("\n♡ Hospedagem EXCLUÍDA com sucesso! ♡\n");
+    } else {
+        remove("temp.csv");
+        printf("\n♡ Hospedagem NÃO encontrada! ♡\n");
+    }
+
     continuar_acao();
 }
