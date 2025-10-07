@@ -209,7 +209,7 @@ void alterar_funcionario(void) {
         mostrar_cabecalho();
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         printf("♡                                                                             ♡\n");
-        printf("♡                            Novos dados de Cliente                           ♡\n");
+        printf("♡                       Novos dados do(a) Funcionários                        ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡      CPF: ");
         scanf("%s",novo_funcionario.cpf);

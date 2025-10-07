@@ -180,7 +180,7 @@ void alterar_venda(void) {
         mostrar_cabecalho();
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         printf("♡                                                                             ♡\n");
-        printf("♡                            Novos dados de Cliente                           ♡\n");
+        printf("♡                             Novos dados da venda                            ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡      CPF: ");
         scanf("%s",novo_venda.cpf);

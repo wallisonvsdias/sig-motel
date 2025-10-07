@@ -180,7 +180,7 @@ void alterar_hospedagem(void) {
         mostrar_cabecalho();
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         printf("♡                                                                             ♡\n");
-        printf("♡                            Novos dados de Cliente                           ♡\n");
+        printf("♡                         Novos dados da Hospedagem                           ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡      CPF: ");
         scanf("%s",novo_hospedagem.cpf);
