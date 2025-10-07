@@ -5,7 +5,7 @@ typedef struct {
     char cpf[12];
     char id_quarto[30];
     char horas[3];
-} Quarto;
+} Hospedagem;
 
 void menu_hospedagem(void);
 void cadastrar_hospedagem(void);

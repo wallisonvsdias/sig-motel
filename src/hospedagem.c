@@ -130,6 +130,27 @@ void exibir_hospedagem(void) {
 
 
 void alterar_hospedagem(void) {
+    Hospedagem hospedagem;
+    FILE *arq_hospedagem;
+        arq_hospedagem = fopen("hospedagem.csv", "rt");
+    if (arq_hospedagem == NULL) {
+        printf("Não foi possivel ler o arquivo de hospedagem");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+    FILE *arq_temp;
+    arq_temp = fopen("temp_hospedagem.csv", "wt");
+    if (arq_temp == NULL) {
+        printf("Não foi possivel criar arquivo temporário");
+        fclose(arq_hospedagem);
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+    char cpf_lido[12];
+    int encontrado = 0;
+    int tam;
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -137,8 +158,60 @@ void alterar_hospedagem(void) {
     printf("♡                        Alterar Dados da Hospedagem                          ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡      Informe o ID da hospedagem:                                            ♡\n");
+    scanf("%s", cpf_lido);
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    while (fscanf(arq_hospedagem, "%11[^;];%3[^;];%3[^\n]\n",
+            hospedagem.cpf, hospedagem.id_quarto,hospedagem.horas)==6) {
+        if (strcmp(hospedagem.cpf,cpf_lido)!=0){
+            fprintf(arq_temp,"%s;",hospedagem.cpf);
+            fprintf(arq_temp,"%s;",hospedagem.id_quarto);
+            fprintf(arq_temp,"%s\n",hospedagem.horas);
+        } else {
+            encontrado = 1;
+        }
+    }
+    
+    fclose(arq_hospedagem);
+
+    if (encontrado) {
+        Hospedagem novo_hospedagem;
+        system("clear||cls");
+        mostrar_cabecalho();
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡                            Novos dados de Cliente                           ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡      CPF: ");
+        scanf("%s",novo_hospedagem.cpf);
+        getchar();
+        printf("♡      ID do Quarto: ");
+        scanf("%s",novo_hospedagem.id_quarto);
+        getchar();
+        printf("♡      Horas: ");
+        scanf("%s",novo_hospedagem.horas);
+        getchar();
+        printf("♡                                                                             ♡\n");
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+
+        fprintf(arq_temp,"%s;",novo_hospedagem.cpf);
+        fprintf(arq_temp,"%s;",novo_hospedagem.id_quarto);
+        fprintf(arq_temp,"%s\n",novo_hospedagem.horas);
+        fclose(arq_temp);
+
+        remove("hospedagem.csv");
+        rename("temp.csv","hospedagem.csv");
+        printf("\t\t Hospedagem ALTERADA com sucesso! >>>> \n");
+        printf("Pressione <ENTER> para continuar");
+        getchar();
+        return;
+
+    } else {
+        printf("\t\t Hospedagem NAO encontrado! >>>> \n");
+        printf("Pressione <ENTER> para continuar");
+        getchar();
+        return;
+    }
     continuar_acao();
 }
 
