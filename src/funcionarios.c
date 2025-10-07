@@ -153,15 +153,107 @@ void exibir_funcionario(void) {
 
 
 void alterar_funcionario(void) {
+    Funcionario funcionario;
+    FILE *arq_funcionarios;
+        arq_funcionarios = fopen("funcionarios.csv", "rt");
+    if (arq_funcionarios == NULL) {
+        printf("Não foi possivel ler o arquivo de funcionários");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+    FILE *arq_temp;
+    arq_temp = fopen("temp_func.csv", "wt");
+    if (arq_temp == NULL) {
+        printf("Não foi possivel criar arquivo temporário");
+        fclose(arq_funcionarios);
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+    char cpf_lido[12];
+    int encontrado = 0;
+    int tam;
+
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                       Alterar Dados do Funcionário(a)                       ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡     Informe o CPF do(a) funcionário(a):                                     ♡\n");
+    printf("♡     Informe o CPF do(a) funcionário(a): ");
+    scanf("%s", cpf_lido);
+    getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    while (fscanf(arq_funcionarios, "%11[^;];%50[^;];%11[^;];%52[^;];%19[^;];%8[^\n]\n",
+            funcionario.cpf,funcionario.nome,funcionario.telefone,funcionario.email,funcionario.cargo,
+            funcionario.salario)==6) {
+        if (strcmp(funcionario.cpf,cpf_lido)!=0){
+            fprintf(arq_temp,"%s;",funcionario.cpf);
+            fprintf(arq_temp,"%s;",funcionario.nome);
+            fprintf(arq_temp,"%s;",funcionario.telefone);
+            fprintf(arq_temp,"%s;",funcionario.email);
+            fprintf(arq_temp,"%s;",funcionario.cargo);
+            fprintf(arq_temp,"%s\n",funcionario.salario);
+        } else {
+            encontrado = 1;
+        }
+    }
+    
+    fclose(arq_funcionarios);
+
+    if (encontrado) {
+        Funcionario novo_funcionario;
+        system("clear||cls");
+        mostrar_cabecalho();
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡                            Novos dados de Cliente                           ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡      CPF: ");
+        scanf("%s",novo_funcionario.cpf);
+        getchar();
+        printf("♡      Nome: ");
+        fgets(novo_funcionario.nome,51,stdin);
+        tam = strlen(novo_funcionario.nome);
+        novo_funcionario.nome[tam-1] = '\0';
+        printf("♡      Telefone: ");
+        scanf("%s",novo_funcionario.telefone);
+        getchar();
+        printf("♡      E-mail: ");
+        scanf("%s",novo_funcionario.email);
+        getchar();
+        printf("♡      Cargo: ");
+        scanf("%s",novo_funcionario.cargo);
+        getchar();
+                printf("♡      Salário: ");
+        scanf("%s",novo_funcionario.salario);
+        getchar();
+        printf("♡                                                                             ♡\n");
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+
+        fprintf(arq_temp,"%s;",novo_funcionario.cpf);
+        fprintf(arq_temp,"%s;",novo_funcionario.nome);
+        fprintf(arq_temp,"%s;",novo_funcionario.telefone);
+        fprintf(arq_temp,"%s;",novo_funcionario.email);
+        fprintf(arq_temp,"%s;",novo_funcionario.cargo);
+        fprintf(arq_temp,"%s\n",novo_funcionario.salario);
+        fclose(arq_temp);
+
+        remove("funcionarios.csv");
+        rename("temp.csv","funcionario.csv");
+        printf("\t\t Funcionário ALTERADO com sucesso! >>>> \n");
+        printf("Pressione <ENTER> para continuar");
+        getchar();
+        return;
+
+    } else {
+        printf("\t\t Funcionário NAO encontrado! >>>> \n");
+        printf("Pressione <ENTER> para continuar");
+        getchar();
+        return;
+    }
     continuar_acao();
 }
 

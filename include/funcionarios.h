@@ -1,6 +1,15 @@
 #ifndef FUNCIONARIOS_H
 #define FUNCIONARIOS_H
 
+typedef struct {
+    char nome[51];
+    char cpf[12];
+    char telefone[12];
+    char email[53];
+    char cargo[20];
+    char salario[9];
+} Funcionario;
+
 void menu_funcionario(void);
 void cadastrar_funcionario(void);
 void exibir_funcionario(void);
