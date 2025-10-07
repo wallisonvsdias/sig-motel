@@ -129,15 +129,89 @@ void exibir_venda(void) {
 
 
 void alterar_venda(void) {
+        Venda venda;
+    FILE *arq_venda;
+        arq_venda = fopen("venda.csv", "rt");
+    if (arq_venda == NULL) {
+        printf("Não foi possivel ler o arquivo de vendas");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+    FILE *arq_temp;
+    arq_temp = fopen("temp_venda.csv", "wt");
+    if (arq_temp == NULL) {
+        printf("Não foi possivel criar arquivo temporário");
+        fclose(arq_venda);
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+    char cpf_lido[12];
+    int encontrado = 0;
+    int tam;
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                        Alterar Dados da Venda                               ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o ID da venda:                                                 ♡\n");
+    printf("♡      Informe o ID da venda: ");
+    scanf("%s",cpf_lido);
+    getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    while (fscanf(arq_venda, "%11[^;];%3[^;];%3[^\n]\n",
+        venda.cpf, venda.id_produto,venda.quant)==6) {
+        if (strcmp(venda.cpf,cpf_lido)!=0){
+            fprintf(arq_temp,"%s;",venda.cpf);
+            fprintf(arq_temp,"%s;",venda.id_produto);
+            fprintf(arq_temp,"%s\n",venda.quant);
+        } else {
+            encontrado = 1;
+        }
+    }
+    
+    fclose(arq_venda);
+
+    if (encontrado) {
+        Venda novo_venda;
+        system("clear||cls");
+        mostrar_cabecalho();
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡                            Novos dados de Cliente                           ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡      CPF: ");
+        scanf("%s",novo_venda.cpf);
+        getchar();
+        printf("♡      ID do Produto: ");
+        scanf("%s",novo_venda.id_produto);
+        getchar();
+        printf("♡      Quantidade: ");
+        scanf("%s",novo_venda.quant);
+        getchar();
+        printf("♡                                                                             ♡\n");
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+
+        fprintf(arq_temp,"%s;",novo_venda.cpf);
+        fprintf(arq_temp,"%s;",novo_venda.id_produto);
+        fprintf(arq_temp,"%s\n",novo_venda.quant);
+        fclose(arq_temp);
+
+        remove("venda.csv");
+        rename("temp.csv","venda.csv");
+        printf("\t\t Venda ALTERADA com sucesso! >>>> \n");
+        printf("Pressione <ENTER> para continuar");
+        getchar();
+        return;
+
+    } else {
+        printf("\t\t venda NAO encontrado! >>>> \n");
+        printf("Pressione <ENTER> para continuar");
+        getchar();
+        return;
+    }
     getchar();
     continuar_acao();
 }
