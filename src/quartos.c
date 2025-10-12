@@ -132,6 +132,7 @@ void exibir_quarto(void){
             printf("Pressione <ENTER> para continuar");
             getchar();
             fclose(arq_quartos);
+            free(quarto);
             return;
         }
     }
@@ -139,6 +140,7 @@ void exibir_quarto(void){
     printf("Pressione <ENTER> para continuar");
     getchar();
     fclose(arq_quartos);
+    free(quarto);
     return;
     continuar_acao();
 }
