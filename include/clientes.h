@@ -1,5 +1,7 @@
 #ifndef CLIENTES_H
 #define CLIENTES_H
+#define True 1
+#define False 0
 
 typedef struct {
     char nome[51];
@@ -7,6 +9,7 @@ typedef struct {
     char nasc[11];
     char telef[12];
     char email[51];
+    bool status;
 } Cliente;
 
 void menu_cliente(void);
