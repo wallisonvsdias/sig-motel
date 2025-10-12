@@ -3,7 +3,6 @@
 #include <string.h>
 #include "interface.h"
 #include "produtos.h"
-#include "id.h"
 
 void menu_produto(void) {
     char op_produto;
@@ -52,16 +51,16 @@ void menu_produto(void) {
 
 
 void cadastrar_produto(void) {
-    Produto produto;
+    Produto* produto;
+    produto = (Produto*)malloc(sizeof(*produto));
     FILE *arq_produtos;
-    arq_produtos = fopen("produtos.csv", "at");
+    arq_produtos = fopen("produtos.DAT", "ab");
     if (arq_produtos == NULL) {
-        printf("Não foi possivel ler o arquivo");
+        printf("Não foi possivel ler o arquivo produtos.DAT");
         printf("Pressione <ENTER> ...");
         getchar();
         return;
     }
-    produto.id = gerador_id("produtos.csv");
     int tam;
     system("clear||cls");
     mostrar_cabecalho();
@@ -69,42 +68,44 @@ void cadastrar_produto(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                            Cadastrar Produto                                ♡\n");
     printf("♡                                                                             ♡\n");
+    printf("♡      ID do Produto: ");
+    scanf("%d",&produto->id);
+    getchar();
     printf("♡      Nome: ");
-    fgets(produto.nome,25,stdin);
-    tam = strlen(produto.nome);
-    produto.nome[tam-1] = '\0';
+    fgets(produto->nome,25,stdin);
+    tam = strlen(produto->nome);
+    produto->nome[tam-1] = '\0';
     printf("♡      Descrição: ");
-    fgets(produto.descricao,55,stdin);
-    tam = strlen(produto.descricao);
-    produto.descricao[tam-1] = '\0';
+    fgets(produto->descricao,55,stdin);
+    tam = strlen(produto->descricao);
+    produto->descricao[tam-1] = '\0';
     printf("♡      Preço: ");
-    scanf("%f",&produto.preco);
+    scanf("%f",&produto->preco);
     getchar();
     printf("♡      Quantidade: ");
-    scanf("%d",&produto.quant);
+    scanf("%d",&produto->quant);
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡        Produto cadastrado com sucesso!                                        ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
 
-    fprintf(arq_produtos,"%d;",produto.id);
-    fprintf(arq_produtos,"%s;",produto.nome);
-    fprintf(arq_produtos,"%s;",produto.descricao);
-    fprintf(arq_produtos,"%f;",produto.preco);
-    fprintf(arq_produtos,"%d\n",produto.quant);
+    produto->status = True;
+    fwrite(produto,sizeof(Produto),1,arq_produtos);
     fclose(arq_produtos);
+    free(produto);
 
     continuar_acao();
 }
 
 
 void exibir_produto(void){
-    Produto produto;
+    Produto* produto;
+    produto = (Produto*)malloc(sizeof(*produto));
     FILE *arq_produtos;
-    arq_produtos = fopen("produtos.csv", "rt");
+    arq_produtos = fopen("produtos.DAT", "rb");
     if (arq_produtos == NULL) {
-        printf("Não foi possivel ler o arquivo");
+        printf("Não foi possivel ler o arquivo produtos.DAT");
         printf("Pressione <ENTER> ...");
         getchar();
         return;
@@ -116,22 +117,22 @@ void exibir_produto(void){
     printf("♡                                                                             ♡\n");
     printf("♡                           Exibir Dados do Produto                           ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o ID do produto:                                               ♡\n");
+    printf("♡      Informe o ID do produto: ");
     scanf("%d",&id_lido);
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    while (fscanf(arq_produtos, "%d;%24[^;];%54[^;];%f;%d\n",
-        &produto.id,produto.nome,produto.descricao,&produto.preco,&produto.quant)==5) {
-        if (produto.id == id_lido){
+    while (fread(produto,sizeof(Produto),1,arq_produtos)) {
+        if (produto->id == id_lido){
             printf("\t\t Produto encontrado! >>>> \n");
-            printf("\t\tNome: %s\n",produto.nome);
-            printf("\t\tDescricao: %s\n",produto.descricao);
-            printf("\t\tPreco: %f\n",produto.preco);
-            printf("\t\tQuantidade: %d\n",produto.quant);
+            printf("\t\tNome: %s\n",produto->nome);
+            printf("\t\tDescricao: %s\n",produto->descricao);
+            printf("\t\tPreco: %f\n",produto->preco);
+            printf("\t\tQuantidade: %d\n",produto->quant);
             printf("Pressione <ENTER> para continuar");
             getchar();
             fclose(arq_produtos);
+            free(produto);
             return;
         }
     }
@@ -139,6 +140,7 @@ void exibir_produto(void){
     printf("Pressione <ENTER> para continuar");
     getchar();
     fclose(arq_produtos);
+    free(produto);
     return;
     continuar_acao();
 }
