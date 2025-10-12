@@ -186,6 +186,7 @@ void alterar_cliente(void){
     }
     
     fclose(arq_clientes);
+    free(cliente);
 
     if (encontrado) {
         Cliente* novo_cliente;
@@ -217,7 +218,6 @@ void alterar_cliente(void){
         novo_cliente->status = True;
         fwrite(novo_cliente,sizeof(Cliente),1,arq_temp);
         fclose(arq_temp);
-        free(cliente);
         free(novo_cliente);
         remove("clientes.DAT");
         rename("temp.DAT","clientes.DAT");
