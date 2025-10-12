@@ -1,5 +1,7 @@
 #ifndef QUARTOS_H
 #define QUARTOS_H
+#define True 1
+#define False 0
 
 typedef struct {
     int id;
@@ -7,6 +9,7 @@ typedef struct {
     char descricao[51];
     float preco_hora;
     float preco_diaria;
+    bool status;
 } Quarto;
 
 void menu_quarto(void);
