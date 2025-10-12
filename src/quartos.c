@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include "interface.h"
 #include "quartos.h"
-#include "id.h"
 
 void menu_quarto(void) {
     char op_quarto;
@@ -51,16 +50,16 @@ void menu_quarto(void) {
 
 
 void cadastrar_quarto(void) {
-    Quarto quarto;
+    Quarto* quarto;
+    quarto = (Quarto*)malloc(sizeof(*quarto));
     FILE *arq_quartos;
-    arq_quartos = fopen("quartos.csv", "at");
+    arq_quartos = fopen("quartos.DAT", "ab");
     if (arq_quartos == NULL) {
-        printf("Não foi possivel ler o arquivo");
+        printf("Não foi possivel ler o arquivo quartos.DAT");
         printf("Pressione <ENTER> ...");
         getchar();
         return;
     }
-    quarto.id = gerador_id("quartos.csv");
     int tam;
     system("clear||cls");
     mostrar_cabecalho();
@@ -68,31 +67,32 @@ void cadastrar_quarto(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                               Cadastrar Quarto                              ♡\n");
     printf("♡                                                                             ♡\n");
+    printf("♡      ID do quarto: ");
+    scanf("%d",&quarto->id);
+    getchar();
     printf("♡      Tipo: ");
-    fgets(quarto.tipo,32,stdin);
-    tam = strlen(quarto.tipo);
-    quarto.tipo[tam-1] = '\0';
+    fgets(quarto->tipo,32,stdin);
+    tam = strlen(quarto->tipo);
+    quarto->tipo[tam-1] = '\0';
     printf("♡      Descrição: ");
-    fgets(quarto.descricao,51,stdin);
-    tam = strlen(quarto.descricao);
-    quarto.descricao[tam-1] = '\0';
+    fgets(quarto->descricao,51,stdin);
+    tam = strlen(quarto->descricao);
+    quarto->descricao[tam-1] = '\0';
     printf("♡      Preço/hora: ");
-    scanf("%f",&quarto.preco_hora);
+    scanf("%f",&quarto->preco_hora);
     getchar();
     printf("♡      Preço/diária: ");
-    scanf("%f",&quarto.preco_diaria);
+    scanf("%f",&quarto->preco_diaria);
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡        Quarto cadastrado com sucesso!                                       ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
 
-    fprintf(arq_quartos,"%d;",quarto.id);
-    fprintf(arq_quartos,"%s;",quarto.tipo);
-    fprintf(arq_quartos,"%s;",quarto.descricao);
-    fprintf(arq_quartos,"%f;",quarto.preco_hora);
-    fprintf(arq_quartos,"%f\n",quarto.preco_diaria);
+    quarto->status = True;
+    fwrite(quarto,sizeof(Quarto),1,arq_quartos);
     fclose(arq_quartos);
+    free(quarto);
 
     continuar_acao();
 
@@ -100,11 +100,12 @@ void cadastrar_quarto(void) {
 
 // Exibir também o status
 void exibir_quarto(void){
-    Quarto quarto;
+    Quarto* quarto;
+    quarto = (Quarto*)malloc(sizeof(*quarto));
     FILE *arq_quartos;
-    arq_quartos = fopen("quartos.csv", "rt");
+    arq_quartos = fopen("quartos.DAT", "rb");
     if (arq_quartos == NULL) {
-        printf("Não foi possivel ler o arquivo");
+        printf("Não foi possivel ler o arquivo quartos.DAT");
         printf("Pressione <ENTER> ...");
         getchar();
         return;
@@ -121,14 +122,13 @@ void exibir_quarto(void){
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    while (fscanf(arq_quartos, "%d;%32[^;];%50[^;];%f;%f\n",
-        &quarto.id,quarto.tipo,quarto.descricao,&quarto.preco_hora,&quarto.preco_diaria)==5) {
-        if (quarto.id == id_lido){
+    while (fread(quarto,sizeof(Quarto),1,arq_quartos)) {
+        if (quarto->id == id_lido){
             printf("\t\t Quarto encontrado! >>>> \n");
-            printf("\t\tTipo: %s\n",quarto.tipo);
-            printf("\t\tDescricao: %s\n",quarto.descricao);
-            printf("\t\tPreco/hora: %f\n",quarto.preco_hora);
-            printf("\t\tPreco/diaria: %f\n",quarto.preco_diaria);
+            printf("\t\tTipo: %s\n",quarto->tipo);
+            printf("\t\tDescricao: %s\n",quarto->descricao);
+            printf("\t\tPreco/hora: %f\n",quarto->preco_hora);
+            printf("\t\tPreco/diaria: %f\n",quarto->preco_diaria);
             printf("Pressione <ENTER> para continuar");
             getchar();
             fclose(arq_quartos);
