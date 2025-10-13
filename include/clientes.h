@@ -9,7 +9,7 @@ typedef struct {
     char nasc[11];
     char telef[12];
     char email[51];
-    bool status;
+    int status;
 } Cliente;
 
 void menu_cliente(void);
