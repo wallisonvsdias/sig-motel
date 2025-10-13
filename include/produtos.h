@@ -9,7 +9,7 @@ typedef struct {
     char descricao[55];
     float preco;
     int quant;
-    bool status;
+    int status;
 } Produto;
 
 void menu_produto(void);
