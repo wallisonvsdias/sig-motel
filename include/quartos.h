@@ -9,7 +9,7 @@ typedef struct {
     char descricao[51];
     float preco_hora;
     float preco_diaria;
-    bool status;
+    int status;
 } Quarto;
 
 void menu_quarto(void);
