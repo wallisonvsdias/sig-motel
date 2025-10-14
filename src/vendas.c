@@ -270,5 +270,6 @@ void excluir_venda(void) {
     printf("♡ Pressione <ENTER> para continuar...");
     getchar();
     continuar_acao();
+    }
 }
     
