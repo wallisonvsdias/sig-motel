@@ -50,11 +50,16 @@ void menu_venda(void) {
 
 
 void cadastrar_venda(void) {
-    FILE *arq_venda;
-    arq_venda = fopen("vendas.csv","at");
-    char cpf[12];
-    char id_produto[4];
-    char quant[4];
+    Venda* venda = (Venda*) malloc(sizeof(*venda));
+    FILE *arq_venda = fopen("vendas.DAT", "ab");
+    if (!arq_venda) {
+        printf("Não foi possível abrir o arquivo vendas.DAT\n");
+        free(venda);
+        getchar();
+        return;
+    }
+
+    int tam;
 
     system("clear||cls");
     mostrar_cabecalho();
@@ -63,41 +68,38 @@ void cadastrar_venda(void) {
     printf("♡                              Cadastrar Venda                                ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡      CPF cliente: ");
-    scanf("%s", cpf);
+    scanf("%s", venda->cpf);
     getchar();
     printf("♡      ID do produto: ");
-    scanf("%s", id_produto);
+    scanf("%s", venda->id_produto);
     getchar();
     printf("♡      Quantidade: ");
-    scanf("%s", quant);
+    scanf("%s", venda->quant);
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     getchar();
 
-    fprintf(arq_venda,"%s;",cpf);
-    fprintf(arq_venda,"%s;",id_produto);
-    fprintf(arq_venda,"%s\n", quant);
+    venda->status = 1; 
+    fwrite(venda, sizeof(Venda), 1, arq_venda);
     fclose(arq_venda);
+    free(venda);
     
     continuar_acao();
 }
 
 
 void exibir_venda(void) {
-    char cpf[12];
-    char cpf_lido[12];
-    char id_produto[4];
-    char quant[4];
-
-    FILE *arq_vendas;
-    arq_vendas = fopen("vendas.csv", "rt");
-    if (arq_vendas == NULL) {
-        printf("nao consigo ler nada");
-        printf("pressione <enter>");
+    Venda* venda = (Venda*) malloc(sizeof(*venda));
+    FILE *arq_vendas = fopen("vendas.DAT", "rb");
+    if (!arq_vendas) {
+        printf("Não foi possível ler o arquivo vendas.DAT\n");
+        free(venda);
         getchar();
         return;
     }
+
+    char cpf_lido[12];
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -110,46 +112,50 @@ void exibir_venda(void) {
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
 
-    while (fscanf(arq_vendas, "%11[^;];%3[^;];%3[^\n]\n", cpf, id_produto, quant) == 3) {
-        if (strcmp(cpf, cpf_lido) == 0) {
-            printf("\nVenda encontrado!\n");
-            printf("CPF: %s\n", cpf);
-            printf("ID do produto: %s\n", id_produto);
-            printf("Horas: %s\n", quant);
-            fclose(arq_vendas);
-            getchar();
-            return;
+    int encontrado = 0;
+    while (fread(venda, sizeof(Venda), 1, arq_vendas)) {
+        if (strcmp(venda->cpf, cpf_lido) == 0 && venda->status == 1) {
+            printf("\nVenda encontrada!\n");
+            printf("CPF: %s\n", venda->cpf);
+            printf("ID do produto: %s\n", venda->id_produto);
+            printf("Quantidade: %s\n", venda->quant);
+            encontrado = 1;
+            break;
         }
     }
+
+    if (!encontrado) {
+        printf("\nVenda não encontrada.\n");
+    }
+
     fclose(arq_vendas);
-    printf("\nVenda não encontrado.\n");
+    free(venda);
     getchar();
     continuar_acao();
 }
 
 
 void alterar_venda(void) {
-        Venda venda;
-    FILE *arq_venda;
-        arq_venda = fopen("venda.csv", "rt");
-    if (arq_venda == NULL) {
-        printf("Não foi possivel ler o arquivo de vendas");
-        printf("Pressione <ENTER> ...");
+    Venda* venda = (Venda*) malloc(sizeof(*venda));
+    FILE *arq_vendas = fopen("vendas.DAT", "rb");
+    if (!arq_vendas) {
+        printf("Não foi possível ler o arquivo vendas.DAT\n");
+        free(venda);
         getchar();
         return;
     }
-    FILE *arq_temp;
-    arq_temp = fopen("temp_venda.csv", "wt");
-    if (arq_temp == NULL) {
-        printf("Não foi possivel criar arquivo temporário");
-        fclose(arq_venda);
-        printf("Pressione <ENTER> ...");
+
+    FILE *arq_temp = fopen("temp_vendas.DAT", "wb");
+    if (!arq_temp) {
+        printf("Não foi possível criar arquivo temporário\n");
+        fclose(arq_vendas);
+        free(venda);
         getchar();
         return;
     }
+
     char cpf_lido[12];
     int encontrado = 0;
-    int tam;
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -161,21 +167,26 @@ void alterar_venda(void) {
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    while (fscanf(arq_venda, "%11[^;];%3[^;];%3[^\n]\n",
-        venda.cpf, venda.id_produto,venda.quant)==6) {
-        if (strcmp(venda.cpf,cpf_lido)!=0){
-            fprintf(arq_temp,"%s;",venda.cpf);
-            fprintf(arq_temp,"%s;",venda.id_produto);
-            fprintf(arq_temp,"%s\n",venda.quant);
+    while (fread(venda, sizeof(Venda), 1, arq_vendas)) {
+        if (strcmp(venda->cpf, cpf_lido) != 0 || venda->status == 0) {
+            fwrite(venda, sizeof(Venda), 1, arq_temp);
         } else {
             encontrado = 1;
         }
     }
     
-    fclose(arq_venda);
+    fclose(arq_vendas);
+    free(venda);
 
     if (encontrado) {
-        Venda novo_venda;
+        Venda* nova_venda = (Venda*) malloc(sizeof(*nova_venda));
+        if (nova_venda == NULL) {
+            printf("Erro ao alocar memória.\n");
+            fclose(arq_temp);
+            getchar();
+            return;
+        }
+
         system("clear||cls");
         mostrar_cabecalho();
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -183,31 +194,34 @@ void alterar_venda(void) {
         printf("♡                             Novos dados da venda                            ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡      CPF: ");
-        scanf("%s",novo_venda.cpf);
+        scanf("%s",nova_venda->cpf);
         getchar();
         printf("♡      ID do Produto: ");
-        scanf("%s",novo_venda.id_produto);
+        scanf("%s",nova_venda->id_produto);
         getchar();
         printf("♡      Quantidade: ");
-        scanf("%s",novo_venda.quant);
+        scanf("%s",nova_venda->quant);
         getchar();
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+        nova_venda->status = 1;
+        fwrite(nova_venda, sizeof(Venda), 1, arq_temp);
 
-        fprintf(arq_temp,"%s;",novo_venda.cpf);
-        fprintf(arq_temp,"%s;",novo_venda.id_produto);
-        fprintf(arq_temp,"%s\n",novo_venda.quant);
         fclose(arq_temp);
+        free(nova_venda);
 
-        remove("venda.csv");
-        rename("temp.csv","venda.csv");
+        remove("vendas.DAT");
+        rename("temp_vendas.DAT", "vendas.DAT");
+
         printf("\t\t Venda ALTERADA com sucesso! >>>> \n");
         printf("Pressione <ENTER> para continuar");
         getchar();
         return;
 
     } else {
-        printf("\t\t venda NAO encontrado! >>>> \n");
+        fclose(arq_temp);
+        remove("temp_vendas.DAT");
+        printf("\t\t Venda NAO encontrada! >>>> \n");
         printf("Pressione <ENTER> para continuar");
         getchar();
         return;
@@ -218,28 +232,17 @@ void alterar_venda(void) {
 
 
 void excluir_venda(void) {
-    Venda venda;
-    FILE *arq_vendas;
-    FILE *arq_temp;
+    Venda* venda = (Venda*) malloc(sizeof(*venda));
+    FILE *arq_vendas = fopen("vendas.DAT", "r+b");
+    if (!arq_vendas) {
+        printf("Não foi possível ler o arquivo vendas.DAT\n");
+        free(venda);
+        getchar();
+        return;
+    }
+
     char cpf_lido[12];
     int encontrado = 0;
-    
-    arq_vendas = fopen("vendas.csv", "rt");
-    if (arq_vendas == NULL) {
-        printf("Não foi possivel ler o arquivo vendas.csv\n");
-        printf("Pressione <ENTER> ...");
-        getchar();
-        return;
-    }
-    
-    arq_temp = fopen("temp.csv", "wt");
-    if (arq_temp == NULL) {
-        printf("Não foi possivel criar o arquivo temp.csv\n");
-        fclose(arq_vendas);
-        printf("Pressione <ENTER> ...");
-        getchar();
-        return;
-    }
 
     system("clear||cls");
     mostrar_cabecalho();
@@ -250,32 +253,21 @@ void excluir_venda(void) {
     printf("♡      Informe o ID da venda:                                                 ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-        while (fscanf(arq_vendas, "%11[^;];%3[^;];%3[^\n]\n",
-        venda.cpf, venda.id_produto, venda.quant) == 3) {
-        
-        if (strcmp(venda.cpf, cpf_lido) != 0) {
-            fprintf(arq_temp, "%s;%s;%s\n",
-                venda.cpf, venda.id_produto, venda.quant);
-        } else {
+    while (fread(venda, sizeof(Venda), 1, arq_vendas)) {
+        if (strcmp(venda->cpf, cpf_lido) == 0 && venda->status) {
+            venda->status = 0; // marca como excluído
+            fseek(arq_vendas, -sizeof(Venda), SEEK_CUR);
+            fwrite(venda, sizeof(Venda), 1, arq_vendas);
             encontrado = 1;
-            printf("\n♡ Venda encontrada:\n");
-            printf("♡ CPF: %s\n", venda.cpf);
-            printf("♡ Produto: %s\n", venda.id_produto);
-            printf("♡ Quantidade: %s\n", venda.quant);
+            printf("\n♡ Venda encontrada e EXCLUÍDA com sucesso!\n");
+            break;
         }
     }
-    
     fclose(arq_vendas);
-    fclose(arq_temp);
+    free(venda);
     
     if (encontrado) {
-        remove("vendas.csv");
-        rename("temp.csv", "vendas.csv");
-        printf("\n♡ Venda EXCLUÍDA com sucesso! ♡\n");
-    } else {
-        remove("temp.csv");
         printf("\n♡ Venda NÃO encontrada! ♡\n");
-    }
     
     printf("♡ Pressione <ENTER> para continuar...");
     getchar();
