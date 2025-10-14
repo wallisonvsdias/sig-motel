@@ -203,7 +203,6 @@ void alterar_hospedagem(void) {
         getchar();
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-
         printf("♡                                                                             ♡\n");
         novo_hospedagem->status = 1;
         fwrite(novo_hospedagem, sizeof(Hospedagem), 1, arq_temp);
