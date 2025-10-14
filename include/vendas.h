@@ -1,5 +1,7 @@
 #ifndef VENDAS_H
 #define VENDAS_H
+#define True 1
+#define False 0
 
 typedef struct{
     char cpf[12];

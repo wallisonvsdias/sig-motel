@@ -1,5 +1,7 @@
 #ifndef FUNCIONARIOS_H
 #define FUNCIONARIOS_H
+#define True 1
+#define False 0
 
 typedef struct {
     char nome[51];
@@ -8,6 +10,7 @@ typedef struct {
     char email[53];
     char cargo[20];
     char salario[9];
+    int status
 } Funcionario;
 
 void menu_funcionario(void);
