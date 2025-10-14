@@ -51,14 +51,17 @@ void menu_funcionario(void) {
 
 
 void cadastrar_funcionario(void) {
+    Funcionario* funcionario;
+    funcionario = (Funcionario*) malloc(sizeof(*funcionario));
     FILE *arq_funcionario;
-    arq_funcionario= fopen("funcionarios.csv","at");
-    char cpf[12];
-    char nome[51];
-    char telefone[12];
-    char email[53];
-    char cargo[20];
-    char salario[9];
+    arq_funcionario = fopen("funcionarios.DAT", "ab");
+    if (arq_funcionario == NULL) {
+        printf("Não foi possível abrir o arquivo funcionarios.dat\n");
+        printf("Pressione <enter>\n");
+        getchar();
+        free(funcionario);
+        return;
+    }
     int tam;
 
     system("clear||cls");
@@ -68,55 +71,50 @@ void cadastrar_funcionario(void) {
     printf("♡                           Cadastrar Funcionário(a)                          ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡      CPF: ");
-    scanf("%s", cpf);
+    scanf("%s", funcionario->cpf);
     getchar();
     printf("♡      Nome: ");
-    fgets(nome, 51, stdin);
-    tam = strlen(nome);
-    nome[tam-1] = '\0';
+    fgets(funcionario->nome, 51, stdin);
+    tam = strlen(funcionario->nome);
+    funcionario->nome[tam-1] = '\0';
     printf("♡      Telefone: ");
-    scanf("%s", telefone);
+    scanf("%s", funcionario->telefone);
     getchar();
     printf("♡      E-mail: ");
-    scanf("%s", email);
+    scanf("%s", funcionario->email);
     printf("♡      Cargo: ");
-    scanf("%s", cargo);
+    scanf("%s", funcionario->cargo);
     getchar();
     printf("♡      Salário: ");
-    scanf("%s", salario);
+    scanf("%s", funcionario->salario);
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    getchar();
 
-    fprintf(arq_funcionario, "%s;", cpf);
-    fprintf(arq_funcionario, "%s;", nome);
-    fprintf(arq_funcionario, "%s;", telefone);
-    fprintf(arq_funcionario, "%s;", email);
-    fprintf(arq_funcionario, "%s;", cargo);
-    fprintf(arq_funcionario, "%s\n", salario);
+    funcionario->status = True;
+    fwrite(funcionario, sizeof(Funcionario), 1, arq_funcionario);
     fclose(arq_funcionario);
+    free(funcionario);
 
     continuar_acao();
 }
 
 
 void exibir_funcionario(void) {
-    char cpf[12];
-    char cpf_lido[12];
-    char nome[51];
-    char cargo[11];
-    char salario[9];
-    char telefone[12];
-    char email[51];
-
+    Funcionario* funcionario;
+    funcionario = (Funcionario*) malloc(sizeof(*funcionario));
     FILE *arq_funcionario;
-    arq_funcionario = fopen("funcionarios.csv", "rt");
+    arq_funcionario = fopen("funcionarios.DAT", "ab");
     if (arq_funcionario == NULL) {
-        printf("nao consigo ler nada");
-        printf("pressione <enter>");
+        printf("Não foi possível abrir o arquivo funcionarios.dat\n");
+        printf("Pressione <enter>\n");
         getchar();
+        free(funcionario);
         return;
     }
+    char cpf_lido[12];
+
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -130,50 +128,62 @@ void exibir_funcionario(void) {
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
 
    while (fscanf(arq_funcionario, "%11[^;];%50[^;];%11[^;];%52[^;];%19[^;];%8[^\n]\n",
-                  cpf, nome, telefone, email, cargo, salario) == 6) {
-        if (strcmp(cpf, cpf_lido) == 0) {
+                  funcionario->cpf, funcionario->nome, funcionario->telefone, 
+                  funcionario->email, funcionario->cargo, funcionario->salario) == 6) {
+        if (strcmp(funcionario->cpf, cpf_lido) == 0) {
             printf("\nFuncionário encontrado!\n");
-            printf("CPF: %s\n", cpf);
-            printf("Nome: %s\n", nome);
-            printf("Telefone: %s\n", telefone);
-            printf("Email: %s\n", email);
-            printf("Cargo: %s\n", cargo);
-            printf("Salário: %s\n", salario);
+            printf("CPF: %s\n", funcionario->cpf);
+            printf("Nome: %s\n", funcionario->nome);
+            printf("Telefone: %s\n", funcionario->telefone);
+            printf("Email: %s\n", funcionario->email);
+            printf("Cargo: %s\n", funcionario->cargo);
+            printf("Salário: %s\n", funcionario->salario);
             fclose(arq_funcionario);
             getchar();
             return;
         }
     }
-    fclose(arq_funcionario);
     printf("\nFuncionário não encontrado.\n");
     getchar();
+    fclose(arq_funcionario);
+    free(funcionario);
+    return;
     continuar_acao();
 
 }
 
 
 void alterar_funcionario(void) {
-    Funcionario funcionario;
-    FILE *arq_funcionarios;
-        arq_funcionarios = fopen("funcionarios.csv", "rt");
+Funcionario* funcionario = (Funcionario*) malloc(sizeof(*funcionario));
+    if (funcionario == NULL) {
+        printf("Erro ao alocar memória.\n");
+        getchar();
+        return;
+    }
+
+    FILE *arq_funcionarios = fopen("funcionarios.DAT", "rb");
     if (arq_funcionarios == NULL) {
-        printf("Não foi possivel ler o arquivo de funcionários");
+        printf("Não foi possível abrir o arquivo funcionarios.DAT\n");
         printf("Pressione <ENTER> ...");
         getchar();
+        free(funcionario);
         return;
     }
-    FILE *arq_temp;
-    arq_temp = fopen("temp_func.csv", "wt");
+
+    FILE *arq_temp = fopen("temp.DAT", "wb");
     if (arq_temp == NULL) {
-        printf("Não foi possivel criar arquivo temporário");
-        fclose(arq_funcionarios);
+        printf("Não foi possível criar o arquivo temporário temp.DAT\n");
         printf("Pressione <ENTER> ...");
         getchar();
+        fclose(arq_funcionarios);
+        free(funcionario);
         return;
     }
+
     char cpf_lido[12];
     int encontrado = 0;
     int tam;
+
 
     system("clear||cls");
     mostrar_cabecalho();
@@ -186,25 +196,25 @@ void alterar_funcionario(void) {
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    while (fscanf(arq_funcionarios, "%11[^;];%50[^;];%11[^;];%52[^;];%19[^;];%8[^\n]\n",
-            funcionario.cpf,funcionario.nome,funcionario.telefone,funcionario.email,funcionario.cargo,
-            funcionario.salario)==6) {
-        if (strcmp(funcionario.cpf,cpf_lido)!=0){
-            fprintf(arq_temp,"%s;",funcionario.cpf);
-            fprintf(arq_temp,"%s;",funcionario.nome);
-            fprintf(arq_temp,"%s;",funcionario.telefone);
-            fprintf(arq_temp,"%s;",funcionario.email);
-            fprintf(arq_temp,"%s;",funcionario.cargo);
-            fprintf(arq_temp,"%s\n",funcionario.salario);
+    while (fread(funcionario, sizeof(Funcionario), 1, arq_funcionarios)) {
+        if (strcmp(funcionario->cpf, cpf_lido) != 0) {
+            fwrite(funcionario, sizeof(Funcionario), 1, arq_temp);
         } else {
             encontrado = 1;
         }
     }
-    
+
     fclose(arq_funcionarios);
+    free(funcionario);
 
     if (encontrado) {
-        Funcionario novo_funcionario;
+        Funcionario* novo_funcionario = (Funcionario*) malloc(sizeof(*novo_funcionario));
+        if (novo_funcionario == NULL) {
+            printf("Erro ao alocar memória.\n");
+            fclose(arq_temp);
+            return;
+        }
+
         system("clear||cls");
         mostrar_cabecalho();
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -212,74 +222,63 @@ void alterar_funcionario(void) {
         printf("♡                       Novos dados do(a) Funcionários                        ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡      CPF: ");
-        scanf("%s",novo_funcionario.cpf);
+        scanf("%s",novo_funcionario->cpf);
         getchar();
         printf("♡      Nome: ");
-        fgets(novo_funcionario.nome,51,stdin);
-        tam = strlen(novo_funcionario.nome);
-        novo_funcionario.nome[tam-1] = '\0';
+        fgets(novo_funcionario->nome,51,stdin);
+        tam = strlen(novo_funcionario->nome);
+        novo_funcionario->nome[tam-1] = '\0';
         printf("♡      Telefone: ");
-        scanf("%s",novo_funcionario.telefone);
+        scanf("%s",novo_funcionario->telefone);
         getchar();
         printf("♡      E-mail: ");
-        scanf("%s",novo_funcionario.email);
+        scanf("%s",novo_funcionario->email);
         getchar();
         printf("♡      Cargo: ");
-        scanf("%s",novo_funcionario.cargo);
+        scanf("%s",novo_funcionario->cargo);
         getchar();
                 printf("♡      Salário: ");
-        scanf("%s",novo_funcionario.salario);
+        scanf("%s",novo_funcionario->salario);
         getchar();
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
 
-        fprintf(arq_temp,"%s;",novo_funcionario.cpf);
-        fprintf(arq_temp,"%s;",novo_funcionario.nome);
-        fprintf(arq_temp,"%s;",novo_funcionario.telefone);
-        fprintf(arq_temp,"%s;",novo_funcionario.email);
-        fprintf(arq_temp,"%s;",novo_funcionario.cargo);
-        fprintf(arq_temp,"%s\n",novo_funcionario.salario);
+        novo_funcionario->status = 1; 
+        fwrite(novo_funcionario, sizeof(Funcionario), 1, arq_temp);
         fclose(arq_temp);
+        free(novo_funcionario);
 
-        remove("funcionarios.csv");
-        rename("temp.csv","funcionario.csv");
+        remove("funcionarios.DAT");
+        rename("temp.DAT", "funcionarios.DAT");
+
         printf("\t\t Funcionário ALTERADO com sucesso! >>>> \n");
         printf("Pressione <ENTER> para continuar");
         getchar();
         return;
 
     } else {
+        fclose(arq_temp);
+        remove("temp.DAT");
         printf("\t\t Funcionário NAO encontrado! >>>> \n");
         printf("Pressione <ENTER> para continuar");
         getchar();
-        return;
     }
     continuar_acao();
 }
 
 void excluir_funcionario(void) {
-    Funcionario funcionario;
+    Funcionario* funcionario;
+    funcionario = (Funcionario*)malloc(sizeof(*funcionario));
     FILE *arq_funcionarios;
-    char cpf_lido[12];
-    int encontrado = 0;
-    
-    arq_funcionarios = fopen("funcionarios.csv", "rt");
+    arq_funcionarios = fopen("funcionarios.DAT", "r+b");
     if (arq_funcionarios == NULL) {
         printf("Não foi possivel ler o arquivo funcionarios.csv\n");
         printf("Pressione <ENTER> ...");
         getchar();
         return;
     }
-    
-    FILE *arq_temp;
-    arq_temp = fopen("temp.csv", "wt"); 
-    if (arq_temp == NULL) {
-        printf("Não foi possivel criar o arquivo temp.csv\n");
-        fclose(arq_funcionarios);
-        printf("Pressione <ENTER> ...");
-        getchar();
-        return;
-    }
+    char cpf_lido[12];
+    int encontrado = 0;
     
     system("clear||cls");
     mostrar_cabecalho();
@@ -293,31 +292,22 @@ void excluir_funcionario(void) {
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     
-    while (fscanf(arq_funcionarios, "%11[^;];%50[^;];%11[^;];%50[^;];%19[^;];%8[^\n]\n",
-        funcionario.cpf, funcionario.nome, funcionario.telefone, funcionario.email, 
-        funcionario.cargo, funcionario.salario) == 6) {
-        
-        if (strcmp(funcionario.cpf, cpf_lido) != 0) {
-            fprintf(arq_temp, "%s;%s;%s;%s;%s;%s\n",
-                funcionario.cpf, funcionario.nome, funcionario.telefone, 
-                funcionario.email, funcionario.cargo, funcionario.salario);
-        } else {
+    while (fread(funcionario, sizeof(Funcionario), 1, arq_funcionarios) == 1 && !encontrado) {
+        if (strcmp(funcionario->cpf, cpf_lido) == 0) {
+            funcionario->status = 0;  // marca como inativo
+            fseek(arq_funcionarios, -(long)sizeof(Funcionario), SEEK_CUR);
+            fwrite(funcionario, sizeof(Funcionario), 1, arq_funcionarios);
             encontrado = 1;
-            printf("\n♡ Funcionário(a) encontrado(a): %s\n", funcionario.nome);
-            printf("♡ Cargo: %s\n", funcionario.cargo);
         }
     }
-    
+
     fclose(arq_funcionarios);
-    fclose(arq_temp);
-    
+    free(funcionario);
+
     if (encontrado) {
-        remove("funcionarios.csv");
-        rename("temp.csv", "funcionarios.csv");
-        printf("\n♡ Funcionário(a) EXCLUÍDO(A) com sucesso! ♡\n");
+        printf("\t\t Funcionário(a) EXCLUÍDO(A) com sucesso! >>>> \n");
     } else {
-        remove("temp.csv");
-        printf("\n♡ Funcionário(a) NÃO encontrado(a)! ♡\n");
+        printf("\t\t Funcionário(a) NÃO encontrado(a)! >>>> \n");
     }
     
     printf("♡ Pressione <ENTER> para continuar...");
