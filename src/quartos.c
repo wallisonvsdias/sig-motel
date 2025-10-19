@@ -123,7 +123,7 @@ void exibir_quarto(void){
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fread(quarto,sizeof(Quarto),1,arq_quartos)) {
-        if (quarto->id == id_lido){
+        if (quarto->id == id_lido && quarto->status==True){
             printf("\t\t Quarto encontrado! >>>> \n");
             printf("\t\tTipo: %s\n",quarto->tipo);
             printf("\t\tDescricao: %s\n",quarto->descricao);
@@ -244,25 +244,18 @@ void alterar_quarto(void) {
 
 
 void excluir_quarto(void) {
-    Quarto quarto;
+    Quarto* quarto;
+    quarto = (Quarto*)malloc(sizeof(*quarto));
     FILE *arq_quartos;
-    arq_quartos = fopen("quartos.csv", "rt");
+    arq_quartos = fopen("quartos.DAT", "r+b");
     if (arq_quartos == NULL) {
-        printf("Não foi possivel ler o arquivo quartos.csv\n");
-        printf("Pressione <ENTER> ...");
-        getchar();
-        return;
-    }
-    FILE *arq_temp;
-    arq_temp = fopen("temp.csv", "at");
-    if (arq_temp == NULL) {
-        printf("Não foi possivel ler o arquivo temp.csv\n");
+        printf("Não foi possivel ler o arquivo quartos.DAT\n");
         printf("Pressione <ENTER> ...");
         getchar();
         return;
     }
     int id_lido;
-    int encontrado;
+    int encontrado = False;
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -274,25 +267,19 @@ void excluir_quarto(void) {
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    while (fscanf(arq_quartos, "%d;%32[^;];%50[^;];%f;%f\n",
-        &quarto.id,quarto.tipo,quarto.descricao,&quarto.preco_hora,&quarto.preco_diaria)==5) {
-        if (quarto.id != id_lido){
-            fprintf(arq_temp,"%d;",quarto.id);
-            fprintf(arq_temp,"%s;",quarto.tipo);
-            fprintf(arq_temp,"%s;",quarto.descricao);
-            fprintf(arq_temp,"%f;",quarto.preco_hora);
-            fprintf(arq_temp,"%f\n",quarto.preco_diaria);
-        } else {
-            encontrado = 1;
+    while (fread(quarto,sizeof(Quarto),1,arq_quartos)) {
+        if (quarto->id == id_lido){
+            quarto->status = False;
+            fseek(arq_quartos,-(long)sizeof(Quarto),SEEK_CUR);
+            fwrite(quarto, sizeof(Quarto), 1, arq_quartos);
+            encontrado = True;
         }
     }
 
     fclose(arq_quartos);
-    fclose(arq_temp);
+    free(quarto);
 
     if (encontrado) {
-        remove("quartos.csv");
-        rename("temp.csv","quartos.csv");
         printf("\t\t Quarto EXCLUIDO com sucesso! >>>> \n");
         printf("Pressione <ENTER> para continuar");
         getchar();
