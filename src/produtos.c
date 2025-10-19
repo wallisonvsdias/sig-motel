@@ -123,7 +123,7 @@ void exibir_produto(void){
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fread(produto,sizeof(Produto),1,arq_produtos)) {
-        if (produto->id == id_lido){
+        if (produto->id == id_lido && produto->status==True){
             printf("\t\t Produto encontrado! >>>> \n");
             printf("\t\tNome: %s\n",produto->nome);
             printf("\t\tDescricao: %s\n",produto->descricao);
@@ -243,25 +243,18 @@ void alterar_produto(void){
 
 
 void excluir_produto(void){
-    Produto produto;
+    Produto* produto;
+    produto = (Produto*)malloc(sizeof(*produto));
     FILE *arq_produtos;
-    arq_produtos = fopen("produtos.csv", "rt");
+    arq_produtos = fopen("produtos.DAT", "r+b");
     if (arq_produtos == NULL) {
-        printf("Não foi possivel ler o arquivo");
-        printf("Pressione <ENTER> ...");
-        getchar();
-        return;
-    }
-    FILE *arq_temp;
-    arq_temp = fopen("temp.csv", "at");
-    if (arq_temp == NULL) {
-        printf("Não foi possivel ler o arquivo");
+        printf("Não foi possivel ler o arquivo produtos.DAT\n");
         printf("Pressione <ENTER> ...");
         getchar();
         return;
     }
     int id_lido;
-    int encontrado;
+    int encontrado = False;
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -273,25 +266,19 @@ void excluir_produto(void){
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    while (fscanf(arq_produtos, "%d;%24[^;];%54[^;];%f;%d\n",
-        &produto.id,produto.nome,produto.descricao,&produto.preco,&produto.quant)==5) {
-        if (produto.id != id_lido){
-            fprintf(arq_temp,"%d;",produto.id);
-            fprintf(arq_temp,"%s;",produto.nome);
-            fprintf(arq_temp,"%s;",produto.descricao);
-            fprintf(arq_temp,"%f;",produto.preco);
-            fprintf(arq_temp,"%d\n",produto.quant);
-        } else {
-            encontrado = 1;
-        }
+    while (fread(produto,sizeof(Produto),1,arq_produtos)) {
+        if (produto->id == id_lido){
+            produto->status = False;
+            fseek(arq_produtos, -(long)sizeof(Produto),SEEK_CUR);
+            fwrite(produto, sizeof(Produto),1,arq_produtos);
+            encontrado = True;
+        } 
     }
 
     fclose(arq_produtos);
-    fclose(arq_temp);
+    free(produto);
 
     if (encontrado) {
-        remove("produtos.csv");
-        rename("temp.csv","produtos.csv");
         printf("\t\t Produto EXCLUIDO com sucesso! >>>> \n");
         printf("Pressione <ENTER> para continuar");
         getchar();
