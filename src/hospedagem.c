@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 #include "interface.h"
 #include "hospedagem.h"
 
@@ -52,13 +53,20 @@ void menu_hospedagem(void) {
 
 void cadastrar_hospedagem(void) {
     Hospedagem* hospedagem = (Hospedagem*) malloc(sizeof(*hospedagem));
+    if (!hospedagem) {
+        printf("Erro ao alocar memória.\n");
+        return;
+    }
+
     FILE *arq_hospedagem = fopen("hospedagem.DAT", "ab");
     if (arq_hospedagem == NULL) {
         printf("Não foi possível abrir o arquivo hospedagem.DAT\n");
-        printf("Pressione <ENTER> ...");
         free(hospedagem);
+        printf("Pressione <ENTER> ...");
+        getchar();
         return;
     }
+
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -77,7 +85,7 @@ void cadastrar_hospedagem(void) {
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
 
-    hospedagem->status = 1; // ativo
+    hospedagem->status = true; // ativo
     fwrite(hospedagem, sizeof(Hospedagem), 1, arq_hospedagem);
 
     fclose(arq_hospedagem);
@@ -89,21 +97,28 @@ void cadastrar_hospedagem(void) {
 // Exibir também a data
 void exibir_hospedagem(void) {
     Hospedagem* hospedagem = (Hospedagem*) malloc(sizeof(*hospedagem));
+    if (!hospedagem) {
+        printf("Erro ao alocar memória.\n");
+        return;
+    }
+
     FILE *arq_hospedagem = fopen("hospedagem.DAT", "rb");
     if (arq_hospedagem == NULL) {
         printf("Não foi possível abrir o arquivo hospedagem.DAT\n");
-        printf("Pressione <ENTER> ...");
         free(hospedagem);
+        printf("Pressione <ENTER> ...");
+        getchar();
         return;
     }
 
     char cpf_lido[12];
-    int encontrado = 0;
+    bool encontrado = false;
+
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡                        Exibir Dados da Hospedagem                           ♡\n");
+    printf("♡                       Exibir Dados da Hospedagem                             ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡      Informe o CPF do cliente hospedado: ");
     scanf("%s", cpf_lido);
@@ -112,12 +127,12 @@ void exibir_hospedagem(void) {
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
 
     while (fread(hospedagem, sizeof(Hospedagem), 1, arq_hospedagem) == 1) {
-        if (strcmp(hospedagem->cpf, cpf_lido) == 0 && hospedagem->status == 1) {
+        if (strcmp(hospedagem->cpf, cpf_lido) == 0 && hospedagem->status == true) {
             printf("\nHospedagem encontrada!\n");
             printf("CPF: %s\n", hospedagem->cpf);
             printf("ID do quarto: %s\n", hospedagem->id_quarto);
             printf("Horas: %s\n", hospedagem->horas);
-            encontrado = 1;
+            encontrado = true;
             break;
         }
     }
@@ -132,99 +147,71 @@ void exibir_hospedagem(void) {
     getchar();
 }
 
-
 void alterar_hospedagem(void) {
     Hospedagem* hospedagem = (Hospedagem*) malloc(sizeof(*hospedagem));
-    FILE *arq_hospedagem = fopen("hospedagem.DAT", "rb");
+    FILE *arq_hospedagem = fopen("hospedagem.DAT", "r+b");
     if (arq_hospedagem == NULL) {
         printf("Não foi possível abrir o arquivo hospedagem.DAT\n");
         printf("Pressione <ENTER> ...");
-        free(hospedagem);
-        return;
-    }
-
-    FILE *arq_temp = fopen("temp_hospedagem.DAT", "ab");
-    if (arq_temp == NULL) {
-        printf("Não foi possível criar o arquivo temporário\n");
-        fclose(arq_hospedagem);
         free(hospedagem);
         getchar();
         return;
     }
 
     char cpf_lido[12];
-    int encontrado = 0;
+    bool encontrado = false;
+
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                        Alterar Dados da Hospedagem                          ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o ID da hospedagem:                                            ♡\n");
+    printf("♡      Informe o CPF da hospedagem: ");
     scanf("%s", cpf_lido);
+    getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    while (fread(hospedagem, sizeof(Hospedagem), 1, arq_hospedagem) == 1) {
-        if (strcmp(hospedagem->cpf, cpf_lido) != 0 || hospedagem->status == 0) {
-            fwrite(hospedagem, sizeof(Hospedagem), 1, arq_temp);
-        } else {
-            encontrado = 1;
+
+    while (fread(hospedagem, sizeof(Hospedagem), 1, arq_hospedagem)) {
+        if (strcmp(hospedagem->cpf, cpf_lido) == 0 && hospedagem->status == true) {
+            encontrado = true;
+
+            system("clear||cls");
+            mostrar_cabecalho();
+            printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+            printf("♡                                                                             ♡\n");
+            printf("♡                        Novos dados da Hospedagem                            ♡\n");
+            printf("♡                                                                             ♡\n");
+            printf("♡      CPF: ");
+            scanf("%s", hospedagem->cpf);
+            getchar();
+            printf("♡      ID do Quarto: ");
+            scanf("%s", hospedagem->id_quarto);
+            getchar();
+            printf("♡      Horas: ");
+            scanf("%s", hospedagem->horas);
+            printf("♡                                                                             ♡\n");
+            printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+            getchar();
+            hospedagem->status = true;
+
+            fseek(arq_hospedagem, -((long) sizeof(Hospedagem)), SEEK_CUR);
+            fwrite(hospedagem, sizeof(Hospedagem), 1, arq_hospedagem);
+            break;
         }
     }
 
     fclose(arq_hospedagem);
     free(hospedagem);
 
-
     if (encontrado) {
-        Hospedagem* novo_hospedagem = (Hospedagem*) malloc(sizeof(*novo_hospedagem));
-        if (novo_hospedagem == NULL) {
-            printf("Erro ao alocar memória.\n");
-            fclose(arq_temp);
-            getchar();
-            return;
-        }
-
-        system("clear||cls");
-        mostrar_cabecalho();
-        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-        printf("♡                                                                             ♡\n");
-        printf("♡                         Novos dados da Hospedagem                           ♡\n");
-        printf("♡                                                                             ♡\n");
-        printf("♡      CPF: ");
-        scanf("%s",novo_hospedagem->cpf);
-        getchar();
-        printf("♡      ID do Quarto: ");
-        scanf("%s",novo_hospedagem->id_quarto);
-        getchar();
-        printf("♡      Horas: ");
-        scanf("%s",novo_hospedagem->horas);
-        getchar();
-        printf("♡                                                                             ♡\n");
-        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-        printf("♡                                                                             ♡\n");
-        novo_hospedagem->status = 1;
-        fwrite(novo_hospedagem, sizeof(Hospedagem), 1, arq_temp);
-
-        fclose(arq_temp);
-        free(novo_hospedagem);
-
-        remove("hospedagem.DAT");
-        rename("temp_hospedagem.DAT", "hospedagem.DAT");
-
-        printf("\t\t Hospedagem ALTERADA com sucesso! >>>> \n");
-        printf("Pressione <ENTER> para continuar");
-        getchar();
-        return;
-
+        printf("\n♡ Hospedagem ALTERADA com sucesso! ♡\n");
     } else {
-        fclose(arq_temp);
-        remove("temp_hospedagem.DAT");
-        printf("\t\t Hospedagem NAO encontrada! >>>> \n");
-        printf("Pressione <ENTER> para continuar");
-        getchar();
-        return;
+        printf("\n♡ Hospedagem NÃO encontrada ou inativa! ♡\n");
     }
+
+    printf("Pressione <ENTER> para continuar...");
     continuar_acao();
 }
 
@@ -239,8 +226,17 @@ void excluir_hospedagem(void) {
         return;
     }
 
+    FILE *arq_temp = fopen("temp.DAT", "wb");
+    if (!arq_temp) {
+        printf("Não foi possível criar arquivo temporário.\n");
+        fclose(arq_hospedagem);
+        free(hospedagem);
+        getchar();
+        return;
+    }
+
     char cpf_lido[12];
-    int encontrado = 0;
+    bool encontrado = false;
 
     system("clear||cls");
     mostrar_cabecalho();
@@ -254,16 +250,12 @@ void excluir_hospedagem(void) {
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fread(hospedagem, sizeof(Hospedagem), 1, arq_hospedagem)) {
-        if (strcmp(hospedagem->cpf, cpf_lido) == 0 && hospedagem->status == 1) {
-            hospedagem->status = 0; // exclusão lógica
-            fseek(arq_hospedagem, -((long) sizeof(Hospedagem)), SEEK_CUR);
-            fwrite(hospedagem, sizeof(Hospedagem), 1, arq_hospedagem);
-            encontrado = 1;
-            break;
-        }
+        if (strcmp(hospedagem->cpf, cpf_lido) == 0) {
+            encontrado = true;
     }
 
     fclose(arq_hospedagem);
+    fclose(arq_temp);
     free(hospedagem);
     
     if (encontrado) {
@@ -274,4 +266,5 @@ void excluir_hospedagem(void) {
 
     printf("Pressione <ENTER> para continuar...");
     continuar_acao();
+    }
 }
