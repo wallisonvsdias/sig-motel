@@ -146,12 +146,17 @@ int validar_data(const char* data) {
 
 
 // valida o telefone
-// deve conter apenas numeros, exemplo 11988887777
+// deve conter apenas numeros, exemplo 80999887766
 int validar_telefone(const char* telefone) {
     int i = 0;
 
     // verifica se esta vazio
     if (strlen(telefone) == 0) {
+        return False;
+    }
+
+    // verifica tamanho
+    if (strlen(telefone) != 11) {
         return False;
     }
 
