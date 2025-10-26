@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "interface.h"
 #include "quartos.h"
+#include "validacao.h"
 
 void menu_quarto(void) {
     char op_quarto;
@@ -60,30 +61,58 @@ void cadastrar_quarto(void) {
         getchar();
         return;
     }
-    int tam;
+    char entrada_preco[20];
+    char entrada_id[10];
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                               Cadastrar Quarto                              ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      ID do quarto: ");
-    scanf("%d",&quarto->id);
-    getchar();
-    printf("♡      Tipo: ");
-    fgets(quarto->tipo,32,stdin);
-    tam = strlen(quarto->tipo);
-    quarto->tipo[tam-1] = '\0';
-    printf("♡      Descrição: ");
-    fgets(quarto->descricao,51,stdin);
-    tam = strlen(quarto->descricao);
-    quarto->descricao[tam-1] = '\0';
-    printf("♡      Preço/hora: ");
-    scanf("%f",&quarto->preco_hora);
-    getchar();
-    printf("♡      Preço/diária: ");
-    scanf("%f",&quarto->preco_diaria);
-    getchar();
+    do {
+        printf("♡      ID do quarto: ");
+        ler_string(entrada_id, 10);
+        if (!validar_id(entrada_id)) {
+            printf("♡      ID invalido! Insira apenas digitos\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_id(entrada_id));
+    quarto->id = atof(entrada_id);
+    do {
+        printf("♡      Tipo: ");
+        ler_string(quarto->tipo, 32);
+        if (!validar_tipo(quarto->tipo, 32)) {
+            printf("♡      Tipo invalido! Nao pode ser vazio\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_tipo(quarto->tipo,32));
+    do {
+        printf("♡      Descrição: ");
+        ler_string(quarto->descricao,51);
+        if (!validar_descricao(quarto->descricao,51)) {
+            printf("♡      Descricao invalida! Nao pode ser vazia\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_descricao(quarto->descricao, 51));
+    do {
+        printf("♡      Preço/hora: ");
+        ler_string(entrada_preco,20);
+        if (!validar_preco(entrada_preco)) {
+            printf("♡      Preco invalido! Deve ser um numero positivo (use '.' para centavos).\n");
+        }
+    } while (!validar_preco(entrada_preco));
+    quarto->preco_hora = atof(entrada_preco);
+    do {
+        printf("♡      Preço/diária: ");
+        ler_string(entrada_preco,20);
+        if (!validar_preco(entrada_preco)) {
+            printf("♡      Preco invalido! Deve ser um numero positivo (use '.' para centavos).\n");
+        }
+    } while (!validar_preco(entrada_preco));
+    quarto->preco_diaria = atof(entrada_preco);
     printf("♡                                                                             ♡\n");
     printf("♡        Quarto cadastrado com sucesso!                                       ♡\n");
     printf("♡                                                                             ♡\n");
@@ -167,7 +196,8 @@ void alterar_quarto(void) {
     }
     int id_lido;
     int encontrado;
-    int tam;
+    char entrada_preco[20];
+    char entrada_id[10];
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -199,23 +229,50 @@ void alterar_quarto(void) {
         printf("♡                                                                             ♡\n");
         printf("♡                              Editar dados de Quarto                         ♡\n");
         printf("♡                                                                             ♡\n");
-        printf("♡     Informe o ID do quarto: ");
-        scanf("%d",&novo_quarto->id);
-        getchar();
-        printf("♡      Tipo: ");
-        fgets(novo_quarto->tipo,32,stdin);
-        tam = strlen(novo_quarto->tipo);
-        novo_quarto->tipo[tam-1] = '\0';
-        printf("♡      Descrição: ");
-        fgets(novo_quarto->descricao,51,stdin);
-        tam = strlen(novo_quarto->descricao);
-        novo_quarto->descricao[tam-1] = '\0';
-        printf("♡      Preço/hora: ");
-        scanf("%f",&novo_quarto->preco_hora);
-        getchar();
-        printf("♡      Preço/diária: ");
-        scanf("%f",&novo_quarto->preco_diaria);
-        getchar();
+        do {
+            printf("♡      ID do quarto: ");
+            ler_string(entrada_id, 10);
+            if (!validar_id(entrada_id)) {
+                printf("♡      ID invalido! Insira apenas digitos\n");
+                printf("♡      Pressione <ENTER>");
+                getchar();
+            }
+        } while (!validar_id(entrada_id));
+        novo_quarto->id = atof(entrada_id);
+        do {
+            printf("♡      Tipo: ");
+            ler_string(novo_quarto->tipo, 32);
+            if (!validar_tipo(novo_quarto->tipo, 32)) {
+                printf("♡      Tipo invalido! Nao pode ser vazio\n");
+                printf("♡      Pressione <ENTER>");
+                getchar();
+            }
+        } while (!validar_tipo(novo_quarto->tipo,32));
+        do {
+            printf("♡      Descrição: ");
+            ler_string(novo_quarto->descricao,51);
+            if (!validar_descricao(novo_quarto->descricao,51)) {
+                printf("♡      Descricao invalida! Nao pode ser vazia\n");
+                printf("♡      Pressione <ENTER>");
+                getchar();
+            }
+        } while (!validar_descricao(novo_quarto->descricao, 51));
+        do {
+            printf("♡      Preço/hora: ");
+            ler_string(entrada_preco,20);
+            if (!validar_preco(entrada_preco)) {
+                printf("♡      Preco invalido! Deve ser um numero positivo (use '.' para centavos).\n");
+            }
+        } while (!validar_preco(entrada_preco));
+        novo_quarto->preco_hora = atof(entrada_preco);
+        do {
+            printf("♡      Preço/diária: ");
+            ler_string(entrada_preco,20);
+            if (!validar_preco(entrada_preco)) {
+                printf("♡      Preco invalido! Deve ser um numero positivo (use '.' para centavos).\n");
+            }
+        } while (!validar_preco(entrada_preco));
+        novo_quarto->preco_diaria = atof(entrada_preco);
         printf("♡                                                                             ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
