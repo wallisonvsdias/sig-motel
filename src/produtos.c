@@ -3,6 +3,7 @@
 #include <string.h>
 #include "interface.h"
 #include "produtos.h"
+#include "validacao.h"
 
 void menu_produto(void) {
     char op_produto;
@@ -61,30 +62,63 @@ void cadastrar_produto(void) {
         getchar();
         return;
     }
-    int tam;
+    char entrada_preco[20];
+    char entrada_id[10];
+    char entrada_quant[10];
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                            Cadastrar Produto                                ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      ID do Produto: ");
-    scanf("%d",&produto->id);
-    getchar();
-    printf("♡      Nome: ");
-    fgets(produto->nome,25,stdin);
-    tam = strlen(produto->nome);
-    produto->nome[tam-1] = '\0';
-    printf("♡      Descrição: ");
-    fgets(produto->descricao,55,stdin);
-    tam = strlen(produto->descricao);
-    produto->descricao[tam-1] = '\0';
-    printf("♡      Preço: ");
-    scanf("%f",&produto->preco);
-    getchar();
-    printf("♡      Quantidade: ");
-    scanf("%d",&produto->quant);
-    getchar();
+    do {
+        printf("♡      ID do produto: ");
+        ler_string(entrada_id, 10);
+        if (!validar_id(entrada_id)) {
+            printf("♡      ID invalido! Insira apenas digitos\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_id(entrada_id));
+    produto->id = atof(entrada_id);
+    do {
+        printf("♡      Nome: ");
+        ler_string(produto->nome,25);
+        if (!validar_nome(produto->nome)) {
+            printf("♡      Nome invalido! Deve conter apenas letras e espacos\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_nome(produto->nome));
+    do {
+        printf("♡      Descrição: ");
+        ler_string(produto->descricao,55);
+        if (!validar_descricao(produto->descricao,55)) {
+            printf("♡      Descricao invalida! Nao pode ser vazia\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_descricao(produto->descricao, 55));
+    do {
+        printf("♡      Preço: ");
+        ler_string(entrada_preco,20);
+        if (!validar_preco(entrada_preco)) {
+            printf("♡      Preco invalido! Deve ser um numero positivo (use '.' para centavos).\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_preco(entrada_preco));
+    produto->preco = atof(entrada_preco);
+    do {
+        printf("♡      Quantidade: ");
+        ler_string(entrada_quant,10);
+        if (!validar_preco(entrada_quant)) {
+            printf("♡      Quantidade invalida! Insira apenas digitos.\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_preco(entrada_quant));
+    produto->quant = atof(entrada_quant);
     printf("♡                                                                             ♡\n");
     printf("♡        Produto cadastrado com sucesso!                                        ♡\n");
     printf("♡                                                                             ♡\n");
@@ -147,25 +181,25 @@ void exibir_produto(void){
 
 
 void alterar_produto(void){
-    Produto produto;
+    Produto* produto;
+    produto = (Produto*)malloc(sizeof(*produto));
     FILE *arq_produtos;
-    arq_produtos = fopen("produtos.csv", "rt");
+    arq_produtos = fopen("produtos.DAT", "rb");
     if (arq_produtos == NULL) {
-        printf("Não foi possivel ler o arquivo");
+        printf("Não foi possivel ler o arquivo produtos.DAT");
         printf("Pressione <ENTER> ...");
         getchar();
         return;
     }
     FILE *arq_temp;
-    arq_temp = fopen("temp.csv", "at");
+    arq_temp = fopen("temp.DAT", "ab");
     if (arq_temp == NULL) {
-        printf("Não foi possivel ler o arquivo");
+        printf("Não foi possivel ler o arquivo temp.DAT");
         printf("Pressione <ENTER> ...");
         getchar();
         return;
     }
     int id_lido;
-    int tam;
     int encontrado;
     system("clear||cls");
     mostrar_cabecalho();
@@ -178,66 +212,101 @@ void alterar_produto(void){
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    while (fscanf(arq_produtos, "%d;%24[^;];%54[^;];%f;%d\n",
-        &produto.id,produto.nome,produto.descricao,&produto.preco,&produto.quant)==5) {
-        if (produto.id != id_lido){
-            fprintf(arq_temp,"%d;",produto.id);
-            fprintf(arq_temp,"%s;",produto.nome);
-            fprintf(arq_temp,"%s;",produto.descricao);
-            fprintf(arq_temp,"%f;",produto.preco);
-            fprintf(arq_temp,"%d\n",produto.quant);
+    while (fread(produto,sizeof(Produto),1,arq_produtos)) {
+        if (produto->id != id_lido){
+            fwrite(produto,sizeof(Produto),1,arq_temp);
         } else {
-            encontrado = 1;
-            Produto novo_produto;
-            system("clear||cls");
-            mostrar_cabecalho();
-            printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-            printf("♡                                                                             ♡\n");
-            printf("♡                         Editar dados de Produto                             ♡\n");
-            printf("♡                                                                             ♡\n");
-            printf("♡      Nome: ");
-            fgets(novo_produto.nome,25,stdin);
-            tam = strlen(novo_produto.nome);
-            novo_produto.nome[tam-1] = '\0';
-            printf("♡      Descrição: ");
-            fgets(novo_produto.descricao,55,stdin);
-            tam = strlen(novo_produto.descricao);
-            novo_produto.descricao[tam-1] = '\0';
-            printf("♡      Preço: ");
-            scanf("%f",&novo_produto.preco);
-            getchar();
-            printf("♡      Quantidade: ");
-            scanf("%d",&novo_produto.quant);
-            getchar();
-            printf("♡                                                                             ♡\n");
-            printf("♡                                                                             ♡\n");
-            printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-
-            fprintf(arq_temp,"%d;",produto.id);
-            fprintf(arq_temp,"%s;",novo_produto.nome);
-            fprintf(arq_temp,"%s;",novo_produto.descricao);
-            fprintf(arq_temp,"%f;",novo_produto.preco);
-            fprintf(arq_temp,"%d\n",novo_produto.quant);
+            encontrado = True;
         }
     }
 
-    fclose(arq_temp);
     fclose(arq_produtos);
+    free(produto);
 
     if (encontrado) {
-        remove("produtos.csv");
-        rename("temp.csv","produtos.csv");
+        Produto* novo_produto;
+        novo_produto = (Produto*)malloc(sizeof(*novo_produto));
+        char entrada_preco[20];
+        char entrada_id[10];
+        char entrada_quant[10];
+        system("clear||cls");
+        mostrar_cabecalho();
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡                              Editar dados de Produto                        ♡\n");
+        printf("♡                                                                             ♡\n");
+        do {
+        printf("♡      ID do produto: ");
+        ler_string(entrada_id, 10);
+        if (!validar_id(entrada_id)) {
+            printf("♡      ID invalido! Insira apenas digitos\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+        } while (!validar_id(entrada_id));
+        novo_produto->id = atof(entrada_id);
+        do {
+            printf("♡      Nome: ");
+            ler_string(novo_produto->nome,25);
+            if (!validar_nome(novo_produto->nome)) {
+                printf("♡      Nome invalido! Deve conter apenas letras e espacos\n");
+                printf("♡      Pressione <ENTER>");
+                getchar();
+            }
+        } while (!validar_nome(novo_produto->nome));
+        do {
+            printf("♡      Descrição: ");
+            ler_string(novo_produto->descricao,55);
+            if (!validar_descricao(novo_produto->descricao,55)) {
+                printf("♡      Descricao invalida! Nao pode ser vazia\n");
+                printf("♡      Pressione <ENTER>");
+                getchar();
+            }
+        } while (!validar_descricao(novo_produto->descricao, 55));
+        do {
+            printf("♡      Preço: ");
+            ler_string(entrada_preco,20);
+            if (!validar_preco(entrada_preco)) {
+                printf("♡      Preco invalido! Deve ser um numero positivo (use '.' para centavos).\n");
+                printf("♡      Pressione <ENTER>");
+                getchar();
+            }
+        } while (!validar_preco(entrada_preco));
+        novo_produto->preco = atof(entrada_preco);
+        do {
+            printf("♡      Quantidade: ");
+            ler_string(entrada_quant,10);
+            if (!validar_preco(entrada_quant)) {
+                printf("♡      Quantidade invalida! Insira apenas digitos.\n");
+                printf("♡      Pressione <ENTER>");
+                getchar();
+            }
+        } while (!validar_preco(entrada_quant));
+        novo_produto->quant = atof(entrada_quant);
+        printf("♡                                                                             ♡\n");
+        printf("♡        Produto cadastrado com sucesso!                                        ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+
+        fwrite(novo_produto,sizeof(Produto),1,arq_temp);
+
+        free(novo_produto);
+        fclose(arq_temp);
+        remove("produtos.DAT");
+        rename("temp.DAT", "produtos.DAT");
         printf("\t\t Produto ALTERADO com sucesso! >>>> \n");
         printf("Pressione <ENTER> para continuar");
         getchar();
         return;
     } else {
+        fclose(arq_temp);
+        remove("temp.DAT");
         printf("\t\t Produto NAO encontrado! >>>> \n");
         printf("Pressione <ENTER> para continuar");
         getchar();
-    return;
+        return;
     }
-    
+
     continuar_acao();
 }
 
