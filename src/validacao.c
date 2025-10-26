@@ -87,23 +87,6 @@ int validar_cpf(const char* cpf) {
     return True;
 }
 
-// valida id
-// deve conter 4 digitos no maximo
-int validar_id(const char* id) {
-    int i = 0;
-
-    if (strlen(id) > 4) {
-        return False; // tamanho incorreto
-    }
-
-    while (id[i] != '\0') {
-        if (!eh_digito(id[i])) {
-            return False; // nao eh digito
-        }
-        i++;
-    }
-    return True;
-}
 
 // valida a data de nascimento DD/MM/AAAA
 // formato, dias, meses e anos validos
@@ -301,6 +284,36 @@ int validar_quantidade(const char* quant_str) {
 
     // verifica se quantidade eh positiva
     if (quantidade < 0) {
+        return False;
+    }
+     
+    return True; 
+}
+
+// valida id
+// recebe uma string que representa um int
+int validar_id(const char* id_str) {
+    int i = 0;
+    int id;
+
+    // verifica se esta vazio
+    if (strlen(id_str) == 0) {
+        return False;
+    }
+
+    // verifica se todos os caracteres sao digitos
+    while (id_str[i] != '\0') {
+        if (!eh_digito(id_str[i])) {
+            return False;
+        }
+        i++;
+    }
+    
+    // converte a string para int
+    id = atoi(id_str);
+
+    // verifica se quantidade eh positiva
+    if (id <= 0) {
         return False;
     }
      

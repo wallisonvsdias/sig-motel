@@ -14,6 +14,7 @@ int validar_nome(const char* nome);
 int validar_data(const char* data);
 int validar_telefone(const char* telefone);
 int validar_email(const char* email);
+int validar_id(const char* id_str);
 int validar_descricao(const char* descricao, int tamanho_max);
 int validar_tipo(const char* tipo, int tamanho_max);
 int validar_preco(const char* preco_str);
