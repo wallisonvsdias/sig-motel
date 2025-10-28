@@ -72,7 +72,7 @@ void cadastrar_hospedagem(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                           Cadastrar Hospedagem                              ♡\n");
     printf("♡                                                                             ♡\n");
-    getchar();
+    getchar(); 
     do {
         printf("♡     CPF (apenas 11 numeros): ");
         ler_string(hospedagem->cpf,12);
@@ -173,7 +173,7 @@ void alterar_hospedagem(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                        Alterar Dados da Hospedagem                          ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o CPF da hospedagem: ");
+    printf("♡      Informe o CPF do cliente: ");
     scanf("%s", cpf_lido);
     getchar();
     printf("♡                                                                             ♡\n");
