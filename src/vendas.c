@@ -157,7 +157,7 @@ void alterar_venda(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                        Alterar Dados da Venda                               ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o CPF da venda: ");
+    printf("♡      Informe o CPF do cliente: ");
     scanf("%s", cpf_lido);
     getchar();
     printf("♡                                                                             ♡\n");
