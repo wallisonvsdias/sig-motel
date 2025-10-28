@@ -7,7 +7,7 @@ typedef struct{
     char cpf[12];
     char id_produto[4];
     char quant[4];
-    bool status;
+    int status;
  } Venda;
 
 void menu_venda(void);

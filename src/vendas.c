@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
 #include "interface.h"
 #include "vendas.h"
 
@@ -51,20 +50,15 @@ void menu_venda(void) {
 
 
 void cadastrar_venda(void) {
-Venda* venda = (Venda*) malloc(sizeof(*venda));
-if (!venda) {
-    printf("Erro ao alocar memória.\n");
-    return;
-}
-
-FILE *arq_venda = fopen("vendas.DAT", "ab");
-if (!arq_venda) {
+Venda* venda;
+venda = (Venda*) malloc(sizeof(*venda));
+FILE *arq_vendas = fopen("vendas.DAT", "ab");
+if (!arq_vendas) {
     printf("Não foi possível abrir o arquivo vendas.DAT\n");
     free(venda);
     getchar();
     return;
 }
-
 system("clear||cls");
 mostrar_cabecalho();
 printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -82,24 +76,17 @@ scanf("%s", venda->quant);
 getchar();
 printf("♡                                                                             ♡\n");
 printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-
-venda->status = true; 
-fwrite(venda, sizeof(Venda), 1, arq_venda);
-
-fclose(arq_venda);
+venda->status = True; 
+fwrite(venda, sizeof(Venda), 1, arq_vendas);
+fclose(arq_vendas);
 free(venda);
-
 continuar_acao();
 }
 
 
 void exibir_venda(void) {
-    Venda* venda = (Venda*) malloc(sizeof(*venda));
-    if (!venda) {
-        printf("Erro ao alocar memória.\n");
-        return;
-    }
-
+    Venda* venda;
+    venda = (Venda*) malloc(sizeof(*venda));
     FILE *arq_vendas = fopen("vendas.DAT", "rb");
     if (!arq_vendas) {
         printf("Não foi possível ler o arquivo vendas.DAT\n");
@@ -108,10 +95,7 @@ void exibir_venda(void) {
         getchar();
         return;
     }
-
     char cpf_lido[12];
-    bool encontrado = false;
-
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -123,37 +107,32 @@ void exibir_venda(void) {
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-
-    while (fread(venda, sizeof(Venda), 1, arq_vendas) == 1) {
-        if (strcmp(venda->cpf, cpf_lido) == 0 && venda->status == true) {
-            printf("\nVenda encontrada!\n");
-            printf("CPF: %s\n", venda->cpf);
-            printf("ID do produto: %s\n", venda->id_produto);
-            printf("Quantidade: %s\n", venda->quant);
-            encontrado = true;
-            break;
+    while (fread(venda,sizeof(Venda),1,arq_vendas)) {
+        if (strcmp(venda->cpf,cpf_lido) == 0  && venda->status==True){
+            printf("\t\t Venda encontrado! >>>> \n");
+            printf("\t\tCPF: %s\n",venda->cpf);
+            printf("\t\tID do Produto: %s\n",venda-> id_produto);
+            printf("\t\tQuantidade: %s\n",venda-> quant);
+            printf("Pressione <ENTER> para continuar");
+            getchar();
+            fclose(arq_vendas);
+            free(venda);
+            return;
         }
     }
-
-    if (!encontrado) {
-        printf("\nVenda não encontrada.\n");
-    }
-
+    printf("\t\t Cliente NAO encontrado! >>>> \n");
+    printf("Pressione <ENTER> para continuar");
+    getchar();
     fclose(arq_vendas);
     free(venda);
-    printf("Pressione <ENTER> para continuar...");
-    getchar();
+    return;
     continuar_acao();
 }
 
 
 void alterar_venda(void) {
-    Venda* venda = (Venda*) malloc(sizeof(*venda));
-    if (!venda) {
-        printf("Erro ao alocar memória.\n");
-        return;
-    }
-
+    Venda* venda;
+    venda = (Venda*) malloc(sizeof(*venda));
     FILE *arq_vendas = fopen("vendas.DAT", "rb");
     if (!arq_vendas) {
         printf("Não foi possível ler o arquivo vendas.DAT\n");
@@ -170,10 +149,8 @@ void alterar_venda(void) {
         getchar();
         return;
     }
-
     char cpf_lido[12];
-    bool encontrado = false;
-
+    int encontrado;
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -186,26 +163,20 @@ void alterar_venda(void) {
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
 
-    while (fread(venda, sizeof(Venda), 1, arq_vendas) == 1) {
-        if (strcmp(venda->cpf, cpf_lido) != 0 || venda->status == false) {
-            fwrite(venda, sizeof(Venda), 1, arq_temp);
+    while (fread(venda,sizeof(Venda),1,arq_vendas)) {
+        if (strcmp(venda->cpf,cpf_lido) != 0){
+            fwrite(venda,sizeof(Venda),1,arq_temp);
         } else {
-            encontrado = true;
+            encontrado = True;
         }
     }
-
+    
     fclose(arq_vendas);
     free(venda);
 
     if (encontrado) {
-        Venda* nova_venda = (Venda*) malloc(sizeof(*nova_venda));
-        if (!nova_venda) {
-            printf("Erro ao alocar memória.\n");
-            fclose(arq_temp);
-            getchar();
-            return;
-        }
-
+        Venda* nova_venda;
+        nova_venda = (Venda*) malloc(sizeof(*nova_venda));
         system("clear||cls");
         mostrar_cabecalho();
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -223,23 +194,17 @@ void alterar_venda(void) {
         getchar();
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-
-        nova_venda->status = true; 
+        nova_venda->status = True; 
         fwrite(nova_venda, sizeof(Venda), 1, arq_temp);
-
         fclose(arq_temp);
         free(nova_venda);
-
         remove("vendas.DAT");
         rename("temp_vendas.DAT", "vendas.DAT");
-
         printf("\t\t Venda ALTERADA com sucesso! >>>> \n");
         printf("Pressione <ENTER> para continuar...");
         getchar();
 
     } else {
-        fclose(arq_temp);
-        remove("temp_vendas.DAT");
         printf("\t\t Venda NÃO encontrada! >>>> \n");
         printf("Pressione <ENTER> para continuar...");
         getchar();
@@ -250,12 +215,8 @@ void alterar_venda(void) {
 
 
 void excluir_venda(void) {
-    Venda* venda = (Venda*) malloc(sizeof(*venda));
-    if (!venda) {
-        printf("Erro ao alocar memória.\n");
-        return;
-    }
-
+    Venda* venda;
+    venda = (Venda*) malloc(sizeof(*venda));
     FILE *arq_vendas = fopen("vendas.DAT", "r+b");
     if (!arq_vendas) {
         printf("Não foi possível ler o arquivo vendas.DAT\n");
@@ -263,10 +224,8 @@ void excluir_venda(void) {
         getchar();
         return;
     }
-
     char cpf_lido[12];
-    bool encontrado = false;
-
+    int encontrado = False;
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -279,21 +238,15 @@ void excluir_venda(void) {
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
 
-    while (fread(venda, sizeof(Venda), 1, arq_vendas) == 1) {
-        if (strcmp(venda->cpf, cpf_lido) == 0 && venda->status == true) {
-            venda->status = false; 
-            fseek(arq_vendas, -sizeof(Venda), SEEK_CUR);
+    while (fread(venda,sizeof(Venda),1,arq_vendas) && (!encontrado)) {
+        if (strcmp(venda->cpf,cpf_lido) == 0){
+            venda->status = False;
+            fseek(arq_vendas,-(long)sizeof(Venda),SEEK_CUR);
             fwrite(venda, sizeof(Venda), 1, arq_vendas);
-            encontrado = true;
-            printf("\n♡ Venda encontrada e EXCLUÍDA com sucesso!\n");
-            break;
+            encontrado = True;
         }
     }
-
-    if (!encontrado) {
-        printf("\n♡ Venda NÃO encontrada! ♡\n");
-    }
-
+    
     fclose(arq_vendas);
     free(venda);
 
