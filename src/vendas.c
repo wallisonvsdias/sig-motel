@@ -3,6 +3,7 @@
 #include <string.h>
 #include "interface.h"
 #include "vendas.h"
+#include "validacao.h"
 
 
 void menu_venda(void) {
@@ -65,9 +66,16 @@ printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ 
 printf("♡                                                                             ♡\n");
 printf("♡                              Cadastrar Venda                                ♡\n");
 printf("♡                                                                             ♡\n");
-printf("♡      CPF cliente: ");
-scanf("%s", venda->cpf);
 getchar();
+do {
+        printf("♡     CPF (apenas 11 numeros): ");
+        ler_string(venda->cpf,12);
+        if (!validar_cpf(venda->cpf)) {
+            printf("♡      CPF invalido! Deve conter 11 numeros\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_cpf(venda->cpf));
 printf("♡      ID do produto: ");
 scanf("%s", venda->id_produto);
 getchar();
@@ -183,9 +191,15 @@ void alterar_venda(void) {
         printf("♡                                                                             ♡\n");
         printf("♡                             Novos dados da venda                            ♡\n");
         printf("♡                                                                             ♡\n");
-        printf("♡      CPF: ");
-        scanf("%s", nova_venda->cpf);
-        getchar();
+        do {
+            printf("♡      CPF (apenas 11 numeros): ");
+            ler_string(nova_venda->cpf,12);
+            if (!validar_cpf(nova_venda->cpf)) {
+                printf("♡      CPF invalido! Deve conter 11 numeros\n");
+                printf("♡      Pressione <ENTER>");
+                getchar();
+            }
+        } while (!validar_cpf(nova_venda->cpf));
         printf("♡      ID do Produto: ");
         scanf("%s", nova_venda->id_produto);
         getchar();
