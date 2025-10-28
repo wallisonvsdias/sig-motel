@@ -3,6 +3,7 @@
 #include <string.h>
 #include "interface.h"
 #include "hospedagem.h"
+#include "validacao.h"
 
 
 void menu_hospedagem(void) {
@@ -71,6 +72,7 @@ void cadastrar_hospedagem(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                           Cadastrar Hospedagem                              ♡\n");
     printf("♡                                                                             ♡\n");
+    getchar();
     do {
         printf("♡     CPF (apenas 11 numeros): ");
         ler_string(hospedagem->cpf,12);
