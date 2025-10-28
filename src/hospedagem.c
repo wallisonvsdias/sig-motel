@@ -65,16 +65,21 @@ void cadastrar_hospedagem(void) {
         getchar();
         return;
     }
-
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                           Cadastrar Hospedagem                              ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      CPF do cliente: ");
-    scanf("%s", hospedagem->cpf);
-    getchar();
+    do {
+        printf("♡     CPF (apenas 11 numeros): ");
+        ler_string(hospedagem->cpf,12);
+        if (!validar_cpf(hospedagem->cpf)) {
+            printf("♡      CPF invalido! Deve conter 11 numeros\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_cpf(hospedagem->cpf));
     printf("♡      ID do quarto: ");
     scanf("%s", hospedagem->id_quarto);
     getchar();
@@ -83,10 +88,8 @@ void cadastrar_hospedagem(void) {
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-
     hospedagem->status = True; 
     fwrite(hospedagem, sizeof(Hospedagem), 1, arq_hospedagem);
-
     fclose(arq_hospedagem);
     free(hospedagem);
 
@@ -193,9 +196,15 @@ void alterar_hospedagem(void) {
             printf("♡                                                                             ♡\n");
             printf("♡                        Novos dados da Hospedagem                            ♡\n");
             printf("♡                                                                             ♡\n");
-            printf("♡      CPF: ");
-            scanf("%s", nova_hospedagem->cpf);
-            getchar();
+            do {
+                printf("♡     CPF (apenas 11 numeros): ");
+                ler_string(nova_hospedagem->cpf,12);
+                if (!validar_cpf(nova_hospedagem->cpf)) {
+                    printf("♡      CPF invalido! Deve conter 11 numeros\n");
+                    printf("♡      Pressione <ENTER>");
+                    getchar();
+                }
+            } while (!validar_cpf(nova_hospedagem->cpf));
             printf("♡      ID do Quarto: ");
             scanf("%s", nova_hospedagem->id_quarto);
             getchar();
