@@ -3,6 +3,7 @@
 #include <string.h>
 #include "interface.h"
 #include "funcionarios.h"
+#include "validacao.h"
 
 
 void menu_funcionario(void) {    
@@ -62,31 +63,56 @@ void cadastrar_funcionario(void) {
         free(funcionario);
         return;
     }
-    int tam;
-
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                           Cadastrar Funcionário(a)                          ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      CPF: ");
-    scanf("%s", funcionario->cpf);
     getchar();
-    printf("♡      Nome: ");
-    fgets(funcionario->nome, 51, stdin);
-    tam = strlen(funcionario->nome);
-    funcionario->nome[tam-1] = '\0';
-    printf("♡      Telefone: ");
-    scanf("%s", funcionario->telefone);
-    getchar();
-    printf("♡      E-mail: ");
-    scanf("%s", funcionario->email);
+    do {
+        printf("♡     CPF (apenas 11 numeros): ");
+        ler_string(funcionario->cpf,12);
+        if (!validar_cpf(funcionario->cpf)) {
+            printf("♡      CPF invalido! Deve conter 11 numeros\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_cpf(funcionario->cpf));
+    do {
+        printf("♡      Nome: ");
+        ler_string(funcionario->nome,51);
+        if (!validar_nome(funcionario->nome)) {
+            printf("♡      Nome invalido! Deve conter apenas letras e espacos\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_nome(funcionario->nome));
+    do {
+        printf("♡      Telefone (apenas números): ");
+        ler_string(funcionario->telefone,12);
+        if (!validar_telefone(funcionario->telefone)) {
+            printf("♡      Telefone invalido! Use apenas numeros e deve conter 11 digitos\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_telefone(funcionario->telefone));
+    do {
+        printf("♡      Email:");
+        ler_string(funcionario->email,51);
+        if (!validar_email(funcionario->email)) {
+            printf("♡      Email invalido! Formato esperado: joao@teste.com\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_email(funcionario->email));
+    //Criar validação cargo
     printf("♡      Cargo: ");
     scanf("%s", funcionario->cargo);
     getchar();
+    //Criar validação salario
     printf("♡      Salário: ");
-    scanf("%s", funcionario->salario);
+    scanf("%f", funcionario->salario);
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -127,17 +153,15 @@ void exibir_funcionario(void) {
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
 
-   while (fscanf(arq_funcionario, "%11[^;];%50[^;];%11[^;];%52[^;];%19[^;];%8[^\n]\n",
-                  funcionario->cpf, funcionario->nome, funcionario->telefone, 
-                  funcionario->email, funcionario->cargo, funcionario->salario) == 6) {
-        if (strcmp(funcionario->cpf, cpf_lido) == 0) {
+    while (fread(funcionario,sizeof(Funcionario),1,arq_funcionario)) {
+        if (strcmp(funcionario->cpf,cpf_lido) == 0  && funcionario->status==True){
             printf("\nFuncionário encontrado!\n");
             printf("CPF: %s\n", funcionario->cpf);
             printf("Nome: %s\n", funcionario->nome);
             printf("Telefone: %s\n", funcionario->telefone);
             printf("Email: %s\n", funcionario->email);
             printf("Cargo: %s\n", funcionario->cargo);
-            printf("Salário: %s\n", funcionario->salario);
+            printf("Salário: %f\n", funcionario->salario);
             fclose(arq_funcionario);
             getchar();
             return;
@@ -154,13 +178,8 @@ void exibir_funcionario(void) {
 
 
 void alterar_funcionario(void) {
-Funcionario* funcionario = (Funcionario*) malloc(sizeof(*funcionario));
-    if (funcionario == NULL) {
-        printf("Erro ao alocar memória.\n");
-        getchar();
-        return;
-    }
-
+    Funcionario* funcionario;
+    funcionario = (Funcionario*) malloc(sizeof(*funcionario));
     FILE *arq_funcionarios = fopen("funcionarios.DAT", "rb");
     if (arq_funcionarios == NULL) {
         printf("Não foi possível abrir o arquivo funcionarios.DAT\n");
@@ -179,12 +198,8 @@ Funcionario* funcionario = (Funcionario*) malloc(sizeof(*funcionario));
         free(funcionario);
         return;
     }
-
     char cpf_lido[12];
     int encontrado = 0;
-    int tam;
-
-
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -221,36 +236,59 @@ Funcionario* funcionario = (Funcionario*) malloc(sizeof(*funcionario));
         printf("♡                                                                             ♡\n");
         printf("♡                       Novos dados do(a) Funcionários                        ♡\n");
         printf("♡                                                                             ♡\n");
-        printf("♡      CPF: ");
-        scanf("%s",novo_funcionario->cpf);
-        getchar();
-        printf("♡      Nome: ");
-        fgets(novo_funcionario->nome,51,stdin);
-        tam = strlen(novo_funcionario->nome);
-        novo_funcionario->nome[tam-1] = '\0';
-        printf("♡      Telefone: ");
-        scanf("%s",novo_funcionario->telefone);
-        getchar();
-        printf("♡      E-mail: ");
-        scanf("%s",novo_funcionario->email);
-        getchar();
+        do {
+        printf("♡     CPF (apenas 11 numeros): ");
+        ler_string(novo_funcionario->cpf,12);
+        if (!validar_cpf(novo_funcionario->cpf)) {
+            printf("♡      CPF invalido! Deve conter 11 numeros\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+        } while (!validar_cpf(novo_funcionario->cpf));
+        do {
+            printf("♡      Nome: ");
+            ler_string(novo_funcionario->nome,51);
+            if (!validar_nome(novo_funcionario->nome)) {
+                printf("♡      Nome invalido! Deve conter apenas letras e espacos\n");
+                printf("♡      Pressione <ENTER>");
+                getchar();
+            }
+        } while (!validar_nome(novo_funcionario->nome));
+        do {
+            printf("♡      Telefone (apenas números): ");
+            ler_string(novo_funcionario->telefone,12);
+            if (!validar_telefone(novo_funcionario->telefone)) {
+                printf("♡      Telefone invalido! Use apenas numeros e deve conter 11 digitos\n");
+                printf("♡      Pressione <ENTER>");
+                getchar();
+            }
+        } while (!validar_telefone(novo_funcionario->telefone));
+        do {
+            printf("♡      Email:");
+            ler_string(novo_funcionario->email,51);
+            if (!validar_email(novo_funcionario->email)) {
+                printf("♡      Email invalido! Formato esperado: joao@teste.com\n");
+                printf("♡      Pressione <ENTER>");
+                getchar();
+            }
+        } while (!validar_email(novo_funcionario->email));
         printf("♡      Cargo: ");
-        scanf("%s",novo_funcionario->cargo);
+        scanf("%s", funcionario->cargo);
         getchar();
-                printf("♡      Salário: ");
-        scanf("%s",novo_funcionario->salario);
+        //criar validação salario
+        printf("♡      Salário: ");
+        scanf("%f", novo_funcionario->salario);
         getchar();
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+        getchar();
 
-        novo_funcionario->status = 1; 
+        novo_funcionario->status = True; 
         fwrite(novo_funcionario, sizeof(Funcionario), 1, arq_temp);
         fclose(arq_temp);
         free(novo_funcionario);
-
         remove("funcionarios.DAT");
         rename("temp.DAT", "funcionarios.DAT");
-
         printf("\t\t Funcionário ALTERADO com sucesso! >>>> \n");
         printf("Pressione <ENTER> para continuar");
         getchar();
@@ -265,6 +303,7 @@ Funcionario* funcionario = (Funcionario*) malloc(sizeof(*funcionario));
     }
     continuar_acao();
 }
+
 
 void excluir_funcionario(void) {
     Funcionario* funcionario;
@@ -294,10 +333,10 @@ void excluir_funcionario(void) {
     
     while (fread(funcionario, sizeof(Funcionario), 1, arq_funcionarios) == 1 && !encontrado) {
         if (strcmp(funcionario->cpf, cpf_lido) == 0) {
-            funcionario->status = 0;  // marca como inativo
+            funcionario->status = False;  
             fseek(arq_funcionarios, -(long)sizeof(Funcionario), SEEK_CUR);
             fwrite(funcionario, sizeof(Funcionario), 1, arq_funcionarios);
-            encontrado = 1;
+            encontrado = True;
         }
     }
 
