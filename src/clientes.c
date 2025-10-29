@@ -143,9 +143,15 @@ void exibir_cliente(void){
     printf("♡                                                                             ♡\n");
     printf("♡                            Exibir Dados do Cliente                          ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o CPF do cliente: ");
-    scanf("%s",cpf_lido);
-    getchar();
+    do {
+        printf("♡      Informe o CPF do cliente: ");
+        ler_string(cpf_lido,12);
+        if (!validar_cpf(cpf_lido)) {
+            printf("♡      CPF invalido! Deve conter 11 numeros\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_cpf(cpf_lido));
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fread(cliente,sizeof(Cliente),1,arq_clientes)) {
@@ -200,9 +206,15 @@ void alterar_cliente(void){
     printf("♡                                                                             ♡\n");
     printf("♡                           Alterar Dados do Cliente                          ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o CPF do cliente: ");
-    scanf("%s",cpf_lido);
-    getchar();
+    do {
+        printf("♡      Informe o CPF do cliente: ");
+        ler_string(cpf_lido,12);
+        if (!validar_cpf(cpf_lido)) {
+            printf("♡      CPF invalido! Deve conter 11 numeros\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_cpf(cpf_lido));
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fread(cliente,sizeof(Cliente),1,arq_clientes)) {
@@ -312,9 +324,15 @@ void excluir_cliente(void){
     printf("♡                                                                             ♡\n");
     printf("♡                                Excluir Cliente                              ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o CPF do cliente: ");
-    scanf("%s",cpf_lido);
-    getchar();
+    do {
+        printf("♡      Informe o CPF do cliente: ");
+        ler_string(cpf_lido,12);
+        if (!validar_cpf(cpf_lido)) {
+            printf("♡      CPF invalido! Deve conter 11 numeros\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_cpf(cpf_lido));
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fread(cliente,sizeof(Cliente),1,arq_clientes) && (!encontrado)) {
