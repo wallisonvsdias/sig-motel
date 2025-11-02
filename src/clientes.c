@@ -107,7 +107,7 @@ void exibir_cliente(void){
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fread(cliente,sizeof(Cliente),1,arq_clientes)) {
-        if (strcmp(cliente->cpf,cpf_lido) == 0  && cliente->status==True){
+        if (strcmp(cliente->cpf,cpf_lido) == 0  && cliente->status){
             printf("\t\t Cliente encontrado! >>>> \n");
             printf("\t\tCPF: %s\n",cliente->cpf);
             printf("\t\tNome: %s\n",cliente->nome);
