@@ -71,53 +71,14 @@ void cadastrar_produto(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                            Cadastrar Produto                                ♡\n");
     printf("♡                                                                             ♡\n");
-    do {
-        printf("♡      ID do produto: ");
-        ler_string(entrada_id, 10);
-        if (!validar_id(entrada_id)) {
-            printf("♡      ID invalido! Insira apenas digitos\n");
-            printf("♡      Pressione <ENTER>");
-            getchar();
-        }
-    } while (!validar_id(entrada_id));
+    ler_id(entrada_id);
     produto->id = atof(entrada_id);
-    do {
-        printf("♡      Nome: ");
-        ler_string(produto->nome,25);
-        if (!validar_nome(produto->nome)) {
-            printf("♡      Nome invalido! Deve conter apenas letras e espacos\n");
-            printf("♡      Pressione <ENTER>");
-            getchar();
-        }
-    } while (!validar_nome(produto->nome));
-    do {
-        printf("♡      Descrição: ");
-        ler_string(produto->descricao,55);
-        if (!validar_descricao(produto->descricao,55)) {
-            printf("♡      Descricao invalida! Nao pode ser vazia\n");
-            printf("♡      Pressione <ENTER>");
-            getchar();
-        }
-    } while (!validar_descricao(produto->descricao, 55));
-    do {
-        printf("♡      Preço: ");
-        ler_string(entrada_preco,20);
-        if (!validar_preco(entrada_preco)) {
-            printf("♡      Preco invalido! Deve ser um numero positivo (use '.' para centavos).\n");
-            printf("♡      Pressione <ENTER>");
-            getchar();
-        }
-    } while (!validar_preco(entrada_preco));
+    ler_nome(produto->nome);
+    ler_descricao(produto->descricao);
+    printf("♡      Preço: ");
+    ler_preco(entrada_preco);
     produto->preco = atof(entrada_preco);
-    do {
-        printf("♡      Quantidade: ");
-        ler_string(entrada_quant,10);
-        if (!validar_preco(entrada_quant)) {
-            printf("♡      Quantidade invalida! Insira apenas digitos.\n");
-            printf("♡      Pressione <ENTER>");
-            getchar();
-        }
-    } while (!validar_preco(entrada_quant));
+    ler_quantidade(entrada_quant);
     produto->quant = atof(entrada_quant);
     printf("♡                                                                             ♡\n");
     printf("♡        Produto cadastrado com sucesso!                                        ♡\n");
@@ -151,8 +112,7 @@ void exibir_produto(void){
     printf("♡                                                                             ♡\n");
     printf("♡                           Exibir Dados do Produto                           ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o ID do produto: ");
-    scanf("%d",&id_lido);
+    ler_id(id_lido);
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -207,8 +167,7 @@ void alterar_produto(void){
     printf("♡                                                                             ♡\n");
     printf("♡                           Alterar Dados do Produto                          ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o ID do produto: ");
-    scanf("%d",&id_lido);
+    ler_id(id_lido);
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -330,8 +289,7 @@ void excluir_produto(void){
     printf("♡                                                                             ♡\n");
     printf("♡                                Excluir Produto                              ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o ID do produto: ");
-    scanf("%d",&id_lido);
+    ler_id(id_lido);
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
