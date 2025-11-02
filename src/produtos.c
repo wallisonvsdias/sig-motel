@@ -72,14 +72,14 @@ void cadastrar_produto(void) {
     printf("♡                            Cadastrar Produto                                ♡\n");
     printf("♡                                                                             ♡\n");
     ler_id(entrada_id);
-    produto->id = atof(entrada_id);
+    produto->id = atoi(entrada_id);
     ler_nome(produto->nome);
     ler_descricao(produto->descricao);
     printf("♡      Preço: ");
     ler_preco(entrada_preco);
     produto->preco = atof(entrada_preco);
     ler_quantidade(entrada_quant);
-    produto->quant = atof(entrada_quant);
+    produto->quant = atoi(entrada_quant);
     printf("♡                                                                             ♡\n");
     printf("♡        Produto cadastrado com sucesso!                                        ♡\n");
     printf("♡                                                                             ♡\n");
@@ -105,19 +105,21 @@ void exibir_produto(void){
         getchar();
         return;
     }
-    int id_lido;
+    int id;
+    char entrada_id[10];
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                           Exibir Dados do Produto                           ♡\n");
     printf("♡                                                                             ♡\n");
-    ler_id(id_lido);
+    ler_id(entrada_id);
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    id = atoi(entrada_id);
     while (fread(produto,sizeof(Produto),1,arq_produtos)) {
-        if (produto->id == id_lido && produto->status==True){
+        if (produto->id == id && produto->status){
             printf("\t\t Produto encontrado! >>>> \n");
             printf("\t\tNome: %s\n",produto->nome);
             printf("\t\tDescricao: %s\n",produto->descricao);
@@ -159,7 +161,8 @@ void alterar_produto(void){
         getchar();
         return;
     }
-    int id_lido;
+    int id;
+    char entrada_id[10];
     int encontrado;
     system("clear||cls");
     mostrar_cabecalho();
@@ -167,12 +170,13 @@ void alterar_produto(void){
     printf("♡                                                                             ♡\n");
     printf("♡                           Alterar Dados do Produto                          ♡\n");
     printf("♡                                                                             ♡\n");
-    ler_id(id_lido);
+    ler_id(entrada_id);
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    id = atoi(entrada_id);
     while (fread(produto,sizeof(Produto),1,arq_produtos)) {
-        if (produto->id != id_lido){
+        if (produto->id != id){
             fwrite(produto,sizeof(Produto),1,arq_temp);
         } else {
             encontrado = True;
@@ -186,7 +190,6 @@ void alterar_produto(void){
         Produto* novo_produto;
         novo_produto = (Produto*)malloc(sizeof(*novo_produto));
         char entrada_preco[20];
-        char entrada_id[10];
         char entrada_quant[10];
         system("clear||cls");
         mostrar_cabecalho();
@@ -194,54 +197,15 @@ void alterar_produto(void){
         printf("♡                                                                             ♡\n");
         printf("♡                              Editar dados de Produto                        ♡\n");
         printf("♡                                                                             ♡\n");
-        do {
-        printf("♡      ID do produto: ");
-        ler_string(entrada_id, 10);
-        if (!validar_id(entrada_id)) {
-            printf("♡      ID invalido! Insira apenas digitos\n");
-            printf("♡      Pressione <ENTER>");
-            getchar();
-        }
-        } while (!validar_id(entrada_id));
-        novo_produto->id = atof(entrada_id);
-        do {
-            printf("♡      Nome: ");
-            ler_string(novo_produto->nome,25);
-            if (!validar_nome(novo_produto->nome)) {
-                printf("♡      Nome invalido! Deve conter apenas letras e espacos\n");
-                printf("♡      Pressione <ENTER>");
-                getchar();
-            }
-        } while (!validar_nome(novo_produto->nome));
-        do {
-            printf("♡      Descrição: ");
-            ler_string(novo_produto->descricao,55);
-            if (!validar_descricao(novo_produto->descricao,55)) {
-                printf("♡      Descricao invalida! Nao pode ser vazia\n");
-                printf("♡      Pressione <ENTER>");
-                getchar();
-            }
-        } while (!validar_descricao(novo_produto->descricao, 55));
-        do {
-            printf("♡      Preço: ");
-            ler_string(entrada_preco,20);
-            if (!validar_preco(entrada_preco)) {
-                printf("♡      Preco invalido! Deve ser um numero positivo (use '.' para centavos).\n");
-                printf("♡      Pressione <ENTER>");
-                getchar();
-            }
-        } while (!validar_preco(entrada_preco));
+        ler_id(entrada_id);
+        novo_produto->id = atoi(entrada_id);
+        ler_nome(novo_produto->nome);
+        ler_descricao(novo_produto->descricao);
+        printf("♡      Preço: ");
+        ler_preco(entrada_preco);
         novo_produto->preco = atof(entrada_preco);
-        do {
-            printf("♡      Quantidade: ");
-            ler_string(entrada_quant,10);
-            if (!validar_preco(entrada_quant)) {
-                printf("♡      Quantidade invalida! Insira apenas digitos.\n");
-                printf("♡      Pressione <ENTER>");
-                getchar();
-            }
-        } while (!validar_preco(entrada_quant));
-        novo_produto->quant = atof(entrada_quant);
+        ler_quantidade(entrada_quant);
+        novo_produto->quant = atoi(entrada_quant);
         printf("♡                                                                             ♡\n");
         printf("♡        Produto cadastrado com sucesso!                                        ♡\n");
         printf("♡                                                                             ♡\n");
@@ -281,7 +245,8 @@ void excluir_produto(void){
         getchar();
         return;
     }
-    int id_lido;
+    int id;
+    char entrada_id[10];
     int encontrado = False;
     system("clear||cls");
     mostrar_cabecalho();
@@ -289,12 +254,13 @@ void excluir_produto(void){
     printf("♡                                                                             ♡\n");
     printf("♡                                Excluir Produto                              ♡\n");
     printf("♡                                                                             ♡\n");
-    ler_id(id_lido);
+    ler_id(entrada_id);
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    id = atoi(entrada_id);
     while (fread(produto,sizeof(Produto),1,arq_produtos)) {
-        if (produto->id == id_lido){
+        if (produto->id == id){
             produto->status = False;
             fseek(arq_produtos, -(long)sizeof(Produto),SEEK_CUR);
             fwrite(produto, sizeof(Produto),1,arq_produtos);

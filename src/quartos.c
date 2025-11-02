@@ -70,7 +70,7 @@ void cadastrar_quarto(void) {
     printf("♡                               Cadastrar Quarto                              ♡\n");
     printf("♡                                                                             ♡\n");
     ler_id(entrada_id);
-    quarto->id = atof(entrada_id);
+    quarto->id = atoi(entrada_id);
     ler_tipo(quarto->tipo);
     ler_descricao(quarto->descricao);
     printf("♡      Preço/hora: ");
@@ -105,19 +105,21 @@ void exibir_quarto(void){
         getchar();
         return;
     }
-    int id_lido;
+    int id;
+    char entrada_id[10];
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                            Exibir Dados do Quarto                           ♡\n");
     printf("♡                                                                             ♡\n");
-    ler_id(id_lido);
+    ler_id(entrada_id);
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    id = atoi(entrada_id);
     while (fread(quarto,sizeof(Quarto),1,arq_quartos)) {
-        if (quarto->id == id_lido && quarto->status==True){
+        if (quarto->id == id && quarto->status){
             printf("\t\t Quarto encontrado! >>>> \n");
             printf("\t\tTipo: %s\n",quarto->tipo);
             printf("\t\tDescricao: %s\n",quarto->descricao);
@@ -159,9 +161,8 @@ void alterar_quarto(void) {
         getchar();
         return;
     }
-    int id_lido;
+    int id;
     int encontrado;
-    char entrada_preco[20];
     char entrada_id[10];
     system("clear||cls");
     mostrar_cabecalho();
@@ -169,12 +170,13 @@ void alterar_quarto(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                            Alterar Dados do Quarto                          ♡\n");
     printf("♡                                                                             ♡\n");
-    ler_id(id_lido);
+    ler_id(entrada_id);
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    id = atoi(entrada_id);
     while (fread(quarto,sizeof(Quarto),1,arq_quartos)) {
-        if (quarto->id != id_lido){
+        if (quarto->id != id){
             fwrite(quarto,sizeof(Quarto),1,arq_temp);
         } else {
             encontrado = True;
@@ -186,6 +188,7 @@ void alterar_quarto(void) {
 
     if (encontrado) {
         Quarto* novo_quarto;
+        char entrada_preco[20];
         novo_quarto = (Quarto*)malloc(sizeof(*novo_quarto));
         system("clear||cls");
         mostrar_cabecalho();
@@ -194,7 +197,7 @@ void alterar_quarto(void) {
         printf("♡                              Editar dados de Quarto                         ♡\n");
         printf("♡                                                                             ♡\n");
         ler_id(entrada_id);
-        novo_quarto->id = atof(entrada_id);
+        novo_quarto->id = atoi(entrada_id);
         ler_tipo(novo_quarto->tipo);
         ler_descricao(novo_quarto->descricao);
         printf("♡      Preço/hora: ");
@@ -241,7 +244,8 @@ void excluir_quarto(void) {
         getchar();
         return;
     }
-    int id_lido;
+    int id;
+    char entrada_id[10];
     int encontrado = False;
     system("clear||cls");
     mostrar_cabecalho();
@@ -249,12 +253,13 @@ void excluir_quarto(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                                 Excluir Quarto                              ♡\n");
     printf("♡                                                                             ♡\n");
-    ler_id(id_lido);
+    ler_id(entrada_id);
     getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    id = atoi(entrada_id);
     while (fread(quarto,sizeof(Quarto),1,arq_quartos)) {
-        if (quarto->id == id_lido){
+        if (quarto->id == id){
             quarto->status = False;
             fseek(arq_quartos,-(long)sizeof(Quarto),SEEK_CUR);
             fwrite(quarto, sizeof(Quarto), 1, arq_quartos);
