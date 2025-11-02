@@ -25,5 +25,10 @@ void ler_cpf(char* cpf);
 void ler_data(char* data);
 void ler_telefone(char* telefone);
 void ler_email(char* email);
+void ler_id(char* id);
+void ler_tipo(char* tipo);
+void ler_descricao(char* descricao);
+void ler_preco(char* preco);
+void ler_quantidade(char* quantidade);
 
 #endif

@@ -379,3 +379,62 @@ void ler_email(char* email){
         }
     } while (!validar_email(email));
 }
+
+void ler_id(char* id) {
+    do {
+        printf("♡      ID: ");
+        ler_string(id, 10);
+        if (!validar_id(id)) {
+            printf("♡      ID invalido! Insira apenas digitos\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_id(id));
+}
+
+void ler_tipo(char* tipo){
+    do {
+        printf("♡      Tipo: ");
+        ler_string(tipo, 32);
+        if (!validar_tipo(tipo, 32)) {
+            printf("♡      Tipo invalido! Nao pode ser vazio\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_tipo(tipo,32));
+}
+
+void ler_descricao(char* descricao){
+    do {
+        printf("♡      Descrição: ");
+        ler_string(descricao,51);
+        if (!validar_descricao(descricao,51)) {
+            printf("♡      Descricao invalida! Nao pode ser vazia\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_descricao(descricao, 51));
+}
+
+void ler_preco(char* preco){
+    do {
+        ler_string(preco,20);
+        if (!validar_preco(preco)) {
+            printf("♡      Preco invalido! Deve ser um numero positivo (use '.' para centavos).\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_preco(preco));
+}
+
+void ler_quantidade(char* quantidade){
+    do {
+        printf("♡      Quantidade: ");
+        ler_string(quantidade,10);
+        if (!validar_preco(quantidade)) {
+            printf("♡      Quantidade invalida! Insira apenas digitos.\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_preco(quantidade));
+}
