@@ -9,15 +9,21 @@ int eh_letra(char c);
 int eh_digito(char c);
 int eh_bissexto(int ano);
 
-int validar_cpf(const char* cpf);
-int validar_nome(const char* nome);
-int validar_data(const char* data);
-int validar_telefone(const char* telefone);
-int validar_email(const char* email);
-int validar_id(const char* id_str);
-int validar_descricao(const char* descricao, int tamanho_max);
-int validar_tipo(const char* tipo, int tamanho_max);
-int validar_preco(const char* preco_str);
-int validar_quantidade(const char* quant_str);
+int validar_cpf(char* cpf);
+int validar_nome(char* nome);
+int validar_data(char* data);
+int validar_telefone(char* telefone);
+int validar_email(char* email);
+int validar_id(char* id_str);
+int validar_descricao(char* descricao, int tamanho_max);
+int validar_tipo(char* tipo, int tamanho_max);
+int validar_preco(char* preco_str);
+int validar_quantidade(char* quant_str);
+
+void ler_nome(char* nome);
+void ler_cpf(char* cpf);
+void ler_data(char* data);
+void ler_telefone(char* telefone);
+void ler_email(char* email);
 
 #endif

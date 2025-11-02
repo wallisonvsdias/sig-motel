@@ -69,51 +69,11 @@ void cadastrar_cliente(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                              Cadastrar Cliente                              ♡\n");
     printf("♡                                                                             ♡\n");
-    do {
-        printf("♡      CPF (apenas 11 numeros): ");
-        ler_string(cliente->cpf,12);
-        if (!validar_cpf(cliente->cpf)) {
-            printf("♡      CPF invalido! Deve conter 11 numeros\n");
-            printf("♡      Pressione <ENTER>");
-            getchar();
-        }
-    } while (!validar_cpf(cliente->cpf));
-    do {
-        printf("♡      Nome: ");
-        ler_string(cliente->nome,51);
-        if (!validar_nome(cliente->nome)) {
-            printf("♡      Nome invalido! Deve conter apenas letras e espacos\n");
-            printf("♡      Pressione <ENTER>");
-            getchar();
-        }
-    } while (!validar_nome(cliente->nome));
-    do {
-        printf("♡      Data de nascimento: ");
-        ler_string(cliente->nasc,11);
-        if (!validar_data(cliente->nasc)) {
-            printf("♡      Data de nascimento invalida! Use o formato DD/MM/AAAA\n");
-            printf("♡      Pressione <ENTER>");
-            getchar();
-        }
-    } while (!validar_data(cliente->nasc));
-    do {
-        printf("♡      Telefone (apenas números): ");
-        ler_string(cliente->telef,12);
-        if (!validar_telefone(cliente->telef)) {
-            printf("♡      Telefone invalido! Use apenas numeros e deve conter 11 digitos\n");
-            printf("♡      Pressione <ENTER>");
-            getchar();
-        }
-    } while (!validar_telefone(cliente->telef));
-    do {
-        printf("♡      Email:");
-        ler_string(cliente->email,51);
-        if (!validar_email(cliente->email)) {
-            printf("♡      Email invalido! Formato esperado: joao@teste.com\n");
-            printf("♡      Pressione <ENTER>");
-            getchar();
-        }
-    } while (!validar_email(cliente->email));
+    ler_cpf(cliente->cpf);
+    ler_nome(cliente->nome);
+    ler_data(cliente->nasc);
+    ler_telefone(cliente->telef);
+    ler_email(cliente->email);
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     cliente->status = True;
@@ -143,15 +103,7 @@ void exibir_cliente(void){
     printf("♡                                                                             ♡\n");
     printf("♡                            Exibir Dados do Cliente                          ♡\n");
     printf("♡                                                                             ♡\n");
-    do {
-        printf("♡      Informe o CPF do cliente: ");
-        ler_string(cpf_lido,12);
-        if (!validar_cpf(cpf_lido)) {
-            printf("♡      CPF invalido! Deve conter 11 numeros\n");
-            printf("♡      Pressione <ENTER>");
-            getchar();
-        }
-    } while (!validar_cpf(cpf_lido));
+    ler_cpf(cpf_lido);
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fread(cliente,sizeof(Cliente),1,arq_clientes)) {
@@ -206,15 +158,7 @@ void alterar_cliente(void){
     printf("♡                                                                             ♡\n");
     printf("♡                           Alterar Dados do Cliente                          ♡\n");
     printf("♡                                                                             ♡\n");
-    do {
-        printf("♡      Informe o CPF do cliente: ");
-        ler_string(cpf_lido,12);
-        if (!validar_cpf(cpf_lido)) {
-            printf("♡      CPF invalido! Deve conter 11 numeros\n");
-            printf("♡      Pressione <ENTER>");
-            getchar();
-        }
-    } while (!validar_cpf(cpf_lido));
+    ler_cpf(cpf_lido);
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fread(cliente,sizeof(Cliente),1,arq_clientes)) {
@@ -237,51 +181,11 @@ void alterar_cliente(void){
         printf("♡                                                                             ♡\n");
         printf("♡                            Novos dados de Cliente                           ♡\n");
         printf("♡                                                                             ♡\n");
-        do {
-            printf("♡      CPF (apenas 11 numeros): ");
-            ler_string(novo_cliente->cpf,12);
-            if (!validar_cpf(novo_cliente->cpf)) {
-                printf("♡      CPF invalido! Deve conter 11 numeros\n");
-                printf("♡      Pressione <ENTER>");
-                getchar();
-            }
-        } while (!validar_cpf(novo_cliente->cpf));
-        do {
-            printf("♡      Nome: ");
-            ler_string(novo_cliente->nome,51);
-            if (!validar_nome(novo_cliente->nome)) {
-                printf("♡      Nome invalido! Deve conter apenas letras e espacos\n");
-                printf("♡      Pressione <ENTER>");
-                getchar();
-            }
-        } while (!validar_nome(novo_cliente->nome));
-        do {
-            printf("♡      Data de nascimento: ");
-            ler_string(novo_cliente->nasc,11);
-            if (!validar_data(novo_cliente->nasc)) {
-                printf("♡      Data de nascimento invalida! Use o formato DD/MM/AAAA\n");
-                printf("♡      Pressione <ENTER>");
-                getchar();
-            }
-        } while (!validar_data(novo_cliente->nasc));
-        do {
-            printf("♡      Telefone (apenas números): ");
-            ler_string(novo_cliente->telef,12);
-            if (!validar_telefone(novo_cliente->telef)) {
-                printf("♡      Telefone invalido! Use apenas numeros e deve conter 11 digitos\n");
-                printf("♡      Pressione <ENTER>");
-                getchar();
-            }
-        } while (!validar_telefone(novo_cliente->telef));
-        do {
-            printf("♡      Email:");
-            ler_string(novo_cliente->email,51);
-            if (!validar_email(novo_cliente->email)) {
-                printf("♡      Email invalido! Formato esperado: joao@teste.com\n");
-                printf("♡      Pressione <ENTER>");
-                getchar();
-            }
-        } while (!validar_email(novo_cliente->email));
+        ler_cpf(novo_cliente->cpf);
+        ler_nome(novo_cliente->nome);
+        ler_data(novo_cliente->nasc);
+        ler_telefone(novo_cliente->telef);
+        ler_email(novo_cliente->email);
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         novo_cliente->status = True;
@@ -324,15 +228,7 @@ void excluir_cliente(void){
     printf("♡                                                                             ♡\n");
     printf("♡                                Excluir Cliente                              ♡\n");
     printf("♡                                                                             ♡\n");
-    do {
-        printf("♡      Informe o CPF do cliente: ");
-        ler_string(cpf_lido,12);
-        if (!validar_cpf(cpf_lido)) {
-            printf("♡      CPF invalido! Deve conter 11 numeros\n");
-            printf("♡      Pressione <ENTER>");
-            getchar();
-        }
-    } while (!validar_cpf(cpf_lido));
+    ler_cpf(cpf_lido);
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fread(cliente,sizeof(Cliente),1,arq_clientes) && (!encontrado)) {

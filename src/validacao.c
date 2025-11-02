@@ -50,7 +50,7 @@ int eh_bissexto(int ano) {
 // deve conter apenas letrase  espacos 
 // nao pode estar vazio
 // falta verificar acentos
-int validar_nome(const char* nome) {
+int validar_nome(char* nome) {
     int i = 0;
 
     // verifica se está vazio
@@ -71,7 +71,7 @@ int validar_nome(const char* nome) {
 // deve conter exatamente 11 numeros
 // nao valida os digitos verificadores, so o formato
 // falta verificacao completa de cpf
-int validar_cpf(const char* cpf) {
+int validar_cpf(char* cpf) {
     int i = 0;
 
     if (strlen(cpf) != 11) {
@@ -90,7 +90,7 @@ int validar_cpf(const char* cpf) {
 
 // valida a data de nascimento DD/MM/AAAA
 // formato, dias, meses e anos validos
-int validar_data(const char* data) {
+int validar_data(char* data) {
     int dia, mes, ano;
     
     // verifica o formato e extrai os numeros
@@ -130,7 +130,7 @@ int validar_data(const char* data) {
 
 // valida o telefone
 // deve conter apenas numeros, exemplo 80999887766
-int validar_telefone(const char* telefone) {
+int validar_telefone(char* telefone) {
     int i = 0;
 
     // verifica se esta vazio
@@ -156,7 +156,7 @@ int validar_telefone(const char* telefone) {
 // valida o email
 // verificacao simples de formato 
 // deve ter um @ e um . depois do @
-int validar_email(const char* email) {
+int validar_email(char* email) {
     char* arroba = strchr(email, '@'); // procura o @
     
     // verifica se tem @
@@ -188,7 +188,7 @@ int validar_email(const char* email) {
 
 // valida descricao
 // verifica o tamanho da string 
-int validar_descricao(const char* descricao, int tamanho_max) {
+int validar_descricao(char* descricao, int tamanho_max) {
     int len = strlen(descricao);
 
     // verifica se ta vazio
@@ -207,7 +207,7 @@ int validar_descricao(const char* descricao, int tamanho_max) {
 
 // valida tipo
 // verifica o tamanho da string 
-int validar_tipo(const char* tipo, int tamanho_max) {
+int validar_tipo(char* tipo, int tamanho_max) {
     int len = strlen(tipo);
 
     // verifica se ta vazio
@@ -225,7 +225,7 @@ int validar_tipo(const char* tipo, int tamanho_max) {
 
 // valida preco
 // recebe uma string que representa um float
-int validar_preco(const char* preco_str) {
+int validar_preco(char* preco_str) {
     int i = 0;
     int pontos_decimais = 0;
     float preco;
@@ -262,7 +262,7 @@ int validar_preco(const char* preco_str) {
 
 // valida quantidade
 // recebe uma string que representa um int
-int validar_quantidade(const char* quant_str) {
+int validar_quantidade(char* quant_str) {
     int i = 0;
     int quantidade;
 
@@ -292,7 +292,7 @@ int validar_quantidade(const char* quant_str) {
 
 // valida id
 // recebe uma string que representa um int
-int validar_id(const char* id_str) {
+int validar_id(char* id_str) {
     int i = 0;
     int id;
 
@@ -318,4 +318,64 @@ int validar_id(const char* id_str) {
     }
      
     return True; 
+}
+
+void ler_nome(char* nome) {
+    do {
+        printf("♡      Nome: ");
+        ler_string(nome,51);
+        if (!validar_nome(nome)) {
+            printf("♡      Nome invalido! Deve conter apenas letras e espacos\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_nome(nome));
+}
+
+void ler_cpf(char* cpf) {
+    do {
+        printf("♡      CPF (apenas 11 numeros): ");
+        ler_string(cpf,12);
+        if (!validar_cpf(cpf)) {
+            printf("♡      CPF invalido! Deve conter 11 numeros\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_cpf(cpf));
+}
+
+void ler_data(char* data){
+    do {
+        printf("♡      Data de nascimento: ");
+        ler_string(data,11);
+        if (!validar_data(data)) {
+            printf("♡      Data de nascimento invalida! Use o formato DD/MM/AAAA\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_data(data));
+}
+
+void ler_telefone(char* telefone){
+    do {
+        printf("♡      Telefone (apenas números): ");
+        ler_string(telefone,12);
+        if (!validar_telefone(telefone)) {
+            printf("♡      Telefone invalido! Use apenas numeros e deve conter 11 digitos\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_telefone(telefone));
+}
+
+void ler_email(char* email){
+    do {
+        printf("♡      Email:");
+        ler_string(email,51);
+        if (!validar_email(email)) {
+            printf("♡      Email invalido! Formato esperado: joao@teste.com\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_email(email));
 }
