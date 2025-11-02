@@ -3,4 +3,6 @@
 
 void menu_relatorio(void);
 
+void lista_geral_clientes(void);
+
 #endif
