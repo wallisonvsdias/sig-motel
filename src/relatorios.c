@@ -4,6 +4,7 @@
 #include "relatorios.h"
 #include "clientes.h"
 #include "quartos.h"
+#include "produtos.h"
 
 void menu_relatorio(void) {
     char op_relatorio;
@@ -44,6 +45,9 @@ void menu_relatorio(void) {
             break;
         case '3':
             lista_geral_quartos();
+            break;
+        case '5':
+            lista_geral_produtos();
             break;
         default:
             break;
@@ -115,5 +119,39 @@ void lista_geral_quartos(void) {
     }
     fclose(arq_quartos);
     free(quarto);
+    continuar_acao();
+}
+
+
+void lista_geral_produtos(void){
+    Produto* produto;
+    produto = (Produto*)malloc(sizeof(*produto));
+    FILE *arq_produtos;
+    arq_produtos = fopen("produtos.DAT", "rb");
+    if (arq_produtos == NULL) {
+        printf("Não foi possivel ler o arquivo produtos.DAT");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+    system("clear||cls");
+    mostrar_cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡                            Lista Geral de Produtos                          ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    while (fread(produto,sizeof(Produto),1,arq_produtos)) {
+        if (produto->status){
+            printf("\n");
+            printf("\t\tID: %d\n",produto->id);
+            printf("\t\tNome: %s\n",produto->nome);
+            printf("\t\tDescricao: %s\n",produto->descricao);
+            printf("\t\tPreco: %f\n",produto->preco);
+            printf("\t\tQuantidade: %d\n",produto->quant);
+        }
+    }
+    fclose(arq_produtos);
+    free(produto);
     continuar_acao();
 }
