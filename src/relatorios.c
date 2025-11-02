@@ -3,7 +3,7 @@
 #include "interface.h"
 #include "relatorios.h"
 #include "clientes.h"
-
+#include "quartos.h"
 
 void menu_relatorio(void) {
     char op_relatorio;
@@ -42,6 +42,9 @@ void menu_relatorio(void) {
         case '1':
             lista_geral_clientes();
             break;
+        case '3':
+            lista_geral_quartos();
+            break;
         default:
             break;
         }
@@ -79,5 +82,38 @@ void lista_geral_clientes(void) {
     }
     fclose(arq_clientes);
     free(cliente);
+    continuar_acao();
+}
+
+void lista_geral_quartos(void) {
+    Quarto* quarto;
+    quarto = (Quarto*)malloc(sizeof(*quarto));
+    FILE *arq_quartos;
+    arq_quartos = fopen("quartos.DAT", "rb");
+    if (arq_quartos == NULL) {
+        printf("Não foi possivel ler o arquivo quartos.DAT");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+    system("clear||cls");
+    mostrar_cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡                            Lista Geral de Quartos                           ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    while (fread(quarto,sizeof(Quarto),1,arq_quartos)) {
+        if (quarto->status){
+            printf("\n");
+            printf("\t\tID: %d\n",quarto->id);
+            printf("\t\tTipo: %s\n",quarto->tipo);
+            printf("\t\tDescricao: %s\n",quarto->descricao);
+            printf("\t\tPreco/hora: %f\n",quarto->preco_hora);
+            printf("\t\tPreco/diaria: %f\n",quarto->preco_diaria);
+        }
+    }
+    fclose(arq_quartos);
+    free(quarto);
     continuar_acao();
 }
