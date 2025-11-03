@@ -340,6 +340,43 @@ int validar_cargo(char* cargo) {
     return True;
 }
 
+// valida salario
+// recebe uma string que representa um float
+int validar_salario(char* salario) {
+    int i = 0;
+    int pontos_decimais = 0;
+    float valor;
+
+    // verifica se ta vazio
+    if (strlen(salario) == 0) {
+        return False;
+    }
+
+    // verifica se todos os caracteres sao digitos ou um ponto
+    while (salario[i] != '\0') {
+        if (salario[i] == '.') {
+            pontos_decimais++;
+        } else if (!eh_digito(salario[i])) {
+            return False; // caracter invalido, nao eh digito nem '.'
+        }
+        
+        if (pontos_decimais > 1) {
+            return False; // mais de um ponto decimal, tipo 10.5.9
+        }
+        i++;
+    }
+    
+    // converte a string para float
+    valor = atof(salario);
+    
+    // verifica se o salario eh positivo
+    if (valor <= 0.0) {
+        return False;
+    }
+    
+    return True;
+}
+
 void ler_nome(char* nome) {
     do {
         printf("♡      Nome: ");
@@ -462,10 +499,22 @@ void ler_cargo(char* cargo) {
     do {
         printf("♡      Cargo: ");
         ler_string(cargo,20);
-        if (!validar_nome(cargo)) {
+        if (!validar_cargo(cargo)) {
             printf("♡      Cargo invalido! Deve conter apenas letras e espacos\n");
             printf("♡      Pressione <ENTER>");
             getchar();
         }
-    } while (!validar_nome(cargo));
+    } while (!validar_cargo(cargo));
+}
+
+void ler_salario(char* salario){
+    do {
+        printf("♡      Salario: ");
+        ler_string(salario,20);
+        if (!validar_preco(salario)) {
+            printf("♡      Salario invalido! Deve ser um numero positivo (use '.' para centavos).\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_salario(salario));
 }
