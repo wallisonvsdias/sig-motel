@@ -320,6 +320,26 @@ int validar_id(char* id_str) {
     return True; 
 }
 
+// valida o cargo
+// deve conter apenas letrase  espacos 
+// nao pode estar vazio
+int validar_cargo(char* cargo) {
+    int i = 0;
+
+    // verifica se está vazio
+    if (strlen(cargo) == 0) {
+        return False;
+    }
+
+    while (cargo[i] != '\0') {
+        if (!isalpha(cargo[i]) && cargo[i] != ' ') {
+            return False; 
+        }
+        i++;
+    }
+    return True;
+}
+
 void ler_nome(char* nome) {
     do {
         printf("♡      Nome: ");
@@ -436,4 +456,16 @@ void ler_quantidade(char* quantidade){
             getchar();
         }
     } while (!validar_preco(quantidade));
+}
+
+void ler_cargo(char* cargo) {
+    do {
+        printf("♡      Cargo: ");
+        ler_string(cargo,20);
+        if (!validar_nome(cargo)) {
+            printf("♡      Cargo invalido! Deve conter apenas letras e espacos\n");
+            printf("♡      Pressione <ENTER>");
+            getchar();
+        }
+    } while (!validar_nome(cargo));
 }
