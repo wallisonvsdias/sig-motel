@@ -19,6 +19,7 @@ int validar_descricao(char* descricao, int tamanho_max);
 int validar_tipo(char* tipo, int tamanho_max);
 int validar_preco(char* preco_str);
 int validar_quantidade(char* quant_str);
+int validar_cargo(char* cargo);
 
 void ler_nome(char* nome);
 void ler_cpf(char* cpf);
@@ -30,5 +31,6 @@ void ler_tipo(char* tipo);
 void ler_descricao(char* descricao);
 void ler_preco(char* preco);
 void ler_quantidade(char* quantidade);
+void ler_cargo(char* cargo);
 
 #endif
