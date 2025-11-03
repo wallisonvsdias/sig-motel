@@ -71,6 +71,7 @@ void cadastrar_produto(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                            Cadastrar Produto                                ♡\n");
     printf("♡                                                                             ♡\n");
+    printf("♡      ID do produto: ");
     ler_id(entrada_id);
     produto->id = atoi(entrada_id);
     ler_nome(produto->nome);
@@ -113,8 +114,8 @@ void exibir_produto(void){
     printf("♡                                                                             ♡\n");
     printf("♡                           Exibir Dados do Produto                           ♡\n");
     printf("♡                                                                             ♡\n");
+    printf("♡      ID do produto: ");
     ler_id(entrada_id);
-    getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     id = atoi(entrada_id);
@@ -171,7 +172,6 @@ void alterar_produto(void){
     printf("♡                           Alterar Dados do Produto                          ♡\n");
     printf("♡                                                                             ♡\n");
     ler_id(entrada_id);
-    getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     id = atoi(entrada_id);
@@ -197,6 +197,7 @@ void alterar_produto(void){
         printf("♡                                                                             ♡\n");
         printf("♡                              Editar dados de Produto                        ♡\n");
         printf("♡                                                                             ♡\n");
+        printf("♡      ID do produto: ");
         ler_id(entrada_id);
         novo_produto->id = atoi(entrada_id);
         ler_nome(novo_produto->nome);
@@ -254,8 +255,8 @@ void excluir_produto(void){
     printf("♡                                                                             ♡\n");
     printf("♡                                Excluir Produto                              ♡\n");
     printf("♡                                                                             ♡\n");
+    printf("♡      ID do produto: ");
     ler_id(entrada_id);
-    getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     id = atoi(entrada_id);
