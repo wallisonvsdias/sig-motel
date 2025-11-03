@@ -5,8 +5,8 @@
 
 typedef struct {
     char cpf[12];
-    char id_quarto[30];
-    char horas[3];
+    int id_quarto;
+    int horas;
     int status;
 } Hospedagem;
 

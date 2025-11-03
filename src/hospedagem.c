@@ -24,7 +24,7 @@ void menu_hospedagem(void) {
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         printf("\nEscolha sua opção: ");
         scanf(" %c", &op_hospedagem);
-        
+        getchar();
         switch(op_hospedagem) {
             case '1':
                 cadastrar_hospedagem();
@@ -41,7 +41,6 @@ void menu_hospedagem(void) {
             case '0':
                 break;
             default:
-                getchar();
                 printf("\n");
                 printf("Por favor, digite uma opção válida");
                 getchar();
@@ -66,28 +65,22 @@ void cadastrar_hospedagem(void) {
         getchar();
         return;
     }
+    char entrada_id[10];
+    char entrada_horas[10];
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                           Cadastrar Hospedagem                              ♡\n");
     printf("♡                                                                             ♡\n");
-    getchar(); 
-    do {
-        printf("♡     CPF (apenas 11 numeros): ");
-        ler_string(hospedagem->cpf,12);
-        if (!validar_cpf(hospedagem->cpf)) {
-            printf("♡      CPF invalido! Deve conter 11 numeros\n");
-            printf("♡      Pressione <ENTER>");
-            getchar();
-        }
-    } while (!validar_cpf(hospedagem->cpf));
-    printf("♡      ID do quarto: ");
-    scanf("%s", hospedagem->id_quarto);
-    getchar();
-    printf("♡      Quantidade de horas: ");
-    scanf("%s", hospedagem->horas);
-    getchar();
+    printf("♡      Informe o CPF do cliente.                                              ♡\n");
+    ler_cpf(hospedagem->cpf);
+    printf("♡      Informe o ID do quarto.                                                ♡\n");
+    ler_id(entrada_id);
+    hospedagem->id_quarto = atoi(entrada_id);
+    printf("♡      Informe a quantidade de horas.                                         ♡\n");
+    ler_quantidade(entrada_horas);
+    hospedagem->horas = atoi(entrada_horas);
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     hospedagem->status = True; 
@@ -117,18 +110,17 @@ void exibir_hospedagem(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                       Exibir Dados da Hospedagem                             ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o CPF do cliente hospedado: ");
-    scanf("%s", cpf_lido);
-    getchar();
+    printf("♡      Informe o CPF do cliente.                                              ♡\n");
+    ler_cpf(cpf_lido);
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
 
     while (fread(hospedagem, sizeof(Hospedagem), 1, arq_hospedagem)) {
-        if (strcmp(hospedagem->cpf, cpf_lido) == 0 && hospedagem->status == True) {
+        if (strcmp(hospedagem->cpf, cpf_lido) == 0 && hospedagem->status) {
             printf("\nHospedagem encontrada!\n");
             printf("CPF: %s\n", hospedagem->cpf);
-            printf("ID do quarto: %s\n", hospedagem->id_quarto);
-            printf("Horas: %s\n", hospedagem->horas);
+            printf("ID do quarto: %d\n", hospedagem->id_quarto);
+            printf("Horas: %d\n", hospedagem->horas);
             getchar();
             fclose(arq_hospedagem);
             free(hospedagem);
@@ -173,9 +165,8 @@ void alterar_hospedagem(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                        Alterar Dados da Hospedagem                          ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o CPF do cliente: ");
-    scanf("%s", cpf_lido);
-    getchar();
+    printf("♡      Informe o CPF do cliente.                                              ♡\n");
+    ler_cpf(cpf_lido);
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
 
@@ -192,39 +183,32 @@ void alterar_hospedagem(void) {
     if (encontrado) {
         Hospedagem* nova_hospedagem;
         nova_hospedagem = (Hospedagem*)malloc(sizeof(*nova_hospedagem));
-            system("clear||cls");
-            mostrar_cabecalho();
-            printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-            printf("♡                                                                             ♡\n");
-            printf("♡                        Novos dados da Hospedagem                            ♡\n");
-            printf("♡                                                                             ♡\n");
-            do {
-                printf("♡     CPF (apenas 11 numeros): ");
-                ler_string(nova_hospedagem->cpf,12);
-                if (!validar_cpf(nova_hospedagem->cpf)) {
-                    printf("♡      CPF invalido! Deve conter 11 numeros\n");
-                    printf("♡      Pressione <ENTER>");
-                    getchar();
-                }
-            } while (!validar_cpf(nova_hospedagem->cpf));
-            printf("♡      ID do Quarto: ");
-            scanf("%s", nova_hospedagem->id_quarto);
-            getchar();
-            printf("♡      Horas: ");
-            scanf("%s", nova_hospedagem->horas);
-            printf("♡                                                                             ♡\n");
-            printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-            getchar();
-            nova_hospedagem->status = True;
-            fwrite(nova_hospedagem,sizeof(Hospedagem),1,arq_temp);
-            fclose(arq_temp);
-            free(nova_hospedagem);
-            remove("hospedahem.DAT");
-            rename("temp.DAT","hospedagem.DAT");
-            printf("\t\t Hospedagem ALTERADA com sucesso! >>>> \n");
-            printf("Pressione <ENTER> para continuar");
-            getchar();
-            return;
+        system("clear||cls");
+        char entrada_id[10];
+        char entrada_horas[10];
+        mostrar_cabecalho();
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡                        Novos dados da Hospedagem                            ♡\n");
+        printf("♡                                                                             ♡\n");
+        ler_cpf(nova_hospedagem->cpf);
+        ler_id(entrada_id); 
+        nova_hospedagem->id_quarto = atoi(entrada_id);
+        printf("♡      Quantidade de Horas                                                    ♡\n");
+        ler_quantidade(entrada_horas);
+        nova_hospedagem->horas = atoi(entrada_horas);
+        printf("♡                                                                             ♡\n");
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+        nova_hospedagem->status = True;
+        fwrite(nova_hospedagem,sizeof(Hospedagem),1,arq_temp);
+        fclose(arq_temp);
+        free(nova_hospedagem);
+        remove("hospedahem.DAT");
+        rename("temp.DAT","hospedagem.DAT");
+        printf("\t\t Hospedagem ALTERADA com sucesso! >>>> \n");
+        printf("Pressione <ENTER> para continuar");
+        getchar();
+        return;
         }
     else {
         printf("\t\t Hospedagem NAO encontrado! >>>> \n");
@@ -256,9 +240,8 @@ void excluir_hospedagem(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                              Excluir Hospedagem                             ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o ID da hospedagem: ");
-    scanf("%s", cpf_lido);
-    getchar();
+    printf("♡      Informe o CPF do cliente\n");
+    ler_cpf(cpf_lido);
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fread(hospedagem,sizeof(Hospedagem),1,arq_hospedagem) && (!encontrado)) {
