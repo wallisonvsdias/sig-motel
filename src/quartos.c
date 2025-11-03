@@ -69,6 +69,7 @@ void cadastrar_quarto(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                               Cadastrar Quarto                              ♡\n");
     printf("♡                                                                             ♡\n");
+    printf("♡      ID do quarto: ");
     ler_id(entrada_id);
     quarto->id = atoi(entrada_id);
     ler_tipo(quarto->tipo);
@@ -113,8 +114,8 @@ void exibir_quarto(void){
     printf("♡                                                                             ♡\n");
     printf("♡                            Exibir Dados do Quarto                           ♡\n");
     printf("♡                                                                             ♡\n");
+    printf("♡      ID do quarto: ");
     ler_id(entrada_id);
-    getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     id = atoi(entrada_id);
@@ -170,8 +171,8 @@ void alterar_quarto(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                            Alterar Dados do Quarto                          ♡\n");
     printf("♡                                                                             ♡\n");
+    printf("♡      ID do quarto: ");
     ler_id(entrada_id);
-    getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     id = atoi(entrada_id);
@@ -196,6 +197,7 @@ void alterar_quarto(void) {
         printf("♡                                                                             ♡\n");
         printf("♡                              Editar dados de Quarto                         ♡\n");
         printf("♡                                                                             ♡\n");
+        printf("♡      ID do quarto: ");
         ler_id(entrada_id);
         novo_quarto->id = atoi(entrada_id);
         ler_tipo(novo_quarto->tipo);
@@ -253,8 +255,8 @@ void excluir_quarto(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                                 Excluir Quarto                              ♡\n");
     printf("♡                                                                             ♡\n");
+    printf("♡      ID do quarto: ");
     ler_id(entrada_id);
-    getchar();
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     id = atoi(entrada_id);
