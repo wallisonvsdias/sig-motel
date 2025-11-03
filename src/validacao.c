@@ -439,6 +439,7 @@ void ler_email(char* email){
 
 void ler_id(char* id) {
     do {
+        printf("♡      ID: ");
         ler_string(id, 10);
         if (!validar_id(id)) {
             printf("♡      ID invalido! Insira apenas digitos\n");
