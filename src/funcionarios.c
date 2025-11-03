@@ -131,7 +131,7 @@ void exibir_funcionario(void) {
     Funcionario* funcionario;
     funcionario = (Funcionario*) malloc(sizeof(*funcionario));
     FILE *arq_funcionario;
-    arq_funcionario = fopen("funcionarios.DAT", "ab");
+    arq_funcionario = fopen("funcionarios.DAT", "rb");
     if (arq_funcionario == NULL) {
         printf("Não foi possível abrir o arquivo funcionarios.dat\n");
         printf("Pressione <enter>\n");
