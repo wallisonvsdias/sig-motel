@@ -24,7 +24,7 @@ void menu_venda(void) {
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         printf("\nEscolha sua opção: ");
         scanf(" %c", &op_venda);
-        
+        getchar();
         switch(op_venda) {
             case '1':
                 cadastrar_venda();
@@ -51,44 +51,37 @@ void menu_venda(void) {
 
 
 void cadastrar_venda(void) {
-Venda* venda;
-venda = (Venda*) malloc(sizeof(*venda));
-FILE *arq_vendas = fopen("vendas.DAT", "ab");
-if (!arq_vendas) {
-    printf("Não foi possível abrir o arquivo vendas.DAT\n");
+    Venda* venda;
+    venda = (Venda*) malloc(sizeof(*venda));
+    FILE *arq_vendas = fopen("vendas.DAT", "ab");
+    if (!arq_vendas) {
+        printf("Não foi possível abrir o arquivo vendas.DAT\n");
+        free(venda);
+        getchar();
+        return;
+    }
+    char entrada_id[10];
+    char entrada_quant[10];
+    system("clear||cls");
+    mostrar_cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡                              Cadastrar Venda                                ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡      Informe o CPF do cliente\n");
+    ler_cpf(venda->cpf);
+    printf("♡      ID do produto: \n");
+    ler_id(entrada_id);
+    venda->id_produto = atoi(entrada_id);
+    ler_quantidade(entrada_quant);
+    venda->quant = atoi(entrada_quant);
+    printf("♡                                                                             ♡\n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    venda->status = True; 
+    fwrite(venda, sizeof(Venda), 1, arq_vendas);
+    fclose(arq_vendas);
     free(venda);
-    getchar();
-    return;
-}
-system("clear||cls");
-mostrar_cabecalho();
-printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-printf("♡                                                                             ♡\n");
-printf("♡                              Cadastrar Venda                                ♡\n");
-printf("♡                                                                             ♡\n");
-getchar();
-do {
-        printf("♡     CPF (apenas 11 numeros): ");
-        ler_string(venda->cpf,12);
-        if (!validar_cpf(venda->cpf)) {
-            printf("♡      CPF invalido! Deve conter 11 numeros\n");
-            printf("♡      Pressione <ENTER>");
-            getchar();
-        }
-    } while (!validar_cpf(venda->cpf));
-printf("♡      ID do produto: ");
-scanf("%s", venda->id_produto);
-getchar();
-printf("♡      Quantidade: ");
-scanf("%s", venda->quant);
-getchar();
-printf("♡                                                                             ♡\n");
-printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-venda->status = True; 
-fwrite(venda, sizeof(Venda), 1, arq_vendas);
-fclose(arq_vendas);
-free(venda);
-continuar_acao();
+    continuar_acao();
 }
 
 
@@ -110,17 +103,16 @@ void exibir_venda(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                        Exibir Dados da Venda                                ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o CPF do cliente: ");
-    scanf("%s", cpf_lido);
-    getchar();
+    printf("♡      Informe o CPF do cliente.\n");
+    ler_cpf(cpf_lido);
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fread(venda,sizeof(Venda),1,arq_vendas)) {
-        if (strcmp(venda->cpf,cpf_lido) == 0  && venda->status==True){
+        if (strcmp(venda->cpf,cpf_lido) == 0  && venda->status){
             printf("\t\t Venda encontrado! >>>> \n");
             printf("\t\tCPF: %s\n",venda->cpf);
-            printf("\t\tID do Produto: %s\n",venda-> id_produto);
-            printf("\t\tQuantidade: %s\n",venda-> quant);
+            printf("\t\tID do Produto: %d\n",venda-> id_produto);
+            printf("\t\tQuantidade: %d\n",venda-> quant);
             printf("Pressione <ENTER> para continuar");
             getchar();
             fclose(arq_vendas);
@@ -129,8 +121,6 @@ void exibir_venda(void) {
         }
     }
     printf("\t\t Cliente NAO encontrado! >>>> \n");
-    printf("Pressione <ENTER> para continuar");
-    getchar();
     fclose(arq_vendas);
     free(venda);
     return;
@@ -166,8 +156,7 @@ void alterar_venda(void) {
     printf("♡                        Alterar Dados da Venda                               ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡      Informe o CPF do cliente: ");
-    scanf("%s", cpf_lido);
-    getchar();
+    ler_cpf(cpf_lido);
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
 
@@ -186,26 +175,20 @@ void alterar_venda(void) {
         Venda* nova_venda;
         nova_venda = (Venda*) malloc(sizeof(*nova_venda));
         system("clear||cls");
+        char entrada_id[10];
+        char entrada_quant[10];
         mostrar_cabecalho();
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡                             Novos dados da venda                            ♡\n");
         printf("♡                                                                             ♡\n");
-        do {
-            printf("♡      CPF (apenas 11 numeros): ");
-            ler_string(nova_venda->cpf,12);
-            if (!validar_cpf(nova_venda->cpf)) {
-                printf("♡      CPF invalido! Deve conter 11 numeros\n");
-                printf("♡      Pressione <ENTER>");
-                getchar();
-            }
-        } while (!validar_cpf(nova_venda->cpf));
-        printf("♡      ID do Produto: ");
-        scanf("%s", nova_venda->id_produto);
-        getchar();
-        printf("♡      Quantidade: ");
-        scanf("%s", nova_venda->quant);
-        getchar();
+        printf("♡      Informe o CPF do cliente\n");
+        ler_cpf(nova_venda->cpf);
+        printf("♡      ID do produto: \n");
+        ler_id(entrada_id);
+        nova_venda->id_produto = atoi(entrada_id);
+        ler_quantidade(entrada_quant);
+        nova_venda->quant = atoi(entrada_quant);
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         nova_venda->status = True; 
@@ -215,13 +198,8 @@ void alterar_venda(void) {
         remove("vendas.DAT");
         rename("temp_vendas.DAT", "vendas.DAT");
         printf("\t\t Venda ALTERADA com sucesso! >>>> \n");
-        printf("Pressione <ENTER> para continuar...");
-        getchar();
-
     } else {
         printf("\t\t Venda NÃO encontrada! >>>> \n");
-        printf("Pressione <ENTER> para continuar...");
-        getchar();
     }
 
     continuar_acao();
@@ -247,8 +225,7 @@ void excluir_venda(void) {
     printf("♡                              Excluir Venda                                  ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡      Informe o CPF da venda:                                                ♡\n");
-    scanf("%s", cpf_lido);
-    getchar();
+    ler_cpf(cpf_lido);
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
 
@@ -263,9 +240,6 @@ void excluir_venda(void) {
     
     fclose(arq_vendas);
     free(venda);
-
-    printf("♡ Pressione <ENTER> para continuar...");
-    getchar();
     continuar_acao();
 }
     

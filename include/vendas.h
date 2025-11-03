@@ -5,8 +5,8 @@
 
 typedef struct{
     char cpf[12];
-    char id_produto[4];
-    char quant[4];
+    int id_produto;
+    int quant;
     int status;
  } Venda;
 
