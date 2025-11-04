@@ -5,6 +5,7 @@
 #include "clientes.h"
 #include "funcionarios.h"
 #include "quartos.h"
+#include "hospedagem.h"
 #include "produtos.h"
 
 void menu_relatorio(void) {
@@ -157,6 +158,36 @@ void lista_geral_quartos(void) {
     continuar_acao();
 }
 
+void lista_geral_hospedagem(void) {
+    Hospedagem* hospedagem;
+    hospedagem = (Hospedagem*)malloc(sizeof(*hospedagem));
+    FILE *arq_hospedagem;
+    arq_hospedagem = fopen("hospedagem.DAT", "rb");
+    if (arq_hospedagem == NULL) {
+        printf("Não foi possivel ler o arquivo hospedagem.DAT");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+    system("clear||cls");
+    mostrar_cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡                         Lista Geral de Hospedagens                          ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    while (fread(hospedagem,sizeof(Hospedagem),1,arq_hospedagem)) {
+        if (hospedagem->status){
+            printf("\n");
+            printf("\t\tCPF Cliente: %s\n",hospedagem->cpf);
+            printf("\t\tID do Quarto: %d\n",hospedagem->id_quarto);
+            printf("\t\tHoras: %d\n",hospedagem->horas);
+        }
+    }
+    fclose(arq_hospedagem);
+    free(hospedagem);
+    continuar_acao();
+}
 
 void lista_geral_produtos(void){
     Produto* produto;
