@@ -7,6 +7,7 @@
 #include "quartos.h"
 #include "hospedagem.h"
 #include "produtos.h"
+#include "vendas.h"
 
 void menu_relatorio(void) {
     char op_relatorio;
@@ -219,5 +220,36 @@ void lista_geral_produtos(void){
     }
     fclose(arq_produtos);
     free(produto);
+    continuar_acao();
+}
+
+void lista_geral_vendas(void) {
+    Venda* venda;
+    venda = (Venda*)malloc(sizeof(*venda));
+    FILE *arq_vendas;
+    arq_vendas = fopen("vendas.DAT", "rb");
+    if (arq_vendas == NULL) {
+        printf("Não foi possivel ler o arquivo vendas.DAT");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+    system("clear||cls");
+    mostrar_cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡                            Lista Geral de Vendas                            ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    while (fread(venda,sizeof(Hospedagem),1,arq_vendas)) {
+        if (venda->status){
+            printf("\n");
+            printf("\t\tCPF Cliente: %s\n",venda->cpf);
+            printf("\t\tID do Quarto: %d\n",venda->id_produto);
+            printf("\t\tHoras: %d\n",venda->quant);
+        }
+    }
+    fclose(arq_vendas);
+    free(venda);
     continuar_acao();
 }

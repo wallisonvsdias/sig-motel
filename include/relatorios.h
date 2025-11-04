@@ -8,5 +8,6 @@ void lista_geral_funcionarios(void);
 void lista_geral_quartos(void);
 void lista_geral_quartos(void);
 void lista_geral_produtos(void);
+void lista_geral_vendas(void);
 
 #endif
