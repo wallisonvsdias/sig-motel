@@ -246,7 +246,7 @@ void lista_geral_vendas(void) {
             printf("\n");
             printf("\t\tCPF Cliente: %s\n",venda->cpf);
             printf("\t\tID do Quarto: %d\n",venda->id_produto);
-            printf("\t\tHoras: %d\n",venda->quant);
+            printf("\t\tHoras: %d\n",venda->quantidade);
         }
     }
     fclose(arq_vendas);
