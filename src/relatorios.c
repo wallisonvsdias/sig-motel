@@ -3,6 +3,7 @@
 #include "interface.h"
 #include "relatorios.h"
 #include "clientes.h"
+#include "funcionarios.h"
 #include "quartos.h"
 #include "produtos.h"
 
@@ -86,6 +87,40 @@ void lista_geral_clientes(void) {
     }
     fclose(arq_clientes);
     free(cliente);
+    continuar_acao();
+}
+
+void lista_geral_funcionarios(void) {
+    Funcionario* funcionario;
+    funcionario = (Funcionario*)malloc(sizeof(*funcionario));
+    FILE *arq_funcionario;
+    arq_funcionario = fopen("funcionarios.DAT", "rb");
+    if (arq_funcionario == NULL) {
+        printf("Não foi possivel ler o arquivo funcionarios.dat\n");
+        printf("pressione <enter>\n");
+        getchar();
+        return;
+    }
+    system("clear||cls");
+    mostrar_cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡                         Lista Geral de Funcionários                         ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    while (fread(funcionario,sizeof(Funcionario),1,arq_funcionario)) {
+        if (funcionario->status){
+            printf("\n");
+            printf("\t\tCPF: %s\n",funcionario->cpf);
+            printf("\t\tNome: %s\n",funcionario->nome);
+            printf("\t\tTelefone: %s\n",funcionario->telefone);
+            printf("\t\tEmail: %s\n",funcionario->email);
+            printf("\t\tCargo: %s\n",funcionario->cargo);
+            printf("\t\tSalário: %f\n",funcionario->salario);
+        }
+    }
+    fclose(arq_funcionario);
+    free(funcionario);
     continuar_acao();
 }
 
