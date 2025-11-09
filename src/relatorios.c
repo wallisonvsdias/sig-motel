@@ -46,11 +46,20 @@ void menu_relatorio(void) {
         case '1':
             lista_geral_clientes();
             break;
+        case '2':
+            lista_geral_funcionarios();
+            break;
         case '3':
             lista_geral_quartos();
             break;
+        case '4':
+            lista_geral_hospedagensswitch();
+            break;
         case '5':
             lista_geral_produtos();
+            break;
+        case '6':
+            lista_geral_vendas();
             break;
         default:
             break;
@@ -159,7 +168,7 @@ void lista_geral_quartos(void) {
     continuar_acao();
 }
 
-void lista_geral_hospedagem(void) {
+void lista_geral_hospedagens(void) {
     Hospedagem* hospedagem;
     hospedagem = (Hospedagem*)malloc(sizeof(*hospedagem));
     FILE *arq_hospedagem;
@@ -241,12 +250,12 @@ void lista_geral_vendas(void) {
     printf("♡                            Lista Geral de Vendas                            ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    while (fread(venda,sizeof(Hospedagem),1,arq_vendas)) {
+    while (fread(venda,sizeof(Venda),1,arq_vendas)) {
         if (venda->status){
             printf("\n");
             printf("\t\tCPF Cliente: %s\n",venda->cpf);
-            printf("\t\tID do Quarto: %d\n",venda->id_produto);
-            printf("\t\tHoras: %d\n",venda->quant);
+            printf("\t\tID do Produto: %d\n",venda->id_produto);
+            printf("\t\tQuantidade: %d\n",venda->quant);
         }
     }
     fclose(arq_vendas);
