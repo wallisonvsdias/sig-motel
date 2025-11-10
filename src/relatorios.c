@@ -53,7 +53,7 @@ void menu_relatorio(void) {
             lista_geral_quartos();
             break;
         case '4':
-            lista_geral_hospedagensswitch();
+            lista_geral_hospedagens();
             break;
         case '5':
             lista_geral_produtos();
