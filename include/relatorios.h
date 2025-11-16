@@ -10,4 +10,6 @@ void lista_geral_hospedagens(void);
 void lista_geral_produtos(void);
 void lista_geral_vendas(void);
 
+void clientes_por_nome(void);
+
 #endif

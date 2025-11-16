@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "interface.h"
 #include "relatorios.h"
 #include "clientes.h"
@@ -8,6 +9,7 @@
 #include "hospedagem.h"
 #include "produtos.h"
 #include "vendas.h"
+#include "validacao.h"
 
 void menu_relatorio(void) {
     char op_relatorio;
@@ -24,6 +26,7 @@ void menu_relatorio(void) {
         printf("♡      4  - Lista geral de hospedagens                                        ♡\n");
         printf("♡      5  - Lista geral de produtos                                           ♡\n");
         printf("♡      6  - Lista geral de vendas                                             ♡\n");
+        printf("♡      7  - Lista Clientes por nome                                           ♡\n");
         printf("♡      0  - Retornar ao Menu Principal                                        ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -50,6 +53,9 @@ void menu_relatorio(void) {
             break;
         case '6':
             lista_geral_vendas();
+            break;
+        case '7':
+            clientes_por_nome();
             break;
         default:
             break;
@@ -250,5 +256,43 @@ void lista_geral_vendas(void) {
     }
     fclose(arq_vendas);
     free(venda);
+    continuar_acao();
+}
+
+void clientes_por_nome(void) {
+    Cliente* cliente;
+    cliente = (Cliente*)malloc(sizeof(*cliente));
+    FILE *arq_clientes;
+    arq_clientes = fopen("clientes.DAT", "rb");
+    if (arq_clientes == NULL) {
+        printf("Não foi possivel ler o arquivo clientes.dat\n");
+        printf("pressione <enter>\n");
+        getchar();
+        return;
+    }
+    char nome_lido[51];
+    system("clear||cls");
+    mostrar_cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡                            Clientes por nome                                ♡\n");
+    printf("♡                                                                             ♡\n");
+    ler_nome(nome_lido);
+    printf("♡                                                                             ♡\n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("\n");
+    printf("Busca: %s\n",nome_lido);
+    while (fread(cliente,sizeof(Cliente),1,arq_clientes)) {
+        if (strstr(cliente->nome,nome_lido) != NULL){
+            printf("\n");
+            printf("\t\tCPF: %s\n",cliente->cpf);
+            printf("\t\tNome: %s\n",cliente->nome);
+            printf("\t\tData de nascimento: %s\n",cliente->nasc);
+            printf("\t\tTelefone: %s\n",cliente->telef);
+            printf("\t\tEmail: %s\n",cliente->email);
+        }
+    }
+    fclose(arq_clientes);
+    free(cliente);
     continuar_acao();
 }
