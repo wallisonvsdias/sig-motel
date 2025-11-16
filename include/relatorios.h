@@ -12,5 +12,6 @@ void lista_geral_vendas(void);
 
 void clientes_por_nome(void);
 void quartos_por_tipo(void);
+void produtos_por_nome(void);
 
 #endif

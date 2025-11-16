@@ -71,7 +71,7 @@ void cadastrar_produto(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                            Cadastrar Produto                                ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      ID do produto: ");
+    printf("♡      ID do produto\n");
     ler_id(entrada_id);
     produto->id = atoi(entrada_id);
     ler_nome(produto->nome);
@@ -197,7 +197,7 @@ void alterar_produto(void){
         printf("♡                                                                             ♡\n");
         printf("♡                              Editar dados de Produto                        ♡\n");
         printf("♡                                                                             ♡\n");
-        printf("♡      ID do produto: ");
+        printf("♡      ID do produto\n");
         ler_id(entrada_id);
         novo_produto->id = atoi(entrada_id);
         ler_nome(novo_produto->nome);

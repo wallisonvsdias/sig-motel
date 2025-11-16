@@ -197,7 +197,7 @@ void alterar_quarto(void) {
         printf("♡                                                                             ♡\n");
         printf("♡                              Editar dados de Quarto                         ♡\n");
         printf("♡                                                                             ♡\n");
-        printf("♡      ID do quarto: ");
+        printf("♡      ID do quarto\n");
         ler_id(entrada_id);
         novo_quarto->id = atoi(entrada_id);
         ler_tipo(novo_quarto->tipo);
