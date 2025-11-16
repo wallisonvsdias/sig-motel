@@ -69,7 +69,7 @@ void cadastrar_quarto(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                               Cadastrar Quarto                              ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      ID do quarto: ");
+    printf("♡      ID do quarto\n");
     ler_id(entrada_id);
     quarto->id = atoi(entrada_id);
     ler_tipo(quarto->tipo);
