@@ -53,7 +53,7 @@ void menu_venda(void) {
 void cadastrar_venda(void) {
     Venda* venda;
     venda = (Venda*) malloc(sizeof(*venda));
-    FILE *arq_vendas = fopen("vendas.DAT", "ab");
+    FILE *arq_vendas = fopen("data/vendas.DAT", "ab");
     if (!arq_vendas) {
         printf("Não foi possível abrir o arquivo vendas.DAT\n");
         free(venda);
@@ -88,7 +88,7 @@ void cadastrar_venda(void) {
 void exibir_venda(void) {
     Venda* venda;
     venda = (Venda*) malloc(sizeof(*venda));
-    FILE *arq_vendas = fopen("vendas.DAT", "rb");
+    FILE *arq_vendas = fopen("data/vendas.DAT", "rb");
     if (!arq_vendas) {
         printf("Não foi possível ler o arquivo vendas.DAT\n");
         free(venda);
@@ -131,7 +131,7 @@ void exibir_venda(void) {
 void alterar_venda(void) {
     Venda* venda;
     venda = (Venda*) malloc(sizeof(*venda));
-    FILE *arq_vendas = fopen("vendas.DAT", "rb");
+    FILE *arq_vendas = fopen("data/vendas.DAT", "rb");
     if (!arq_vendas) {
         printf("Não foi possível ler o arquivo vendas.DAT\n");
         free(venda);
@@ -139,7 +139,7 @@ void alterar_venda(void) {
         return;
     }
 
-    FILE *arq_temp = fopen("temp_vendas.DAT", "wb");
+    FILE *arq_temp = fopen("data/temp_vendas.DAT", "wb");
     if (!arq_temp) {
         printf("Não foi possível criar arquivo temporário\n");
         fclose(arq_vendas);
@@ -209,7 +209,7 @@ void alterar_venda(void) {
 void excluir_venda(void) {
     Venda* venda;
     venda = (Venda*) malloc(sizeof(*venda));
-    FILE *arq_vendas = fopen("vendas.DAT", "r+b");
+    FILE *arq_vendas = fopen("data/vendas.DAT", "r+b");
     if (!arq_vendas) {
         printf("Não foi possível ler o arquivo vendas.DAT\n");
         free(venda);

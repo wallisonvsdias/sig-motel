@@ -55,7 +55,7 @@ void cadastrar_funcionario(void) {
     Funcionario* funcionario;
     funcionario = (Funcionario*) malloc(sizeof(*funcionario));
     FILE *arq_funcionario;
-    arq_funcionario = fopen("funcionarios.DAT", "ab");
+    arq_funcionario = fopen("data/funcionarios.DAT", "ab");
     if (arq_funcionario == NULL) {
         printf("Não foi possível abrir o arquivo funcionarios.dat\n");
         printf("Pressione <enter>\n");
@@ -91,7 +91,7 @@ void exibir_funcionario(void) {
     Funcionario* funcionario;
     funcionario = (Funcionario*) malloc(sizeof(*funcionario));
     FILE *arq_funcionario;
-    arq_funcionario = fopen("funcionarios.DAT", "rb");
+    arq_funcionario = fopen("data/funcionarios.DAT", "rb");
     if (arq_funcionario == NULL) {
         printf("Não foi possível abrir o arquivo funcionarios.dat\n");
         printf("Pressione <enter>\n");
@@ -138,7 +138,7 @@ void exibir_funcionario(void) {
 void alterar_funcionario(void) {
     Funcionario* funcionario;
     funcionario = (Funcionario*) malloc(sizeof(*funcionario));
-    FILE *arq_funcionarios = fopen("funcionarios.DAT", "rb");
+    FILE *arq_funcionarios = fopen("data/funcionarios.DAT", "rb");
     if (arq_funcionarios == NULL) {
         printf("Não foi possível abrir o arquivo funcionarios.DAT\n");
         printf("Pressione <ENTER> ...");
@@ -147,7 +147,7 @@ void alterar_funcionario(void) {
         return;
     }
 
-    FILE *arq_temp = fopen("temp.DAT", "wb");
+    FILE *arq_temp = fopen("data/temp.DAT", "wb");
     if (arq_temp == NULL) {
         printf("Não foi possível criar o arquivo temporário temp.DAT\n");
         printf("Pressione <ENTER> ...");
@@ -229,7 +229,7 @@ void excluir_funcionario(void) {
     Funcionario* funcionario;
     funcionario = (Funcionario*)malloc(sizeof(*funcionario));
     FILE *arq_funcionarios;
-    arq_funcionarios = fopen("funcionarios.DAT", "r+b");
+    arq_funcionarios = fopen("data/funcionarios.DAT", "r+b");
     if (arq_funcionarios == NULL) {
         printf("Não foi possivel ler o arquivo funcionarios.csv\n");
         printf("Pressione <ENTER> ...");

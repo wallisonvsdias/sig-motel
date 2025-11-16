@@ -57,7 +57,7 @@ void cadastrar_hospedagem(void) {
         return;
     }
 
-    FILE *arq_hospedagem = fopen("hospedagem.DAT", "ab");
+    FILE *arq_hospedagem = fopen("data/hospedagem.DAT", "ab");
     if (arq_hospedagem == NULL) {
         printf("Não foi possível abrir o arquivo hospedagem.DAT\n");
         free(hospedagem);
@@ -95,7 +95,7 @@ void cadastrar_hospedagem(void) {
 void exibir_hospedagem(void) {
     Hospedagem* hospedagem; 
     hospedagem = (Hospedagem*) malloc(sizeof(*hospedagem));
-    FILE *arq_hospedagem = fopen("hospedagem.DAT", "rb");
+    FILE *arq_hospedagem = fopen("data/hospedagem.DAT", "rb");
     if (arq_hospedagem == NULL) {
         printf("Não foi possível abrir o arquivo hospedagem.DAT\n");
         free(hospedagem);
@@ -140,7 +140,7 @@ void exibir_hospedagem(void) {
 void alterar_hospedagem(void) {
     Hospedagem* hospedagem;
     hospedagem = (Hospedagem*) malloc(sizeof(*hospedagem));
-    FILE *arq_hospedagem = fopen("hospedagem.DAT", "r+b");
+    FILE *arq_hospedagem = fopen("data/hospedagem.DAT", "r+b");
     if (arq_hospedagem == NULL) {
         printf("Não foi possível abrir o arquivo hospedagem.DAT\n");
         printf("Pressione <ENTER> ...");
@@ -149,7 +149,7 @@ void alterar_hospedagem(void) {
         return;
     }
     FILE *arq_temp;
-    arq_temp = fopen("temp.DAT", "ab");
+    arq_temp = fopen("data/temp.DAT", "ab");
     if (arq_temp == NULL) {
         printf("Não foi possivel ler o arquivo temp.DAT");
         printf("Pressione <ENTER> ...");
@@ -223,7 +223,7 @@ void alterar_hospedagem(void) {
 void excluir_hospedagem(void) {
     Hospedagem* hospedagem;
     hospedagem = (Hospedagem*) malloc(sizeof(*hospedagem)); 
-    FILE *arq_hospedagem = fopen("hospedagem.DAT", "r+b");
+    FILE *arq_hospedagem = fopen("data/hospedagem.DAT", "r+b");
     if (!arq_hospedagem) {
         printf("Não foi possível abrir o arquivo hospedagem.DAT\n");
         free(hospedagem);

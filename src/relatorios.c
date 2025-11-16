@@ -68,7 +68,7 @@ void lista_geral_clientes(void) {
     Cliente* cliente;
     cliente = (Cliente*)malloc(sizeof(*cliente));
     FILE *arq_clientes;
-    arq_clientes = fopen("clientes.DAT", "rb");
+    arq_clientes = fopen("data/clientes.DAT", "rb");
     if (arq_clientes == NULL) {
         printf("Não foi possivel ler o arquivo clientes.dat\n");
         printf("pressione <enter>\n");
@@ -101,7 +101,7 @@ void lista_geral_funcionarios(void) {
     Funcionario* funcionario;
     funcionario = (Funcionario*)malloc(sizeof(*funcionario));
     FILE *arq_funcionario;
-    arq_funcionario = fopen("funcionarios.DAT", "rb");
+    arq_funcionario = fopen("data/funcionarios.DAT", "rb");
     if (arq_funcionario == NULL) {
         printf("Não foi possivel ler o arquivo funcionarios.dat\n");
         printf("pressione <enter>\n");
@@ -135,7 +135,7 @@ void lista_geral_quartos(void) {
     Quarto* quarto;
     quarto = (Quarto*)malloc(sizeof(*quarto));
     FILE *arq_quartos;
-    arq_quartos = fopen("quartos.DAT", "rb");
+    arq_quartos = fopen("data/quartos.DAT", "rb");
     if (arq_quartos == NULL) {
         printf("Não foi possivel ler o arquivo quartos.DAT");
         printf("Pressione <ENTER> ...");
@@ -168,7 +168,7 @@ void lista_geral_hospedagens(void) {
     Hospedagem* hospedagem;
     hospedagem = (Hospedagem*)malloc(sizeof(*hospedagem));
     FILE *arq_hospedagem;
-    arq_hospedagem = fopen("hospedagem.DAT", "rb");
+    arq_hospedagem = fopen("data/hospedagem.DAT", "rb");
     if (arq_hospedagem == NULL) {
         printf("Não foi possivel ler o arquivo hospedagem.DAT");
         printf("Pressione <ENTER> ...");
@@ -199,7 +199,7 @@ void lista_geral_produtos(void){
     Produto* produto;
     produto = (Produto*)malloc(sizeof(*produto));
     FILE *arq_produtos;
-    arq_produtos = fopen("produtos.DAT", "rb");
+    arq_produtos = fopen("data/produtos.DAT", "rb");
     if (arq_produtos == NULL) {
         printf("Não foi possivel ler o arquivo produtos.DAT");
         printf("Pressione <ENTER> ...");
@@ -232,7 +232,7 @@ void lista_geral_vendas(void) {
     Venda* venda;
     venda = (Venda*)malloc(sizeof(*venda));
     FILE *arq_vendas;
-    arq_vendas = fopen("vendas.DAT", "rb");
+    arq_vendas = fopen("data/vendas.DAT", "rb");
     if (arq_vendas == NULL) {
         printf("Não foi possivel ler o arquivo vendas.DAT");
         printf("Pressione <ENTER> ...");
@@ -263,7 +263,7 @@ void clientes_por_nome(void) {
     Cliente* cliente;
     cliente = (Cliente*)malloc(sizeof(*cliente));
     FILE *arq_clientes;
-    arq_clientes = fopen("clientes.DAT", "rb");
+    arq_clientes = fopen("data/clientes.DAT", "rb");
     if (arq_clientes == NULL) {
         printf("Não foi possivel ler o arquivo clientes.dat\n");
         printf("pressione <enter>\n");
