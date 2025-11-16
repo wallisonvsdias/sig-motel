@@ -27,6 +27,7 @@ void menu_relatorio(void) {
         printf("♡      5  - Lista geral de produtos                                           ♡\n");
         printf("♡      6  - Lista geral de vendas                                             ♡\n");
         printf("♡      7  - Lista Clientes por nome                                           ♡\n");
+        printf("♡      8  - Lista quartos por tipo                                           ♡\n");
         printf("♡      0  - Retornar ao Menu Principal                                        ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -56,6 +57,9 @@ void menu_relatorio(void) {
             break;
         case '7':
             clientes_por_nome();
+            break;
+        case '8':
+            quartos_por_tipo();
             break;
         default:
             break;
@@ -294,5 +298,43 @@ void clientes_por_nome(void) {
     }
     fclose(arq_clientes);
     free(cliente);
+    continuar_acao();
+}
+
+void quartos_por_tipo(void) {
+    Quarto* quarto;
+    quarto = (Quarto*)malloc(sizeof(*quarto));
+    FILE *arq_quartos;
+    arq_quartos = fopen("data/quartos.DAT", "rb");
+    if (arq_quartos == NULL) {
+        printf("Não foi possivel ler o arquivo quartos.DAT");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+    char tipo_lido[32];
+    system("clear||cls");
+    mostrar_cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡                            Quartos por tipo                                 ♡\n");
+    printf("♡                                                                             ♡\n");
+    ler_tipo(tipo_lido);
+    printf("♡                                                                             ♡\n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("\n");
+    printf("Busca: %s\n",tipo_lido);
+    while (fread(quarto,sizeof(Quarto),1,arq_quartos)){
+        if (strstr(quarto->tipo,tipo_lido) != NULL){
+            printf("\n");
+            printf("\t\tID: %d\n",quarto->id);
+            printf("\t\tTipo: %s\n",quarto->tipo);
+            printf("\t\tDescricao: %s\n",quarto->descricao);
+            printf("\t\tPreco/hora: %f\n",quarto->preco_hora);
+            printf("\t\tPreco/diaria: %f\n",quarto->preco_diaria);
+        }
+    }
+    fclose(arq_quartos);
+    free(quarto);
     continuar_acao();
 }
