@@ -5,7 +5,7 @@
 
 typedef struct {
     int id;
-    char nome[25];
+    char nome[51];
     char descricao[55];
     float preco;
     int quant;

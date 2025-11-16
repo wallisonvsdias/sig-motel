@@ -26,8 +26,9 @@ void menu_relatorio(void) {
         printf("♡      4  - Lista geral de hospedagens                                        ♡\n");
         printf("♡      5  - Lista geral de produtos                                           ♡\n");
         printf("♡      6  - Lista geral de vendas                                             ♡\n");
-        printf("♡      7  - Lista Clientes por nome                                           ♡\n");
-        printf("♡      8  - Lista quartos por tipo                                           ♡\n");
+        printf("♡      7  - Lista clientes por nome                                           ♡\n");
+        printf("♡      8  - Lista quartos por tipo                                            ♡\n");
+        printf("♡      9  - Lista produtos por nome                                           ♡\n");
         printf("♡      0  - Retornar ao Menu Principal                                        ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -60,6 +61,9 @@ void menu_relatorio(void) {
             break;
         case '8':
             quartos_por_tipo();
+            break;
+        case '9':
+            produtos_por_nome();
             break;
         default:
             break;
@@ -336,5 +340,43 @@ void quartos_por_tipo(void) {
     }
     fclose(arq_quartos);
     free(quarto);
+    continuar_acao();
+}
+
+void produtos_por_nome(void) {
+    Produto* produto;
+    produto = (Produto*)malloc(sizeof(*produto));
+    FILE *arq_produtos;
+    arq_produtos = fopen("data/produtos.DAT", "rb");
+    if (arq_produtos == NULL) {
+        printf("Não foi possivel ler o arquivo produtos.DAT");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+    char nome_lido[51];
+    system("clear||cls");
+    mostrar_cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡                               Produtos por nome                             ♡\n");
+    printf("♡                                                                             ♡\n");
+    ler_nome(nome_lido);
+    printf("♡                                                                             ♡\n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("\n");
+    printf("Busca: %s\n",nome_lido);
+    while (fread(produto,sizeof(Produto),1,arq_produtos)) {
+        if (strstr(produto->nome,nome_lido) != NULL) {
+            printf("\n");
+            printf("\t\tID: %d\n",produto->id);
+            printf("\t\tNome: %s\n",produto->nome);
+            printf("\t\tDescricao: %s\n",produto->descricao);
+            printf("\t\tPreco: %f\n",produto->preco);
+            printf("\t\tQuantidade: %d\n",produto->quant);
+        }
+    }
+    fclose(arq_produtos);
+    free(produto);
     continuar_acao();
 }
