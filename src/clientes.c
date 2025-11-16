@@ -56,7 +56,7 @@ void cadastrar_cliente(void) {
     Cliente* cliente;
     cliente = (Cliente*)malloc(sizeof(*cliente));
     FILE *arq_clientes;
-    arq_clientes = fopen("clientes.DAT", "ab");
+    arq_clientes = fopen("data/clientes.DAT", "ab");
     if (arq_clientes == NULL) {
         printf("Não foi possivel ler o arquivo clientes.dat\n");
         printf("pressione <enter>\n");
@@ -89,7 +89,7 @@ void exibir_cliente(void){
     Cliente* cliente;
     cliente = (Cliente*)malloc(sizeof(*cliente));
     FILE *arq_clientes;
-    arq_clientes = fopen("clientes.DAT", "rb");
+    arq_clientes = fopen("data/clientes.DAT", "rb");
     if (arq_clientes == NULL) {
         printf("Não foi possivel ler o arquivo clientes.dat\n");
         printf("pressione <enter>\n");
@@ -135,7 +135,7 @@ void alterar_cliente(void){
     Cliente* cliente;
     cliente = (Cliente*)malloc(sizeof(*cliente));
     FILE *arq_clientes;
-    arq_clientes = fopen("clientes.DAT", "rb");
+    arq_clientes = fopen("data/clientes.DAT", "rb");
     if (arq_clientes == NULL) {
         printf("Não foi possivel ler o arquivo clientes.DAT");
         printf("Pressione <ENTER> ...");
@@ -143,7 +143,7 @@ void alterar_cliente(void){
         return;
     }
     FILE *arq_temp;
-    arq_temp = fopen("temp.DAT", "ab");
+    arq_temp = fopen("data/temp.DAT", "ab");
     if (arq_temp == NULL) {
         printf("Não foi possivel ler o arquivo temp.DAT");
         printf("Pressione <ENTER> ...");
@@ -213,7 +213,7 @@ void excluir_cliente(void){
     Cliente* cliente;
     cliente = (Cliente*)malloc(sizeof(*cliente));
     FILE *arq_clientes;
-    arq_clientes = fopen("clientes.DAT", "r+b");
+    arq_clientes = fopen("data/clientes.DAT", "r+b");
     if (arq_clientes == NULL) {
         printf("Não foi possivel ler o arquivo clientes.DAT");
         printf("Pressione <ENTER> ...");

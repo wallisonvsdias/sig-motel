@@ -54,7 +54,7 @@ void cadastrar_quarto(void) {
     Quarto* quarto;
     quarto = (Quarto*)malloc(sizeof(*quarto));
     FILE *arq_quartos;
-    arq_quartos = fopen("quartos.DAT", "ab");
+    arq_quartos = fopen("data/quartos.DAT", "ab");
     if (arq_quartos == NULL) {
         printf("Não foi possivel ler o arquivo quartos.DAT");
         printf("Pressione <ENTER> ...");
@@ -99,7 +99,7 @@ void exibir_quarto(void){
     Quarto* quarto;
     quarto = (Quarto*)malloc(sizeof(*quarto));
     FILE *arq_quartos;
-    arq_quartos = fopen("quartos.DAT", "rb");
+    arq_quartos = fopen("data/quartos.DAT", "rb");
     if (arq_quartos == NULL) {
         printf("Não foi possivel ler o arquivo quartos.DAT");
         printf("Pressione <ENTER> ...");
@@ -147,7 +147,7 @@ void alterar_quarto(void) {
     Quarto* quarto;
     quarto = (Quarto*)malloc(sizeof(*quarto));
     FILE *arq_quartos;
-    arq_quartos = fopen("quartos.DAT", "rb");
+    arq_quartos = fopen("data/quartos.DAT", "rb");
     if (arq_quartos == NULL) {
         printf("Não foi possivel ler o arquivo quartos.DAT\n");
         printf("Pressione <ENTER> ...");
@@ -155,7 +155,7 @@ void alterar_quarto(void) {
         return;
     }
     FILE *arq_temp;
-    arq_temp = fopen("temp.DAT", "ab");
+    arq_temp = fopen("data/temp.DAT", "ab");
     if (arq_temp == NULL) {
         printf("Não foi possivel ler o arquivo temp.DAT\n");
         printf("Pressione <ENTER> ...");
@@ -239,7 +239,7 @@ void excluir_quarto(void) {
     Quarto* quarto;
     quarto = (Quarto*)malloc(sizeof(*quarto));
     FILE *arq_quartos;
-    arq_quartos = fopen("quartos.DAT", "r+b");
+    arq_quartos = fopen("data/quartos.DAT", "r+b");
     if (arq_quartos == NULL) {
         printf("Não foi possivel ler o arquivo quartos.DAT\n");
         printf("Pressione <ENTER> ...");

@@ -55,7 +55,7 @@ void cadastrar_produto(void) {
     Produto* produto;
     produto = (Produto*)malloc(sizeof(*produto));
     FILE *arq_produtos;
-    arq_produtos = fopen("produtos.DAT", "ab");
+    arq_produtos = fopen("data/produtos.DAT", "ab");
     if (arq_produtos == NULL) {
         printf("Não foi possivel ler o arquivo produtos.DAT");
         printf("Pressione <ENTER> ...");
@@ -99,7 +99,7 @@ void exibir_produto(void){
     Produto* produto;
     produto = (Produto*)malloc(sizeof(*produto));
     FILE *arq_produtos;
-    arq_produtos = fopen("produtos.DAT", "rb");
+    arq_produtos = fopen("data/produtos.DAT", "rb");
     if (arq_produtos == NULL) {
         printf("Não foi possivel ler o arquivo produtos.DAT");
         printf("Pressione <ENTER> ...");
@@ -147,7 +147,7 @@ void alterar_produto(void){
     Produto* produto;
     produto = (Produto*)malloc(sizeof(*produto));
     FILE *arq_produtos;
-    arq_produtos = fopen("produtos.DAT", "rb");
+    arq_produtos = fopen("data/produtos.DAT", "rb");
     if (arq_produtos == NULL) {
         printf("Não foi possivel ler o arquivo produtos.DAT");
         printf("Pressione <ENTER> ...");
@@ -155,7 +155,7 @@ void alterar_produto(void){
         return;
     }
     FILE *arq_temp;
-    arq_temp = fopen("temp.DAT", "ab");
+    arq_temp = fopen("data/temp.DAT", "ab");
     if (arq_temp == NULL) {
         printf("Não foi possivel ler o arquivo temp.DAT");
         printf("Pressione <ENTER> ...");
@@ -239,7 +239,7 @@ void excluir_produto(void){
     Produto* produto;
     produto = (Produto*)malloc(sizeof(*produto));
     FILE *arq_produtos;
-    arq_produtos = fopen("produtos.DAT", "r+b");
+    arq_produtos = fopen("data/produtos.DAT", "r+b");
     if (arq_produtos == NULL) {
         printf("Não foi possivel ler o arquivo produtos.DAT\n");
         printf("Pressione <ENTER> ...");
