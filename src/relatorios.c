@@ -73,6 +73,9 @@ void menu_relatorio(void) {
         case 10:
             funcionarios_por_cargo();
             break;
+        case 11:
+            hospedagens_por_cliente();
+            break;
         default:
             printf("\n");
             printf("Por favor, digite uma opção válida");
@@ -431,5 +434,45 @@ void funcionarios_por_cargo(void){
     }
     fclose(arq_funcionario);
     free(funcionario);
+    continuar_acao();
+}
+
+// adicionar get_nome_cliente()
+void hospedagens_por_cliente(void){
+    Hospedagem* hospedagem;
+    hospedagem = (Hospedagem*)malloc(sizeof(*hospedagem));
+    FILE *arq_hospedagem;
+    arq_hospedagem = fopen("data/hospedagem.DAT", "rb");
+    if (arq_hospedagem == NULL) {
+        printf("Não foi possivel ler o arquivo hospedagem.DAT");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+    char nome_lido[51];
+    char* nome_cliente;
+    system("clear||cls");
+    mostrar_cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡                         Hospedagens por cliente                             ♡\n");
+    printf("♡                                                                             ♡\n");
+    ler_nome(nome_lido);
+    printf("♡                                                                             ♡\n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("\n");
+    printf("Busca: %s\n",nome_lido);
+    while (fread(hospedagem,sizeof(Hospedagem),1,arq_hospedagem)) {
+        nome_cliente = get_nome_cliente(hospedagem->cpf);
+        if (strstr(nome_cliente,nome_lido) != NULL){
+            printf("\n");
+            printf("\t\tCPF Cliente: %s\n",hospedagem->cpf);
+            printf("\t\tNome Cliente: %s\n",nome_cliente);
+            printf("\t\tID do Quarto: %d\n",hospedagem->id_quarto);
+            printf("\t\tHoras: %d\n",hospedagem->horas);
+        }
+    }
+    fclose(arq_hospedagem);
+    free(hospedagem);
     continuar_acao();
 }
