@@ -35,4 +35,6 @@ void ler_quantidade(char* quantidade);
 void ler_cargo(char* cargo);
 void ler_salario(char* salario);
 
+char* get_nome_cliente(char* cpf);
+
 #endif
