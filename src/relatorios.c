@@ -29,6 +29,9 @@ void menu_relatorio(void) {
         printf("♡      7  - Lista clientes por nome                                           ♡\n");
         printf("♡      8  - Lista quartos por tipo                                            ♡\n");
         printf("♡      9  - Lista produtos por nome                                           ♡\n");
+        printf("♡      10 - Lista funcionarios por cargo                                      ♡\n");
+        printf("♡      11 - Lista hospedagem por cliente                                      ♡\n");
+        printf("♡      12 - Lista venda por cliente                                           ♡\n");
         printf("♡      0  - Retornar ao Menu Principal                                        ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -66,6 +69,9 @@ void menu_relatorio(void) {
             produtos_por_nome();
             break;
         default:
+            printf("\n");
+            printf("Por favor, digite uma opção válida");
+            getchar();
             break;
         }
     } while (op_relatorio != '0');
