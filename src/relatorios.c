@@ -183,6 +183,7 @@ void lista_geral_hospedagens(void) {
         getchar();
         return;
     }
+    char* nome_cliente;
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -192,8 +193,10 @@ void lista_geral_hospedagens(void) {
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fread(hospedagem,sizeof(Hospedagem),1,arq_hospedagem)) {
         if (hospedagem->status){
+            nome_cliente = get_nome_cliente(hospedagem->cpf);
             printf("\n");
             printf("\t\tCPF Cliente: %s\n",hospedagem->cpf);
+            printf("\t\tNome Cliente: %s\n",nome_cliente);
             printf("\t\tID do Quarto: %d\n",hospedagem->id_quarto);
             printf("\t\tHoras: %d\n",hospedagem->horas);
         }

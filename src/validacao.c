@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include "clientes.h"
 #include "validacao.h"
 
 void ler_string(char* buffer, int tamanho) {
@@ -518,4 +519,25 @@ void ler_salario(char* salario){
             getchar();
         }
     } while (!validar_salario(salario));
+}
+
+char* get_nome_cliente(char* cpf) {
+    Cliente* cliente;
+    cliente = (Cliente*)malloc(sizeof(*cliente));
+    FILE *arq_clientes;
+    arq_clientes = fopen("data/clientes.DAT", "rb");
+    if (arq_clientes == NULL) {
+        printf("Não foi possivel ler o arquivo clientes.dat\n");
+        printf("pressione <enter>\n");
+        getchar();
+        return NULL;
+    }
+    while (fread(cliente,sizeof(Cliente),1,arq_clientes)) {
+        if (strcmp(cliente->cpf,cpf) == 0){
+            return cliente->nome;
+        }
+    }
+    fclose(arq_clientes);
+    free(cliente);
+    return NULL;
 }
