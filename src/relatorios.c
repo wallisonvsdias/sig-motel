@@ -76,6 +76,9 @@ void menu_relatorio(void) {
         case 11:
             hospedagens_por_cliente();
             break;
+        case 12:
+            vendas_por_cliente();
+            break;
         default:
             printf("\n");
             printf("Por favor, digite uma opção válida");
@@ -437,7 +440,7 @@ void funcionarios_por_cargo(void){
     continuar_acao();
 }
 
-// adicionar get_nome_cliente()
+
 void hospedagens_por_cliente(void){
     Hospedagem* hospedagem;
     hospedagem = (Hospedagem*)malloc(sizeof(*hospedagem));
@@ -474,5 +477,44 @@ void hospedagens_por_cliente(void){
     }
     fclose(arq_hospedagem);
     free(hospedagem);
+    continuar_acao();
+}
+
+void vendas_por_cliente(void) {
+    Venda* venda;
+    venda = (Venda*)malloc(sizeof(*venda));
+    FILE *arq_vendas;
+    arq_vendas = fopen("data/vendas.DAT", "rb");
+    if (arq_vendas == NULL) {
+        printf("Não foi possivel ler o arquivo vendas.DAT");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+    system("clear||cls");
+    mostrar_cabecalho();
+    char nome_lido[51];
+    char* nome_cliente;
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡                            Vendas por cliente                               ♡\n");
+    printf("♡                                                                             ♡\n");
+    ler_nome(nome_lido);
+    printf("♡                                                                             ♡\n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("\n");
+    printf("Busca: %s\n",nome_lido);
+    while (fread(venda,sizeof(Venda),1,arq_vendas)) {
+        nome_cliente = get_nome_cliente(venda->cpf);
+        if (strstr(nome_cliente,nome_lido) != NULL){
+            printf("\n");
+            printf("\t\tCPF Cliente: %s\n",venda->cpf);
+            printf("\t\tNome Cliente: %s\n",nome_cliente);
+            printf("\t\tID do Produto: %d\n",venda->id_produto);
+            printf("\t\tQuantidade: %d\n",venda->quant);
+        }
+    }
+    fclose(arq_vendas);
+    free(venda);
     continuar_acao();
 }
