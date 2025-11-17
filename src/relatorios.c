@@ -12,7 +12,7 @@
 #include "validacao.h"
 
 void menu_relatorio(void) {
-    char op_relatorio;
+    int op_relatorio;
     do {
         system("clear||cls");
         mostrar_cabecalho();
@@ -37,36 +37,41 @@ void menu_relatorio(void) {
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         printf("\n");
         printf("Escolha sua opção: ");
-        scanf(" %2s", &op_relatorio);
+        scanf(" %d", &op_relatorio);
         getchar();
         
         switch (op_relatorio) {
-        case '1':
+        case 0:
+            break;
+        case 1:
             lista_geral_clientes();
             break;
-        case '2':
+        case 2:
             lista_geral_funcionarios();
             break;
-        case '3':
+        case 3:
             lista_geral_quartos();
             break;
-        case '4':
+        case 4:
             lista_geral_hospedagens();
             break;
-        case '5':
+        case 5:
             lista_geral_produtos();
             break;
-        case '6':
+        case 6:
             lista_geral_vendas();
             break;
-        case '7':
+        case 7:
             clientes_por_nome();
             break;
-        case '8':
+        case 8:
             quartos_por_tipo();
             break;
-        case '9':
+        case 9:
             produtos_por_nome();
+            break;
+        case 10:
+            funcionarios_por_cargo();
             break;
         default:
             printf("\n");
@@ -74,7 +79,7 @@ void menu_relatorio(void) {
             getchar();
             break;
         }
-    } while (op_relatorio != '0');
+    } while (op_relatorio != 0);
 
 }
 
@@ -387,5 +392,44 @@ void produtos_por_nome(void) {
     }
     fclose(arq_produtos);
     free(produto);
+    continuar_acao();
+}
+
+void funcionarios_por_cargo(void){
+    Funcionario* funcionario;
+    funcionario = (Funcionario*)malloc(sizeof(*funcionario));
+    FILE *arq_funcionario;
+    arq_funcionario = fopen("data/funcionarios.DAT", "rb");
+    if (arq_funcionario == NULL) {
+        printf("Não foi possivel ler o arquivo funcionarios.dat\n");
+        printf("pressione <enter>\n");
+        getchar();
+        return;
+    }
+    char cargo_lido[20];
+    system("clear||cls");
+    mostrar_cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡                             Funcionarios por cargo                          ♡\n");
+    printf("♡                                                                             ♡\n");
+    ler_cargo(cargo_lido);
+    printf("♡                                                                             ♡\n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("\n");
+    printf("Busca: %s\n",cargo_lido);
+    while (fread(funcionario,sizeof(Funcionario),1,arq_funcionario)) {
+        if (strstr(funcionario->cargo,cargo_lido) != NULL){
+            printf("\n");
+            printf("\t\tCPF: %s\n",funcionario->cpf);
+            printf("\t\tNome: %s\n",funcionario->nome);
+            printf("\t\tTelefone: %s\n",funcionario->telefone);
+            printf("\t\tEmail: %s\n",funcionario->email);
+            printf("\t\tCargo: %s\n",funcionario->cargo);
+            printf("\t\tSalário: %f\n",funcionario->salario);
+        }
+    }
+    fclose(arq_funcionario);
+    free(funcionario);
     continuar_acao();
 }
