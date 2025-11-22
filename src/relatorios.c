@@ -20,19 +20,64 @@ void menu_relatorio(void) {
         printf("♡                                                                             ♡\n");
         printf("♡                              Módulo Relatório                               ♡\n");
         printf("♡                                                                             ♡\n");
-        printf("♡      1  - Lista geral de clientes                                           ♡\n");
-        printf("♡      2  - Lista geral de funcionários                                       ♡\n");
-        printf("♡      3  - Lista geral de quartos                                            ♡\n");
-        printf("♡      4  - Lista geral de hospedagens                                        ♡\n");
-        printf("♡      5  - Lista geral de produtos                                           ♡\n");
-        printf("♡      6  - Lista geral de vendas                                             ♡\n");
-        printf("♡      7  - Lista clientes por nome                                           ♡\n");
-        printf("♡      8  - Lista quartos por tipo                                            ♡\n");
-        printf("♡      9  - Lista produtos por nome                                           ♡\n");
-        printf("♡      10 - Lista funcionarios por cargo                                      ♡\n");
-        printf("♡      11 - Lista hospedagem por cliente                                      ♡\n");
-        printf("♡      12 - Lista venda por cliente                                           ♡\n");
+        printf("♡      1  - Relatórios de Clientes                                            ♡\n");
+        printf("♡      2  - Relatórios de Funcionários                                        ♡\n");
+        printf("♡      3  - Relatórios de Quartos                                             ♡\n");
+        printf("♡      4  - Relatórios de Hospedagens                                         ♡\n");
+        printf("♡      5  - Relatórios de Produtos                                            ♡\n");
+        printf("♡      6  - Relatórios de Vendas                                              ♡\n");
         printf("♡      0  - Retornar ao Menu Principal                                        ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+        printf("\n");
+        printf("Escolha sua opção: ");
+        scanf(" %d", &op_relatorio);
+        getchar();
+        
+        switch (op_relatorio) {
+        case 0:
+            break;
+        case 1:
+            menu_relatorio_clientes();
+            break;
+        case 2:
+            menu_relatorio_funcionarios();
+            break;
+        case 3:
+            menu_relatorio_quartos();
+            break;
+        case 4:
+            menu_relatorio_hospedagens();
+            break;
+        case 5:
+            menu_relatorio_produtos();
+            break;
+        case 6:
+            menu_relatorio_vendas();
+            break;
+        default:
+            printf("\n");
+            printf("Por favor, digite uma opção válida");
+            getchar();
+            break;
+        }
+    } while (op_relatorio != 0);
+}
+
+// ============================= MENU DOS RELATÓRIOS =============================
+
+void menu_relatorio_clientes(void) {
+    int op_relatorio;
+    do {
+        system("clear||cls");
+        mostrar_cabecalho();
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡                           Relatórios de Clientes                            ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡      1  - Lista geral de clientes                                           ♡\n");
+        printf("♡      2  - Lista clientes por nome                                           ♡\n");
+        printf("♡      0  - Retornar ao Menu de Relatórios                                    ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         printf("\n");
@@ -47,36 +92,191 @@ void menu_relatorio(void) {
             lista_geral_clientes();
             break;
         case 2:
-            lista_geral_funcionarios();
-            break;
-        case 3:
-            lista_geral_quartos();
-            break;
-        case 4:
-            lista_geral_hospedagens();
-            break;
-        case 5:
-            lista_geral_produtos();
-            break;
-        case 6:
-            lista_geral_vendas();
-            break;
-        case 7:
             clientes_por_nome();
             break;
-        case 8:
-            quartos_por_tipo();
+        default:
+            printf("\n");
+            printf("Por favor, digite uma opção válida");
+            getchar();
             break;
-        case 9:
-            produtos_por_nome();
+        }
+    } while (op_relatorio != 0);
+}
+
+void menu_relatorio_funcionarios(void) {
+    int op_relatorio;
+    do {
+        system("clear||cls");
+        mostrar_cabecalho();
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡                         Relatórios de Funcionários                          ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡      1  - Lista geral de funcionários                                       ♡\n");
+        printf("♡      2  - Lista funcionarios por cargo                                      ♡\n");
+        printf("♡      0  - Retornar ao Menu de Relatórios                                    ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+        printf("\n");
+        printf("Escolha sua opção: ");
+        scanf(" %d", &op_relatorio);
+        getchar();
+        
+        switch (op_relatorio) {
+        case 0:
             break;
-        case 10:
+        case 1:
+            lista_geral_funcionarios();
+            break;
+        case 2:
             funcionarios_por_cargo();
             break;
-        case 11:
+        default:
+            printf("\n");
+            printf("Por favor, digite uma opção válida");
+            getchar();
+            break;
+        }
+    } while (op_relatorio != 0);
+}
+
+void menu_relatorio_quartos(void) {
+    int op_relatorio;
+    do {
+        system("clear||cls");
+        mostrar_cabecalho();
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡                          Relatórios de Quartos                              ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡      1  - Lista geral de quartos                                            ♡\n");
+        printf("♡      2  - Lista quartos por tipo                                            ♡\n");
+        printf("♡      0  - Retornar ao Menu de Relatórios                                    ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+        printf("\n");
+        printf("Escolha sua opção: ");
+        scanf(" %d", &op_relatorio);
+        getchar();
+        
+        switch (op_relatorio) {
+        case 0:
+            break;
+        case 1:
+            lista_geral_quartos();
+            break;
+        case 2:
+            quartos_por_tipo();
+            break;
+        default:
+            printf("\n");
+            printf("Por favor, digite uma opção válida");
+            getchar();
+            break;
+        }
+    } while (op_relatorio != 0);
+}
+
+void menu_relatorio_hospedagens(void) {
+    int op_relatorio;
+    do {
+        system("clear||cls");
+        mostrar_cabecalho();
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡                        Relatórios de Hospedagens                            ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡      1  - Lista geral de hospedagens                                        ♡\n");
+        printf("♡      2  - Lista hospedagem por cliente                                      ♡\n");
+        printf("♡      0  - Retornar ao Menu de Relatórios                                    ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+        printf("\n");
+        printf("Escolha sua opção: ");
+        scanf(" %d", &op_relatorio);
+        getchar();
+        
+        switch (op_relatorio) {
+        case 0:
+            break;
+        case 1:
+            lista_geral_hospedagens();
+            break;
+        case 2:
             hospedagens_por_cliente();
             break;
-        case 12:
+        default:
+            printf("\n");
+            printf("Por favor, digite uma opção válida");
+            getchar();
+            break;
+        }
+    } while (op_relatorio != 0);
+}
+
+void menu_relatorio_produtos(void) {
+    int op_relatorio;
+    do {
+        system("clear||cls");
+        mostrar_cabecalho();
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡                          Relatórios de Produtos                             ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡      1  - Lista geral de produtos                                           ♡\n");
+        printf("♡      2  - Lista produtos por nome                                           ♡\n");
+        printf("♡      0  - Retornar ao Menu de Relatórios                                    ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+        printf("\n");
+        printf("Escolha sua opção: ");
+        scanf(" %d", &op_relatorio);
+        getchar();
+        
+        switch (op_relatorio) {
+        case 0:
+            break;
+        case 1:
+            lista_geral_produtos();
+            break;
+        case 2:
+            produtos_por_nome();
+            break;
+        default:
+            printf("\n");
+            printf("Por favor, digite uma opção válida");
+            getchar();
+            break;
+        }
+    } while (op_relatorio != 0);
+}
+
+void menu_relatorio_vendas(void) {
+    int op_relatorio;
+    do {
+        system("clear||cls");
+        mostrar_cabecalho();
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡                           Relatórios de Vendas                              ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡      1  - Lista geral de vendas                                             ♡\n");
+        printf("♡      2  - Lista venda por cliente                                           ♡\n");
+        printf("♡      0  - Retornar ao Menu de Relatórios                                    ♡\n");
+        printf("♡                                                                             ♡\n");
+        printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+        printf("\n");
+        printf("Escolha sua opção: ");
+        scanf(" %d", &op_relatorio);
+        getchar();
+        
+        switch (op_relatorio) {
+        case 0:
+            break;
+        case 1:
+            lista_geral_vendas();
+            break;
+        case 2:
             vendas_por_cliente();
             break;
         default:
@@ -86,8 +286,9 @@ void menu_relatorio(void) {
             break;
         }
     } while (op_relatorio != 0);
-
 }
+
+// ============================= RELATÓRIOS GERAIS =============================
 
 void lista_geral_clientes(void) {
     Cliente* cliente;
@@ -287,6 +488,8 @@ void lista_geral_vendas(void) {
     continuar_acao();
 }
 
+// ============================= RELATÓRIOS ESPECÍFICOS =============================
+
 void clientes_por_nome(void) {
     Cliente* cliente;
     cliente = (Cliente*)malloc(sizeof(*cliente));
@@ -439,7 +642,6 @@ void funcionarios_por_cargo(void){
     free(funcionario);
     continuar_acao();
 }
-
 
 void hospedagens_por_cliente(void){
     Hospedagem* hospedagem;
