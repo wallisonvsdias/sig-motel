@@ -468,6 +468,7 @@ void lista_geral_vendas(void) {
         getchar();
         return;
     }
+    char* nome_cliente;
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -477,8 +478,10 @@ void lista_geral_vendas(void) {
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fread(venda,sizeof(Venda),1,arq_vendas)) {
         if (venda->status){
+            nome_cliente = get_nome_cliente(venda->cpf);
             printf("\n");
             printf("\t\tCPF Cliente: %s\n",venda->cpf);
+            printf("\t\tNome Cliente: %s\n",nome_cliente);
             printf("\t\tID do Produto: %d\n",venda->id_produto);
             printf("\t\tQuantidade: %d\n",venda->quant);
         }
