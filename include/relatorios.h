@@ -26,5 +26,6 @@ void produtos_por_nome(void);
 void funcionarios_por_cargo(void);
 void hospedagens_por_cliente(void);
 void vendas_por_cliente(void);
+void vendas_por_funcionario(void);
 
 #endif

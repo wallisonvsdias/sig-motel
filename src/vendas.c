@@ -69,7 +69,9 @@ void cadastrar_venda(void) {
     printf("♡                              Cadastrar Venda                                ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡      Informe o CPF do cliente\n");
-    ler_cpf(venda->cpf);
+    ler_cpf(venda->cpf_cliente);
+    printf("♡      Informe o CPF do funcionario\n");
+    ler_cpf(venda->cpf_funcionario);
     printf("♡      ID do produto: \n");
     ler_id(entrada_id);
     venda->id_produto = atoi(entrada_id);
@@ -108,9 +110,10 @@ void exibir_venda(void) {
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fread(venda,sizeof(Venda),1,arq_vendas)) {
-        if (strcmp(venda->cpf,cpf_lido) == 0  && venda->status){
+        if (strcmp(venda->cpf_cliente,cpf_lido) == 0  && venda->status){
             printf("\t\t Venda encontrado! >>>> \n");
-            printf("\t\tCPF: %s\n",venda->cpf);
+            printf("\t\tCPF Cliente: %s\n",venda->cpf_cliente);
+            printf("\t\tCPF Funcionario: %s\n",venda->cpf_funcionario);
             printf("\t\tID do Produto: %d\n",venda-> id_produto);
             printf("\t\tQuantidade: %d\n",venda-> quant);
             printf("Pressione <ENTER> para continuar");
@@ -161,7 +164,7 @@ void alterar_venda(void) {
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
 
     while (fread(venda,sizeof(Venda),1,arq_vendas)) {
-        if (strcmp(venda->cpf,cpf_lido) != 0){
+        if (strcmp(venda->cpf_cliente,cpf_lido) != 0){
             fwrite(venda,sizeof(Venda),1,arq_temp);
         } else {
             encontrado = True;
@@ -183,7 +186,9 @@ void alterar_venda(void) {
         printf("♡                             Novos dados da venda                            ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡      Informe o CPF do cliente\n");
-        ler_cpf(nova_venda->cpf);
+        ler_cpf(nova_venda->cpf_cliente);
+        printf("♡      Informe o CPF do funcionario\n");
+        ler_cpf(nova_venda->cpf_funcionario);
         printf("♡      ID do produto: \n");
         ler_id(entrada_id);
         nova_venda->id_produto = atoi(entrada_id);
@@ -224,13 +229,13 @@ void excluir_venda(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                              Excluir Venda                                  ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      Informe o CPF da venda:                                                ♡\n");
+    printf("♡      Informe o CPF do cliente:                                              ♡\n");
     ler_cpf(cpf_lido);
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
 
     while (fread(venda,sizeof(Venda),1,arq_vendas) && (!encontrado)) {
-        if (strcmp(venda->cpf,cpf_lido) == 0){
+        if (strcmp(venda->cpf_cliente,cpf_lido) == 0){
             venda->status = False;
             fseek(arq_vendas,-(long)sizeof(Venda),SEEK_CUR);
             fwrite(venda, sizeof(Venda), 1, arq_vendas);

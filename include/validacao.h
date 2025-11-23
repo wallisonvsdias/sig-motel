@@ -16,7 +16,6 @@ int validar_telefone(char* telefone);
 int validar_email(char* email);
 int validar_id(char* id_str);
 int validar_descricao(char* descricao, int tamanho_max);
-int validar_tipo(char* tipo, int tamanho_max);
 int validar_preco(char* preco_str);
 int validar_quantidade(char* quant_str);
 int validar_cargo(char* cargo);
@@ -28,7 +27,7 @@ void ler_data(char* data);
 void ler_telefone(char* telefone);
 void ler_email(char* email);
 void ler_id(char* id);
-void ler_tipo(char* tipo);
+int ler_tipo(void);
 void ler_descricao(char* descricao);
 void ler_preco(char* preco);
 void ler_quantidade(char* quantidade);
@@ -36,5 +35,6 @@ void ler_cargo(char* cargo);
 void ler_salario(char* salario);
 
 char* get_nome_cliente(char* cpf);
+char* get_nome_funcionario(char* cpf);
 
 #endif
