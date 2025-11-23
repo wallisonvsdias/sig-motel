@@ -383,7 +383,7 @@ void lista_geral_quartos(void) {
         if (quarto->status){
             printf("\n");
             printf("\t\tID: %d\n",quarto->id);
-            printf("\t\tTipo: %s\n",quarto->tipo);
+            printf("\t\tTipo: %s\n",NOME_TIPOS_QUARTO[quarto->tipo]);
             printf("\t\tDescricao: %s\n",quarto->descricao);
             printf("\t\tPreco/hora: %f\n",quarto->preco_hora);
             printf("\t\tPreco/diaria: %f\n",quarto->preco_diaria);
@@ -550,23 +550,28 @@ void quartos_por_tipo(void) {
         getchar();
         return;
     }
-    char tipo_lido[32];
+    int tipo_lido;
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                            Quartos por tipo                                 ♡\n");
     printf("♡                                                                             ♡\n");
-    ler_tipo(tipo_lido);
+    printf("\n\n--- Tipos de Quarto Disponíveis ---\n");
+    for (int i = 0; i < 4; i++) {
+        printf("\t%d - %s\n", i + 1, NOME_TIPOS_QUARTO[i]);
+    }
+    tipo_lido = ler_tipo();
+    tipo_lido--;
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("\n");
-    printf("Busca: %s\n",tipo_lido);
+    printf("Busca: %s\n",NOME_TIPOS_QUARTO[tipo_lido]);
     while (fread(quarto,sizeof(Quarto),1,arq_quartos)){
-        if (strstr(quarto->tipo,tipo_lido) != NULL){
+        if (quarto->tipo == (tipo_quarto)tipo_lido){
             printf("\n");
             printf("\t\tID: %d\n",quarto->id);
-            printf("\t\tTipo: %s\n",quarto->tipo);
+            printf("\t\tTipo: %s\n",NOME_TIPOS_QUARTO[quarto->tipo]);
             printf("\t\tDescricao: %s\n",quarto->descricao);
             printf("\t\tPreco/hora: %f\n",quarto->preco_hora);
             printf("\t\tPreco/diaria: %f\n",quarto->preco_diaria);
