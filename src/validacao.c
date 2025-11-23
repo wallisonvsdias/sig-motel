@@ -207,24 +207,6 @@ int validar_descricao(char* descricao, int tamanho_max) {
 }
 
 
-// valida tipo
-// verifica o tamanho da string 
-int validar_tipo(char* tipo, int tamanho_max) {
-    int len = strlen(tipo);
-
-    // verifica se ta vazio
-    if (len == 0) {
-        return False;
-    }
-    
-    // verifica se passou do tamanho maximo
-    if (len > tamanho_max - 1) { // -1 por causa do '\0'
-        return False;
-    }
-    
-    return True;
-}
-
 // valida preco
 // recebe uma string que representa um float
 int validar_preco(char* preco_str) {
@@ -451,16 +433,20 @@ void ler_id(char* id) {
     } while (!validar_id(id));
 }
 
-void ler_tipo(char* tipo){
+int ler_tipo(void){
+    int escolha;
     do {
-        printf("♡      Tipo: ");
-        ler_string(tipo, 32);
-        if (!validar_tipo(tipo, 32)) {
-            printf("♡      Tipo invalido! Nao pode ser vazio\n");
-            printf("♡      Pressione <ENTER>");
-            getchar();
+        printf("Digite o número do tipo de quarto: ");
+        if (scanf("%d", &escolha) != 1) {
+            while (getchar() != '\n'); 
+            escolha = -1;
+            printf("Entrada inválida. Tente novamente.\n");
+        } else if (escolha < 1 || escolha > 4) {
+            printf("Opção inválida. Escolha um número entre 1 e 4.\n");
         }
-    } while (!validar_tipo(tipo,32));
+    } while (escolha < 1 || escolha > 4);
+    
+    return escolha;
 }
 
 void ler_descricao(char* descricao){

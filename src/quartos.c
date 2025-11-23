@@ -5,6 +5,13 @@
 #include "quartos.h"
 #include "validacao.h"
 
+const char* NOME_TIPOS_QUARTO[] = {
+    "Quarto Simples",
+    "Quarto Master",
+    "Suite",
+    "Suite Presidencial"
+};
+
 void menu_quarto(void) {
     char op_quarto;
     do {
@@ -72,7 +79,12 @@ void cadastrar_quarto(void) {
     printf("♡      ID do quarto\n");
     ler_id(entrada_id);
     quarto->id = atoi(entrada_id);
-    ler_tipo(quarto->tipo);
+    printf("\n\n--- Tipos de Quarto Disponíveis ---\n");
+    for (int i = 0; i < 4; i++) {
+        printf("\t%d - %s\n", i + 1, NOME_TIPOS_QUARTO[i]);
+    }
+    int tipo = ler_tipo();
+    quarto->tipo = tipo-1;
     ler_descricao(quarto->descricao);
     printf("♡      Preço/hora: ");
     ler_preco(entrada_preco);
@@ -114,7 +126,7 @@ void exibir_quarto(void){
     printf("♡                                                                             ♡\n");
     printf("♡                            Exibir Dados do Quarto                           ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      ID do quarto: ");
+    printf("♡      ID do quarto\n");
     ler_id(entrada_id);
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -122,7 +134,7 @@ void exibir_quarto(void){
     while (fread(quarto,sizeof(Quarto),1,arq_quartos)) {
         if (quarto->id == id && quarto->status){
             printf("\t\t Quarto encontrado! >>>> \n");
-            printf("\t\tTipo: %s\n",quarto->tipo);
+            printf("\t\tTipo: %s\n",NOME_TIPOS_QUARTO[quarto->tipo]);
             printf("\t\tDescricao: %s\n",quarto->descricao);
             printf("\t\tPreco/hora: %f\n",quarto->preco_hora);
             printf("\t\tPreco/diaria: %f\n",quarto->preco_diaria);
@@ -200,7 +212,12 @@ void alterar_quarto(void) {
         printf("♡      ID do quarto\n");
         ler_id(entrada_id);
         novo_quarto->id = atoi(entrada_id);
-        ler_tipo(novo_quarto->tipo);
+        printf("\n\n--- Tipos de Quarto Disponíveis ---\n");
+        for (int i = 0; i < 4; i++) {
+            printf("\t%d - %s\n", i + 1, NOME_TIPOS_QUARTO[i]);
+        }
+        int tipo = ler_tipo();
+        novo_quarto->tipo = tipo-1;
         ler_descricao(novo_quarto->descricao);
         printf("♡      Preço/hora: ");
         ler_preco(entrada_preco);

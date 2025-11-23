@@ -3,9 +3,18 @@
 #define True 1
 #define False 0
 
+typedef enum {
+    QUARTO_SIMPLES,     // 0
+    QUARTO_MASTER,      // 1
+    SUITE,              // 2
+    SUITE_PRESIDENCIAL, // 3
+} tipo_quarto;
+
+extern const char* NOME_TIPOS_QUARTO[];
+
 typedef struct {
     int id;
-    char tipo[32];
+    tipo_quarto tipo;
     char descricao[51];
     float preco_hora;
     float preco_diaria;
