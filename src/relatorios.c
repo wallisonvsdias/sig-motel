@@ -478,10 +478,11 @@ void lista_geral_vendas(void) {
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fread(venda,sizeof(Venda),1,arq_vendas)) {
         if (venda->status){
-            nome_cliente = get_nome_cliente(venda->cpf);
+            nome_cliente = get_nome_cliente(venda->cpf_cliente);
             printf("\n");
-            printf("\t\tCPF Cliente: %s\n",venda->cpf);
+            printf("\t\tCPF Cliente: %s\n",venda->cpf_cliente);
             printf("\t\tNome Cliente: %s\n",nome_cliente);
+            printf("\t\tCPF Funcionario: %s\n",venda->cpf_funcionario);
             printf("\t\tID do Produto: %d\n",venda->id_produto);
             printf("\t\tQuantidade: %d\n",venda->quant);
         }
@@ -710,11 +711,12 @@ void vendas_por_cliente(void) {
     printf("\n");
     printf("Busca: %s\n",nome_lido);
     while (fread(venda,sizeof(Venda),1,arq_vendas)) {
-        nome_cliente = get_nome_cliente(venda->cpf);
+        nome_cliente = get_nome_cliente(venda->cpf_cliente);
         if (strstr(nome_cliente,nome_lido) != NULL){
             printf("\n");
-            printf("\t\tCPF Cliente: %s\n",venda->cpf);
+            printf("\t\tCPF Cliente: %s\n",venda->cpf_cliente);
             printf("\t\tNome Cliente: %s\n",nome_cliente);
+            printf("\t\tCPF Funcionario: %s\n",venda->cpf_funcionario);
             printf("\t\tID do Produto: %d\n",venda->id_produto);
             printf("\t\tQuantidade: %d\n",venda->quant);
         }

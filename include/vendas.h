@@ -4,7 +4,8 @@
 #define False 0
 
 typedef struct{
-    char cpf[12];
+    char cpf_cliente[12];
+    char cpf_funcionario[12];
     int id_produto;
     int quant;
     int status;
