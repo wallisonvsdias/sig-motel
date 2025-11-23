@@ -3,6 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "clientes.h"
+#include "funcionarios.h"
 #include "validacao.h"
 
 void ler_string(char* buffer, int tamanho) {
@@ -539,5 +540,27 @@ char* get_nome_cliente(char* cpf) {
     }
     fclose(arq_clientes);
     free(cliente);
+    return NULL;
+}
+
+char* get_nome_funcionario(char* cpf) {
+    Funcionario* funcionario;
+    funcionario = (Funcionario*) malloc(sizeof(*funcionario));
+    FILE *arq_funcionario;
+    arq_funcionario = fopen("data/funcionarios.DAT", "rb");
+    if (arq_funcionario == NULL) {
+        printf("Não foi possível abrir o arquivo funcionarios.dat\n");
+        printf("Pressione <enter>\n");
+        getchar();
+        free(funcionario);
+        return NULL;
+    }
+    while (fread(funcionario,sizeof(Funcionario),1,arq_funcionario)) {
+        if (strcmp(funcionario->cpf,cpf) == 0){
+            return funcionario->nome;
+        }
+    }
+    fclose(arq_funcionario);
+    free(funcionario);
     return NULL;
 }

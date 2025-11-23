@@ -469,6 +469,7 @@ void lista_geral_vendas(void) {
         return;
     }
     char* nome_cliente;
+    char* nome_funcionario;
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -479,10 +480,12 @@ void lista_geral_vendas(void) {
     while (fread(venda,sizeof(Venda),1,arq_vendas)) {
         if (venda->status){
             nome_cliente = get_nome_cliente(venda->cpf_cliente);
+            nome_funcionario = get_nome_funcionario(venda->cpf_funcionario);
             printf("\n");
             printf("\t\tCPF Cliente: %s\n",venda->cpf_cliente);
             printf("\t\tNome Cliente: %s\n",nome_cliente);
             printf("\t\tCPF Funcionario: %s\n",venda->cpf_funcionario);
+            printf("\t\tNome Funcionario: %s\n",nome_funcionario);
             printf("\t\tID do Produto: %d\n",venda->id_produto);
             printf("\t\tQuantidade: %d\n",venda->quant);
         }
@@ -701,6 +704,7 @@ void vendas_por_cliente(void) {
     mostrar_cabecalho();
     char nome_lido[51];
     char* nome_cliente;
+    char* nome_funcionario;
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                            Vendas por cliente                               ♡\n");
@@ -712,11 +716,13 @@ void vendas_por_cliente(void) {
     printf("Busca: %s\n",nome_lido);
     while (fread(venda,sizeof(Venda),1,arq_vendas)) {
         nome_cliente = get_nome_cliente(venda->cpf_cliente);
+        nome_funcionario = get_nome_funcionario(venda->cpf_funcionario);
         if (strstr(nome_cliente,nome_lido) != NULL){
             printf("\n");
             printf("\t\tCPF Cliente: %s\n",venda->cpf_cliente);
             printf("\t\tNome Cliente: %s\n",nome_cliente);
             printf("\t\tCPF Funcionario: %s\n",venda->cpf_funcionario);
+            printf("\t\tNome Funcionario: %s\n",nome_funcionario);
             printf("\t\tID do Produto: %d\n",venda->id_produto);
             printf("\t\tQuantidade: %d\n",venda->quant);
         }
