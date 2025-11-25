@@ -76,7 +76,8 @@ void menu_relatorio_clientes(void) {
         printf("♡                           Relatórios de Clientes                            ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡      1  - Lista geral de clientes                                           ♡\n");
-        printf("♡      2  - Lista clientes por nome                                           ♡\n");
+        printf("♡      2  - Lista geral de clientes (Ordem Alfabética)                        ♡\n");
+        printf("♡      3  - Lista clientes por nome                                           ♡\n");
         printf("♡      0  - Retornar ao Menu de Relatórios                                    ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -92,6 +93,9 @@ void menu_relatorio_clientes(void) {
             lista_geral_clientes();
             break;
         case 2:
+            lista_geral_clientes_ordenado();
+            break;
+        case 3:
             clientes_por_nome();
             break;
         default:
@@ -781,5 +785,88 @@ void vendas_por_funcionario(void) {
     }
     fclose(arq_vendas);
     free(venda);
+    continuar_acao();
+}
+
+// ============================= RELATÓRIOS ORDENADOS =============================
+
+typedef struct cliente_node {
+    Cliente cliente;
+    struct cliente_node* prox;
+} ClienteNode;
+
+void lista_geral_clientes_ordenado(void) {
+    FILE *arq_clientes;
+    Cliente cliente;
+    ClienteNode* novo_node;
+    ClienteNode* lista;
+    ClienteNode* anter;
+    ClienteNode* atual;
+    int i = 1;
+    
+    arq_clientes = fopen("data/clientes.DAT", "rb");
+    if (arq_clientes == NULL) {
+        printf("Não foi possivel ler o arquivo clientes.dat\n");
+        printf("Pressione <ENTER>\n");
+        getchar();
+        return;
+    }
+
+    lista = NULL;
+    while (fread(&cliente, sizeof(Cliente), 1, arq_clientes)) {
+        if (cliente.status) {
+            novo_node = (ClienteNode*) malloc(sizeof(ClienteNode));
+            novo_node->cliente = cliente;  // copia os dados do cliente
+            
+            if (lista == NULL) {
+                // Primeiro elemento da lista
+                lista = novo_node;
+                novo_node->prox = NULL;
+            } else if (strcmp(novo_node->cliente.nome, lista->cliente.nome) < 0) {
+                // Insere no início
+                novo_node->prox = lista;
+                lista = novo_node;
+            } else {
+                // Insere no meio ou final
+                anter = lista;
+                atual = lista->prox;
+                while ((atual != NULL) && strcmp(atual->cliente.nome, novo_node->cliente.nome) < 0) {
+                    anter = atual;
+                    atual = atual->prox;
+                }
+                anter->prox = novo_node;
+                novo_node->prox = atual;
+            }
+        }
+    }
+    fclose(arq_clientes);
+
+    system("clear||cls");
+    mostrar_cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡                   Lista Geral de Clientes (Ordem Alfabética)                ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    
+    novo_node = lista;
+    while (novo_node != NULL) {
+        printf("\n");
+        printf("\t\tCliente %d:\n", i);
+        printf("\t\tCPF: %s\n", novo_node->cliente.cpf);
+        printf("\t\tNome: %s\n", novo_node->cliente.nome);
+        printf("\t\tData de nascimento: %s\n", novo_node->cliente.nasc);
+        printf("\t\tTelefone: %s\n", novo_node->cliente.telef);
+        printf("\t\tEmail: %s\n", novo_node->cliente.email);
+        
+        novo_node = novo_node->prox;
+        i++;
+    }
+    novo_node = lista;
+    while (lista != NULL) {
+        lista = lista->prox;
+        free(novo_node);
+        novo_node = lista;
+    }
     continuar_acao();
 }
