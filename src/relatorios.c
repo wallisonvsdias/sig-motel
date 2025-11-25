@@ -117,7 +117,8 @@ void menu_relatorio_funcionarios(void) {
         printf("♡                         Relatórios de Funcionários                          ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡      1  - Lista geral de funcionários                                       ♡\n");
-        printf("♡      2  - Lista funcionarios por cargo                                      ♡\n");
+        printf("♡      2  - Lista geral de funcionários (Ordem Alfabética)                     ♡\n");
+        printf("♡      3  - Lista funcionarios por cargo                                      ♡\n");
         printf("♡      0  - Retornar ao Menu de Relatórios                                    ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -133,6 +134,9 @@ void menu_relatorio_funcionarios(void) {
             lista_geral_funcionarios();
             break;
         case 2:
+            lista_geral_funcionarios_ordenado();
+            break;
+        case 3:
             funcionarios_por_cargo();
             break;
         default:
@@ -151,7 +155,7 @@ void menu_relatorio_quartos(void) {
         mostrar_cabecalho();
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         printf("♡                                                                             ♡\n");
-        printf("♡                          Relatórios de Quartos                              ♡\n");
+        printf("♡                            Relatórios de Quartos                            ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡      1  - Lista geral de quartos                                            ♡\n");
         printf("♡      2  - Lista quartos por tipo                                            ♡\n");
@@ -225,9 +229,10 @@ void menu_relatorio_produtos(void) {
         mostrar_cabecalho();
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         printf("♡                                                                             ♡\n");
-        printf("♡                          Relatórios de Produtos                             ♡\n");
+        printf("♡                            Relatórios de Produtos                           ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡      1  - Lista geral de produtos                                           ♡\n");
+        printf("♡      1  - Lista geral de produtos (Ordem Alfabética)                        ♡\n");
         printf("♡      2  - Lista produtos por nome                                           ♡\n");
         printf("♡      0  - Retornar ao Menu de Relatórios                                    ♡\n");
         printf("♡                                                                             ♡\n");
@@ -244,6 +249,9 @@ void menu_relatorio_produtos(void) {
             lista_geral_produtos();
             break;
         case 2:
+            lista_geral_produtos_ordenado();
+            break;
+        case 3:
             produtos_por_nome();
             break;
         default:
@@ -868,5 +876,166 @@ void lista_geral_clientes_ordenado(void) {
         free(novo_node);
         novo_node = lista;
     }
+    continuar_acao();
+}
+
+typedef struct funcionario_node {
+    Funcionario funcionario;
+    struct funcionario_node* prox;
+} FuncionarioNode;
+
+void lista_geral_funcionarios_ordenado(void) {
+    FILE *arq_funcionarios;
+    Funcionario funcionario;
+    FuncionarioNode* novo_node;
+    FuncionarioNode* lista;
+    FuncionarioNode* anter;
+    FuncionarioNode* atual;
+    int i = 1;
+    
+    arq_funcionarios = fopen("data/funcionarios.DAT", "rb");
+    if (arq_funcionarios == NULL) {
+        printf("Não foi possivel ler o arquivo funcionarios.dat\n");
+        printf("Pressione <ENTER>\n");
+        getchar();
+        return;
+    }
+
+    lista = NULL;
+    while (fread(&funcionario, sizeof(Funcionario), 1, arq_funcionarios)) {
+        if (funcionario.status) {
+            novo_node = (FuncionarioNode*) malloc(sizeof(FuncionarioNode));
+            novo_node->funcionario = funcionario;
+            
+            if (lista == NULL) {
+                lista = novo_node;
+                novo_node->prox = NULL;
+            } else if (strcmp(novo_node->funcionario.nome, lista->funcionario.nome) < 0) {
+                novo_node->prox = lista;
+                lista = novo_node;
+            } else {
+                anter = lista;
+                atual = lista->prox;
+                while ((atual != NULL) && strcmp(atual->funcionario.nome, novo_node->funcionario.nome) < 0) {
+                    anter = atual;
+                    atual = atual->prox;
+                }
+                anter->prox = novo_node;
+                novo_node->prox = atual;
+            }
+        }
+    }
+    fclose(arq_funcionarios);
+
+    system("clear||cls");
+    mostrar_cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡                Lista Geral de Funcionários (Ordem Alfabética)              ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    
+    novo_node = lista;
+    while (novo_node != NULL) {
+        printf("\n");
+        printf("\t\tFuncionário %d:\n", i);
+        printf("\t\tCPF: %s\n", novo_node->funcionario.cpf);
+        printf("\t\tNome: %s\n", novo_node->funcionario.nome);
+        printf("\t\tTelefone: %s\n", novo_node->funcionario.telefone);
+        printf("\t\tEmail: %s\n", novo_node->funcionario.email);
+        printf("\t\tCargo: %s\n", novo_node->funcionario.cargo);
+        printf("\t\tSalário: %.2f\n", novo_node->funcionario.salario);
+        
+        novo_node = novo_node->prox;
+        i++;
+    }
+
+    novo_node = lista;
+    while (lista != NULL) {
+        lista = lista->prox;
+        free(novo_node);
+        novo_node = lista;
+    }
+    
+    continuar_acao();
+}
+
+typedef struct produto_node {
+    Produto produto;
+    struct produto_node* prox;
+} ProdutoNode;
+
+void lista_geral_produtos_ordenado(void) {
+    FILE *arq_produtos;
+    Produto produto;
+    ProdutoNode* novo_node;
+    ProdutoNode* lista;
+    ProdutoNode* anter;
+    ProdutoNode* atual;
+    int i = 1;
+    
+    arq_produtos = fopen("data/produtos.DAT", "rb");
+    if (arq_produtos == NULL) {
+        printf("Não foi possivel ler o arquivo produtos.dat\n");
+        printf("Pressione <ENTER>\n");
+        getchar();
+        return;
+    }
+
+    lista = NULL;
+    while (fread(&produto, sizeof(Produto), 1, arq_produtos)) {
+        if (produto.status) {
+            novo_node = (ProdutoNode*) malloc(sizeof(ProdutoNode));
+            novo_node->produto = produto;
+            
+            if (lista == NULL) {
+                lista = novo_node;
+                novo_node->prox = NULL;
+            } else if (strcmp(novo_node->produto.nome, lista->produto.nome) < 0) {
+                novo_node->prox = lista;
+                lista = novo_node;
+            } else {
+                anter = lista;
+                atual = lista->prox;
+                while ((atual != NULL) && strcmp(atual->produto.nome, novo_node->produto.nome) < 0) {
+                    anter = atual;
+                    atual = atual->prox;
+                }
+                anter->prox = novo_node;
+                novo_node->prox = atual;
+            }
+        }
+    }
+    fclose(arq_produtos);
+
+    system("clear||cls");
+    mostrar_cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡                  Lista Geral de Produtos (Ordem Alfabética)                 ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    
+    novo_node = lista;
+    while (novo_node != NULL) {
+        printf("\n");
+        printf("\t\tProduto %d:\n", i);
+        printf("\t\tID: %d\n", novo_node->produto.id);
+        printf("\t\tNome: %s\n", novo_node->produto.nome);
+        printf("\t\tDescrição: %s\n", novo_node->produto.descricao);
+        printf("\t\tPreço: %.2f\n", novo_node->produto.preco);
+        printf("\t\tQuantidade: %d\n", novo_node->produto.quant);
+        
+        novo_node = novo_node->prox;
+        i++;
+    }
+
+    novo_node = lista;
+    while (lista != NULL) {
+        lista = lista->prox;
+        free(novo_node);
+        novo_node = lista;
+    }
+    
     continuar_acao();
 }
