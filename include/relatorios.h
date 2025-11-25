@@ -31,5 +31,6 @@ void vendas_por_funcionario(void);
 // Relatórios ordem alfabética
 void lista_geral_clientes_ordenado(void);
 void lista_geral_funcionarios_ordenado(void);
+void lista_geral_produtos_ordenado(void);
 
 #endif
