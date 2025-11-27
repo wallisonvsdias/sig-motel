@@ -159,6 +159,7 @@ void menu_relatorio_quartos(void) {
         printf("♡                                                                             ♡\n");
         printf("♡      1  - Lista geral de quartos                                            ♡\n");
         printf("♡      2  - Lista quartos por tipo                                            ♡\n");
+        printf("♡      3  - Lista Geral de Quartos (Ordem Numerica)                           ♡\n");
         printf("♡      0  - Retornar ao Menu de Relatórios                                    ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -175,6 +176,9 @@ void menu_relatorio_quartos(void) {
             break;
         case 2:
             quartos_por_tipo();
+            break;
+        case 3:
+            lista_geral_quartos_ordenado();
             break;
         default:
             printf("\n");
@@ -1028,6 +1032,83 @@ void lista_geral_produtos_ordenado(void) {
         
         novo_node = novo_node->prox;
         i++;
+    }
+
+    novo_node = lista;
+    while (lista != NULL) {
+        lista = lista->prox;
+        free(novo_node);
+        novo_node = lista;
+    }
+    
+    continuar_acao();
+}
+
+typedef struct quarto_node {
+    Quarto quarto;
+    struct quarto_node* prox;
+} QuartoNode;
+
+void lista_geral_quartos_ordenado(void){
+    FILE *arq_quartos;
+    Quarto quarto;
+    QuartoNode* novo_node;
+    QuartoNode* lista;
+    QuartoNode* anter;
+    QuartoNode* atual;
+
+    arq_quartos = fopen("data/quartos.DAT", "rb");
+    if (arq_quartos == NULL) {
+        printf("Não foi possivel ler o arquivo quartos.DAT");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+
+    lista = NULL;
+    while (fread(&quarto, sizeof(Quarto), 1, arq_quartos)) {
+        if (quarto.status) {
+            novo_node = (QuartoNode*) malloc(sizeof(QuartoNode));
+            novo_node->quarto = quarto;
+            
+            if (lista == NULL) {
+                lista = novo_node;
+                novo_node->prox = NULL;
+            } else if (novo_node->quarto.id < lista->quarto.id) {
+                novo_node->prox = lista;
+                lista = novo_node;
+            } else {
+                anter = lista;
+                atual = lista->prox;
+                while ((atual != NULL) && (atual->quarto.id < novo_node->quarto.id)) {
+                    anter = atual;
+                    atual = atual->prox;
+                }
+                anter->prox = novo_node;
+                novo_node->prox = atual;
+            }
+        }
+    }
+    fclose(arq_quartos);
+
+    system("clear||cls");
+    mostrar_cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡                    Lista Geral de Quartos (Ordem Numerica)                  ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+
+    novo_node = lista;
+    while (novo_node != NULL) {
+        printf("\n");
+        printf("\t\tID: %d\n",novo_node->quarto.id);
+        printf("\t\tTipo: %s\n",NOME_TIPOS_QUARTO[novo_node->quarto.tipo]);
+        printf("\t\tDescricao: %s\n",novo_node->quarto.descricao);
+        printf("\t\tPreco/hora: %f\n",novo_node->quarto.preco_hora);
+        printf("\t\tPreco/diaria: %f\n",novo_node->quarto.preco_diaria);
+        
+        novo_node = novo_node->prox;
     }
 
     novo_node = lista;
