@@ -240,8 +240,8 @@ void menu_relatorio_produtos(void) {
         printf("♡                            Relatórios de Produtos                           ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡      1  - Lista geral de produtos                                           ♡\n");
-        printf("♡      1  - Lista geral de produtos (Ordem Alfabética)                        ♡\n");
-        printf("♡      2  - Lista produtos por nome                                           ♡\n");
+        printf("♡      2  - Lista geral de produtos (Ordem Alfabética)                        ♡\n");
+        printf("♡      3  - Lista produtos por nome                                           ♡\n");
         printf("♡      0  - Retornar ao Menu de Relatórios                                    ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -283,6 +283,7 @@ void menu_relatorio_vendas(void) {
         printf("♡      1  - Lista geral de vendas                                             ♡\n");
         printf("♡      2  - Lista venda por cliente                                           ♡\n");
         printf("♡      3  - Lista venda por funcionario                                       ♡\n");
+        printf("♡      4  - Lista geral de vendas ordenada                                    ♡\n");
         printf("♡      0  - Retornar ao Menu de Relatórios                                    ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -302,6 +303,9 @@ void menu_relatorio_vendas(void) {
             break;
         case 3:
             vendas_por_funcionario();
+            break;
+        case 4:
+            lista_geral_vendas_ordenado();
             break;
         default:
             printf("\n");
@@ -1191,6 +1195,88 @@ void lista_geral_hospedagens_ordenado(void){
         printf("\t\tID do Quarto: %d\n",novo_node->hospedagem.id_quarto);
         printf("\t\tHoras: %d\n",novo_node->hospedagem.horas);
 
+        novo_node = novo_node->prox;
+    }
+
+    novo_node = lista;
+    while (lista != NULL) {
+        lista = lista->prox;
+        free(novo_node);
+        novo_node = lista;
+    }
+    
+    continuar_acao();
+}
+
+typedef struct vendas_node {
+    Venda venda;
+    struct vendas_node* prox;
+} VendaNode;
+
+void lista_geral_vendas_ordenado(void){
+    Venda venda;
+    VendaNode* novo_node;
+    VendaNode* lista;
+    VendaNode* anter;
+    VendaNode* atual;
+
+    FILE *arq_vendas;
+    arq_vendas = fopen("data/vendas.DAT", "rb");
+    if (arq_vendas == NULL) {
+        printf("Não foi possivel ler o arquivo vendas.DAT");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+
+    lista = NULL;
+    while (fread(&venda, sizeof(Venda), 1, arq_vendas)) {
+        if (venda.status) {
+            novo_node = (VendaNode*) malloc(sizeof(VendaNode));
+            novo_node->venda = venda; 
+            
+            if (lista == NULL) {
+                lista = novo_node;
+                novo_node->prox = NULL;
+            } else if (strcmp(get_nome_cliente(novo_node->venda.cpf_cliente), get_nome_cliente(lista->venda.cpf_cliente)) < 0) {
+                novo_node->prox = lista;
+                lista = novo_node;
+            } else {
+                anter = lista;
+                atual = lista->prox;
+                while ((atual != NULL) && strcmp(get_nome_cliente(atual->venda.cpf_cliente), get_nome_cliente(novo_node->venda.cpf_cliente)) < 0) {
+                    anter = atual;
+                    atual = atual->prox;
+                }
+                anter->prox = novo_node;
+                novo_node->prox = atual;
+            }
+        }
+    }
+    fclose(arq_vendas);
+    char* nome_cliente;
+    char* nome_funcionario;
+
+    system("clear||cls");
+    mostrar_cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡                             Lista Geral de Vendas                           ♡\n");
+    printf("♡                         Ordem Alfabetica de Clientes                        ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+
+    novo_node = lista;
+    while (novo_node != NULL) {
+        nome_cliente = get_nome_cliente(novo_node->venda.cpf_cliente);
+        nome_funcionario = get_nome_funcionario(novo_node->venda.cpf_funcionario);
+        printf("\n");
+        printf("\t\tCPF Cliente: %s\n",novo_node->venda.cpf_cliente);
+        printf("\t\tNome Cliente: %s\n",nome_cliente);
+        printf("\t\tCPF Funcionario: %s\n",novo_node->venda.cpf_funcionario);
+        printf("\t\tNome Funcionario: %s\n",nome_funcionario);
+        printf("\t\tID do Produto: %d\n",novo_node->venda.id_produto);
+        printf("\t\tQuantidade: %d\n",novo_node->venda.quant);
         novo_node = novo_node->prox;
     }
 
