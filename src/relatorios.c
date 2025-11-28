@@ -200,6 +200,7 @@ void menu_relatorio_hospedagens(void) {
         printf("♡                                                                             ♡\n");
         printf("♡      1  - Lista geral de hospedagens                                        ♡\n");
         printf("♡      2  - Lista hospedagem por cliente                                      ♡\n");
+        printf("♡      3  - Lista geral de hospedagens ordenada                               ♡\n");
         printf("♡      0  - Retornar ao Menu de Relatórios                                    ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -216,6 +217,9 @@ void menu_relatorio_hospedagens(void) {
             break;
         case 2:
             hospedagens_por_cliente();
+            break;
+        case 3:
+            lista_geral_hospedagens_ordenado();
             break;
         default:
             printf("\n");
@@ -1108,6 +1112,85 @@ void lista_geral_quartos_ordenado(void){
         printf("\t\tPreco/hora: %f\n",novo_node->quarto.preco_hora);
         printf("\t\tPreco/diaria: %f\n",novo_node->quarto.preco_diaria);
         
+        novo_node = novo_node->prox;
+    }
+
+    novo_node = lista;
+    while (lista != NULL) {
+        lista = lista->prox;
+        free(novo_node);
+        novo_node = lista;
+    }
+    
+    continuar_acao();
+}
+
+typedef struct hospedagens_node {
+    Hospedagem hospedagem;
+    struct hospedagens_node* prox;
+} HospedagemNode;
+
+void lista_geral_hospedagens_ordenado(void){
+    Hospedagem hospedagem;
+    HospedagemNode* novo_node;
+    HospedagemNode* lista;
+    HospedagemNode* anter;
+    HospedagemNode* atual;
+
+    FILE *arq_hospedagem;
+    arq_hospedagem = fopen("data/hospedagem.DAT", "rb");
+    if (arq_hospedagem == NULL) {
+        printf("Não foi possivel ler o arquivo hospedagem.DAT");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        return;
+    }
+
+    lista = NULL;
+    while (fread(&hospedagem, sizeof(Hospedagem), 1, arq_hospedagem)) {
+        if (hospedagem.status) {
+            novo_node = (HospedagemNode*) malloc(sizeof(HospedagemNode));
+            novo_node->hospedagem = hospedagem; 
+            
+            if (lista == NULL) {
+                lista = novo_node;
+                novo_node->prox = NULL;
+            } else if (strcmp(get_nome_cliente(novo_node->hospedagem.cpf), get_nome_cliente(lista->hospedagem.cpf)) < 0) {
+                novo_node->prox = lista;
+                lista = novo_node;
+            } else {
+                anter = lista;
+                atual = lista->prox;
+                while ((atual != NULL) && strcmp(get_nome_cliente(atual->hospedagem.cpf), get_nome_cliente(novo_node->hospedagem.cpf)) < 0) {
+                    anter = atual;
+                    atual = atual->prox;
+                }
+                anter->prox = novo_node;
+                novo_node->prox = atual;
+            }
+        }
+    }
+    fclose(arq_hospedagem);
+    char* nome_cliente;
+
+    system("clear||cls");
+    mostrar_cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡                          Lista Geral de Hospedagens                         ♡\n");
+    printf("♡                         Ordem Alfabetica de Clientes                        ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+
+    novo_node = lista;
+    while (novo_node != NULL) {
+        nome_cliente = get_nome_cliente(novo_node->hospedagem.cpf);
+        printf("\n");
+        printf("\t\tCPF Cliente: %s\n",novo_node->hospedagem.cpf);
+        printf("\t\tNome Cliente: %s\n",nome_cliente);
+        printf("\t\tID do Quarto: %d\n",novo_node->hospedagem.id_quarto);
+        printf("\t\tHoras: %d\n",novo_node->hospedagem.horas);
+
         novo_node = novo_node->prox;
     }
 
