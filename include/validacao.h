@@ -36,5 +36,6 @@ void ler_salario(char* salario);
 
 char* get_nome_cliente(char* cpf);
 char* get_nome_funcionario(char* cpf);
+char* get_nome_produto(int id);
 
 #endif

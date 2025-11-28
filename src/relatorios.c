@@ -498,6 +498,7 @@ void lista_geral_vendas(void) {
     }
     char* nome_cliente;
     char* nome_funcionario;
+    char* nome_produto;
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -509,12 +510,14 @@ void lista_geral_vendas(void) {
         if (venda->status){
             nome_cliente = get_nome_cliente(venda->cpf_cliente);
             nome_funcionario = get_nome_funcionario(venda->cpf_funcionario);
+            nome_produto = get_nome_produto(venda->id_produto);
             printf("\n");
             printf("\t\tCPF Cliente: %s\n",venda->cpf_cliente);
             printf("\t\tNome Cliente: %s\n",nome_cliente);
             printf("\t\tCPF Funcionario: %s\n",venda->cpf_funcionario);
             printf("\t\tNome Funcionario: %s\n",nome_funcionario);
             printf("\t\tID do Produto: %d\n",venda->id_produto);
+            printf("\t\tNome Produto: %s\n",nome_produto);
             printf("\t\tQuantidade: %d\n",venda->quant);
         }
     }
@@ -738,6 +741,7 @@ void vendas_por_cliente(void) {
     char nome_lido[51];
     char* nome_cliente;
     char* nome_funcionario;
+    char* nome_produto;
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                            Vendas por cliente                               ♡\n");
@@ -750,6 +754,7 @@ void vendas_por_cliente(void) {
     while (fread(venda,sizeof(Venda),1,arq_vendas)) {
         nome_cliente = get_nome_cliente(venda->cpf_cliente);
         nome_funcionario = get_nome_funcionario(venda->cpf_funcionario);
+        nome_produto = get_nome_produto(venda->id_produto);
         if (strstr(nome_cliente,nome_lido) != NULL){
             printf("\n");
             printf("\t\tCPF Cliente: %s\n",venda->cpf_cliente);
@@ -757,6 +762,7 @@ void vendas_por_cliente(void) {
             printf("\t\tCPF Funcionario: %s\n",venda->cpf_funcionario);
             printf("\t\tNome Funcionario: %s\n",nome_funcionario);
             printf("\t\tID do Produto: %d\n",venda->id_produto);
+            printf("\t\tNome Produto: %s\n",nome_produto);
             printf("\t\tQuantidade: %d\n",venda->quant);
         }
     }
@@ -781,6 +787,7 @@ void vendas_por_funcionario(void) {
     char nome_lido[51];
     char* nome_cliente;
     char* nome_funcionario;
+    char* nome_produto;
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                          Vendas por funcionario                             ♡\n");
@@ -793,6 +800,7 @@ void vendas_por_funcionario(void) {
     while (fread(venda,sizeof(Venda),1,arq_vendas)) {
         nome_cliente = get_nome_cliente(venda->cpf_cliente);
         nome_funcionario = get_nome_funcionario(venda->cpf_funcionario);
+        nome_produto = get_nome_produto(venda->id_produto);
         if (strstr(nome_funcionario,nome_lido) != NULL){
             printf("\n");
             printf("\t\tCPF Cliente: %s\n",venda->cpf_cliente);
@@ -800,6 +808,7 @@ void vendas_por_funcionario(void) {
             printf("\t\tCPF Funcionario: %s\n",venda->cpf_funcionario);
             printf("\t\tNome Funcionario: %s\n",nome_funcionario);
             printf("\t\tID do Produto: %d\n",venda->id_produto);
+            printf("\t\tNome Produto: %s\n",nome_produto);
             printf("\t\tQuantidade: %d\n",venda->quant);
         }
     }
@@ -1256,6 +1265,7 @@ void lista_geral_vendas_ordenado(void){
     fclose(arq_vendas);
     char* nome_cliente;
     char* nome_funcionario;
+    char* nome_produto;
 
     system("clear||cls");
     mostrar_cabecalho();
@@ -1270,12 +1280,14 @@ void lista_geral_vendas_ordenado(void){
     while (novo_node != NULL) {
         nome_cliente = get_nome_cliente(novo_node->venda.cpf_cliente);
         nome_funcionario = get_nome_funcionario(novo_node->venda.cpf_funcionario);
+        nome_produto = get_nome_produto(novo_node->venda.id_produto);
         printf("\n");
         printf("\t\tCPF Cliente: %s\n",novo_node->venda.cpf_cliente);
         printf("\t\tNome Cliente: %s\n",nome_cliente);
         printf("\t\tCPF Funcionario: %s\n",novo_node->venda.cpf_funcionario);
         printf("\t\tNome Funcionario: %s\n",nome_funcionario);
         printf("\t\tID do Produto: %d\n",novo_node->venda.id_produto);
+        printf("\t\tNome Produto: %s\n",nome_produto);
         printf("\t\tQuantidade: %d\n",novo_node->venda.quant);
         novo_node = novo_node->prox;
     }
