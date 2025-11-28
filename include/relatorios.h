@@ -32,5 +32,8 @@ void vendas_por_funcionario(void);
 void lista_geral_clientes_ordenado(void);
 void lista_geral_funcionarios_ordenado(void);
 void lista_geral_produtos_ordenado(void);
+void lista_geral_quartos_ordenado(void);
+void lista_geral_hospedagens_ordenado(void);
+void lista_geral_vendas_ordenado(void);
 
 #endif

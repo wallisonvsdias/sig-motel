@@ -4,6 +4,7 @@
 #include <ctype.h>
 #include "clientes.h"
 #include "funcionarios.h"
+#include "produtos.h"
 #include "validacao.h"
 
 void ler_string(char* buffer, int tamanho) {
@@ -548,5 +549,27 @@ char* get_nome_funcionario(char* cpf) {
     }
     fclose(arq_funcionario);
     free(funcionario);
+    return NULL;
+}
+
+char* get_nome_produto(int id){
+    Produto* produto;
+    produto = (Produto*) malloc(sizeof(*produto));
+    FILE *arq_produtos;
+    arq_produtos = fopen("data/produtos.DAT", "rb");
+    if (arq_produtos == NULL) {
+        printf("Não foi possível abrir o arquivo produtos.DAT\n");
+        printf("Pressione <enter>\n");
+        getchar();
+        free(produto);
+        return NULL;
+    }
+    while (fread(produto,sizeof(Produto),1,arq_produtos)) {
+        if (produto->id == id){
+            return produto->nome;
+        }
+    }
+    fclose(arq_produtos);
+    free(produto);
     return NULL;
 }
