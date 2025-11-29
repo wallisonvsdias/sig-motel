@@ -187,6 +187,7 @@ void alterar_cliente(void){
         ler_email(novo_cliente->email);
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+        
         novo_cliente->status = True;
         fwrite(novo_cliente,sizeof(Cliente),1,arq_temp);
         fclose(arq_temp);

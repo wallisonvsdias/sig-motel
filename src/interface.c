@@ -18,7 +18,6 @@ void mostrar_cabecalho(void) {
 
 // Exibido no fim de cada tela
 void continuar_acao(void) {
-    getchar();
     printf("\n");
     printf("Pressione [Enter] para continuar a ação");
     getchar();

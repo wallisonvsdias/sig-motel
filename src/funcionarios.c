@@ -121,16 +121,14 @@ void exibir_funcionario(void) {
             printf("\t\tCargo: %s\n", funcionario->cargo);
             printf("\t\tSalário: %f\n", funcionario->salario);
             fclose(arq_funcionario);
-            getchar();
             return;
         }
     }
     printf("\n\t\tFuncionário não encontrado.\n");
-    getchar();
+    continuar_acao();
     fclose(arq_funcionario);
     free(funcionario);
     return;
-    continuar_acao();
 
 }
 
@@ -157,7 +155,7 @@ void alterar_funcionario(void) {
         return;
     }
     char cpf_lido[12];
-    int encontrado = 0;
+    int encontrado = False;
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -171,10 +169,9 @@ void alterar_funcionario(void) {
         if (strcmp(funcionario->cpf, cpf_lido) != 0) {
             fwrite(funcionario, sizeof(Funcionario), 1, arq_temp);
         } else {
-            encontrado = 1;
+            encontrado = True;
         }
     }
-
     fclose(arq_funcionarios);
     free(funcionario);
 
@@ -201,27 +198,24 @@ void alterar_funcionario(void) {
         novo_funcionario->salario = atof(entrada_salario);
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-        getchar();
+        printf("\t\t Funcionário ALTERADO com sucesso! >>>> \n");
 
         novo_funcionario->status = True; 
         fwrite(novo_funcionario, sizeof(Funcionario), 1, arq_temp);
         fclose(arq_temp);
         free(novo_funcionario);
-        remove("funcionarios.DAT");
-        rename("temp.DAT", "funcionarios.DAT");
-        printf("\t\t Funcionário ALTERADO com sucesso! >>>> \n");
-        printf("Pressione <ENTER> para continuar");
-        getchar();
+
+        remove("data/funcionarios.DAT");
+        rename("data/temp.DAT", "data/funcionarios.DAT");
         return;
+        continuar_acao();
 
     } else {
         fclose(arq_temp);
         remove("temp.DAT");
         printf("\t\t Funcionário NAO encontrado! >>>> \n");
-        printf("Pressione <ENTER> para continuar");
         getchar();
     }
-    continuar_acao();
 }
 
 
@@ -266,7 +260,5 @@ void excluir_funcionario(void) {
     } else {
         printf("\t\t Funcionário(a) NÃO encontrado(a)! >>>> \n");
     }
-    
-    printf("♡ Pressione <ENTER> para continuar...");
-    getchar();
+    continuar_acao();
 }
