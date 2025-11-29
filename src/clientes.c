@@ -143,7 +143,7 @@ void alterar_cliente(void){
         return;
     }
     FILE *arq_temp;
-    arq_temp = fopen("data/temp.DAT", "ab");
+    arq_temp = fopen("data/temp.DAT", "wb");
     if (arq_temp == NULL) {
         printf("Não foi possivel ler o arquivo temp.DAT");
         printf("Pressione <ENTER> ...");
@@ -151,7 +151,7 @@ void alterar_cliente(void){
         return;
     }
     char cpf_lido[12];
-    int encontrado;
+    int encontrado = False;
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -161,14 +161,13 @@ void alterar_cliente(void){
     ler_cpf(cpf_lido);
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    while (fread(cliente,sizeof(Cliente),1,arq_clientes)) {
-        if (strcmp(cliente->cpf,cpf_lido) != 0){
-            fwrite(cliente,sizeof(Cliente),1,arq_temp);
+    while (fread(cliente, sizeof(Cliente), 1, arq_clientes)) {
+        if (strcmp(cliente->cpf, cpf_lido) != 0) {
+            fwrite(cliente, sizeof(Cliente), 1, arq_temp);
         } else {
             encontrado = True;
         }
     }
-    
     fclose(arq_clientes);
     free(cliente);
 
@@ -192,10 +191,10 @@ void alterar_cliente(void){
         fwrite(novo_cliente,sizeof(Cliente),1,arq_temp);
         fclose(arq_temp);
         free(novo_cliente);
-        remove("clientes.DAT");
-        rename("temp.DAT","clientes.DAT");
+
+        remove("data/clientes.DAT");
+        rename("data/temp.DAT", "data/clientes.DAT");
         printf("\t\t Cliente ALTERADO com sucesso! >>>> \n");
-        printf("Pressione <ENTER> para continuar");
         getchar();
         return;
 
