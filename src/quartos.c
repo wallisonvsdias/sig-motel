@@ -187,22 +187,18 @@ void alterar_quarto(void) {
     ler_id(entrada_id);
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-
     id = atoi(entrada_id);
-
     while (fread(quarto, sizeof(Quarto), 1, arq_quartos)) {
-        if (quarto->id != id){
+        if (quarto->id != id || quarto->status == False){
             fwrite(quarto, sizeof(Quarto), 1, arq_temp);
         } else {
             encontrado = True;
         }
     }
-
     fclose(arq_quartos);
     free(quarto);
 
     if (encontrado) {
-
         Quarto* novo_quarto;
         char entrada_preco[20];
         novo_quarto = (Quarto*)malloc(sizeof(*novo_quarto));
@@ -211,38 +207,30 @@ void alterar_quarto(void) {
         mostrar_cabecalho();
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         printf("♡                                                                             ♡\n");
-        printf("♡                              Editar dados de Quarto                         ♡\n");
+        printf("♡                              Novos dados do Quarto                          ♡\n");
         printf("♡                                                                             ♡\n");
 
         printf("♡      ID do quarto\n");
         ler_id(entrada_id);
         novo_quarto->id = atoi(entrada_id);
-
         printf("\n\n--- Tipos de Quarto Disponíveis ---\n");
         for (int i = 0; i < 4; i++) {
             printf("\t%d - %s\n", i + 1, NOME_TIPOS_QUARTO[i]);
         }
-
         int tipo = ler_tipo();
         novo_quarto->tipo = tipo - 1;
-
         printf("♡      Descricao: ");
         ler_descricao(novo_quarto->descricao);
-
         printf("♡      Preço/hora: ");
         ler_preco(entrada_preco);
         novo_quarto->preco_hora = atof(entrada_preco);
-
         printf("♡      Preço/diária: ");
         ler_preco(entrada_preco);
         novo_quarto->preco_diaria = atof(entrada_preco);
-
         printf("♡                                                                             ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-
         fwrite(novo_quarto, sizeof(Quarto), 1, arq_temp);
-
         free(novo_quarto);
         fclose(arq_temp);
 
@@ -254,7 +242,6 @@ void alterar_quarto(void) {
         return;
 
     } else {
-
         fclose(arq_temp);
         remove("data/temp.DAT");
 
@@ -286,13 +273,19 @@ void excluir_quarto(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                                 Excluir Quarto                              ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      ID do quarto: ");
+    printf("♡      ID do quarto: \n");
     ler_id(entrada_id);
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     id = atoi(entrada_id);
     while (fread(quarto,sizeof(Quarto),1,arq_quartos)) {
         if (quarto->id == id){
+            if (quarto->status == False) {
+                printf("\t\t Quarto NAO encontrado! >>>> \n");
+                continuar_acao();
+                return;
+            }
+            
             quarto->status = False;
             fseek(arq_quartos,-(long)sizeof(Quarto),SEEK_CUR);
             fwrite(quarto, sizeof(Quarto), 1, arq_quartos);
@@ -305,16 +298,12 @@ void excluir_quarto(void) {
 
     if (encontrado) {
         printf("\t\t Quarto EXCLUIDO com sucesso! >>>> \n");
-        printf("Pressione <ENTER> para continuar");
-        getchar();
+        continuar_acao();
         return;
     } else {
         printf("\t\t Quarto NAO encontrado! >>>> \n");
-        printf("Pressione <ENTER> para continuar");
-        getchar();
+        continuar_acao();
         return;
     }
-
-    continuar_acao();
 
 }
