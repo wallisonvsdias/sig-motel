@@ -213,6 +213,7 @@ void menu_relatorio_hospedagens(void) {
         printf("♡      1  - Lista geral de hospedagens                                        ♡\n");
         printf("♡      2  - Lista hospedagem por cliente                                      ♡\n");
         printf("♡      3  - Lista geral de hospedagens ordenada                               ♡\n");
+        printf("♡      4  - Lista de hospedagens desativadas                                  ♡\n");
         printf("♡      0  - Retornar ao Menu de Relatórios                                    ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -232,6 +233,9 @@ void menu_relatorio_hospedagens(void) {
             break;
         case 3:
             lista_geral_hospedagens_ordenado();
+            break;
+        case 4:
+            lista_hospedagens_desativadas();
             break;
         default:
             printf("\n");
@@ -1444,5 +1448,53 @@ void lista_quartos_desativados(void) {
     
     fclose(arq_quartos);
     free(quarto);
+    continuar_acao();
+}
+
+void lista_hospedagens_desativadas(void) {
+    Hospedagem* hospedagem;
+    hospedagem = (Hospedagem*)malloc(sizeof(*hospedagem));
+    FILE *arq_hospedagem;
+    arq_hospedagem = fopen("data/hospedagem.DAT", "rb");
+    if (arq_hospedagem == NULL) {
+        printf("Não foi possivel ler o arquivo hospedagem.DAT\n");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        free(hospedagem);
+        return;
+    }
+    
+    int encontrados = 0;
+    char* nome_cliente;
+    system("clear||cls");
+    mostrar_cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡                      Lista de Hospedagens Desativadas                      ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    
+    while (fread(hospedagem, sizeof(Hospedagem), 1, arq_hospedagem)) {
+        if (!hospedagem->status) {  // Status desativado
+            nome_cliente = get_nome_cliente(hospedagem->cpf);
+            printf("\n");
+            printf("\t\tCPF Cliente: %s\n", hospedagem->cpf);
+            printf("\t\tNome Cliente: %s\n", nome_cliente);
+            printf("\t\tID do Quarto: %d\n", hospedagem->id_quarto);
+            printf("\t\tHoras: %d\n", hospedagem->horas);
+            printf("\t\t--- STATUS: DESATIVADO ---\n");
+            encontrados++;
+            free(nome_cliente);  // Liberar memória alocada
+        }
+    }
+    
+    if (encontrados == 0) {
+        printf("\n\t\tNenhuma hospedagem desativada encontrada.\n");
+    } else {
+        printf("\n\t\tTotal de hospedagens desativadas: %d\n", encontrados);
+    }
+    
+    fclose(arq_hospedagem);
+    free(hospedagem);
     continuar_acao();
 }

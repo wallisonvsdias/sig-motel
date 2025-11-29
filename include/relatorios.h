@@ -40,5 +40,6 @@ void lista_geral_vendas_ordenado(void);
 void lista_clientes_desativados(void);
 void lista_funcionarios_desativados(void);
 void lista_quartos_desativados(void);
+void lista_hospedagens_desativadas(void);
 
 #endif
