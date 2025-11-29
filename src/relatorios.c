@@ -78,6 +78,7 @@ void menu_relatorio_clientes(void) {
         printf("♡      1  - Lista geral de clientes                                           ♡\n");
         printf("♡      2  - Lista geral de clientes (Ordem Alfabética)                        ♡\n");
         printf("♡      3  - Lista clientes por nome                                           ♡\n");
+        printf("♡      4  - Lista de clientes desativados                                     ♡\n");
         printf("♡      0  - Retornar ao Menu de Relatórios                                    ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -98,6 +99,9 @@ void menu_relatorio_clientes(void) {
         case 3:
             clientes_por_nome();
             break;
+        case 4:
+            lista_clientes_desativados();
+            break;
         default:
             printf("\n");
             printf("Por favor, digite uma opção válida");
@@ -117,8 +121,9 @@ void menu_relatorio_funcionarios(void) {
         printf("♡                         Relatórios de Funcionários                          ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡      1  - Lista geral de funcionários                                       ♡\n");
-        printf("♡      2  - Lista geral de funcionários (Ordem Alfabética)                     ♡\n");
+        printf("♡      2  - Lista geral de funcionários (Ordem Alfabética)                    ♡\n");
         printf("♡      3  - Lista funcionarios por cargo                                      ♡\n");
+        printf("♡      4  - Lista de funcionários desativados                                 ♡\n");
         printf("♡      0  - Retornar ao Menu de Relatórios                                    ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -138,6 +143,9 @@ void menu_relatorio_funcionarios(void) {
             break;
         case 3:
             funcionarios_por_cargo();
+            break;
+        case 4:
+            lista_funcionarios_desativados();
             break;
         default:
             printf("\n");
@@ -160,6 +168,7 @@ void menu_relatorio_quartos(void) {
         printf("♡      1  - Lista geral de quartos                                            ♡\n");
         printf("♡      2  - Lista quartos por tipo                                            ♡\n");
         printf("♡      3  - Lista Geral de Quartos (Ordem Numerica)                           ♡\n");
+        printf("♡      4  - Lista de quartos desativados                                      ♡\n");
         printf("♡      0  - Retornar ao Menu de Relatórios                                    ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -179,6 +188,9 @@ void menu_relatorio_quartos(void) {
             break;
         case 3:
             lista_geral_quartos_ordenado();
+            break;
+        case 4:
+            lista_quartos_desativados();
             break;
         default:
             printf("\n");
@@ -201,6 +213,7 @@ void menu_relatorio_hospedagens(void) {
         printf("♡      1  - Lista geral de hospedagens                                        ♡\n");
         printf("♡      2  - Lista hospedagem por cliente                                      ♡\n");
         printf("♡      3  - Lista geral de hospedagens ordenada                               ♡\n");
+        printf("♡      4  - Lista de hospedagens desativadas                                  ♡\n");
         printf("♡      0  - Retornar ao Menu de Relatórios                                    ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -220,6 +233,9 @@ void menu_relatorio_hospedagens(void) {
             break;
         case 3:
             lista_geral_hospedagens_ordenado();
+            break;
+        case 4:
+            lista_hospedagens_desativadas();
             break;
         default:
             printf("\n");
@@ -471,14 +487,12 @@ void lista_geral_produtos(void){
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fread(produto,sizeof(Produto),1,arq_produtos)) {
-        if (produto->status){
-            printf("\n");
-            printf("\t\tID: %d\n",produto->id);
-            printf("\t\tNome: %s\n",produto->nome);
-            printf("\t\tDescricao: %s\n",produto->descricao);
-            printf("\t\tPreco: %f\n",produto->preco);
-            printf("\t\tQuantidade: %d\n",produto->quant);
-        }
+        printf("\n");
+        printf("\t\tID: %d\n",produto->id);
+        printf("\t\tNome: %s\n",produto->nome);
+        printf("\t\tDescricao: %s\n",produto->descricao);
+        printf("\t\tPreco: %f\n",produto->preco);
+        printf("\t\tQuantidade: %d\n",produto->quant);
     }
     fclose(arq_produtos);
     free(produto);
@@ -507,19 +521,17 @@ void lista_geral_vendas(void) {
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fread(venda,sizeof(Venda),1,arq_vendas)) {
-        if (venda->status){
-            nome_cliente = get_nome_cliente(venda->cpf_cliente);
-            nome_funcionario = get_nome_funcionario(venda->cpf_funcionario);
-            nome_produto = get_nome_produto(venda->id_produto);
-            printf("\n");
-            printf("\t\tCPF Cliente: %s\n",venda->cpf_cliente);
-            printf("\t\tNome Cliente: %s\n",nome_cliente);
-            printf("\t\tCPF Funcionario: %s\n",venda->cpf_funcionario);
-            printf("\t\tNome Funcionario: %s\n",nome_funcionario);
-            printf("\t\tID do Produto: %d\n",venda->id_produto);
-            printf("\t\tNome Produto: %s\n",nome_produto);
-            printf("\t\tQuantidade: %d\n",venda->quant);
-        }
+        nome_cliente = get_nome_cliente(venda->cpf_cliente);
+        nome_funcionario = get_nome_funcionario(venda->cpf_funcionario);
+        nome_produto = get_nome_produto(venda->id_produto);
+        printf("\n");
+        printf("\t\tCPF Cliente: %s\n",venda->cpf_cliente);
+        printf("\t\tNome Cliente: %s\n",nome_cliente);
+        printf("\t\tCPF Funcionario: %s\n",venda->cpf_funcionario);
+        printf("\t\tNome Funcionario: %s\n",nome_funcionario);
+        printf("\t\tID do Produto: %d\n",venda->id_produto);
+        printf("\t\tNome Produto: %s\n",nome_produto);
+        printf("\t\tQuantidade: %d\n",venda->quant);
     }
     fclose(arq_vendas);
     free(venda);
@@ -1005,26 +1017,24 @@ void lista_geral_produtos_ordenado(void) {
 
     lista = NULL;
     while (fread(&produto, sizeof(Produto), 1, arq_produtos)) {
-        if (produto.status) {
-            novo_node = (ProdutoNode*) malloc(sizeof(ProdutoNode));
-            novo_node->produto = produto;
-            
-            if (lista == NULL) {
-                lista = novo_node;
-                novo_node->prox = NULL;
-            } else if (strcmp(novo_node->produto.nome, lista->produto.nome) < 0) {
-                novo_node->prox = lista;
-                lista = novo_node;
-            } else {
-                anter = lista;
-                atual = lista->prox;
-                while ((atual != NULL) && strcmp(atual->produto.nome, novo_node->produto.nome) < 0) {
-                    anter = atual;
-                    atual = atual->prox;
-                }
-                anter->prox = novo_node;
-                novo_node->prox = atual;
+        novo_node = (ProdutoNode*) malloc(sizeof(ProdutoNode));
+        novo_node->produto = produto;
+        
+        if (lista == NULL) {
+            lista = novo_node;
+            novo_node->prox = NULL;
+        } else if (strcmp(novo_node->produto.nome, lista->produto.nome) < 0) {
+            novo_node->prox = lista;
+            lista = novo_node;
+        } else {
+            anter = lista;
+            atual = lista->prox;
+            while ((atual != NULL) && strcmp(atual->produto.nome, novo_node->produto.nome) < 0) {
+                anter = atual;
+                atual = atual->prox;
             }
+            anter->prox = novo_node;
+            novo_node->prox = atual;
         }
     }
     fclose(arq_produtos);
@@ -1240,26 +1250,24 @@ void lista_geral_vendas_ordenado(void){
 
     lista = NULL;
     while (fread(&venda, sizeof(Venda), 1, arq_vendas)) {
-        if (venda.status) {
-            novo_node = (VendaNode*) malloc(sizeof(VendaNode));
-            novo_node->venda = venda; 
-            
-            if (lista == NULL) {
-                lista = novo_node;
-                novo_node->prox = NULL;
-            } else if (strcmp(get_nome_cliente(novo_node->venda.cpf_cliente), get_nome_cliente(lista->venda.cpf_cliente)) < 0) {
-                novo_node->prox = lista;
-                lista = novo_node;
-            } else {
-                anter = lista;
-                atual = lista->prox;
-                while ((atual != NULL) && strcmp(get_nome_cliente(atual->venda.cpf_cliente), get_nome_cliente(novo_node->venda.cpf_cliente)) < 0) {
-                    anter = atual;
-                    atual = atual->prox;
-                }
-                anter->prox = novo_node;
-                novo_node->prox = atual;
+        novo_node = (VendaNode*) malloc(sizeof(VendaNode));
+        novo_node->venda = venda; 
+        
+        if (lista == NULL) {
+            lista = novo_node;
+            novo_node->prox = NULL;
+        } else if (strcmp(get_nome_cliente(novo_node->venda.cpf_cliente), get_nome_cliente(lista->venda.cpf_cliente)) < 0) {
+            novo_node->prox = lista;
+            lista = novo_node;
+        } else {
+            anter = lista;
+            atual = lista->prox;
+            while ((atual != NULL) && strcmp(get_nome_cliente(atual->venda.cpf_cliente), get_nome_cliente(novo_node->venda.cpf_cliente)) < 0) {
+                anter = atual;
+                atual = atual->prox;
             }
+            anter->prox = novo_node;
+            novo_node->prox = atual;
         }
     }
     fclose(arq_vendas);
@@ -1299,5 +1307,194 @@ void lista_geral_vendas_ordenado(void){
         novo_node = lista;
     }
     
+    continuar_acao();
+}
+
+// ============================= RELATÓRIOS DESATIVADOS =============================
+
+void lista_clientes_desativados(void) {
+    Cliente* cliente;
+    cliente = (Cliente*)malloc(sizeof(*cliente));
+    FILE *arq_clientes;
+    arq_clientes = fopen("data/clientes.DAT", "rb");
+    if (arq_clientes == NULL) {
+        printf("Não foi possivel ler o arquivo clientes.dat\n");
+        printf("pressione <enter>\n");
+        getchar();
+        free(cliente);
+        return;
+    }
+    
+    int encontrados = 0;
+    system("clear||cls");
+    mostrar_cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡                       Lista de Clientes Desativados                        ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    
+    while (fread(cliente, sizeof(Cliente), 1, arq_clientes)) {
+        if (!cliente->status) {  // Status desativado
+            printf("\n");
+            printf("\t\tCPF: %s\n", cliente->cpf);
+            printf("\t\tNome: %s\n", cliente->nome);
+            printf("\t\tData de nascimento: %s\n", cliente->nasc);
+            printf("\t\tTelefone: %s\n", cliente->telef);
+            printf("\t\tEmail: %s\n", cliente->email);
+            printf("\t\t--- STATUS: DESATIVADO ---\n");
+            encontrados++;
+        }
+    }
+    
+    if (encontrados == 0) {
+        printf("\n\t\tNenhum cliente desativado encontrado.\n");
+    } else {
+        printf("\n\t\tTotal de clientes desativados: %d\n", encontrados);
+    }
+    
+    fclose(arq_clientes);
+    free(cliente);
+    continuar_acao();
+}
+
+void lista_funcionarios_desativados(void) {
+    Funcionario* funcionario;
+    funcionario = (Funcionario*)malloc(sizeof(*funcionario));
+    FILE *arq_funcionarios;
+    arq_funcionarios = fopen("data/funcionarios.DAT", "rb");
+    if (arq_funcionarios == NULL) {
+        printf("Não foi possivel ler o arquivo funcionarios.dat\n");
+        printf("pressione <enter>\n");
+        getchar();
+        free(funcionario);
+        return;
+    }
+    
+    int encontrados = 0;
+    system("clear||cls");
+    mostrar_cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡                     Lista de Funcionários Desativados                      ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    
+    while (fread(funcionario, sizeof(Funcionario), 1, arq_funcionarios)) {
+        if (!funcionario->status) {  // Status desativado
+            printf("\n");
+            printf("\t\tCPF: %s\n", funcionario->cpf);
+            printf("\t\tNome: %s\n", funcionario->nome);
+            printf("\t\tTelefone: %s\n", funcionario->telefone);
+            printf("\t\tEmail: %s\n", funcionario->email);
+            printf("\t\tCargo: %s\n", funcionario->cargo);
+            printf("\t\tSalário: %.2f\n", funcionario->salario);
+            printf("\t\t--- STATUS: DESATIVADO ---\n");
+            encontrados++;
+        }
+    }
+    
+    if (encontrados == 0) {
+        printf("\n\t\tNenhum funcionário desativado encontrado.\n");
+    } else {
+        printf("\n\t\tTotal de funcionários desativados: %d\n", encontrados);
+    }
+    
+    fclose(arq_funcionarios);
+    free(funcionario);
+    continuar_acao();
+}
+
+void lista_quartos_desativados(void) {
+    Quarto* quarto;
+    quarto = (Quarto*)malloc(sizeof(*quarto));
+    FILE *arq_quartos;
+    arq_quartos = fopen("data/quartos.DAT", "rb");
+    if (arq_quartos == NULL) {
+        printf("Não foi possivel ler o arquivo quartos.DAT\n");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        free(quarto);
+        return;
+    }
+    
+    int encontrados = 0;
+    system("clear||cls");
+    mostrar_cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡                        Lista de Quartos Desativados                        ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    
+    while (fread(quarto, sizeof(Quarto), 1, arq_quartos)) {
+        if (!quarto->status) {  // Status desativado
+            printf("\n");
+            printf("\t\tID: %d\n", quarto->id);
+            printf("\t\tTipo: %s\n", NOME_TIPOS_QUARTO[quarto->tipo]);
+            printf("\t\tDescricao: %s\n", quarto->descricao);
+            printf("\t\tPreco/hora: %.2f\n", quarto->preco_hora);
+            printf("\t\tPreco/diaria: %.2f\n", quarto->preco_diaria);
+            printf("\t\t--- STATUS: DESATIVADO ---\n");
+            encontrados++;
+        }
+    }
+    
+    if (encontrados == 0) {
+        printf("\n\t\tNenhum quarto desativado encontrado.\n");
+    } else {
+        printf("\n\t\tTotal de quartos desativados: %d\n", encontrados);
+    }
+    
+    fclose(arq_quartos);
+    free(quarto);
+    continuar_acao();
+}
+
+void lista_hospedagens_desativadas(void) {
+    Hospedagem* hospedagem;
+    hospedagem = (Hospedagem*)malloc(sizeof(*hospedagem));
+    FILE *arq_hospedagem;
+    arq_hospedagem = fopen("data/hospedagem.DAT", "rb");
+    if (arq_hospedagem == NULL) {
+        printf("Não foi possivel ler o arquivo hospedagem.DAT\n");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        free(hospedagem);
+        return;
+    }
+    
+    int encontrados = 0;
+    char* nome_cliente;
+    system("clear||cls");
+    mostrar_cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡                      Lista de Hospedagens Desativadas                      ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    
+    while (fread(hospedagem, sizeof(Hospedagem), 1, arq_hospedagem)) {
+        if (!hospedagem->status) {  // Status desativado
+            nome_cliente = get_nome_cliente(hospedagem->cpf);
+            printf("\n");
+            printf("\t\tCPF Cliente: %s\n", hospedagem->cpf);
+            printf("\t\tNome Cliente: %s\n", nome_cliente);
+            printf("\t\tID do Quarto: %d\n", hospedagem->id_quarto);
+            printf("\t\tHoras: %d\n", hospedagem->horas);
+            printf("\t\t--- STATUS: DESATIVADO ---\n");
+            encontrados++;
+            free(nome_cliente);  // Liberar memória alocada
+        }
+    }
+    
+    if (encontrados == 0) {
+        printf("\n\t\tNenhuma hospedagem desativada encontrada.\n");
+    } else {
+        printf("\n\t\tTotal de hospedagens desativadas: %d\n", encontrados);
+    }
+    
+    fclose(arq_hospedagem);
+    free(hospedagem);
     continuar_acao();
 }
