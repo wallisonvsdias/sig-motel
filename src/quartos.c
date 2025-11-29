@@ -47,7 +47,6 @@ void menu_quarto(void) {
             case '0':
                 break;
             default:
-                getchar();
                 printf("\n");
                 printf("Por favor, digite uma opção válida");
                 getchar();
@@ -85,6 +84,7 @@ void cadastrar_quarto(void) {
     }
     int tipo = ler_tipo();
     quarto->tipo = tipo-1;
+    printf("♡      Descrição: ");
     ler_descricao(quarto->descricao);
     printf("♡      Preço/hora: ");
     ler_preco(entrada_preco);
@@ -103,7 +103,6 @@ void cadastrar_quarto(void) {
     free(quarto);
 
     continuar_acao();
-
 }
 
 // Exibir também o status

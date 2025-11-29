@@ -475,24 +475,25 @@ void ler_id(char* id) {
 }
 
 int ler_tipo(void){
+    char buffer[20];
     int escolha;
     do {
         printf("Digite o número do tipo de quarto: ");
-        if (scanf("%d", &escolha) != 1) {
-            while (getchar() != '\n'); 
-            escolha = -1;
+        ler_string(buffer, 20);
+        if (!validar_id(buffer)) {
             printf("Entrada inválida. Tente novamente.\n");
-        } else if (escolha < 1 || escolha > 4) {
+            continue;
+        }
+        escolha = atoi(buffer);
+        if (escolha < 1 || escolha > 4) {
             printf("Opção inválida. Escolha um número entre 1 e 4.\n");
         }
     } while (escolha < 1 || escolha > 4);
-    
     return escolha;
 }
 
 void ler_descricao(char* descricao){
     do {
-        printf("♡      Descrição: ");
         ler_string(descricao,51);
         if (!validar_descricao(descricao,51)) {
             printf("♡      Descricao invalida! Nao pode ser vazia\n");
