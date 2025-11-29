@@ -38,5 +38,6 @@ void lista_geral_vendas_ordenado(void);
 
 // Relatórios desativados
 void lista_clientes_desativados(void);
+void lista_funcionarios_desativados(void);
 
 #endif

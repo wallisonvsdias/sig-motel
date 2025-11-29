@@ -121,8 +121,9 @@ void menu_relatorio_funcionarios(void) {
         printf("♡                         Relatórios de Funcionários                          ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡      1  - Lista geral de funcionários                                       ♡\n");
-        printf("♡      2  - Lista geral de funcionários (Ordem Alfabética)                     ♡\n");
+        printf("♡      2  - Lista geral de funcionários (Ordem Alfabética)                    ♡\n");
         printf("♡      3  - Lista funcionarios por cargo                                      ♡\n");
+        printf("♡      4  - Lista de funcionários desativados                                 ♡\n");
         printf("♡      0  - Retornar ao Menu de Relatórios                                    ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -142,6 +143,9 @@ void menu_relatorio_funcionarios(void) {
             break;
         case 3:
             funcionarios_por_cargo();
+            break;
+        case 4:
+            lista_funcionarios_desativados();
             break;
         default:
             printf("\n");
@@ -1343,5 +1347,52 @@ void lista_clientes_desativados(void) {
     
     fclose(arq_clientes);
     free(cliente);
+    continuar_acao();
+}
+
+void lista_funcionarios_desativados(void) {
+    Funcionario* funcionario;
+    funcionario = (Funcionario*)malloc(sizeof(*funcionario));
+    FILE *arq_funcionarios;
+    arq_funcionarios = fopen("data/funcionarios.DAT", "rb");
+    if (arq_funcionarios == NULL) {
+        printf("Não foi possivel ler o arquivo funcionarios.dat\n");
+        printf("pressione <enter>\n");
+        getchar();
+        free(funcionario);
+        return;
+    }
+    
+    int encontrados = 0;
+    system("clear||cls");
+    mostrar_cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡                     Lista de Funcionários Desativados                      ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    
+    while (fread(funcionario, sizeof(Funcionario), 1, arq_funcionarios)) {
+        if (!funcionario->status) {  // Status desativado
+            printf("\n");
+            printf("\t\tCPF: %s\n", funcionario->cpf);
+            printf("\t\tNome: %s\n", funcionario->nome);
+            printf("\t\tTelefone: %s\n", funcionario->telefone);
+            printf("\t\tEmail: %s\n", funcionario->email);
+            printf("\t\tCargo: %s\n", funcionario->cargo);
+            printf("\t\tSalário: %.2f\n", funcionario->salario);
+            printf("\t\t--- STATUS: DESATIVADO ---\n");
+            encontrados++;
+        }
+    }
+    
+    if (encontrados == 0) {
+        printf("\n\t\tNenhum funcionário desativado encontrado.\n");
+    } else {
+        printf("\n\t\tTotal de funcionários desativados: %d\n", encontrados);
+    }
+    
+    fclose(arq_funcionarios);
+    free(funcionario);
     continuar_acao();
 }
