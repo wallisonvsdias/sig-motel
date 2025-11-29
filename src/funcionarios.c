@@ -128,7 +128,6 @@ void exibir_funcionario(void) {
     continuar_acao();
     fclose(arq_funcionario);
     free(funcionario);
-    continuar_acao();
     return;
 
 }
@@ -167,7 +166,7 @@ void alterar_funcionario(void) {
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fread(funcionario, sizeof(Funcionario), 1, arq_funcionarios)) {
-        if (strcmp(funcionario->cpf, cpf_lido) != 0) {
+        if (strcmp(funcionario->cpf, cpf_lido) != 0 || funcionario->status == False) {
             fwrite(funcionario, sizeof(Funcionario), 1, arq_temp);
         } else {
             encontrado = True;
@@ -199,7 +198,6 @@ void alterar_funcionario(void) {
         novo_funcionario->salario = atof(entrada_salario);
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-        printf("\t\t Funcionário ALTERADO com sucesso! >>>> \n");
 
         novo_funcionario->status = True; 
         fwrite(novo_funcionario, sizeof(Funcionario), 1, arq_temp);
@@ -208,13 +206,14 @@ void alterar_funcionario(void) {
 
         remove("data/funcionarios.DAT");
         rename("data/temp.DAT", "data/funcionarios.DAT");
+        printf("\t\t Funcionário ALTERADO com sucesso! >>>> \n");
 
         continuar_acao();
         return;
     } else {
         fclose(arq_temp);
-        remove("temp.DAT");
         printf("\t\t Funcionário NAO encontrado! >>>> \n");
+        remove("data/temp.DAT");
         continuar_acao();
         return;
     }
@@ -246,6 +245,11 @@ void excluir_funcionario(void) {
     
     while (fread(funcionario, sizeof(Funcionario), 1, arq_funcionarios) == 1 && !encontrado) {
         if (strcmp(funcionario->cpf, cpf_lido) == 0) {
+            if (funcionario->status == False) {
+                printf("\t\t Funcionário(a) NÃO encontrado(a)! >>>> \n");
+                continuar_acao();
+                return;
+            }
             funcionario->status = False;  
             fseek(arq_funcionarios, -(long)sizeof(Funcionario), SEEK_CUR);
             fwrite(funcionario, sizeof(Funcionario), 1, arq_funcionarios);

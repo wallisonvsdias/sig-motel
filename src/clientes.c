@@ -192,10 +192,11 @@ void alterar_cliente(void){
         remove("data/clientes.DAT");
         rename("data/temp.DAT", "data/clientes.DAT");
         printf("\t\t Cliente ALTERADO com sucesso! >>>> \n");
-        
+
         continuar_acao();
         return;
     } else {
+        fclose(arq_temp);
         printf("\t\t Cliente NAO encontrado! >>>> \n");
         remove("data/temp.DAT");
         continuar_acao();
