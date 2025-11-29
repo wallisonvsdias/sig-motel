@@ -42,7 +42,6 @@ void menu_cliente(void) {
             case '0':
                 break;
             default:
-                getchar();
                 printf("\n");
                 printf("Por favor, digite uma opção válida");
                 getchar();
@@ -193,9 +192,9 @@ void alterar_cliente(void){
         remove("data/clientes.DAT");
         rename("data/temp.DAT", "data/clientes.DAT");
         printf("\t\t Cliente ALTERADO com sucesso! >>>> \n");
+        
         continuar_acao();
         return;
-
     } else {
         printf("\t\t Cliente NAO encontrado! >>>> \n");
         remove("data/temp.DAT");

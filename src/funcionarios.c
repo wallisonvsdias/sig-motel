@@ -41,7 +41,6 @@ void menu_funcionario(void) {
             case '0':
                 break;
             default:
-                getchar();
                 printf("\n");
                 printf("Por favor, digite uma opção válida");
                 getchar();
@@ -121,13 +120,15 @@ void exibir_funcionario(void) {
             printf("\t\tCargo: %s\n", funcionario->cargo);
             printf("\t\tSalário: %f\n", funcionario->salario);
             fclose(arq_funcionario);
+            continuar_acao();
             return;
         }
     }
-    printf("\n\t\tFuncionário não encontrado.\n");
+    printf("\n\t\tFuncionário NAO encontrado! >>>> \n");
     continuar_acao();
     fclose(arq_funcionario);
     free(funcionario);
+    continuar_acao();
     return;
 
 }
@@ -207,14 +208,16 @@ void alterar_funcionario(void) {
 
         remove("data/funcionarios.DAT");
         rename("data/temp.DAT", "data/funcionarios.DAT");
+
+        continuar_acao();
         return;
     } else {
         fclose(arq_temp);
         remove("temp.DAT");
         printf("\t\t Funcionário NAO encontrado! >>>> \n");
-        getchar();
+        continuar_acao();
+        return;
     }
-    continuar_acao();
 }
 
 
@@ -231,7 +234,6 @@ void excluir_funcionario(void) {
     }
     char cpf_lido[12];
     int encontrado = 0;
-    
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -256,8 +258,12 @@ void excluir_funcionario(void) {
 
     if (encontrado) {
         printf("\t\t Funcionário(a) EXCLUÍDO(A) com sucesso! >>>> \n");
+        continuar_acao();
+        return;
     } else {
         printf("\t\t Funcionário(a) NÃO encontrado(a)! >>>> \n");
+        continuar_acao();
+        return;
     }
     continuar_acao();
 }
