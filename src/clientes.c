@@ -159,7 +159,7 @@ void alterar_cliente(void){
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fread(cliente, sizeof(Cliente), 1, arq_clientes)) {
-        if (strcmp(cliente->cpf, cpf_lido ) != 0) {
+        if (strcmp(cliente->cpf, cpf_lido) != 0 || cliente->status == False) {
             fwrite(cliente, sizeof(Cliente), 1, arq_temp);
         } else {
             encontrado = True;
@@ -198,9 +198,8 @@ void alterar_cliente(void){
 
     } else {
         printf("\t\t Cliente NAO encontrado! >>>> \n");
-        printf("Pressione <ENTER> para continuar");
+        remove("data/temp.DAT");
         continuar_acao();
-        getchar();
         return;
     }
 }
@@ -230,6 +229,11 @@ void excluir_cliente(void){
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fread(cliente,sizeof(Cliente),1,arq_clientes) && (!encontrado)) {
         if (strcmp(cliente->cpf,cpf_lido) == 0){
+            if (cliente->status == False) {
+                printf("\t\t Cliente NAO encontrado! >>>>\n");
+                continuar_acao();
+                return;
+            }
             cliente->status = False;
             fseek(arq_clientes,-(long)sizeof(Cliente),SEEK_CUR);
             fwrite(cliente, sizeof(Cliente), 1, arq_clientes);
