@@ -168,6 +168,7 @@ void menu_relatorio_quartos(void) {
         printf("♡      1  - Lista geral de quartos                                            ♡\n");
         printf("♡      2  - Lista quartos por tipo                                            ♡\n");
         printf("♡      3  - Lista Geral de Quartos (Ordem Numerica)                           ♡\n");
+        printf("♡      4  - Lista de quartos desativados                                      ♡\n");
         printf("♡      0  - Retornar ao Menu de Relatórios                                    ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -187,6 +188,9 @@ void menu_relatorio_quartos(void) {
             break;
         case 3:
             lista_geral_quartos_ordenado();
+            break;
+        case 4:
+            lista_quartos_desativados();
             break;
         default:
             printf("\n");
@@ -1394,5 +1398,51 @@ void lista_funcionarios_desativados(void) {
     
     fclose(arq_funcionarios);
     free(funcionario);
+    continuar_acao();
+}
+
+void lista_quartos_desativados(void) {
+    Quarto* quarto;
+    quarto = (Quarto*)malloc(sizeof(*quarto));
+    FILE *arq_quartos;
+    arq_quartos = fopen("data/quartos.DAT", "rb");
+    if (arq_quartos == NULL) {
+        printf("Não foi possivel ler o arquivo quartos.DAT\n");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        free(quarto);
+        return;
+    }
+    
+    int encontrados = 0;
+    system("clear||cls");
+    mostrar_cabecalho();
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡                        Lista de Quartos Desativados                        ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    
+    while (fread(quarto, sizeof(Quarto), 1, arq_quartos)) {
+        if (!quarto->status) {  // Status desativado
+            printf("\n");
+            printf("\t\tID: %d\n", quarto->id);
+            printf("\t\tTipo: %s\n", NOME_TIPOS_QUARTO[quarto->tipo]);
+            printf("\t\tDescricao: %s\n", quarto->descricao);
+            printf("\t\tPreco/hora: %.2f\n", quarto->preco_hora);
+            printf("\t\tPreco/diaria: %.2f\n", quarto->preco_diaria);
+            printf("\t\t--- STATUS: DESATIVADO ---\n");
+            encontrados++;
+        }
+    }
+    
+    if (encontrados == 0) {
+        printf("\n\t\tNenhum quarto desativado encontrado.\n");
+    } else {
+        printf("\n\t\tTotal de quartos desativados: %d\n", encontrados);
+    }
+    
+    fclose(arq_quartos);
+    free(quarto);
     continuar_acao();
 }
