@@ -34,6 +34,8 @@ void ler_quantidade(char* quantidade);
 void ler_cargo(char* cargo);
 void ler_salario(char* salario);
 
+void pegar_data_atual(char* buffer);
+
 char* get_nome_cliente(char* cpf);
 char* get_nome_funcionario(char* cpf);
 char* get_nome_produto(int id);

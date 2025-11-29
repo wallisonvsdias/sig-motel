@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <time.h>
 #include "clientes.h"
 #include "funcionarios.h"
 #include "produtos.h"
@@ -548,6 +549,17 @@ void ler_salario(char* salario){
             getchar();
         }
     } while (!validar_salario(salario));
+}
+
+void pegar_data_atual(char* buffer) {
+    time_t agora;
+    struct tm *info;
+
+    time(&agora);
+    info = localtime(&agora);
+
+    // formata em dd/mm/aaaa
+    strftime(buffer, 11, "%d/%m/%Y", info);
 }
 
 char* get_nome_cliente(char* cpf) {

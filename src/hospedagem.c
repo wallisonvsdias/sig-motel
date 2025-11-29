@@ -84,6 +84,8 @@ void cadastrar_hospedagem(void) {
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     hospedagem->status = True; 
+    // registra a data automaticamente
+    pegar_data_atual(hospedagem->data);
     fwrite(hospedagem, sizeof(Hospedagem), 1, arq_hospedagem);
     fclose(arq_hospedagem);
     free(hospedagem);
@@ -121,19 +123,19 @@ void exibir_hospedagem(void) {
             printf("CPF: %s\n", hospedagem->cpf);
             printf("ID do quarto: %d\n", hospedagem->id_quarto);
             printf("Horas: %d\n", hospedagem->horas);
-            getchar();
+            printf("Data do registro: %s\n", hospedagem->data);
+            
             fclose(arq_hospedagem);
             free(hospedagem);
+            continuar_acao();
             return;
         }
     }
     printf("\t\t Hospedagem NAO encontrado! >>>> \n");
-    printf("Pressione <ENTER> para continuar");
-    getchar();
     fclose(arq_hospedagem);
     free(hospedagem);
-    return;
     continuar_acao();
+    return;
 }
 
 
