@@ -71,11 +71,9 @@ int validar_nome(char* nome) {
 }
 
 // valida o cpf
-// deve conter exatamente 11 numeros
-// nao valida os digitos verificadores, so o formato
-// falta verificacao completa de cpf
+
 int validar_cpf(char* cpf) {
-    int i = 0;
+    int i = 0, soma, resto;
 
     if (strlen(cpf) != 11) {
         return False; // tamanho incorreto
@@ -87,6 +85,48 @@ int validar_cpf(char* cpf) {
         }
         i++;
     }
+
+    // verifica se todos os dígitos são iguais
+    int tudo_igual = 1;
+    for (i = 1; i < 11; i++) {
+        if (cpf[i] != cpf[0]) {
+            tudo_igual = 0;
+            break;
+        }
+    }
+    if (tudo_igual) {
+        return False;
+    }
+    return True;
+
+    // verifica o primeiro dígito
+    soma = 0;
+    int peso = 10;
+    for (i = 0; i < 9; i++) {
+        soma += (cpf[i] - '0') * peso;
+        peso--;
+    }
+    resto = soma % 11;
+    int digito1 = (resto < 2) ? 0 : 11 - resto;
+
+    if (digito1 != (cpf[9] - '0')) {
+        return False;
+    }
+
+    // verifica o segundo dígito
+    soma = 0;
+    peso = 11;
+    for (i = 0; i < 10; i++) {
+        soma += (cpf[i] - '0') * peso;
+        peso--;
+    }
+    resto = soma % 11;
+    int digito2 = (resto < 2) ? 0 : 11 - resto;
+
+    if (digito2 != (cpf[10] - '0')) {
+        return False;
+    }
+
     return True;
 }
 
@@ -379,7 +419,7 @@ void ler_cpf(char* cpf) {
         printf("♡      CPF (apenas 11 numeros): ");
         ler_string(cpf,12);
         if (!validar_cpf(cpf)) {
-            printf("♡      CPF invalido! Deve conter 11 numeros\n");
+            printf("♡      CPF invalido! Tente Novamente!\n");
             printf("♡      Pressione <ENTER>");
             getchar();
         }
