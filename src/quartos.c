@@ -84,7 +84,6 @@ void cadastrar_quarto(void) {
     }
     int tipo = ler_tipo();
     quarto->tipo = tipo-1;
-    printf("♡      Descrição: ");
     ler_descricao(quarto->descricao);
     printf("♡      Preço/hora: ");
     ler_preco(entrada_preco);
@@ -219,7 +218,6 @@ void alterar_quarto(void) {
         }
         int tipo = ler_tipo();
         novo_quarto->tipo = tipo - 1;
-        printf("♡      Descricao: ");
         ler_descricao(novo_quarto->descricao);
         printf("♡      Preço/hora: ");
         ler_preco(entrada_preco);

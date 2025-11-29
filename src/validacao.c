@@ -495,6 +495,7 @@ int ler_tipo(void){
 
 void ler_descricao(char* descricao){
     do {
+        printf("♡      Descrição: ");  // ADICIONE ESTA LINHA
         ler_string(descricao,51);
         if (!validar_descricao(descricao,51)) {
             printf("♡      Descricao invalida! Nao pode ser vazia\n");

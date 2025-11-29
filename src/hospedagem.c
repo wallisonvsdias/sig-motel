@@ -110,7 +110,7 @@ void exibir_hospedagem(void) {
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡                       Exibir Dados da Hospedagem                             ♡\n");
+    printf("♡                       Exibir Dados da Hospedagem                            ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡      Informe o CPF do cliente.                                              ♡\n");
     ler_cpf(cpf_lido);
@@ -179,6 +179,7 @@ void alterar_hospedagem(void) {
             encontrado = True;
         }
     }
+    pegar_data_atual(hospedagem->data);
     fclose(arq_hospedagem);
     free(hospedagem);
     
@@ -203,7 +204,6 @@ void alterar_hospedagem(void) {
         nova_hospedagem->horas = atoi(entrada_horas);
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-        
         nova_hospedagem->status = True;
         fwrite(nova_hospedagem,sizeof(Hospedagem),1,arq_temp);
         fclose(arq_temp);
