@@ -7,7 +7,7 @@ Departamento de Computação e Tecnologia - DCT
 Disciplina DCT1106 — Programação
 Professor: Flavius Gorgônio 
 
-Desenvolvido por [@wallisonvsdias](https://github.com/wallisonvsdias) e [@Isabellecavalcant](https://github.com/Isabellecavalcant)  
+Desenvolvido por [@wallisonvsdias](https://github.com/wallisonvsdias), [@Isabellecavalcant](https://github.com/Isabellecavalcant), [@pedromarcal079](https://github.com/pedromarcal079) e [@vanescaSnt](https://github.com/vanescaSnt)
 Desde agosto/2025  
 
 ---
