@@ -208,14 +208,13 @@ void alterar_funcionario(void) {
         remove("data/funcionarios.DAT");
         rename("data/temp.DAT", "data/funcionarios.DAT");
         return;
-        continuar_acao();
-
     } else {
         fclose(arq_temp);
         remove("temp.DAT");
         printf("\t\t Funcionário NAO encontrado! >>>> \n");
         getchar();
     }
+    continuar_acao();
 }
 
 
