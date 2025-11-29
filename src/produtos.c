@@ -41,7 +41,6 @@ void menu_produto(void) {
             case '0':
                 break;
             default:
-                getchar();
                 printf("\n");
                 printf("Por favor, digite uma opção válida");
                 getchar();
@@ -82,11 +81,9 @@ void cadastrar_produto(void) {
     ler_quantidade(entrada_quant);
     produto->quant = atoi(entrada_quant);
     printf("♡                                                                             ♡\n");
-    printf("♡        Produto cadastrado com sucesso!                                        ♡\n");
+    printf("♡        Produto cadastrado com sucesso!                                      ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-
-    produto->status = True;
     fwrite(produto,sizeof(Produto),1,arq_produtos);
     fclose(arq_produtos);
     free(produto);
@@ -114,32 +111,29 @@ void exibir_produto(void){
     printf("♡                                                                             ♡\n");
     printf("♡                           Exibir Dados do Produto                           ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      ID do produto: ");
+    printf("♡      ID do produto: \n");
     ler_id(entrada_id);
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     id = atoi(entrada_id);
     while (fread(produto,sizeof(Produto),1,arq_produtos)) {
-        if (produto->id == id && produto->status){
+        if (produto->id == id){
             printf("\t\t Produto encontrado! >>>> \n");
             printf("\t\tNome: %s\n",produto->nome);
             printf("\t\tDescricao: %s\n",produto->descricao);
             printf("\t\tPreco: %f\n",produto->preco);
             printf("\t\tQuantidade: %d\n",produto->quant);
-            printf("Pressione <ENTER> para continuar");
-            getchar();
             fclose(arq_produtos);
             free(produto);
+            continuar_acao();
             return;
         }
     }
     printf("\t\t Produto NAO encontrado! >>>> \n");
-    printf("Pressione <ENTER> para continuar");
-    getchar();
     fclose(arq_produtos);
     free(produto);
-    return;
     continuar_acao();
+    return;
 }
 
 
@@ -152,6 +146,7 @@ void alterar_produto(void){
         printf("Não foi possivel ler o arquivo produtos.DAT");
         printf("Pressione <ENTER> ...");
         getchar();
+        free(produto);
         return;
     }
     FILE *arq_temp;
@@ -160,11 +155,15 @@ void alterar_produto(void){
         printf("Não foi possivel ler o arquivo temp.DAT");
         printf("Pressione <ENTER> ...");
         getchar();
+        fclose(arq_produtos);
+        free(produto);
         return;
     }
+    
     int id;
     char entrada_id[10];
-    int encontrado;
+    int encontrado = False;
+    
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -175,14 +174,13 @@ void alterar_produto(void){
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     id = atoi(entrada_id);
-    while (fread(produto,sizeof(Produto),1,arq_produtos)) {
-        if (produto->id != id){
-            fwrite(produto,sizeof(Produto),1,arq_temp);
+    while (fread(produto, sizeof(Produto), 1, arq_produtos)) {
+        if (produto->id != id) {
+            fwrite(produto, sizeof(Produto), 1, arq_temp);
         } else {
             encontrado = True;
         }
     }
-
     fclose(arq_produtos);
     free(produto);
 
@@ -191,11 +189,12 @@ void alterar_produto(void){
         novo_produto = (Produto*)malloc(sizeof(*novo_produto));
         char entrada_preco[20];
         char entrada_quant[10];
+        
         system("clear||cls");
         mostrar_cabecalho();
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         printf("♡                                                                             ♡\n");
-        printf("♡                              Editar dados de Produto                        ♡\n");
+        printf("♡                            Novos dados de Produto                           ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡      ID do produto\n");
         ler_id(entrada_id);
@@ -208,30 +207,26 @@ void alterar_produto(void){
         ler_quantidade(entrada_quant);
         novo_produto->quant = atoi(entrada_quant);
         printf("♡                                                                             ♡\n");
-        printf("♡        Produto cadastrado com sucesso!                                        ♡\n");
+        printf("♡        Produto cadastrado com sucesso!                                      ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
 
-        fwrite(novo_produto,sizeof(Produto),1,arq_temp);
+        fwrite(novo_produto, sizeof(Produto), 1, arq_temp);
 
         free(novo_produto);
         fclose(arq_temp);
-        remove("produtos.DAT");
-        rename("temp.DAT", "produtos.DAT");
+        remove("data/produtos.DAT");
+        rename("data/temp.DAT", "data/produtos.DAT");
         printf("\t\t Produto ALTERADO com sucesso! >>>> \n");
-        printf("Pressione <ENTER> para continuar");
-        getchar();
+        continuar_acao();
         return;
     } else {
         fclose(arq_temp);
-        remove("temp.DAT");
+        remove("data/temp.DAT");
         printf("\t\t Produto NAO encontrado! >>>> \n");
-        printf("Pressione <ENTER> para continuar");
-        getchar();
+        continuar_acao();
         return;
     }
-
-    continuar_acao();
 }
 
 
@@ -239,11 +234,22 @@ void excluir_produto(void){
     Produto* produto;
     produto = (Produto*)malloc(sizeof(*produto));
     FILE *arq_produtos;
-    arq_produtos = fopen("data/produtos.DAT", "r+b");
+    arq_produtos = fopen("data/produtos.DAT", "rb");
     if (arq_produtos == NULL) {
         printf("Não foi possivel ler o arquivo produtos.DAT\n");
         printf("Pressione <ENTER> ...");
         getchar();
+        free(produto);
+        return;
+    }
+    FILE *arq_temp;
+    arq_temp = fopen("data/temp.DAT", "ab");
+    if (arq_temp == NULL) {
+        printf("Não foi possivel criar arquivo temporário\n");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        fclose(arq_produtos);
+        free(produto);
         return;
     }
     int id;
@@ -259,30 +265,28 @@ void excluir_produto(void){
     ler_id(entrada_id);
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    
     id = atoi(entrada_id);
-    while (fread(produto,sizeof(Produto),1,arq_produtos)) {
-        if (produto->id == id){
-            produto->status = False;
-            fseek(arq_produtos, -(long)sizeof(Produto),SEEK_CUR);
-            fwrite(produto, sizeof(Produto),1,arq_produtos);
+    while (fread(produto, sizeof(Produto), 1, arq_produtos)) {
+        if (produto->id != id) {
+            fwrite(produto, sizeof(Produto), 1, arq_temp);
+        } else {
             encontrado = True;
-        } 
+        }
     }
 
     fclose(arq_produtos);
+    fclose(arq_temp);
     free(produto);
 
     if (encontrado) {
+        remove("data/produtos.DAT");
+        rename("data/temp.DAT", "data/produtos.DAT");
         printf("\t\t Produto EXCLUIDO com sucesso! >>>> \n");
-        printf("Pressione <ENTER> para continuar");
-        getchar();
-        return;
     } else {
+        remove("data/temp.DAT");
         printf("\t\t Produto NAO encontrado! >>>> \n");
-        printf("Pressione <ENTER> para continuar");
-        getchar();
-        return;
     }
-
+    
     continuar_acao();
 }

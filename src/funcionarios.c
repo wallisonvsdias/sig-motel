@@ -41,7 +41,6 @@ void menu_funcionario(void) {
             case '0':
                 break;
             default:
-                getchar();
                 printf("\n");
                 printf("Por favor, digite uma opção válida");
                 getchar();
@@ -121,16 +120,15 @@ void exibir_funcionario(void) {
             printf("\t\tCargo: %s\n", funcionario->cargo);
             printf("\t\tSalário: %f\n", funcionario->salario);
             fclose(arq_funcionario);
-            getchar();
+            continuar_acao();
             return;
         }
     }
-    printf("\n\t\tFuncionário não encontrado.\n");
-    getchar();
+    printf("\n\t\tFuncionário NAO encontrado! >>>> \n");
+    continuar_acao();
     fclose(arq_funcionario);
     free(funcionario);
     return;
-    continuar_acao();
 
 }
 
@@ -157,7 +155,7 @@ void alterar_funcionario(void) {
         return;
     }
     char cpf_lido[12];
-    int encontrado = 0;
+    int encontrado = False;
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -168,13 +166,12 @@ void alterar_funcionario(void) {
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fread(funcionario, sizeof(Funcionario), 1, arq_funcionarios)) {
-        if (strcmp(funcionario->cpf, cpf_lido) != 0) {
+        if (strcmp(funcionario->cpf, cpf_lido) != 0 || funcionario->status == False) {
             fwrite(funcionario, sizeof(Funcionario), 1, arq_temp);
         } else {
-            encontrado = 1;
+            encontrado = True;
         }
     }
-
     fclose(arq_funcionarios);
     free(funcionario);
 
@@ -201,27 +198,25 @@ void alterar_funcionario(void) {
         novo_funcionario->salario = atof(entrada_salario);
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-        getchar();
 
         novo_funcionario->status = True; 
         fwrite(novo_funcionario, sizeof(Funcionario), 1, arq_temp);
         fclose(arq_temp);
         free(novo_funcionario);
-        remove("funcionarios.DAT");
-        rename("temp.DAT", "funcionarios.DAT");
-        printf("\t\t Funcionário ALTERADO com sucesso! >>>> \n");
-        printf("Pressione <ENTER> para continuar");
-        getchar();
-        return;
 
+        remove("data/funcionarios.DAT");
+        rename("data/temp.DAT", "data/funcionarios.DAT");
+        printf("\t\t Funcionário ALTERADO com sucesso! >>>> \n");
+
+        continuar_acao();
+        return;
     } else {
         fclose(arq_temp);
-        remove("temp.DAT");
         printf("\t\t Funcionário NAO encontrado! >>>> \n");
-        printf("Pressione <ENTER> para continuar");
-        getchar();
+        remove("data/temp.DAT");
+        continuar_acao();
+        return;
     }
-    continuar_acao();
 }
 
 
@@ -238,7 +233,6 @@ void excluir_funcionario(void) {
     }
     char cpf_lido[12];
     int encontrado = 0;
-    
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -251,6 +245,11 @@ void excluir_funcionario(void) {
     
     while (fread(funcionario, sizeof(Funcionario), 1, arq_funcionarios) == 1 && !encontrado) {
         if (strcmp(funcionario->cpf, cpf_lido) == 0) {
+            if (funcionario->status == False) {
+                printf("\t\t Funcionário(a) NÃO encontrado(a)! >>>> \n");
+                continuar_acao();
+                return;
+            }
             funcionario->status = False;  
             fseek(arq_funcionarios, -(long)sizeof(Funcionario), SEEK_CUR);
             fwrite(funcionario, sizeof(Funcionario), 1, arq_funcionarios);
@@ -263,10 +262,12 @@ void excluir_funcionario(void) {
 
     if (encontrado) {
         printf("\t\t Funcionário(a) EXCLUÍDO(A) com sucesso! >>>> \n");
+        continuar_acao();
+        return;
     } else {
         printf("\t\t Funcionário(a) NÃO encontrado(a)! >>>> \n");
+        continuar_acao();
+        return;
     }
-    
-    printf("♡ Pressione <ENTER> para continuar...");
-    getchar();
+    continuar_acao();
 }

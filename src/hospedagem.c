@@ -84,6 +84,8 @@ void cadastrar_hospedagem(void) {
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     hospedagem->status = True; 
+    // registra a data automaticamente
+    pegar_data_atual(hospedagem->data);
     fwrite(hospedagem, sizeof(Hospedagem), 1, arq_hospedagem);
     fclose(arq_hospedagem);
     free(hospedagem);
@@ -108,7 +110,7 @@ void exibir_hospedagem(void) {
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡                       Exibir Dados da Hospedagem                             ♡\n");
+    printf("♡                       Exibir Dados da Hospedagem                            ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡      Informe o CPF do cliente.                                              ♡\n");
     ler_cpf(cpf_lido);
@@ -121,19 +123,19 @@ void exibir_hospedagem(void) {
             printf("CPF: %s\n", hospedagem->cpf);
             printf("ID do quarto: %d\n", hospedagem->id_quarto);
             printf("Horas: %d\n", hospedagem->horas);
-            getchar();
+            printf("Data do registro: %s\n", hospedagem->data);
+            
             fclose(arq_hospedagem);
             free(hospedagem);
+            continuar_acao();
             return;
         }
     }
     printf("\t\t Hospedagem NAO encontrado! >>>> \n");
-    printf("Pressione <ENTER> para continuar");
-    getchar();
     fclose(arq_hospedagem);
     free(hospedagem);
-    return;
     continuar_acao();
+    return;
 }
 
 
@@ -171,21 +173,24 @@ void alterar_hospedagem(void) {
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
 
     while (fread(hospedagem,sizeof(Hospedagem),1,arq_hospedagem)) {
-        if (strcmp(hospedagem->cpf,cpf_lido) != 0){
+        if (strcmp(hospedagem->cpf,cpf_lido) != 0 || hospedagem->status == False){
             fwrite(hospedagem,sizeof(Hospedagem),1,arq_temp);
         } else {
             encontrado = True;
         }
     }
+    pegar_data_atual(hospedagem->data);
     fclose(arq_hospedagem);
     free(hospedagem);
     
     if (encontrado) {
         Hospedagem* nova_hospedagem;
         nova_hospedagem = (Hospedagem*)malloc(sizeof(*nova_hospedagem));
+
         system("clear||cls");
         char entrada_id[10];
         char entrada_horas[10];
+
         mostrar_cabecalho();
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         printf("♡                                                                             ♡\n");
@@ -194,7 +199,7 @@ void alterar_hospedagem(void) {
         ler_cpf(nova_hospedagem->cpf);
         ler_id(entrada_id); 
         nova_hospedagem->id_quarto = atoi(entrada_id);
-        printf("♡      Quantidade de Horas                                                    ♡\n");
+        printf("♡      Quantidade de Horas:                                                   ♡\n");
         ler_quantidade(entrada_horas);
         nova_hospedagem->horas = atoi(entrada_horas);
         printf("♡                                                                             ♡\n");
@@ -203,20 +208,19 @@ void alterar_hospedagem(void) {
         fwrite(nova_hospedagem,sizeof(Hospedagem),1,arq_temp);
         fclose(arq_temp);
         free(nova_hospedagem);
-        remove("hospedahem.DAT");
-        rename("temp.DAT","hospedagem.DAT");
+
+        remove("data/hospedahem.DAT");
+        rename("data/temp.DAT","data/hospedagem.DAT");
         printf("\t\t Hospedagem ALTERADA com sucesso! >>>> \n");
-        printf("Pressione <ENTER> para continuar");
-        getchar();
+        continuar_acao();
         return;
         }
     else {
+        fclose(arq_temp);
         printf("\t\t Hospedagem NAO encontrado! >>>> \n");
-        printf("Pressione <ENTER> para continuar");
-        getchar();
+        continuar_acao();
         return;
     }
-    continuar_acao();
 }
 
 
@@ -246,6 +250,11 @@ void excluir_hospedagem(void) {
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fread(hospedagem,sizeof(Hospedagem),1,arq_hospedagem) && (!encontrado)) {
         if (strcmp(hospedagem->cpf,cpf_lido) == 0){
+            if (hospedagem->status == False) {
+                printf("\t\t Hospedagem NAO encontrado! >>>>\n");
+                continuar_acao();
+                return;
+            }
             hospedagem ->status = False;
             fseek(arq_hospedagem,-(long)sizeof(Hospedagem),SEEK_CUR);
             fwrite(hospedagem, sizeof(Hospedagem), 1, arq_hospedagem);
@@ -258,16 +267,13 @@ void excluir_hospedagem(void) {
     free(hospedagem);
     
     if (encontrado) {
-        printf("\t\t Hospedahem EXCLUIDO com sucesso! >>>> \n");
-        printf("Pressione <ENTER> para continuar");
-        getchar();
+        printf("\t\t Hospedagem EXCLUIDO com sucesso! >>>> \n");
+        continuar_acao();
         return;
     } else {
         printf("\t\t Hospedagem NAO encontrado! >>>> \n");
-        printf("Pressione <ENTER> para continuar");
-        getchar();
+        continuar_acao();
         return;
     }
-    continuar_acao();
     
 }

@@ -47,7 +47,6 @@ void menu_quarto(void) {
             case '0':
                 break;
             default:
-                getchar();
                 printf("\n");
                 printf("Por favor, digite uma opção válida");
                 getchar();
@@ -103,10 +102,8 @@ void cadastrar_quarto(void) {
     free(quarto);
 
     continuar_acao();
-
 }
 
-// Exibir também o status
 void exibir_quarto(void){
     Quarto* quarto;
     quarto = (Quarto*)malloc(sizeof(*quarto));
@@ -138,20 +135,18 @@ void exibir_quarto(void){
             printf("\t\tDescricao: %s\n",quarto->descricao);
             printf("\t\tPreco/hora: %f\n",quarto->preco_hora);
             printf("\t\tPreco/diaria: %f\n",quarto->preco_diaria);
-            printf("Pressione <ENTER> para continuar");
-            getchar();
+
             fclose(arq_quartos);
             free(quarto);
+            continuar_acao();
             return;
         }
     }
     printf("\t\t Quarto NAO encontrado! >>>> \n");
-    printf("Pressione <ENTER> para continuar");
-    getchar();
     fclose(arq_quartos);
     free(quarto);
-    return;
     continuar_acao();
+    return;
 }
 
 
@@ -166,36 +161,39 @@ void alterar_quarto(void) {
         getchar();
         return;
     }
+
     FILE *arq_temp;
-    arq_temp = fopen("data/temp.DAT", "ab");
+    arq_temp = fopen("data/temp.DAT", "wb");
     if (arq_temp == NULL) {
         printf("Não foi possivel ler o arquivo temp.DAT\n");
         printf("Pressione <ENTER> ...");
         getchar();
+        fclose(arq_quartos);
         return;
     }
+
     int id;
-    int encontrado;
+    int encontrado = False;
     char entrada_id[10];
+
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡                            Alterar Dados do Quarto                          ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      ID do quarto: ");
+    printf("♡      ID do quarto: \n");
     ler_id(entrada_id);
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     id = atoi(entrada_id);
-    while (fread(quarto,sizeof(Quarto),1,arq_quartos)) {
-        if (quarto->id != id){
-            fwrite(quarto,sizeof(Quarto),1,arq_temp);
+    while (fread(quarto, sizeof(Quarto), 1, arq_quartos)) {
+        if (quarto->id != id || quarto->status == False){
+            fwrite(quarto, sizeof(Quarto), 1, arq_temp);
         } else {
             encontrado = True;
         }
     }
-
     fclose(arq_quartos);
     free(quarto);
 
@@ -203,12 +201,14 @@ void alterar_quarto(void) {
         Quarto* novo_quarto;
         char entrada_preco[20];
         novo_quarto = (Quarto*)malloc(sizeof(*novo_quarto));
+
         system("clear||cls");
         mostrar_cabecalho();
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
         printf("♡                                                                             ♡\n");
-        printf("♡                              Editar dados de Quarto                         ♡\n");
+        printf("♡                              Novos dados do Quarto                          ♡\n");
         printf("♡                                                                             ♡\n");
+
         printf("♡      ID do quarto\n");
         ler_id(entrada_id);
         novo_quarto->id = atoi(entrada_id);
@@ -217,7 +217,7 @@ void alterar_quarto(void) {
             printf("\t%d - %s\n", i + 1, NOME_TIPOS_QUARTO[i]);
         }
         int tipo = ler_tipo();
-        novo_quarto->tipo = tipo-1;
+        novo_quarto->tipo = tipo - 1;
         ler_descricao(novo_quarto->descricao);
         printf("♡      Preço/hora: ");
         ler_preco(entrada_preco);
@@ -228,28 +228,27 @@ void alterar_quarto(void) {
         printf("♡                                                                             ♡\n");
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-
-        fwrite(novo_quarto,sizeof(Quarto),1,arq_temp);
-
+        fwrite(novo_quarto, sizeof(Quarto), 1, arq_temp);
         free(novo_quarto);
         fclose(arq_temp);
-        remove("quartos.DAT");
-        rename("temp.DAT","quartos.DAT");
+
+        remove("data/quartos.DAT");
+        rename("data/temp.DAT", "data/quartos.DAT");
+
         printf("\t\t Quarto ALTERADO com sucesso! >>>> \n");
-        printf("Pressione <ENTER> para continuar");
-        getchar();
+        continuar_acao();
         return;
+
     } else {
         fclose(arq_temp);
-        remove("temp.DAT");
+        remove("data/temp.DAT");
+
         printf("\t\t Quarto NAO encontrado! >>>> \n");
-        printf("Pressione <ENTER> para continuar");
-        getchar();
+        continuar_acao();
         return;
     }
-
-    continuar_acao();
 }
+
 
 
 void excluir_quarto(void) {
@@ -272,13 +271,19 @@ void excluir_quarto(void) {
     printf("♡                                                                             ♡\n");
     printf("♡                                 Excluir Quarto                              ♡\n");
     printf("♡                                                                             ♡\n");
-    printf("♡      ID do quarto: ");
+    printf("♡      ID do quarto: \n");
     ler_id(entrada_id);
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     id = atoi(entrada_id);
     while (fread(quarto,sizeof(Quarto),1,arq_quartos)) {
         if (quarto->id == id){
+            if (quarto->status == False) {
+                printf("\t\t Quarto NAO encontrado! >>>> \n");
+                continuar_acao();
+                return;
+            }
+            
             quarto->status = False;
             fseek(arq_quartos,-(long)sizeof(Quarto),SEEK_CUR);
             fwrite(quarto, sizeof(Quarto), 1, arq_quartos);
@@ -291,16 +296,12 @@ void excluir_quarto(void) {
 
     if (encontrado) {
         printf("\t\t Quarto EXCLUIDO com sucesso! >>>> \n");
-        printf("Pressione <ENTER> para continuar");
-        getchar();
+        continuar_acao();
         return;
     } else {
         printf("\t\t Quarto NAO encontrado! >>>> \n");
-        printf("Pressione <ENTER> para continuar");
-        getchar();
+        continuar_acao();
         return;
     }
-
-    continuar_acao();
 
 }

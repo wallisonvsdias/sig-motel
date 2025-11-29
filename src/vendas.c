@@ -79,7 +79,6 @@ void cadastrar_venda(void) {
     venda->quant = atoi(entrada_quant);
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    venda->status = True; 
     fwrite(venda, sizeof(Venda), 1, arq_vendas);
     fclose(arq_vendas);
     free(venda);
@@ -110,24 +109,23 @@ void exibir_venda(void) {
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fread(venda,sizeof(Venda),1,arq_vendas)) {
-        if (strcmp(venda->cpf_cliente,cpf_lido) == 0  && venda->status){
+        if (strcmp(venda->cpf_cliente,cpf_lido) == 0){
             printf("\t\t Venda encontrado! >>>> \n");
             printf("\t\tCPF Cliente: %s\n",venda->cpf_cliente);
             printf("\t\tCPF Funcionario: %s\n",venda->cpf_funcionario);
             printf("\t\tID do Produto: %d\n",venda-> id_produto);
             printf("\t\tQuantidade: %d\n",venda-> quant);
-            printf("Pressione <ENTER> para continuar");
-            getchar();
             fclose(arq_vendas);
             free(venda);
+            continuar_acao();
             return;
         }
     }
     printf("\t\t Cliente NAO encontrado! >>>> \n");
     fclose(arq_vendas);
     free(venda);
-    return;
     continuar_acao();
+    return;
 }
 
 
@@ -142,7 +140,7 @@ void alterar_venda(void) {
         return;
     }
 
-    FILE *arq_temp = fopen("data/temp_vendas.DAT", "wb");
+    FILE *arq_temp = fopen("data/temp.DAT", "wb");
     if (!arq_temp) {
         printf("Não foi possível criar arquivo temporário\n");
         fclose(arq_vendas);
@@ -196,27 +194,36 @@ void alterar_venda(void) {
         nova_venda->quant = atoi(entrada_quant);
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-        nova_venda->status = True; 
         fwrite(nova_venda, sizeof(Venda), 1, arq_temp);
         fclose(arq_temp);
         free(nova_venda);
-        remove("vendas.DAT");
-        rename("temp_vendas.DAT", "vendas.DAT");
+        remove("data/vendas.DAT");
+        rename("data/temp.DAT", "data/vendas.DAT");
         printf("\t\t Venda ALTERADA com sucesso! >>>> \n");
+        continuar_acao();
+        return;
     } else {
         printf("\t\t Venda NÃO encontrada! >>>> \n");
+        continuar_acao();
+        return;
     }
-
-    continuar_acao();
 }
 
 
 void excluir_venda(void) {
     Venda* venda;
     venda = (Venda*) malloc(sizeof(*venda));
-    FILE *arq_vendas = fopen("data/vendas.DAT", "r+b");
+    FILE *arq_vendas = fopen("data/vendas.DAT", "rb");
     if (!arq_vendas) {
         printf("Não foi possível ler o arquivo vendas.DAT\n");
+        free(venda);
+        getchar();
+        return;
+    }
+    FILE *arq_temp = fopen("data/temp.DAT", "ab");
+    if (!arq_temp) {
+        printf("Não foi possível criar arquivo temporário\n");
+        fclose(arq_vendas);
         free(venda);
         getchar();
         return;
@@ -233,18 +240,25 @@ void excluir_venda(void) {
     ler_cpf(cpf_lido);
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-
-    while (fread(venda,sizeof(Venda),1,arq_vendas) && (!encontrado)) {
-        if (strcmp(venda->cpf_cliente,cpf_lido) == 0){
-            venda->status = False;
-            fseek(arq_vendas,-(long)sizeof(Venda),SEEK_CUR);
-            fwrite(venda, sizeof(Venda), 1, arq_vendas);
+    while (fread(venda, sizeof(Venda), 1, arq_vendas)) {
+        if (strcmp(venda->cpf_cliente, cpf_lido) != 0) {
+            fwrite(venda, sizeof(Venda), 1, arq_temp);
+        } else {
             encontrado = True;
         }
     }
     
     fclose(arq_vendas);
+    fclose(arq_temp);
     free(venda);
+
+    if (encontrado) {
+        remove("data/vendas.DAT");
+        rename("data/temp.DAT", "data/vendas.DAT");
+        printf("\t\t Venda EXCLUIDA com sucesso! >>>> \n");
+    } else {
+        remove("data/temp.DAT");
+        printf("\t\t Venda NAO encontrada! >>>> \n");
+    }
     continuar_acao();
 }
-    

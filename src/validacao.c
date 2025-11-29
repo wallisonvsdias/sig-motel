@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <time.h>
 #include "clientes.h"
 #include "funcionarios.h"
 #include "produtos.h"
@@ -71,11 +72,9 @@ int validar_nome(char* nome) {
 }
 
 // valida o cpf
-// deve conter exatamente 11 numeros
-// nao valida os digitos verificadores, so o formato
-// falta verificacao completa de cpf
+
 int validar_cpf(char* cpf) {
-    int i = 0;
+    int i = 0, soma, resto;
 
     if (strlen(cpf) != 11) {
         return False; // tamanho incorreto
@@ -87,6 +86,48 @@ int validar_cpf(char* cpf) {
         }
         i++;
     }
+
+    // verifica se todos os dígitos são iguais
+    int tudo_igual = 1;
+    for (i = 1; i < 11; i++) {
+        if (cpf[i] != cpf[0]) {
+            tudo_igual = 0;
+            break;
+        }
+    }
+    if (tudo_igual) {
+        return False;
+    }
+    return True;
+
+    // verifica o primeiro dígito
+    soma = 0;
+    int peso = 10;
+    for (i = 0; i < 9; i++) {
+        soma += (cpf[i] - '0') * peso;
+        peso--;
+    }
+    resto = soma % 11;
+    int digito1 = (resto < 2) ? 0 : 11 - resto;
+
+    if (digito1 != (cpf[9] - '0')) {
+        return False;
+    }
+
+    // verifica o segundo dígito
+    soma = 0;
+    peso = 11;
+    for (i = 0; i < 10; i++) {
+        soma += (cpf[i] - '0') * peso;
+        peso--;
+    }
+    resto = soma % 11;
+    int digito2 = (resto < 2) ? 0 : 11 - resto;
+
+    if (digito2 != (cpf[10] - '0')) {
+        return False;
+    }
+
     return True;
 }
 
@@ -379,7 +420,7 @@ void ler_cpf(char* cpf) {
         printf("♡      CPF (apenas 11 numeros): ");
         ler_string(cpf,12);
         if (!validar_cpf(cpf)) {
-            printf("♡      CPF invalido! Deve conter 11 numeros\n");
+            printf("♡      CPF invalido! Tente Novamente!\n");
             printf("♡      Pressione <ENTER>");
             getchar();
         }
@@ -435,24 +476,26 @@ void ler_id(char* id) {
 }
 
 int ler_tipo(void){
+    char buffer[20];
     int escolha;
     do {
         printf("Digite o número do tipo de quarto: ");
-        if (scanf("%d", &escolha) != 1) {
-            while (getchar() != '\n'); 
-            escolha = -1;
+        ler_string(buffer, 20);
+        if (!validar_id(buffer)) {
             printf("Entrada inválida. Tente novamente.\n");
-        } else if (escolha < 1 || escolha > 4) {
+            continue;
+        }
+        escolha = atoi(buffer);
+        if (escolha < 1 || escolha > 4) {
             printf("Opção inválida. Escolha um número entre 1 e 4.\n");
         }
     } while (escolha < 1 || escolha > 4);
-    
     return escolha;
 }
 
 void ler_descricao(char* descricao){
     do {
-        printf("♡      Descrição: ");
+        printf("♡      Descrição: ");  // ADICIONE ESTA LINHA
         ler_string(descricao,51);
         if (!validar_descricao(descricao,51)) {
             printf("♡      Descricao invalida! Nao pode ser vazia\n");
@@ -507,6 +550,17 @@ void ler_salario(char* salario){
             getchar();
         }
     } while (!validar_salario(salario));
+}
+
+void pegar_data_atual(char* buffer) {
+    time_t agora;
+    struct tm *info;
+
+    time(&agora);
+    info = localtime(&agora);
+
+    // formata em dd/mm/aaaa
+    strftime(buffer, 11, "%d/%m/%Y", info);
 }
 
 char* get_nome_cliente(char* cpf) {

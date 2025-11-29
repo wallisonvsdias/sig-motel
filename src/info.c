@@ -74,6 +74,16 @@ void equipe(void) {
     printf("♡ E-mail: isabelle.silva.712@ufrn.edu.br                                      ♡\n");
     printf("♡ GitHub: @Isabellecavalcant                                                  ♡\n");
     printf("♡                                                                             ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡ Pedro William Marçal                                                        ♡\n");
+    printf("♡ E-mail: pedro.marcal.079@ufrn.edu.br                                        ♡\n");
+    printf("♡ GitHub: @pedromarcal079                                                     ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡                                                                             ♡\n");
+    printf("♡ Vanesca Silva                                                               ♡\n");
+    printf("♡ E-mail: vanesca.santos.115@ufrn.edu.br                                      ♡\n");
+    printf("♡ GitHub: @vanescaSnt                                                         ♡\n");
+    printf("♡                                                                             ♡\n");
     printf("♡ Repositório: https://github.com/wallisonvsdias/sig-motel.git                ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ Sites usados para as artes em ASCII:                                        ♡\n");

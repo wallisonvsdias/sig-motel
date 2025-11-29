@@ -42,7 +42,6 @@ void menu_cliente(void) {
             case '0':
                 break;
             default:
-                getchar();
                 printf("\n");
                 printf("Por favor, digite uma opção válida");
                 getchar();
@@ -114,20 +113,17 @@ void exibir_cliente(void){
             printf("\t\tData de nascimento: %s\n",cliente->nasc);
             printf("\t\tTelefone: %s\n",cliente->telef);
             printf("\t\tEmail: %s\n",cliente->email);
-            printf("Pressione <ENTER> para continuar");
-            getchar();
+            continuar_acao();
             fclose(arq_clientes);
             free(cliente);
             return;
         }
     }
     printf("\t\t Cliente NAO encontrado! >>>> \n");
-    printf("Pressione <ENTER> para continuar");
-    getchar();
     fclose(arq_clientes);
     free(cliente);
-    return;
     continuar_acao();
+    return;
 }
 
 
@@ -143,7 +139,7 @@ void alterar_cliente(void){
         return;
     }
     FILE *arq_temp;
-    arq_temp = fopen("data/temp.DAT", "ab");
+    arq_temp = fopen("data/temp.DAT", "wb");
     if (arq_temp == NULL) {
         printf("Não foi possivel ler o arquivo temp.DAT");
         printf("Pressione <ENTER> ...");
@@ -151,7 +147,7 @@ void alterar_cliente(void){
         return;
     }
     char cpf_lido[12];
-    int encontrado;
+    int encontrado = False;
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -161,14 +157,13 @@ void alterar_cliente(void){
     ler_cpf(cpf_lido);
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    while (fread(cliente,sizeof(Cliente),1,arq_clientes)) {
-        if (strcmp(cliente->cpf,cpf_lido) != 0){
-            fwrite(cliente,sizeof(Cliente),1,arq_temp);
+    while (fread(cliente, sizeof(Cliente), 1, arq_clientes)) {
+        if (strcmp(cliente->cpf, cpf_lido) != 0 || cliente->status == False) {
+            fwrite(cliente, sizeof(Cliente), 1, arq_temp);
         } else {
             encontrado = True;
         }
     }
-    
     fclose(arq_clientes);
     free(cliente);
 
@@ -188,24 +183,25 @@ void alterar_cliente(void){
         ler_email(novo_cliente->email);
         printf("♡                                                                             ♡\n");
         printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+
         novo_cliente->status = True;
         fwrite(novo_cliente,sizeof(Cliente),1,arq_temp);
         fclose(arq_temp);
         free(novo_cliente);
-        remove("clientes.DAT");
-        rename("temp.DAT","clientes.DAT");
-        printf("\t\t Cliente ALTERADO com sucesso! >>>> \n");
-        printf("Pressione <ENTER> para continuar");
-        getchar();
-        return;
 
+        remove("data/clientes.DAT");
+        rename("data/temp.DAT", "data/clientes.DAT");
+        printf("\t\t Cliente ALTERADO com sucesso! >>>> \n");
+
+        continuar_acao();
+        return;
     } else {
+        fclose(arq_temp);
         printf("\t\t Cliente NAO encontrado! >>>> \n");
-        printf("Pressione <ENTER> para continuar");
-        getchar();
+        remove("data/temp.DAT");
+        continuar_acao();
         return;
     }
-    continuar_acao();
 }
 
 
@@ -233,6 +229,11 @@ void excluir_cliente(void){
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
     while (fread(cliente,sizeof(Cliente),1,arq_clientes) && (!encontrado)) {
         if (strcmp(cliente->cpf,cpf_lido) == 0){
+            if (cliente->status == False) {
+                printf("\t\t Cliente NAO encontrado! >>>>\n");
+                continuar_acao();
+                return;
+            }
             cliente->status = False;
             fseek(arq_clientes,-(long)sizeof(Cliente),SEEK_CUR);
             fwrite(cliente, sizeof(Cliente), 1, arq_clientes);
@@ -245,15 +246,11 @@ void excluir_cliente(void){
 
     if (encontrado) {
         printf("\t\t Cliente EXCLUIDO com sucesso! >>>> \n");
-        printf("Pressione <ENTER> para continuar");
-        getchar();
+        continuar_acao();
         return;
     } else {
         printf("\t\t Cliente NAO encontrado! >>>> \n");
-        printf("Pressione <ENTER> para continuar");
-        getchar();
+        continuar_acao();
         return;
     }
-
-    continuar_acao();
 }

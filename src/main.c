@@ -92,7 +92,6 @@ int main(void) {
                 final();
                 break;
             default:
-                getchar();
                 printf("\n");
                 printf("Por favor, digite uma opção válida");
                 getchar();
