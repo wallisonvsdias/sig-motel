@@ -36,4 +36,7 @@ void lista_geral_quartos_ordenado(void);
 void lista_geral_hospedagens_ordenado(void);
 void lista_geral_vendas_ordenado(void);
 
+// Relatórios desativados
+void lista_clientes_desativados(void);
+
 #endif
