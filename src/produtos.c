@@ -84,7 +84,6 @@ void cadastrar_produto(void) {
     printf("♡        Produto cadastrado com sucesso!                                      ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    produto->status = True;
     fwrite(produto,sizeof(Produto),1,arq_produtos);
     fclose(arq_produtos);
     free(produto);
@@ -235,11 +234,22 @@ void excluir_produto(void){
     Produto* produto;
     produto = (Produto*)malloc(sizeof(*produto));
     FILE *arq_produtos;
-    arq_produtos = fopen("data/produtos.DAT", "r+b");
+    arq_produtos = fopen("data/produtos.DAT", "rb");
     if (arq_produtos == NULL) {
         printf("Não foi possivel ler o arquivo produtos.DAT\n");
         printf("Pressione <ENTER> ...");
         getchar();
+        free(produto);
+        return;
+    }
+    FILE *arq_temp;
+    arq_temp = fopen("data/temp.DAT", "ab");
+    if (arq_temp == NULL) {
+        printf("Não foi possivel criar arquivo temporário\n");
+        printf("Pressione <ENTER> ...");
+        getchar();
+        fclose(arq_produtos);
+        free(produto);
         return;
     }
     int id;
@@ -255,27 +265,28 @@ void excluir_produto(void){
     ler_id(entrada_id);
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
+    
     id = atoi(entrada_id);
-    while (fread(produto,sizeof(Produto),1,arq_produtos)) {
-        if (produto->id == id){
-            produto->status = False;
-            fseek(arq_produtos, -(long)sizeof(Produto),SEEK_CUR);
-            fwrite(produto, sizeof(Produto),1,arq_produtos);
+    while (fread(produto, sizeof(Produto), 1, arq_produtos)) {
+        if (produto->id != id) {
+            fwrite(produto, sizeof(Produto), 1, arq_temp);
+        } else {
             encontrado = True;
-        } 
+        }
     }
 
     fclose(arq_produtos);
+    fclose(arq_temp);
     free(produto);
 
     if (encontrado) {
+        remove("data/produtos.DAT");
+        rename("data/temp.DAT", "data/produtos.DAT");
         printf("\t\t Produto EXCLUIDO com sucesso! >>>> \n");
-        continuar_acao();
-        return;
     } else {
+        remove("data/temp.DAT");
         printf("\t\t Produto NAO encontrado! >>>> \n");
-        continuar_acao();
-        return;
     }
+    
     continuar_acao();
 }
