@@ -16,6 +16,11 @@ typedef struct cliente_node {
     struct cliente_node* prox;
 } ClienteNode;
 
+typedef struct funcionario_node {
+    Funcionario funcionario;
+    struct funcionario_node* prox;
+} FuncionarioNode;
+
 void menu_relatorio(void) {
     int op_relatorio;
     do {
@@ -390,13 +395,23 @@ void lista_geral_clientes(void) {
         i++;
     }
     fclose(arq_clientes);
+
+    novo_node = lista;
+    while (lista != NULL) {
+        lista = lista->prox;
+        free(novo_node);
+        novo_node = lista;
+    }
+
     continuar_acao();
 }
 
 void lista_geral_funcionarios(void) {
-    Funcionario* funcionario;
-    funcionario = (Funcionario*)malloc(sizeof(*funcionario));
     FILE *arq_funcionario;
+    Funcionario funcionario;
+    FuncionarioNode* novo_node;
+    FuncionarioNode* lista;
+    int i = 1;
     arq_funcionario = fopen("data/funcionarios.DAT", "rb");
     if (arq_funcionario == NULL) {
         printf("Não foi possivel ler o arquivo funcionarios.dat\n");
@@ -404,6 +419,17 @@ void lista_geral_funcionarios(void) {
         getchar();
         return;
     }
+
+    lista = NULL;
+    while (fread(&funcionario, sizeof(Funcionario), 1, arq_funcionario)) {
+        if (funcionario.status) {
+            novo_node = (FuncionarioNode*) malloc(sizeof(FuncionarioNode));
+            novo_node->prox = lista;
+            novo_node->funcionario = funcionario;
+            lista = novo_node;
+        }
+    }
+
     system("clear||cls");
     mostrar_cabecalho();
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
@@ -411,19 +437,29 @@ void lista_geral_funcionarios(void) {
     printf("♡                         Lista Geral de Funcionários                         ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    while (fread(funcionario,sizeof(Funcionario),1,arq_funcionario)) {
-        if (funcionario->status){
-            printf("\n");
-            printf("\t\tCPF: %s\n",funcionario->cpf);
-            printf("\t\tNome: %s\n",funcionario->nome);
-            printf("\t\tTelefone: %s\n",funcionario->telefone);
-            printf("\t\tEmail: %s\n",funcionario->email);
-            printf("\t\tCargo: %s\n",funcionario->cargo);
-            printf("\t\tSalário: %f\n",funcionario->salario);
-        }
+    novo_node = lista;
+    while (novo_node != NULL) {
+        printf("\n");
+        printf("\t\tFuncionário %d:\n", i);
+        printf("\t\tCPF: %s\n", novo_node->funcionario.cpf);
+        printf("\t\tNome: %s\n", novo_node->funcionario.nome);
+        printf("\t\tTelefone: %s\n", novo_node->funcionario.telefone);
+        printf("\t\tEmail: %s\n", novo_node->funcionario.email);
+        printf("\t\tCargo: %s\n", novo_node->funcionario.cargo);
+        printf("\t\tSalário: %.2f\n", novo_node->funcionario.salario);
+        
+        novo_node = novo_node->prox;
+        i++;
     }
     fclose(arq_funcionario);
-    free(funcionario);
+
+    novo_node = lista;
+    while (lista != NULL) {
+        lista = lista->prox;
+        free(novo_node);
+        novo_node = lista;
+    }
+
     continuar_acao();
 }
 
@@ -902,7 +938,6 @@ void lista_geral_clientes_ordenado(void) {
         }
     }
     fclose(arq_clientes);
-    // AQUI
 
     system("clear||cls");
     mostrar_cabecalho();
@@ -934,10 +969,6 @@ void lista_geral_clientes_ordenado(void) {
     continuar_acao();
 }
 
-typedef struct funcionario_node {
-    Funcionario funcionario;
-    struct funcionario_node* prox;
-} FuncionarioNode;
 
 void lista_geral_funcionarios_ordenado(void) {
     FILE *arq_funcionarios;
