@@ -11,6 +11,11 @@
 #include "vendas.h"
 #include "validacao.h"
 
+typedef struct cliente_node {
+    Cliente cliente;
+    struct cliente_node* prox;
+} ClienteNode;
+
 void menu_relatorio(void) {
     int op_relatorio;
     do {
@@ -335,15 +340,34 @@ void menu_relatorio_vendas(void) {
 // ============================= RELATÓRIOS GERAIS =============================
 
 void lista_geral_clientes(void) {
-    Cliente* cliente;
-    cliente = (Cliente*)malloc(sizeof(*cliente));
     FILE *arq_clientes;
+    Cliente cliente;
+    ClienteNode* novo_node;
+    ClienteNode* lista;
+    ClienteNode* ultimo;
+    int i = 1;
+    
     arq_clientes = fopen("data/clientes.DAT", "rb");
     if (arq_clientes == NULL) {
         printf("Não foi possivel ler o arquivo clientes.dat\n");
-        printf("pressione <enter>\n");
+        printf("Pressione <ENTER>\n");
         getchar();
         return;
+    }
+
+    lista = NULL;
+    while (fread(&cliente, sizeof(Cliente), 1, arq_clientes)) {
+        if (cliente.status) {
+            novo_node = (ClienteNode*) malloc(sizeof(ClienteNode));
+            novo_node->cliente = cliente;
+            
+            if (lista == NULL) {
+                lista = novo_node;
+            } else {
+                ultimo->prox =novo_node;
+            }
+            ultimo = novo_node;
+        }
     }
     system("clear||cls");
     mostrar_cabecalho();
@@ -352,18 +376,20 @@ void lista_geral_clientes(void) {
     printf("♡                            Lista Geral de Clientes                          ♡\n");
     printf("♡                                                                             ♡\n");
     printf("♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡ ♡\n");
-    while (fread(cliente,sizeof(Cliente),1,arq_clientes)) {
-        if (cliente->status){
-            printf("\n");
-            printf("\t\tCPF: %s\n",cliente->cpf);
-            printf("\t\tNome: %s\n",cliente->nome);
-            printf("\t\tData de nascimento: %s\n",cliente->nasc);
-            printf("\t\tTelefone: %s\n",cliente->telef);
-            printf("\t\tEmail: %s\n",cliente->email);
-        }
+    novo_node = lista;
+    while (novo_node != NULL) {
+        printf("\n");
+        printf("\t\tCliente %d:\n", i);
+        printf("\t\tCPF: %s\n", novo_node->cliente.cpf);
+        printf("\t\tNome: %s\n", novo_node->cliente.nome);
+        printf("\t\tData de nascimento: %s\n", novo_node->cliente.nasc);
+        printf("\t\tTelefone: %s\n", novo_node->cliente.telef);
+        printf("\t\tEmail: %s\n", novo_node->cliente.email);
+        
+        novo_node = novo_node->prox;
+        i++;
     }
     fclose(arq_clientes);
-    free(cliente);
     continuar_acao();
 }
 
@@ -831,11 +857,6 @@ void vendas_por_funcionario(void) {
 
 // ============================= RELATÓRIOS ORDENADOS =============================
 
-typedef struct cliente_node {
-    Cliente cliente;
-    struct cliente_node* prox;
-} ClienteNode;
-
 void lista_geral_clientes_ordenado(void) {
     FILE *arq_clientes;
     Cliente cliente;
@@ -881,6 +902,7 @@ void lista_geral_clientes_ordenado(void) {
         }
     }
     fclose(arq_clientes);
+    // AQUI
 
     system("clear||cls");
     mostrar_cabecalho();
