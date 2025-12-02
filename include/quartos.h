@@ -21,6 +21,11 @@ typedef struct {
     int status;
 } Quarto;
 
+typedef struct quarto_node {
+    Quarto quarto;
+    struct quarto_node* prox;
+} QuartoNode;
+
 void menu_quarto(void);
 void cadastrar_quarto(void);
 void exibir_quarto(void);

@@ -8,7 +8,12 @@ typedef struct{
     char cpf_funcionario[12];
     int id_produto;
     int quant;
- } Venda;
+} Venda;
+
+typedef struct vendas_node {
+    Venda venda;
+    struct vendas_node* prox;
+} VendaNode;
 
 void menu_venda(void);
 void cadastrar_venda(void);

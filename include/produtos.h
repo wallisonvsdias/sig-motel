@@ -11,6 +11,11 @@ typedef struct {
     int quant;
 } Produto;
 
+typedef struct produto_node {
+    Produto produto;
+    struct produto_node* prox;
+} ProdutoNode;
+
 void menu_produto(void);
 void cadastrar_produto(void);
 void exibir_produto(void);

@@ -12,6 +12,11 @@ typedef struct {
     int status;
 } Cliente;
 
+typedef struct cliente_node {
+    Cliente cliente;
+    struct cliente_node* prox;
+} ClienteNode;
+
 void menu_cliente(void);
 void cadastrar_cliente(void);
 void exibir_cliente(void);

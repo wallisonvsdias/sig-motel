@@ -12,6 +12,11 @@ typedef struct {
 
 } Hospedagem;
 
+typedef struct hospedagens_node {
+    Hospedagem hospedagem;
+    struct hospedagens_node* prox;
+} HospedagemNode;
+
 void menu_hospedagem(void);
 void cadastrar_hospedagem(void);
 void exibir_hospedagem(void);

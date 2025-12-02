@@ -13,6 +13,11 @@ typedef struct {
     int status;
 } Funcionario;
 
+typedef struct funcionario_node {
+    Funcionario funcionario;
+    struct funcionario_node* prox;
+} FuncionarioNode;
+
 void menu_funcionario(void);
 void cadastrar_funcionario(void);
 void exibir_funcionario(void);

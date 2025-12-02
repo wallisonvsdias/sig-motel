@@ -11,15 +11,6 @@
 #include "vendas.h"
 #include "validacao.h"
 
-typedef struct cliente_node {
-    Cliente cliente;
-    struct cliente_node* prox;
-} ClienteNode;
-
-typedef struct funcionario_node {
-    Funcionario funcionario;
-    struct funcionario_node* prox;
-} FuncionarioNode;
 
 void menu_relatorio(void) {
     int op_relatorio;
@@ -1046,11 +1037,6 @@ void lista_geral_funcionarios_ordenado(void) {
     continuar_acao();
 }
 
-typedef struct produto_node {
-    Produto produto;
-    struct produto_node* prox;
-} ProdutoNode;
-
 void lista_geral_produtos_ordenado(void) {
     FILE *arq_produtos;
     Produto produto;
@@ -1124,11 +1110,6 @@ void lista_geral_produtos_ordenado(void) {
     continuar_acao();
 }
 
-typedef struct quarto_node {
-    Quarto quarto;
-    struct quarto_node* prox;
-} QuartoNode;
-
 void lista_geral_quartos_ordenado(void){
     FILE *arq_quartos;
     Quarto quarto;
@@ -1200,11 +1181,6 @@ void lista_geral_quartos_ordenado(void){
     
     continuar_acao();
 }
-
-typedef struct hospedagens_node {
-    Hospedagem hospedagem;
-    struct hospedagens_node* prox;
-} HospedagemNode;
 
 void lista_geral_hospedagens_ordenado(void){
     Hospedagem hospedagem;
@@ -1279,11 +1255,6 @@ void lista_geral_hospedagens_ordenado(void){
     
     continuar_acao();
 }
-
-typedef struct vendas_node {
-    Venda venda;
-    struct vendas_node* prox;
-} VendaNode;
 
 void lista_geral_vendas_ordenado(void){
     Venda venda;
